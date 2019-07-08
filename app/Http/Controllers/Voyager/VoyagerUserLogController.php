@@ -17,13 +17,16 @@ class VoyagerUserLogController extends BaseVoyagerUserController
      * @return response
      */
     public function indexLog($id) {
-        $userLog = ActivityModel::where('subject_id', '=', $id)->orderBy('created_at', 'desc')->paginate(2);
+        $userLog = ActivityModel::where('subject_id', '=', $id)->orderBy('created_at', 'desc')->paginate(1);
 
         return response()->json([
             'userLog' => $userLog,
             'numberOfPages' => $userLog->lastPage(),
             'currentPageNumber' => $userLog->currentPage(),
-            'hasMorePages' => $userLog->hasMorePages()
+            'hasMorePages' => $userLog->hasMorePages(),
+            'currentPage' => $userLog->url(1),
+            'nextPageUrl' => $userLog->nextPageUrl(),
+            'previousPageUrl' => $userLog->previousPageUrl()
         ]);
     }
 }
