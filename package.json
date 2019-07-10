@@ -39,5 +39,8 @@
   "bugs": {
     "url": "https://github.com/Hamzakh777/digital-rocket-app/issues"
   },
-  "homepage": "https://github.com/Hamzakh777/digital-rocket-app#readme"
+  "homepage": "https://github.com/Hamzakh777/digital-rocket-app#readme",
+  "dependencies": {
+    "vuex": "^3.1.1"
+  }
 }
