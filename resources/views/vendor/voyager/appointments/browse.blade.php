@@ -50,21 +50,27 @@
                     </div>
                     <div class="panel-body mt-2">
                         <appointment-filter>
-                            <template v-slot:experts>
-                                <option value="option1" selected>Option 1 Text</option>
-                                <option value="option2">Option 2 Text</option>
-                            </template>
-
-                            <template v-slot:cities>
-                                <option value="option1" selected>Option 1 Text</option>
-                                <option value="option2">Option 2 Text</option>
-                            </template>
-
-                            <template v-slot:users>
-                                <option value="option1" selected>Option 1 Text</option>
-                                <option value="option2">Option 2 Text</option>
-                            </template>
-                        
+                            @foreach ($dataType->addRows as $row)
+                                @if ($row->field == 'wanted_expert')
+                                    <template v-slot:experts>
+                                        @foreach ($row->details->options as $key => $option)
+                                            <option value="{{$key}}">{{ $option }}</option> 
+                                        @endforeach
+                                    </template>
+                                @elseif($row->field == 'canton_city')
+                                    <template v-slot:cities>
+                                        @foreach ($row->details->options as $key => $option)
+                                            <option value="{{$key}}">{{ $option }}</option> 
+                                        @endforeach
+                                    </template>
+                                @elseif($row->field == 'appointment_belongsto_user_relationship')
+                                    <template v-slot:users>
+                                        @foreach($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->user_name }}</option>
+                                        @endforeach
+                                    </template>
+                                @endif
+                            @endforeach
                         </appointment-filter>
                     </div>
                 </div>
@@ -107,7 +113,7 @@
                                 @endif
                             </form>
                         @endif
-                        <div class="table-responsive">
+                        <div class="table-responsive" id="table">
                             <table id="dataTable" class="table table-hover">
                                 <thead>
                                     <tr>
@@ -121,7 +127,17 @@
                                             @if ($isServerSide)
                                                 <a href="{{ $row->sortByUrl($orderBy, $sortOrder) }}">
                                             @endif
-                                            {{ $row->display_name }}
+                                            
+                                            @switch($row->display_name)
+                                                @case("Canton City")
+                                                    Canton
+                                                    @break
+                                                @case(2)
+                                                    
+                                                    @break
+                                                @default
+                                                    {{ $row->display_name }}
+                                            @endswitch
                                             @if ($isServerSide)
                                                 @if ($row->isCurrentSortField($orderBy))
                                                     @if ($sortOrder == 'asc')

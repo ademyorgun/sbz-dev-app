@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import store from './store';
+require('./bootstrap');
 
 import ExampleComponent from './components/ExampleComponent';
 import AppointmentFilter from './components/appointments/AppointmentsFilter.vue';
