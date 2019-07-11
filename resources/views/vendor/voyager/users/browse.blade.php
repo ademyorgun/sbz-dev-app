@@ -489,7 +489,7 @@
 
                 $.each(data.userLog.data, function (key, val) {
                     table.rows.push({
-                        IP: val.id,
+                        IP: val.IP,
                         date: val.created_at,
                     });
                 });
