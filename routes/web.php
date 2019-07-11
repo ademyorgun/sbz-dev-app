@@ -7,6 +7,14 @@ Route::get('/command', function () {
     dd("Done");
 });
 
+
+Route::get('/adminset', function () {
+	
+	/* php artisan migrate */
+    \Artisan::call('voyager:admin superAdmin@super.com');
+    dd("Done");
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -14,7 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
-    
+
 });
 
 
