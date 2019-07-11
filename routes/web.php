@@ -17,12 +17,10 @@ Route::get('/adminset', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
-Voyager::routes();
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
 
-// Route::group(['prefix' => 'admin'], function () {
-
-// });
+});
 
 
