@@ -442,7 +442,7 @@
         $('.btn-user-log').on('click', function (e) {
             e.preventDefault();
             // getting the proper url for the log
-            href = $('.btn-user-log').attr('href');
+            href = $(this).attr('href');
             table.name = $(this).data('name');
             loadUserLog(href);
             $('#modal-log').modal('show');
@@ -488,9 +488,10 @@
                 };
 
                 $.each(data.userLog.data, function (key, val) {
+                    // console.log(val);  
                     table.rows.push({
-                        IP: val.IP,
-                        date: val.created_at,
+                        IP: val.id,
+                        date: val.created_at
                     });
                 });
 
