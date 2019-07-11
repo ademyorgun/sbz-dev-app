@@ -1,5 +1,12 @@
 <?php
 
+use Illuminate\Support\Str;
+use TCG\Voyager\Events\Routing;
+use TCG\Voyager\Events\RoutingAdmin;
+use TCG\Voyager\Events\RoutingAdminAfter;
+use TCG\Voyager\Events\RoutingAfter;
+use TCG\Voyager\Facades\Voyager;
+
 Route::get('/command', function () {
 	
 	/* php artisan migrate */
@@ -25,11 +32,22 @@ Auth::routes();
 
 Voyager::routes();
 
-// testing route for filtering the items
-Route::post('products/filter', 'Voyager\VoyagerProductsController@filter');
+Route::group(['as' => 'voyager.'], function () {
+    event(new Routing());
 
-// User log
-Route::get('users/{id}/log', 'Voyager\VoyagerUserLogController@indexLog')->name('user.log');
+    $namespacePrefix = '\\'.config('voyager.controllers.namespace').'\\';
+    Route::group(['middleware' => 'admin.user'], function () use ($namespacePrefix) {
+        event(new RoutingAdmin());
 
-// 
-Route::post('appointments/filter', 'Voyager\VoyagerAppointmentController@filter')->name('appointment.filter');
+        // testing route for filtering the items
+        Route::post('products/filter', 'Voyager\VoyagerProductsController@filter');
+        // User log
+        Route::get('users/{id}/log', 'Voyager\VoyagerUserLogController@indexLog')->name('user.log');
+        // 
+        Route::post('appointments/filter', 'Voyager\VoyagerAppointmentController@filter')->name('appointment.filter');
+    
+        event(new RoutingAdminAfter());
+    });
+
+    event(new RoutingAfter());
+});
