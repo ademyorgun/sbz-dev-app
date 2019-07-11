@@ -36,4 +36,7 @@ class User extends \TCG\Voyager\Models\User
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
 }
