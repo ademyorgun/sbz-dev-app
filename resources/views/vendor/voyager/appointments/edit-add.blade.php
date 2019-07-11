@@ -84,7 +84,7 @@
                                         @include($row->details->view, ['row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $dataTypeContent->{$row->field}, 'action' => ($edit ? 'edit' : 'add')])
                                     @elseif($row->type == 'relationship' && $row->field == 'appointment_belongsto_user_relationship')
                                         {{-- we'd like to show a preselected user --}}    
-                                        @include('voyager::formfields.relationshipUser ', ['options' => $row->details])
+                                        @include('voyager.formFields.relationshipUser ', ['options' => $row->details])
                                     @elseif ($row->type == 'relationship')
                                         @include('voyager::formfields.relationship', ['options' => $row->details])
                                     @else
