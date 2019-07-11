@@ -3,7 +3,6 @@ $(document).ready(function() {
 
     $("#call-date")
         .children(".form-control")
-        .prop("disabled", true)
         .val(
             date.getFullYear().toString() +
                 "-" +

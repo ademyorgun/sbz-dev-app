@@ -195,6 +195,21 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
 
     public function filter(Request $request)
     {
+        // GET THE REQUEST DATA to use as filter
+        $appointmentID = $request->input('appointmentID');
+        $phoneNumber = $request->input('phoneNumber');
+        $userID = $request->input('userID');
+        $canton = $request->input('canton');
+        $wantedExpert = $request->input('wantedExpert');
+        // $appointmentDateEnd = join('-',array_reverse(explode('/',$request->input('appointmentDateEnd'))));
+        // $appointmentDateStart = join('-',array_reverse(explode('/',$request->input('appointmentDateStart'))));
+        // $callDateEnd = join('-',array_reverse(explode('/',$request->input('callDateEnd'))));
+        // $callDateStart = join('-',array_reverse(explode('/',$request->input('callDateStart'))));
+        $appointmentDateEnd = $request->input('appointmentDateEnd');
+        $appointmentDateStart = $request->input('appointmentDateStart');
+        $callDateEnd = $request->input('callDateEnd');
+        $callDateStart = $request->input('callDateStart');
+
         // GET THE SLUG
         $slug = 'appointments';
         
@@ -239,28 +254,50 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
             if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope'.ucfirst($dataType->scope))) {
                 $query = $model->{$dataType->scope}();
             } else {
-                $query = $model::select('*');
+                // $query = $model::select('*');
+                $query = $model::when($appointmentID, function ($data, $appointmentID) {
+                                return $data->where('id', '=', $appointmentID);
+                            })
+                            ->when($phoneNumber, function ($data, $phoneNumber) {
+                                return $data->where('telephone_number', '=', $phoneNumber);
+                            })
+                            ->when($userID, function ($data, $userID) {
+                                return $data->where('call_agent_id', '=', $userID);
+                            })
+                            ->when($canton, function ($data, $canton) {
+                                return $data->where('canton_city', '=', $canton);
+                            })
+                            ->when($wantedExpert, function ($data, $wantedExpert) {
+                                return $data->where('wanted_expert', '=', $wantedExpert);
+                            })
+                            ->when($appointmentDateEnd, function ($data, $appointmentDateEnd) {
+                                return $data->where('meeting_date', '<=', $appointmentDateEnd);
+                            })
+                            ->when($appointmentDateStart, function ($data, $appointmentDateStart) {
+                                return $data->where('meeting_date', '>=', $appointmentDateStart);
+                            })
+                            ->when($callDateEnd, function ($data, $callDateEnd) {
+                                return $data->where('call_date', '<=', $callDateEnd);
+                            })
+                            ->when($callDateStart, function ($data, $callDateStart) {
+                                return $data->where('call_date', '>=', $callDateStart);
+                            });
             }
 
-            // Use withTrashed() if model uses SoftDeletes and if toggle is selected
-            if ($model && in_array(SoftDeletes::class, class_uses($model)) && app('VoyagerAuth')->user()->can('delete', app($dataType->model_name))) {
-                $usesSoftDeletes = true;
+            // // Use withTrashed() if model uses SoftDeletes and if toggle is selected
+            // if ($model && in_array(SoftDeletes::class, class_uses($model)) && app('VoyagerAuth')->user()->can('delete', app($dataType->model_name))) {
+            //     $usesSoftDeletes = true;
 
-                if ($request->get('showSoftDeleted')) {
-                    $showSoftDeleted = true;
-                    $query = $query->withTrashed();
-                }
-            }
+            //     if ($request->get('showSoftDeleted')) {
+            //         $showSoftDeleted = true;
+            //         $query = $query->withTrashed();
+            //     }
+            // }
 
             // If a column has a relationship associated with it, we do not want to show that field
             $this->removeRelationshipField($dataType, 'browse');
 
-            if ($search->value != '' && $search->key && $search->filter) {
-                $search_filter = ($search->filter == 'equals') ? '=' : 'LIKE';
-                $search_value = ($search->filter == 'equals') ? $search->value : '%'.$search->value.'%';
-                $query->where($search->key, $search_filter, $search_value);
-            }
-
+            
             if ($orderBy && in_array($orderBy, $dataType->fields())) {
                 $querySortOrder = (!empty($sortOrder)) ? $sortOrder : 'desc';
                 $dataTypeContent = call_user_func([
