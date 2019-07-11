@@ -17,7 +17,7 @@ class VoyagerUserLogController extends BaseVoyagerUserController
      * @return response
      */
     public function indexLog($id) {
-        $userLog = ActivityModel::where('subject_id', '=', $id)->orderBy('created_at', 'desc')->paginate(1);
+        $userLog = ActivityModel::where('subject_id', '=', $id)->orderBy('created_at', 'desc')->paginate(10);
 
         return response()->json([
             'userLog' => $userLog,
