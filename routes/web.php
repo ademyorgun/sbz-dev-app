@@ -3,7 +3,7 @@
 Route::get('/command', function () {
 	
 	/* php artisan migrate */
-    \Artisan::call('migrate');
+    \Artisan::call('migrate:fresh');
     dd("Done");
 });
 Auth::routes();
