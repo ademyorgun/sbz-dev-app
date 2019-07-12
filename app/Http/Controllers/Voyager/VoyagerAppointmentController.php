@@ -210,6 +210,7 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
         $callDateEnd = $request->input('callDateEnd');
         $callDateStart = $request->input('callDateStart');
 
+        // dd([$callDateStart, $callDateEnd]);
         // GET THE SLUG
         $slug = 'appointments';
         
@@ -251,6 +252,7 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
         if (strlen($dataType->model_name) != 0) {
             $model = app($dataType->model_name);
 
+            // If we are using model scoping
             if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope'.ucfirst($dataType->scope))) {
                 $query = $model->{$dataType->scope}();
             } else {
@@ -331,7 +333,8 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
 
         $view = 'voyager::appointments.table';
 
-        $test = Voyager::view($view, compact(
+        // render the table
+        $table = Voyager::view($view, compact(
             'dataType',
             'dataTypeContent',
             'isModelTranslatable',
@@ -347,8 +350,19 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
             'users'
         ))->render();
         
+        // render the paginator
+        $paginator = view('vendor.voyager.inc.paginator', compact(
+            'dataTypeContent',
+            'search',
+            'orderBy',
+            'sortOrder',
+            'showSoftDeleted'
+        ))->render();
+
         return response()->json([
-            'test' => $test
+            'table' => $table,
+            'paginator' => $paginator,
+            'dataTypeContent' => $dataTypeContent
         ]);
     }
 }

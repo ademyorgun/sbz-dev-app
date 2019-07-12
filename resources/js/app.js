@@ -1,15 +1,61 @@
-import Vue from 'vue';
-import store from './store';
-require('./bootstrap');
+import Vue from "vue";
+import store from "./store";
+require("./bootstrap");
 
-import ExampleComponent from './components/ExampleComponent';
-import AppointmentFilter from './components/appointments/AppointmentsFilter.vue';
+import AppointmentFilter from "./components/appointments/AppointmentsFilter.vue";
+import AppointmentsPaginator from "./components/appointments/AppointmentsPaginator.vue";
 
 const app = new Vue({
-    el: '#app',
+    el: "#app",
+
     components: {
-        ExampleComponent,
-        AppointmentFilter
+        AppointmentFilter,
+        AppointmentsPaginator
     },
-    store
+
+    data: {
+        filterData: {},
+        paginationData: {},
+        isResultsFiltered: false
+    },
+
+    computed: {},
+
+    methods: {
+        getResults(data , page = 1) {
+            this.filterData = data;
+            axios
+                .post("appointments/filter?page=" + page, data)
+                .then(response => {
+                    try {
+                        // update the table
+                        let table = document.querySelector("#table");
+                        table.innerHTML = response.data.table;
+                        
+                        this.paginationData = response.data.dataTypeContent;
+                        this.isResultsFiltered = true;
+                    } catch (e) {
+                        console.warn(e);
+                    }
+                });
+        },
+
+        paginatorChangePage(page) {
+            axios
+                .post("appointments/filter?page=" + page, this.filterData)
+                .then(response => {
+                    try {
+                        // update the table
+                        let table = document.querySelector("#table");
+                        table.innerHTML = response.data.table;
+
+                        this.paginationData = response.data.dataTypeContent;
+                        this.isResultsFiltered = true;
+                    } catch (e) {
+                        console.warn(e);
+                    }
+                });
+            console.log(page, 'yay');
+        }
+    }
 });

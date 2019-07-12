@@ -37,9 +37,9 @@
 @stop
 
 @section('content')
-<div class="page-content browse container-fluid">
+<div class="page-content browse container-fluid" id="app">
     @include('voyager::alerts')
-    <div class="row" id="app">
+    <div class="row" >
         <div class="col-md-12">
             <div class="panel panel-primary panelbordered">
                 <div class="panel-heading">
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                     <div class="panel-body mt-2">
-                        <appointment-filter>
+                        <appointment-filter @filter="getResults">
                             @foreach ($dataType->addRows as $row)
                                 @if ($row->field == 'wanted_expert')
                                     <template v-slot:experts>
@@ -86,7 +86,7 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        @if ($isServerSide)
+                        {{-- @if ($isServerSide)
                             <form method="get" class="form-search">
                                 <div id="search-input">
                                     <select id="search_key" name="key">
@@ -112,7 +112,7 @@
                                     <input type="hidden" name="order_by" value="{{ Request::get('order_by') }}">
                                 @endif
                             </form>
-                        @endif
+                        @endif --}}
                         <div class="table-responsive" id="table">
                             <table id="dataTable" class="table table-hover">
                                 <thead>
@@ -308,23 +308,20 @@
                             </table>
                         </div>
                         @if ($isServerSide)
-                            <div class="pull-left">
-                                <div role="status" class="show-res" aria-live="polite">{{ trans_choice(
-                                    'voyager::generic.showing_entries', $dataTypeContent->total(), [
-                                        'from' => $dataTypeContent->firstItem(),
-                                        'to' => $dataTypeContent->lastItem(),
-                                        'all' => $dataTypeContent->total()
-                                    ]) }}</div>
-                            </div>
                             <div class="pull-right">
-                                {{ $dataTypeContent->appends([
+                                <appointments-paginator :pagination-data="paginationData" @get-results="paginatorChangePage" v-if="isResultsFiltered"></appointments-paginator>
+                                {{-- show the server generated paginator before filtering --}}
+                                <div v-if="!isResultsFiltered">
+                                    {{ $dataTypeContent->appends([
                                     's' => $search->value,
                                     'filter' => $search->filter,
                                     'key' => $search->key,
                                     'order_by' => $orderBy,
                                     'sort_order' => $sortOrder,
                                     'showSoftDeleted' => $showSoftDeleted,
-                                ])->links() }}
+                                ])->links() }}    
+                                </div>
+
                             </div>
                         @endif
                     </div>
