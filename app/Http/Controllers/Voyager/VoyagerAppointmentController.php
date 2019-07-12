@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Database\Schema\SchemaManager;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController as BaseVoyagerBaseController;
+use Carbon\Carbon;
 use App\User as User;
 
 class VoyagerAppointmentController extends BaseVoyagerBaseController
@@ -201,16 +202,27 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
         $userID = $request->input('userID');
         $canton = $request->input('canton');
         $wantedExpert = $request->input('wantedExpert');
-        // $appointmentDateEnd = join('-',array_reverse(explode('/',$request->input('appointmentDateEnd'))));
-        // $appointmentDateStart = join('-',array_reverse(explode('/',$request->input('appointmentDateStart'))));
-        // $callDateEnd = join('-',array_reverse(explode('/',$request->input('callDateEnd'))));
-        // $callDateStart = join('-',array_reverse(explode('/',$request->input('callDateStart'))));
         $appointmentDateEnd = $request->input('appointmentDateEnd');
         $appointmentDateStart = $request->input('appointmentDateStart');
         $callDateEnd = $request->input('callDateEnd');
         $callDateStart = $request->input('callDateStart');
+        if($appointmentDateEnd != null ) {
+            $appointmentDateEnd = Carbon::parse($appointmentDateEnd, 'Europe/London')->format('Y-m-d');
+        } 
+        if($appointmentDateStart != null ) {
+            $appointmentDateStart = Carbon::parse($appointmentDateStart, 'Europe/London')->format('Y-m-d');
+        } 
+        if($callDateEnd != null ) {
+            $callDateEnd = Carbon::parse($callDateEnd, 'Europe/London')->format('Y-m-d');
+        } 
+        if($callDateStart != null ) {
+            $callDateStart = Carbon::parse($callDateStart, 'Europe/London')->format('Y-m-d');
+        } 
+        
+        
+        // dd($appointmentDateEnd);
 
-        // dd([$callDateStart, $callDateEnd]);
+        // dd( Carbon::parse($callDateStart, 'Europe/London')->format('Y-m-d'));
         // GET THE SLUG
         $slug = 'appointments';
         

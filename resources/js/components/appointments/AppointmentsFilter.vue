@@ -1,26 +1,26 @@
 <template>
   <div class="filter-form">
-    <div class="test"></div>
     <form id="form">
       <div class="row">
         <div class="form-group col-md-3">
           <label class="control-label">Call Date start</label>
-          <input type="date" class="form-control" v-model="callDateStart" />
+          <Datepicker class="datePicker" input-class="form-control" v-model="callDateStart" :format="'yyyy MM dd'"></Datepicker>
+          <!-- <datepicker v-model="callDateStart"></datepicker> -->
         </div>
 
         <div class="form-group col-md-3">
           <label class="control-label">Call Date end</label>
-          <input type="date" class="form-control" v-model="callDateEnd" />
+          <Datepicker class="datePicker" input-class="form-control" v-model="callDateEnd"></Datepicker>
         </div>
 
         <div class="form-group col-md-3">
           <label class="control-label">Appointment Date start</label>
-          <input type="date" class="form-control" v-model="appointmentDateStart" />
+          <Datepicker class="datePicker" input-class="form-control" v-model="appointmentDateStart"></Datepicker>
         </div>
 
         <div class="form-group col-md-3">
           <label class="control-label">Appointment Date end</label>
-          <input type="date" class="form-control" v-model="appointmentDateEnd" />
+          <Datepicker class="datePicker" input-class="form-control" v-model="appointmentDateEnd"></Datepicker>
         </div>
 
         <!-- wanted expert -->
@@ -94,9 +94,14 @@
 </template>
 
 <script>
+import Datepicker from 'vuejs-datepicker';
 
 export default {
   name: "AppointmentFilter",
+
+  components: {
+    Datepicker,
+  },
 
   data() {
     return {
@@ -128,7 +133,7 @@ export default {
 };
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 .filter-form
     margin-top: 1.6em
 
@@ -137,4 +142,11 @@ export default {
 
     .pr-2 
         padding-right: 1em
+
+    .datePicker--input , .datePicker--input[readonly]
+      color: #76838f
+      background-color: #fff !important
+      background-image: none
+      border: 1px solid #e4eaec
+
 </style>

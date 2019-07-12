@@ -18,6 +18,6 @@ $(document).ready(function() {
         format: "HH:mm"
     });
     $(".datepicker--date-only").datetimepicker({
-        format: "MM/DD/YYYY"
+        format: "YYYY-MM-DD"
     });
 });
