@@ -48,9 +48,10 @@ Route::group(['as' => 'voyager.'], function () {
         // Filtering the appointments
         Route::post('appointments/filter', 'Voyager\VoyagerAppointmentController@filter')->name('appointment.filter');
     
-        // Reports route
+        // Reports routes
         Route::get('reports', 'ReportsController@index')->name('reports.index');
-        
+        Route::post('reports', 'ReportsController@show');
+
         event(new RoutingAdminAfter());
     });
 

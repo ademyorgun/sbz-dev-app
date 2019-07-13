@@ -1726,6 +1726,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ReportsFiler',
@@ -1734,21 +1737,53 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      dateFormat: 'yyyy MM dd',
-      yearFormat: 'yyyy',
-      monthFormat: 'MM',
       month: '',
       year: ''
     };
   },
+  computed: {
+    yearsToShow: function yearsToShow() {
+      var currentYear = new Date().getFullYear();
+      return this.decreaseValue(currentYear, 2016);
+    },
+    monthsToShow: function monthsToShow() {
+      // for some weird reason getMonth returs the month
+      // starting form 0, so we have to add 1 in order
+      // to accomodate for that
+      var currentMonth = new Date().getMonth() + 1;
+      return this.decreaseValue(currentMonth, 0);
+    }
+  },
   created: function created() {
-    var now = new Date();
-    this.month = now.getMonth();
-    this.year = now.getFullYear();
+    this.clearForm();
   },
   methods: {
     clearForm: function clearForm() {
-      this.month = '', this.year = '';
+      // reset the values
+      var now = new Date();
+      this.month = now.getMonth(), this.year = now.getFullYear(); // load the equivalent data
+
+      this.$emit('fetch-data', this.$data);
+    },
+
+    /**
+     * Used to calculat successive decreasing values 
+     * starting from the given one until the limit + 1
+     * 
+     * @param Int, Int
+     * @return array 
+     */
+    decreaseValue: function decreaseValue(value, limit) {
+      var result = [];
+
+      while (value != limit) {
+        result.push(value);
+        value = value - 1;
+      }
+
+      ;
+      result = result.reverse();
+      return result;
     }
   }
 });
@@ -20019,47 +20054,85 @@ var render = function() {
   return _c("div", { staticClass: "filter-form" }, [
     _c("form", { attrs: { id: "form" } }, [
       _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          { staticClass: "form-group col-md-6" },
-          [
-            _c("label", { staticClass: "control-label" }, [_vm._v("Year")]),
-            _vm._v(" "),
-            _c("Datepicker", {
-              staticClass: "datePicker",
-              attrs: { "input-class": "form-control", format: _vm.yearFormat },
-              model: {
-                value: _vm.year,
-                callback: function($$v) {
-                  _vm.year = $$v
-                },
-                expression: "year"
+        _c("div", { staticClass: "form-group col-md-6" }, [
+          _c("label", { staticClass: "control-label" }, [_vm._v("Year")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.year,
+                  expression: "year"
+                }
+              ],
+              staticClass: "form-control",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.year = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
               }
-            })
-          ],
-          1
-        ),
+            },
+            _vm._l(_vm.yearsToShow, function(year, index) {
+              return _c("option", { key: index, domProps: { value: year } }, [
+                _vm._v(_vm._s(year))
+              ])
+            }),
+            0
+          )
+        ]),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "form-group col-md-6" },
-          [
-            _c("label", { staticClass: "control-label" }, [_vm._v("Month")]),
-            _vm._v(" "),
-            _c("Datepicker", {
-              staticClass: "datePicker",
-              attrs: { "input-class": "form-control", format: _vm.monthFormat },
-              model: {
-                value: _vm.month,
-                callback: function($$v) {
-                  _vm.month = $$v
-                },
-                expression: "month"
+        _c("div", { staticClass: "form-group col-md-6" }, [
+          _c("label", { staticClass: "control-label" }, [_vm._v("Month")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.month,
+                  expression: "month"
+                }
+              ],
+              staticClass: "form-control",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.month = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
               }
-            })
-          ],
-          1
-        )
+            },
+            _vm._l(_vm.monthsToShow, function(month, index) {
+              return _c("option", { key: index, domProps: { value: month } }, [
+                _vm._v(_vm._s(month))
+              ])
+            }),
+            0
+          )
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row pr-2" }, [
@@ -20088,7 +20161,7 @@ var render = function() {
             on: {
               click: function($event) {
                 $event.preventDefault()
-                return _vm.$emit("filter", _vm.$data)
+                return _vm.$emit("fetch-data", _vm.$data)
               }
             }
           },
@@ -34848,6 +34921,14 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app-reports',
   components: {
     ReportsFilter: _components_reports_ReportsFilter_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  methods: {
+    fetchData: function fetchData(data) {
+      console.log(data);
+      axios.post('/reports', data).then(function (response) {
+        return console.log(response);
+      });
+    }
   }
 });
 

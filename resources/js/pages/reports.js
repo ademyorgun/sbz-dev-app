@@ -8,5 +8,13 @@ const app = new Vue({
 
     components: {
         ReportsFilter
+    },
+
+    methods: {
+        fetchData(data) {
+            console.log(data);
+            axios.post('/reports', data)
+                .then(response => console.log(response))
+        }
     }
 });

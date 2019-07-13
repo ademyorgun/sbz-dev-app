@@ -21,14 +21,14 @@
                         </div>
                     </div>
                     <div class="panel-body mt-2">
-                        <reports-filter></reports-filter>
+                        <reports-filter @fetch-data="fetchData"></reports-filter>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-
+        
     </div>
 </div>
 @stop
