@@ -41,11 +41,16 @@ Route::group(['as' => 'voyager.'], function () {
 
         // testing route for filtering the items
         Route::post('products/filter', 'Voyager\VoyagerProductsController@filter');
+
         // User log
         Route::get('users/{id}/log', 'Voyager\VoyagerUserLogController@indexLog')->name('user.log');
-        // 
+
+        // Filtering the appointments
         Route::post('appointments/filter', 'Voyager\VoyagerAppointmentController@filter')->name('appointment.filter');
     
+        // Reports route
+        Route::get('reports', 'ReportsController@index')->name('reports.index');
+        
         event(new RoutingAdminAfter());
     });
 

@@ -82,6 +82,7 @@ return [
     'required'               => 'Required',
     'return_to_list'         => 'Return to List',
     'results'                => 'Result',
+    'reports'                => 'Reports',
     'route'                  => 'Route',
     'save'                   => 'Save',
     'search'                 => 'Search',

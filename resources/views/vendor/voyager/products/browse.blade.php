@@ -15,13 +15,6 @@
 
 @section('content')
     @include('voyager::menus.partial.notice')
-    <div class="page-content container-fluid">
-        <form class="test-form">
-            <input type="number" name="id">
-            {{ csrf_field() }}
-            <button class="test-btn" type="submit">Submit</button>
-        </form>
-    </div>
 
     <div class="page-content container-fluid">
         @include('voyager::alerts')
