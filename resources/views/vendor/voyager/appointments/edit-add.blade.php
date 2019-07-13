@@ -114,11 +114,13 @@
                                                         <select
                                                             class="form-control " name="{{ $options->column }}"
                                                             data-get-items-field="{{$row->field}}"
+                                                            disabled
                                                         >
                                                             <option value="{{ auth()->user()->id }}">{{ auth()->user()->user_name }}</option>
 
                                                         </select>
 
+                                                        <input name="{{ $options->column }}" type="hidden" value="{{ auth()->user()->id }}">
 
                                                     @endif
 

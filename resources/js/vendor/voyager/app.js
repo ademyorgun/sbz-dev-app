@@ -2,7 +2,7 @@ $(document).ready(function () {
     var date = new Date();
 
     $("#call-date")
-        .children(".form-control")
+        .children(".form-control").attr('readonly', 'readonly')
         .val(
             date.getFullYear().toString() +
             "-" +
@@ -17,7 +17,24 @@ $(document).ready(function () {
     $(".datepicker--time-only").datetimepicker({
         format: "HH:mm"
     });
+    
+    // disable chaging the value by mouse scroll
+    $('form').on('focus', 'input[type=number]', function (e) {
+        $(this).on('mousewheel.disableScroll', function (e) {
+            e.preventDefault();
+        })
+    });
+    $('form').on('blur', 'input[type=number]', function (e) {
+        $(this).off('mousewheel.disableScroll');
+    });
+    console.log('tset');
+    // $('form').on('focus', 'input[type=number]', function (e) {
+    //     $(this).on('mousewheel.disableScroll', function (e) {
+    //         e.preventDefault()
+    //     })
+    // });
+
     $(".datepicker--date-only").datetimepicker({
-        format: "MM/DD/YYYY"
+        format: "YYYY-MM-DD"
     });
 });

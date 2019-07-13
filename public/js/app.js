@@ -1821,7 +1821,8 @@ __webpack_require__.r(__webpack_exports__);
       canton: null,
       userID: null,
       phoneNumber: null,
-      appointmentID: null
+      appointmentID: null,
+      dateFormat: 'yyyy MM dd'
     };
   },
   methods: {
@@ -22263,7 +22264,7 @@ var render = function() {
             _vm._v(" "),
             _c("Datepicker", {
               staticClass: "datePicker",
-              attrs: { "input-class": "form-control", format: "yyyy MM dd" },
+              attrs: { "input-class": "form-control", format: _vm.dateFormat },
               model: {
                 value: _vm.callDateStart,
                 callback: function($$v) {
@@ -22286,7 +22287,7 @@ var render = function() {
             _vm._v(" "),
             _c("Datepicker", {
               staticClass: "datePicker",
-              attrs: { "input-class": "form-control" },
+              attrs: { "input-class": "form-control", format: _vm.dateFormat },
               model: {
                 value: _vm.callDateEnd,
                 callback: function($$v) {
@@ -22309,7 +22310,7 @@ var render = function() {
             _vm._v(" "),
             _c("Datepicker", {
               staticClass: "datePicker",
-              attrs: { "input-class": "form-control" },
+              attrs: { "input-class": "form-control", format: _vm.dateFormat },
               model: {
                 value: _vm.appointmentDateStart,
                 callback: function($$v) {
@@ -22332,7 +22333,7 @@ var render = function() {
             _vm._v(" "),
             _c("Datepicker", {
               staticClass: "datePicker",
-              attrs: { "input-class": "form-control" },
+              attrs: { "input-class": "form-control", format: _vm.dateFormat },
               model: {
                 value: _vm.appointmentDateEnd,
                 callback: function($$v) {

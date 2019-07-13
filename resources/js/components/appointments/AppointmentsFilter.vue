@@ -4,23 +4,23 @@
       <div class="row">
         <div class="form-group col-md-3">
           <label class="control-label">Call Date start</label>
-          <Datepicker class="datePicker" input-class="form-control" v-model="callDateStart" :format="'yyyy MM dd'"></Datepicker>
+          <Datepicker class="datePicker" input-class="form-control" v-model="callDateStart" :format="dateFormat"></Datepicker>
           <!-- <datepicker v-model="callDateStart"></datepicker> -->
         </div>
 
         <div class="form-group col-md-3">
           <label class="control-label">Call Date end</label>
-          <Datepicker class="datePicker" input-class="form-control" v-model="callDateEnd"></Datepicker>
+          <Datepicker class="datePicker" input-class="form-control" v-model="callDateEnd" :format="dateFormat"></Datepicker>
         </div>
 
         <div class="form-group col-md-3">
           <label class="control-label">Appointment Date start</label>
-          <Datepicker class="datePicker" input-class="form-control" v-model="appointmentDateStart"></Datepicker>
+          <Datepicker class="datePicker" input-class="form-control" v-model="appointmentDateStart" :format="dateFormat"></Datepicker>
         </div>
 
         <div class="form-group col-md-3">
           <label class="control-label">Appointment Date end</label>
-          <Datepicker class="datePicker" input-class="form-control" v-model="appointmentDateEnd"></Datepicker>
+          <Datepicker class="datePicker" input-class="form-control" v-model="appointmentDateEnd" :format="dateFormat"></Datepicker>
         </div>
 
         <!-- wanted expert -->
@@ -114,6 +114,7 @@ export default {
       userID: null,
       phoneNumber: null,
       appointmentID: null,
+      dateFormat: 'yyyy MM dd'
     };
   },
 
