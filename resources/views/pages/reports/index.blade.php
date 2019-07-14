@@ -51,7 +51,8 @@
                     </div>
                 </div>
                 <div class="panel-body mt-2">
-                    <reports-chart :data-to-load="numOfAppointmentsPerDay"></reports-chart>
+                    <reports-bar-chart :data-to-load="numOfAppointmentsPerDay"></reports-bar-chart>
+                    <reports-pie-chart></reports-pie-chart>
                 </div>
             </div>
         </div>

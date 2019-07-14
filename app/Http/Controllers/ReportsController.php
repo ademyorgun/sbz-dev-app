@@ -27,6 +27,8 @@ class ReportsController extends Controller
         $selectedMonth = (string)$request->input('month');
         $selectedYear = (string)$request->input('year');
         $selectedDay = (int)$request->input('day');
+
+        $appointmentPossibleStatus = ['open', 'positive', 'negative', 'not_home', 'processing', 'multi_year_contract'];
         
         // Get all users
         $users = User::all();
@@ -47,18 +49,26 @@ class ReportsController extends Controller
         // Number of appointments per day
         $numOfAppointmentsPerDay = [];
         while ($selectedDay > 0) {
-            $allAppointments = Appointment::whereDay('created_at', $selectedDay)->get();
+            $allAppointments = Appointment::whereMonth('created_at', $selectedMonth)->whereDay('created_at', $selectedDay)->get();
             $numOfAppointmentsPerDay[$selectedDay] = count($allAppointments);
             
             $selectedDay = $selectedDay - 1;
         }
 
-        // 
+        // Number of appointments per status (  )
+        $numOfAppointmentsPerStatus = [];
+        foreach ($appointmentPossibleStatus as $key => $status) {
+            $allAppointments = Appointment::where('comment_status', $status)->get();
+
+            $numOfAppointmentsPerStatus[$status] = count($allAppointments);
+        }
+
         // Returning the result
         return response()->json([
             'numOfAppointmentsPerUser' => $numOfAppointmentsPerUser,
             'numOfAllApointments' => $numOfAllApointments,
-            'numOfAppointmentsPerDay' => $numOfAppointmentsPerDay
+            'numOfAppointmentsPerDay' => $numOfAppointmentsPerDay,
+            'numOfAppointmentsPerStatus' => $numOfAppointmentsPerStatus
         ]);
     }
 }

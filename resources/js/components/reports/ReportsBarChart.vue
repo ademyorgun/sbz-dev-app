@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <base-chart-bar :data="ChartData"></base-chart-bar>
+        <base-chart-bar :chart-data="ChartData"></base-chart-bar>
     </div>
 </template>
 
@@ -36,8 +36,14 @@ export default {
             };
 
             return {
-                labels,
-                data
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Appointments per day',
+                        backgroundColor: '#f87979',
+                        data: data
+                    }
+                ]
             };
         }
     }

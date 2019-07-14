@@ -2,16 +2,20 @@ import Vue from "vue";
 require("./../bootstrap");
 
 import ReportsFilter from '../components/reports/ReportsFilter.vue';
-import ReportsChart from '../components/reports/ReportsChart.vue';
+import ReportsBarChart from '../components/reports/ReportsBarChart.vue';
 import ReportsUsersTable from '../components/reports/ReportsUsersTable.vue';
+import ReportsPieChart from '../components/reports/ReportsPieChart.vue';
+
+Vue.config.productionTip = false;
 
 const app = new Vue({
     el: '#app-reports',
 
     components: {
         ReportsFilter,
-        ReportsChart,
-        ReportsUsersTable
+        ReportsBarChart,
+        ReportsUsersTable,
+        ReportsPieChart
     },
 
     data: {
