@@ -39,6 +39,19 @@ class User extends \TCG\Voyager\Models\User
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Enabling soft delete for users
+     * 
+     */
     use SoftDeletes;
     protected $dates = ['deleted_at'];
+
+    /**
+     * Get the appointments for the user
+     * 
+     * 
+     */
+    public function appointments() {
+        return $this->hasMany('App\Appointment', 'call_agent_id', 'id');
+    }
 }

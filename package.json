@@ -38,8 +38,10 @@
     },
     "homepage": "https://github.com/Hamzakh777/digital-rocket-app#readme",
     "dependencies": {
+        "chart.js": "^2.8.0",
         "laravel-vue-pagination": "^2.3.0",
         "typescript": "^3.5.3",
+        "vue-chartjs": "^3.4.2",
         "vuejs-datepicker": "^1.6.2",
         "vuex": "^3.1.1"
     }

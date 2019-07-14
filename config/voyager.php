@@ -196,7 +196,6 @@ return [
     ],
 
     'additional_js' => [
-        'js/pages/reports.js',
         'js/vendor/main.js'
     ],
 

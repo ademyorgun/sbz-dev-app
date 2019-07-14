@@ -43,6 +43,7 @@ export default {
         return {
             month: '',
             year: '',
+            day: new Date().getDate()
         }
     },
 
