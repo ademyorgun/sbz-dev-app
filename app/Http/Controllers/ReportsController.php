@@ -48,26 +48,20 @@ class ReportsController extends Controller
 
         // Number of appointments per user
         $numOfAppointmentsPerUser = [];
-        $users = User::all();
-        foreach ($users as $key => $user) {
-            // $appointments = User::find($user->id)->whereHas('appointments', function($query) use ($selectedYear, $selectedMonth, $isAgentMeetingDateSet) {
-            //     return $query->whereYear('created_at', $selectedYear)
-            //                 ->whereMonth('created_at', $selectedMonth)
-            //                 ->when($isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
-            //                     return $query->whereNotNull('meeting_date');
-            //                 })
-            //                 // agent meeting date is not set
-            //                 ->when(!$isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
-            //                     return $query->whereNull('meeting_date');
-            //                 });
-            // })->get();
-
-            $appointments = User::with(['appointments' => function ($query) use ($selectedYear, $selectedMonth, $isAgentMeetingDateSet) {
-                            $query->whereYear('created_at', $selectedYear);
+        // $users = User::all();
+        $users = User::with(['appointments' => function ($query) use ($selectedYear, $selectedMonth, $isAgentMeetingDateSet) {
+                            $query->whereYear('created_at', $selectedYear)
+                            ->whereMonth('created_at', $selectedMonth)
+                            ->when($isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                                return $query->whereNotNull('meeting_date');
+                            })
+                            // agent meeting date is not set
+                            ->when(!$isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                                return $query->whereNull('meeting_date');
+                            });
                         }])->get();
-                                
-            $totalOfAppointments = count($appointments);
-            $numOfAppointmentsPerUser[$user->user_name] = $totalOfAppointments;
+        foreach ($users as $key => $user) {
+            $numOfAppointmentsPerUser[$user->user_name] = count($user->appointments);
         };
 
         // Number of appointments per day
