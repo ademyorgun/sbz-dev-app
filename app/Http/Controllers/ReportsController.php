@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 use App\User;
 use App\Appointment;
 
@@ -27,24 +28,45 @@ class ReportsController extends Controller
         $selectedMonth = (string)$request->input('month');
         $selectedYear = (string)$request->input('year');
         $selectedDay = (int)$request->input('day');
+        $isAgentMeetingDateSet = (boolean)$request->input('isAgentMeetingDateSet'); 
 
+        // 
         $appointmentPossibleStatus = ['open', 'positive', 'negative', 'not_home', 'processing', 'multi_year_contract'];
-        
-        // Get all users
-        $users = User::all();
         
         // Appoitments for the selected year/month
         $allAppointments = Appointment::whereYear('created_at', $selectedYear)
-                                        ->whereMonth('created_at', $selectedMonth)
-                                        ->get();
+                            ->whereMonth('created_at', $selectedMonth)
+                            ->when($isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                                return $query->whereNotNull('meeting_date');
+                            })
+                            // agent meeting date is not set
+                            ->when(!$isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                                return $query->whereNull('meeting_date');
+                            })
+                            ->get();
         $numOfAllApointments = count($allAppointments);
 
         // Number of appointments per user
         $numOfAppointmentsPerUser = [];
+        $users = User::all();
         foreach ($users as $key => $user) {
-            $appointments = User::find($user->id)->appointments;
-            $totalOfAppointments = count($appointments);
+            // $appointments = User::find($user->id)->whereHas('appointments', function($query) use ($selectedYear, $selectedMonth, $isAgentMeetingDateSet) {
+            //     return $query->whereYear('created_at', $selectedYear)
+            //                 ->whereMonth('created_at', $selectedMonth)
+            //                 ->when($isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+            //                     return $query->whereNotNull('meeting_date');
+            //                 })
+            //                 // agent meeting date is not set
+            //                 ->when(!$isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+            //                     return $query->whereNull('meeting_date');
+            //                 });
+            // })->get();
 
+            $appointments = User::with(['appointments' => function ($query) use ($selectedYear, $selectedMonth, $isAgentMeetingDateSet) {
+                            $query->whereYear('created_at', $selectedYear);
+                        }])->get();
+                                
+            $totalOfAppointments = count($appointments);
             $numOfAppointmentsPerUser[$user->user_name] = $totalOfAppointments;
         };
 
@@ -52,9 +74,17 @@ class ReportsController extends Controller
         $numOfAppointmentsPerDay = [];
         $dayToUse = $selectedDay; // we gonna need the selectedDay value later
         while ($dayToUse > 0) {
-            $allAppointments = Appointment::whereMonth('created_at', $selectedMonth)
-                                            ->whereDay('created_at', $dayToUse)
-                                            ->get();
+            $allAppointments = Appointment::whereYear('created_at', $selectedYear)
+                            ->whereMonth('created_at', $selectedMonth)
+                            ->when($isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                                return $query->whereNotNull('meeting_date');
+                            })
+                            // agent meeting date is not set
+                            ->when(!$isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                                return $query->whereNull('meeting_date');
+                            })
+                            ->whereDay('created_at', $dayToUse)
+                            ->get();
             $numOfAppointmentsPerDay[$dayToUse] = count($allAppointments);
             
             $dayToUse = $dayToUse - 1;
@@ -63,7 +93,16 @@ class ReportsController extends Controller
         // Number of appointments per status
         $numOfAppointmentsPerStatus = [];
         foreach ($appointmentPossibleStatus as $key => $status) {
-            $allAppointments = Appointment::where('comment_status', $status)->get();
+            $allAppointments = Appointment::whereYear('created_at', $selectedYear)
+                            ->whereMonth('created_at', $selectedMonth)
+                            ->when($isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                                return $query->whereNotNull('meeting_date');
+                            })
+                            // agent meeting date is not set
+                            ->when(!$isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                                return $query->whereNull('meeting_date');
+                            })
+                            ->where('comment_status', $status)->get();
 
             $numOfAppointmentsPerStatus[$status] = count($allAppointments);
         }
@@ -72,11 +111,27 @@ class ReportsController extends Controller
         $numOfAllApointmentsPerDayPositive = [];
         $numOfAllApointmentsPerDayNegative = [];
         while($selectedDay > 0) {
-            $allAppointmentsPositive = Appointment::whereMonth('created_at', $selectedMonth)
+            $allAppointmentsPositive = Appointment::whereYear('created_at', $selectedYear)
+                                    ->whereMonth('created_at', $selectedMonth)
+                                    ->when($isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                                        return $query->whereNotNull('meeting_date');
+                                    })
+                                    // agent meeting date is not set
+                                    ->when(!$isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                                        return $query->whereNull('meeting_date');
+                                    })
                                     ->whereDay('created_at', $selectedDay)
                                     ->where('comment_status', 'positive')
                                     ->get();
-            $allAppointmentsNegative = Appointment::whereMonth('created_at', $selectedMonth)
+            $allAppointmentsNegative = Appointment::whereYear('created_at', $selectedYear)
+                                    ->whereMonth('created_at', $selectedMonth)
+                                    ->when($isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                                        return $query->whereNotNull('meeting_date');
+                                    })
+                                    // agent meeting date is not set
+                                    ->when(!$isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                                        return $query->whereNull('meeting_date');
+                                    })
                                     ->whereDay('created_at', $selectedDay)
                                     ->where('comment_status', 'negative')
                                     ->get();

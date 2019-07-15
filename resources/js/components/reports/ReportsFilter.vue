@@ -1,21 +1,31 @@
 <template>
-     <div class="filter-form">
+  <div class="filter-form">
     <form id="form">
       <div class="row">
         <div class="form-group col-md-6">
           <label class="control-label">Year</label>
-          <select class="form-control" v-model="year" >
-            <option v-for="(year, index) in yearsToShow" :value="year" :key="index" >{{year}}</option>
+          <select class="form-control" v-model="year">
+            <option v-for="(year, index) in yearsToShow" :value="year" :key="index">{{year}}</option>
           </select>
         </div>
         <div class="form-group col-md-6">
           <label class="control-label">Month</label>
-          <select class="form-control" v-model="month" >
-            <option v-for="(month, index) in monthsToShow" :value="month" :key="index" >{{month}}</option>
+          <select class="form-control" v-model="month">
+            <option v-for="(month, index) in monthsToShow" :value="month" :key="index">{{month}}</option>
           </select>
         </div>
       </div>
       <div class="row pr-2">
+        <div class="form-group pull-left col-md-6 col-sm-12 toggle">
+          <label class="control-label">Meeting date set:</label>
+          <div class="toggle-button-wrapper">
+            <toggle-button 
+              v-model="isAgentMeetingDateSet"
+              :value="false"
+              :labels="{checked: 'Yes', unchecked: 'No'}"
+              @change="clearForm" />
+          </div>
+        </div>
         <button class="btn btn-light pull-right" @click.prevent="clearForm">
           <i class="voyager-trash"></i>
           <span>Clear filter</span>
@@ -30,76 +40,76 @@
 </template>
 
 <script>
-import Datepicker from 'vuejs-datepicker';
+import { ToggleButton } from "vue-js-toggle-button";
 
 export default {
-    name: 'ReportsFiler',
+  name: "ReportsFiler",
 
-    components: {
-        Datepicker
+  components: {
+    ToggleButton
+  },
+
+  data() {
+    return {
+      month: "",
+      year: "",
+      day: new Date().getDate(),
+      isAgentMeetingDateSet: true
+    };
+  },
+
+  computed: {
+    yearsToShow() {
+      let currentYear = new Date().getFullYear();
+      return this.decreaseValue(currentYear, 2016);
     },
 
-    data() {
-        return {
-            month: '',
-            year: '',
-            day: new Date().getDate()
-        }
+    monthsToShow() {
+      // for some weird reason getMonth returs the month
+      // starting form 0, so we have to add 1 in order
+      // to accomodate for that
+      let currentMonth = new Date().getMonth() + 1;
+      return this.decreaseValue(currentMonth, 0);
+    }
+  },
+
+  created() {
+    this.clearForm();
+  },
+
+  methods: {
+    clearForm() {
+      // reset the values
+      const now = new Date();
+      // for some weird reason getMonth returs the month
+      // starting form 0, so we have to add 1 in order
+      // to accomodate for that
+      (this.month = now.getMonth() + 1), (this.year = now.getFullYear());
+
+      // load the equivalent data
+      this.$emit("fetch-data", this.$data);
     },
 
-    computed: {
-      yearsToShow() {
-        let currentYear = new Date().getFullYear();
-        return this.decreaseValue(currentYear, 2016);
-      },
+    /**
+     * Used to calculat successive decreasing values
+     * starting from the given one until the limit + 1
+     *
+     * @param Int, Int
+     * @return array
+     */
+    decreaseValue(value, limit) {
+      let result = [];
 
-      monthsToShow() {
-        // for some weird reason getMonth returs the month
-        // starting form 0, so we have to add 1 in order
-        // to accomodate for that
-        let currentMonth = new Date().getMonth() + 1;
-        return this.decreaseValue(currentMonth, 0);
+      while (value != limit) {
+        result.push(value);
+        value = value - 1;
       }
-    },
 
-    created() {
-        this.clearForm();
-    },
-
-    methods: {
-        clearForm() {
-            // reset the values
-            const now = new Date();
-            // for some weird reason getMonth returs the month
-            // starting form 0, so we have to add 1 in order
-            // to accomodate for that
-            this.month = now.getMonth() + 1 ,
-            this.year = now.getFullYear()
-
-            // load the equivalent data
-            this.$emit('fetch-data', this.$data);
-        },
-
-        /**
-         * Used to calculat successive decreasing values 
-         * starting from the given one until the limit + 1
-         * 
-         * @param Int, Int
-         * @return array 
-         */
-        decreaseValue( value, limit) {
-          let result = [];
-
-          while (value != limit) {
-            result.push(value);
-            value = value - 1;
-          };
-
-          result = result.reverse();
-          return result;
-        }
-    },
-}
+      result = result.reverse();
+      return result;
+    }
+  }
+};
 </script>
 
 <style  lang="sass">
@@ -120,6 +130,13 @@ export default {
 
     input.form-control
         background-color: #fff !important
+
+    .toggle
+        margin-bottom: 21px
+        
+        .toggle-button-wrapper
+            display: inline-block
+            margin-left: 10px
 
 .form-control[readonly]
     color: #76838f
