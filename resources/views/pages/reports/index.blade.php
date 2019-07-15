@@ -88,7 +88,6 @@
         justify-content: space-around;
         margin-bottom: 3em;
         max-width: 100%;
-        margin: 0;
     }
     .panel-body.graphs {
         padding-right: 0;
@@ -100,6 +99,7 @@
         .row-flex {
             flex-direction: column;
             align-items: center;
+            margin: 0;
         }
         .panel-body.graphs {
             padding-top: 1em;
