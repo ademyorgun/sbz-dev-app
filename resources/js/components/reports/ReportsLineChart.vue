@@ -1,23 +1,29 @@
 <template>
   <div class="card">
-    <base-pie-chart :chart-data="chartData"></base-pie-chart>
+    <BaseLineChart :chart-data="chartData"></BaseLineChart>
   </div>
 </template>
 
 <script>
-import BasePieChart from "../baseComponents/BasePieChart";
+import BaseLineChart from "../baseComponents/BaseLineChart";
 
 export default {
-  name: "ReportsPieChart",
+  name: "ReportsLineChart",
 
   components: {
-    BasePieChart
+    BaseLineChart
   },
 
   props: {
     DataToLoad: {
-      type: Object
-      // required: true
+      type: Object,
+      required: true
+    },
+    backgroundColor: {
+      type: String
+    },
+    label: {
+      type: String
     }
   },
 
@@ -40,14 +46,8 @@ export default {
         labels,
         datasets: [
           {
-            backgroundColor: [
-              "#41B883",
-              "#E46651",
-              "#00D8FF",
-              "#DD1B16",
-              "#00ffff",
-              "#a4a4a4"
-            ],
+            label: this.label,
+            backgroundColor: this.backgroundColor,
             data
           }
         ]

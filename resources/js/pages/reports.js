@@ -5,6 +5,8 @@ import ReportsFilter from '../components/reports/ReportsFilter.vue';
 import ReportsBarChart from '../components/reports/ReportsBarChart.vue';
 import ReportsUsersTable from '../components/reports/ReportsUsersTable.vue';
 import ReportsPieChart from '../components/reports/ReportsPieChart.vue';
+import ReportsLineChart from '../components/reports/ReportsLineChart.vue';
+import ReportsTotalCard from '../components/reports/ReportsTotalCard.vue';
 
 Vue.config.productionTip = false;
 
@@ -15,13 +17,18 @@ const app = new Vue({
         ReportsFilter,
         ReportsBarChart,
         ReportsUsersTable,
-        ReportsPieChart
+        ReportsPieChart,
+        ReportsLineChart,
+        ReportsTotalCard
     },
 
     data: {
         numOfAllApointments: 0,
         numOfAppointmentsPerUser: {},
-        numOfAppointmentsPerDay: {}
+        numOfAppointmentsPerDay: {},
+        numOfAppointmentsPerStatus: {},
+        numOfAllApointmentsPerDayPositive: {},
+        numOfAllApointmentsPerDayNegative: {}
     },
 
     methods: {
@@ -31,6 +38,9 @@ const app = new Vue({
                     this.numOfAllApointments = response.data.numOfAllApointments;
                     this.numOfAppointmentsPerUser = response.data.numOfAppointmentsPerUser;
                     this.numOfAppointmentsPerDay = response.data.numOfAppointmentsPerDay;
+                    this.numOfAppointmentsPerStatus = response.data.numOfAppointmentsPerStatus;
+                    this.numOfAllApointmentsPerDayPositive = response.data.numOfAllApointmentsPerDayPositive;
+                    this.numOfAllApointmentsPerDayNegative = response.data.numOfAllApointmentsPerDayNegative;
                 })
         }
     }

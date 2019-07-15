@@ -70,7 +70,10 @@ export default {
         clearForm() {
             // reset the values
             const now = new Date();
-            this.month = now.getMonth(),
+            // for some weird reason getMonth returs the month
+            // starting form 0, so we have to add 1 in order
+            // to accomodate for that
+            this.month = now.getMonth() + 1 ,
             this.year = now.getFullYear()
 
             // load the equivalent data

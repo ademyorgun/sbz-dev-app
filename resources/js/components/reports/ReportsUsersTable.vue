@@ -31,6 +31,6 @@ export default {
 
 <style scoped lang="sass">
 .table-responsive 
-    margin-top: 1em
+    margin-top: 2em
 
 </style>

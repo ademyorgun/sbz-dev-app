@@ -40,7 +40,7 @@ export default {
                 datasets: [
                     {
                         label: 'Appointments per day',
-                        backgroundColor: '#f87979',
+                        backgroundColor: '#E4572E',
                         data: data
                     }
                 ]
@@ -52,5 +52,15 @@ export default {
 
 <style scoped lang="sass">
 .card
-    max-width: 400px
+    max-width: 45%
+    width: 50%
+    display: inline-block
+    background-color: #fff
+    padding: 2em
+    box-shadow: 0px 10px 40px rgba(0,0,0, 0.1)
+
+    @media(max-width: 700px)
+        max-width: 90%
+        width: 100%
+        margin-bottom: 2em
 </style>

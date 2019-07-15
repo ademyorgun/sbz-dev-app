@@ -13,6 +13,7 @@ return [
     'ascending'              => 'Ascending',
     'auto_increment'         => 'Auto Increment',
     'appointments_per_user'  => 'Number of appointments per user',
+    'appointments_per_month' => 'Appointments for this months',
     'bread'                  => 'BREAD',
     'browse'                 => 'Browse',
     'builder'                => 'Builder',
