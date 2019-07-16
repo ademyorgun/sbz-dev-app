@@ -14,6 +14,12 @@ export default {
         DataToLoad: {
             type: Object,
             required: true
+        },
+        backgroundColor: {
+            type: String
+        },
+        label: {
+            type: String
         }
     },
 
@@ -39,8 +45,8 @@ export default {
                 labels: labels,
                 datasets: [
                     {
-                        label: 'Appointments per day',
-                        backgroundColor: '#E4572E',
+                        label: this.label,
+                        backgroundColor: this.backgroundColor, //'#E4572E'
                         data: data
                     }
                 ]

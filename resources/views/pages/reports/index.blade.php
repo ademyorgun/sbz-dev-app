@@ -66,12 +66,12 @@
                 </div>
                 <div class="panel-body mt-2 graphs">
                     <div class="row row-flex">
-                        <reports-bar-chart :data-to-load="numOfAppointmentsPerDay"></reports-bar-chart>
+                        <reports-bar-chart :data-to-load="numOfAppointmentsPerDay" background-color="#E4572E" label="Appointment per day"></reports-bar-chart>
                         <reports-pie-chart :data-to-load="numOfAppointmentsPerStatus"></reports-pie-chart>
                     </div>
                     <div class="row row-flex">
-                        <reports-line-chart :data-to-load="numOfAllApointmentsPerDayPositive" background-color="#70D6FF" label="Positive"></reports-line-chart>
-                        <reports-line-chart :data-to-load="numOfAllApointmentsPerDayNegative" background-color="#ED254E" label="Nositive"></reports-line-chart>
+                        <reports-bar-chart :data-to-load="numOfAllApointmentsPerDayPositive" background-color="#70D6FF" label="Positive"></reports-bar-chart>
+                        <reports-bar-chart :data-to-load="numOfAllApointmentsPerDayNegative" background-color="#ED254E" label="Nositive"></reports-bar-chart>
                     </div>
                 </div>
             </div>

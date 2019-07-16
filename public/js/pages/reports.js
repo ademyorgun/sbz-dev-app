@@ -1782,6 +1782,12 @@ __webpack_require__.r(__webpack_exports__);
     DataToLoad: {
       type: Object,
       required: true
+    },
+    backgroundColor: {
+      type: String
+    },
+    label: {
+      type: String
     }
   },
   components: {
@@ -1804,8 +1810,9 @@ __webpack_require__.r(__webpack_exports__);
       return {
         labels: labels,
         datasets: [{
-          label: 'Appointments per day',
-          backgroundColor: '#E4572E',
+          label: this.label,
+          backgroundColor: this.backgroundColor,
+          //'#E4572E'
           data: data
         }]
       };
