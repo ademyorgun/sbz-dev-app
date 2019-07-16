@@ -132,9 +132,7 @@
                                                 @case("Canton City")
                                                     Canton
                                                     @break
-                                                @case(2)
-                                                    
-                                                    @break
+                                              
                                                 @default
                                                     {{ $row->display_name }}
                                             @endswitch
@@ -289,6 +287,9 @@
                                                     @else
                                                         {{ trans_choice('voyager::media.files', 0) }}
                                                     @endif
+                                                
+                                                @elseif($row->type == 'time')
+                                                    {{ property_exists($row->details, 'format') ? \Carbon\Carbon::parse($data->{$row->field})->formatLocalized($row->details->format) : $data->{$row->field} }}
                                                 @else
                                                     @include('voyager::multilingual.input-hidden-bread-browse')
                                                     <span>{{ $data->{$row->field} }}</span>

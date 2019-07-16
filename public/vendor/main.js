@@ -95,6 +95,9 @@
 
 $(document).ready(function () {
   var date = new Date();
+  $(".datepicker--date-only").datetimepicker({
+    format: "DD-MM-YYYY"
+  });
   $("#call-date").children(".form-control").attr('readonly', 'readonly').val(date.getFullYear().toString() + "-" + (date.getMonth() + 1).toString().padStart(2, 0) + "-" + date.getDate().toString().padStart(2, 0));
   $(".datepicker--time-only").datetimepicker({
     format: "HH:mm"
@@ -113,10 +116,6 @@ $(document).ready(function () {
   //         e.preventDefault()
   //     })
   // });
-
-  $(".datepicker--date-only").datetimepicker({
-    format: "YYYY-MM-DD"
-  });
 });
 
 /***/ }),

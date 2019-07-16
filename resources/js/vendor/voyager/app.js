@@ -1,6 +1,10 @@
 $(document).ready(function () {
     var date = new Date();
 
+    $(".datepicker--date-only").datetimepicker({
+        format: "DD-MM-YYYY"
+    });
+    
     $("#call-date")
         .children(".form-control").attr('readonly', 'readonly')
         .val(
@@ -33,8 +37,4 @@ $(document).ready(function () {
     //         e.preventDefault()
     //     })
     // });
-
-    $(".datepicker--date-only").datetimepicker({
-        format: "YYYY-MM-DD"
-    });
 });
