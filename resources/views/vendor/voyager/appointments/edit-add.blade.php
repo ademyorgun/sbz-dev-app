@@ -65,6 +65,11 @@
                                     }
                                 @endphp
 
+                                <!-- GET THE ROLE OPTIONS -->
+                                @php
+                                    $currentUserRole = auth()->user()->role->name;
+                                @endphp
+
                                 {{-- if appoitment is created we show the following two rows --}}
                                 @if(($row->field == 'comment_status' or $row->field == 'graduation_abschluss') &&  $add)
                                     @continue
@@ -80,63 +85,19 @@
                                     <label class="control-label" for="name">{{ $row->display_name }}</label>
                                     @include('voyager::multilingual.input-hidden-bread-edit-add')
 
+                                    @php
+                                        $options = $row->details;
+                                    @endphp
                                     @if (isset($row->details->view) )
-                                        @include($row->details->view, ['row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $dataTypeContent->{$row->field}, 'action' => ($edit ? 'edit' : 'add')])
+                                        @include($row->details->view, ['currentUserRole' => $currentUserRole,'options' => $row->details,'row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $dataTypeContent->{$row->field}, 'action' => ($edit ? 'edit' : 'add')])
                                     @elseif($row->type == 'relationship' && $row->field == 'appointment_belongsto_user_relationship')
                                         {{-- we'd like to show a preselected user --}}    
-                                        {{-- @include('voyager.formFields.relationshipUser ', ['options' => $row->details]) --}}
-                                        @php
-                                            $options = $row->details;
-                                        @endphp
-                                        @if(isset($options->model) && isset($options->type))
-                                            @if(class_exists($options->model))
-
-                                                @php $relationshipField = $row->field; @endphp
-
-                                                @if($options->type == 'belongsTo')
-
-                                                    @if(isset($view) && ($view == 'browse' || $view == 'read'))
-
-                                                        @php
-                                                            $relationshipData = (isset($data)) ? $data : $dataTypeContent;
-                                                            $model = app($options->model);
-                                                            $query = $model::where($options->key,$relationshipData->{$options->column})->first();
-                                                        @endphp
-
-                                                        @if(isset($query))
-                                                            <p>{{ $query->{$options->label} }}</p>
-                                                        @else
-                                                            <p>{{ __('voyager::generic.no_results') }}</p>
-                                                        @endif
-
-                                                    @else
-                                                        
-                                                        <select
-                                                            class="form-control " name="{{ $options->column }}"
-                                                            data-get-items-field="{{$row->field}}"
-                                                            disabled
-                                                        >
-                                                            <option value="{{ auth()->user()->id }}">{{ auth()->user()->user_name }}</option>
-
-                                                        </select>
-
-                                                        <input name="{{ $options->column }}" type="hidden" value="{{ auth()->user()->id }}">
-
-                                                    @endif
-
-                                                @endif
-
-                                            @else
-
-                                                cannot make relationship because {{ $options->model }} does not exist.
-
-                                            @endif
-
-                                        @endif
+                                        @include('vendor.voyager.formFields.relationshipUser', ['options' => $row->details])
+                                        {{-- @include('voyager::formfields.relationship', ['options' => $row->details]) --}}
                                     @elseif ($row->type == 'relationship')
                                         @include('voyager::formfields.relationship', ['options' => $row->details])
                                     @else
-                                        {!! app('voyager')->formField($row, $dataType, $dataTypeContent) !!}
+                                        {!! app('voyager')->formField($row, $dataType, $dataTypeContent, $options , $currentUserRole) !!}
                                     @endif
                                 
                                     @foreach (app('voyager')->afterFormFields($row, $dataType, $dataTypeContent) as $after)
