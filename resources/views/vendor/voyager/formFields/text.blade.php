@@ -7,8 +7,6 @@
     @php
         $options = (array)$options;
         $roleOptions = (isset($options['roleOptions']) ? (array)$options['roleOptions'] : '');
-        // $roleOptions = (array)$roleOptions;
-
         if($roleOptions != '') {
             $roles = (array)$roleOptions['readonly'];
             $noRoles = false;
@@ -16,7 +14,7 @@
             $noRoles = true;
         }
     @endphp
-    @if (!$noRoles) {
+    @if (!$noRoles) 
         @foreach ($roles as $readonlyUserRole)
             @if ($currentUserRole == strtolower($readonlyUserRole))
                 {{ 'readonly' }}
