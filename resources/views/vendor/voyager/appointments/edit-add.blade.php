@@ -23,113 +23,119 @@
     <div class="page-content edit-add container-fluid">
         <div class="row">
             <div class="col-md-12">
-
-                <div class="panel panel-bordered">
-                    <!-- form start -->
-                    <form role="form"
-                            class="form-edit-add"
-                            action="{{ $edit ? route('voyager.'.$dataType->slug.'.update', $dataTypeContent->getKey()) : route('voyager.'.$dataType->slug.'.store') }}"
-                            method="POST" enctype="multipart/form-data">
-                        <!-- PUT Method if we are editing -->
-                        @if($edit)
-                            {{ method_field("PUT") }}
-                        @endif
-
-                        <!-- CSRF TOKEN -->
-                        {{ csrf_field() }}
-
-                        <div class="panel-body">
-
-                            @if (count($errors) > 0)
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
+                <div class="panel panel-primary panel-bordered">
+                    <div class="panel-heading">
+                        <h3 class="panel-title panel-icon"><i class=""></i>Appoitment details</h3>
+                        <div class="panel-actions">
+                            <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
+                        </div>
+                    </div>
+                    <div class="panel-body mt-1">
+                        <!-- form start -->
+                        <form role="form"
+                                class="form-edit-add"
+                                action="{{ $edit ? route('voyager.'.$dataType->slug.'.update', $dataTypeContent->getKey()) : route('voyager.'.$dataType->slug.'.store') }}"
+                                method="POST" enctype="multipart/form-data">
+                            <!-- PUT Method if we are editing -->
+                            @if($edit)
+                                {{ method_field("PUT") }}
                             @endif
 
-                            <!-- Adding / Editing -->
-                            @php
-                                $dataTypeRows = $dataType->{($edit ? 'editRows' : 'addRows' )};
-                            @endphp
+                            <!-- CSRF TOKEN -->
+                            {{ csrf_field() }}
 
-                            @foreach($dataTypeRows as $row)
+                            <div class="panel-body">
 
-                                <!-- GET THE DISPLAY OPTIONS -->
+                                @if (count($errors) > 0)
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
+                                <!-- Adding / Editing -->
                                 @php
-                                    $display_options = $row->details->display ?? NULL;
-                                    if ($dataTypeContent->{$row->field.'_'.($edit ? 'edit' : 'add')}) {
-                                        $dataTypeContent->{$row->field} = $dataTypeContent->{$row->field.'_'.($edit ? 'edit' : 'add')};
-                                    }
+                                    $dataTypeRows = $dataType->{($edit ? 'editRows' : 'addRows' )};
                                 @endphp
 
-                                <!-- GET THE ROLE OPTIONS -->
-                                @php
-                                    $currentUserRole = auth()->user()->role->name;
-                                @endphp
+                                @foreach($dataTypeRows as $row)
 
-                                {{-- if appoitment is created we show the following two rows --}}
-                                @if(($row->field == 'comment_status' or $row->field == 'graduation_abschluss') &&  $add)
-                                    @continue
-                                @endif
-
-                                @if($row->field == 'created_by' )
-                                    @continue
-                                @endif
-
-                                @if (isset($row->details->legend) && isset($row->details->legend->text))
-                                    <legend class="text-{{ $row->details->legend->align ?? 'center' }}" style="background-color: {{ $row->details->legend->bgcolor ?? '#f0f0f0' }};padding: 5px;">{{ $row->details->legend->text }}</legend>
-                                @endif
-
-                                <div class="form-group @if($row->type == 'hidden') hidden @endif col-md-{{ $display_options->width ?? 3 }} {{ $errors->has($row->field) ? 'has-error' : '' }}" @if(isset($display_options->id)){{ "id=$display_options->id" }}@endif>
-                                    {{ $row->slugify }}
-                                    <label class="control-label" for="name">{{ $row->display_name }}</label>
-                                        @include('voyager::multilingual.input-hidden-bread-edit-add')
+                                    <!-- GET THE DISPLAY OPTIONS -->
                                     @php
-                                        $options = $row->details;
+                                        $display_options = $row->details->display ?? NULL;
+                                        if ($dataTypeContent->{$row->field.'_'.($edit ? 'edit' : 'add')}) {
+                                            $dataTypeContent->{$row->field} = $dataTypeContent->{$row->field.'_'.($edit ? 'edit' : 'add')};
+                                        }
                                     @endphp
-                                    @if (isset($row->details->view) )
-                                        @include($row->details->view, ['currentUserRole' => $currentUserRole,'options' => $row->details,'row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $dataTypeContent->{$row->field}, 'action' => ($edit ? 'edit' : 'add')])
-                                    @elseif($row->type == 'relationship' && $row->field == 'appointment_belongsto_user_relationship_1')
-                                        @include('vendor.voyager.formFields.select_dropdown_createdby', ['options' => $row->details])
-                                    @elseif ($row->type == 'relationship')
-                                        @include('voyager::formfields.relationship', ['options' => $row->details])
-                                    @else
-                                        {!! app('voyager')->formField($row, $dataType, $dataTypeContent, $options , $currentUserRole) !!}
+
+                                    <!-- GET THE ROLE OPTIONS -->
+                                    @php
+                                        $currentUserRole = auth()->user()->role->name;
+                                    @endphp
+
+                                    {{-- if appoitment is created we show the following two rows --}}
+                                    @if(($row->field == 'comment_status' or $row->field == 'graduation_abschluss') &&  $add)
+                                        @continue
                                     @endif
-                                
-                                    @foreach (app('voyager')->afterFormFields($row, $dataType, $dataTypeContent) as $after)
-                                        {!! $after->handle($row, $dataType, $dataTypeContent) !!}
-                                    @endforeach
-                                    @if ($errors->has($row->field))
-                                        @foreach ($errors->get($row->field) as $error)
-                                            <span class="help-block">{{ $error }}</span>
+
+                                    @if($row->display_name == 'Created_by' )
+                                        @continue
+                                    @endif
+
+                                    @if (isset($row->details->legend) && isset($row->details->legend->text))
+                                        <legend class="text-{{ $row->details->legend->align ?? 'center' }}" style="background-color: {{ $row->details->legend->bgcolor ?? '#f0f0f0' }};padding: 5px;">{{ $row->details->legend->text }}</legend>
+                                    @endif
+
+                                    <div class="form-group @if($row->type == 'hidden') hidden @endif col-md-{{ $display_options->width ?? 3 }} {{ $errors->has($row->field) ? 'has-error' : '' }}" @if(isset($display_options->id)){{ "id=$display_options->id" }}@endif>
+                                        {{ $row->slugify }}
+                                        <label class="control-label" for="name">{{ $row->display_name }}</label>
+                                            @include('voyager::multilingual.input-hidden-bread-edit-add')
+                                        @php
+                                            $options = $row->details;
+                                        @endphp
+                                        @if (isset($row->details->view) )
+                                            @include($row->details->view, ['currentUserRole' => $currentUserRole,'options' => $row->details,'row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $dataTypeContent->{$row->field}, 'action' => ($edit ? 'edit' : 'add')])
+                                        @elseif($row->type == 'relationship' && $row->field == 'appointment_belongsto_user_relationship_1')
+                                            @include('vendor.voyager.formFields.select_dropdown_createdby', ['options' => $row->details])
+                                        @elseif ($row->type == 'relationship')
+                                            @include('voyager::formfields.relationship', ['options' => $row->details])
+                                        @else
+                                            {!! app('voyager')->formField($row, $dataType, $dataTypeContent, $options , $currentUserRole) !!}
+                                        @endif
+                                    
+                                        @foreach (app('voyager')->afterFormFields($row, $dataType, $dataTypeContent) as $after)
+                                            {!! $after->handle($row, $dataType, $dataTypeContent) !!}
                                         @endforeach
-                                    @endif
-                                </div>
-                            @endforeach
+                                        @if ($errors->has($row->field))
+                                            @foreach ($errors->get($row->field) as $error)
+                                                <span class="help-block">{{ $error }}</span>
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                @endforeach
 
-                        </div><!-- panel-body -->
+                            </div><!-- panel-body -->
 
-                        <div class="panel-footer">
-                            @section('submit-buttons')
-                                <button type="submit" class="btn btn-primary save">{{ __('voyager::generic.save') }}</button>
-                            @stop
-                            @yield('submit-buttons')
-                        </div>
-                    </form>
+                            <div class="panel-footer">
+                                @section('submit-buttons')
+                                    <button type="submit" class="btn btn-primary save">{{ __('voyager::generic.save') }}</button>
+                                @stop
+                                @yield('submit-buttons')
+                            </div>
+                        </form>
 
-                    <iframe id="form_target" name="form_target" style="display:none"></iframe>
-                    <form id="my_form" action="{{ route('voyager.upload') }}" target="form_target" method="post"
-                            enctype="multipart/form-data" style="width:0;height:0;overflow:hidden">
-                        <input name="image" id="upload_file" type="file"
-                                 onchange="$('#my_form').submit();this.value='';">
-                        <input type="hidden" name="type_slug" id="type_slug" value="{{ $dataType->slug }}">
-                        {{ csrf_field() }}
-                    </form>
-
+                        <iframe id="form_target" name="form_target" style="display:none"></iframe>
+                        <form id="my_form" action="{{ route('voyager.upload') }}" target="form_target" method="post"
+                                enctype="multipart/form-data" style="width:0;height:0;overflow:hidden">
+                            <input name="image" id="upload_file" type="file"
+                                    onchange="$('#my_form').submit();this.value='';">
+                            <input type="hidden" name="type_slug" id="type_slug" value="{{ $dataType->slug }}">
+                            {{ csrf_field() }}
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

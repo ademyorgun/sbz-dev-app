@@ -135,6 +135,11 @@ class ReportsController extends Controller
 
             $selectedDay = $selectedDay -1;
         }
+
+        // Number of appoitments won per day
+        
+
+        // Number of appointments won per agnet
         // Returning the result
         return response()->json([
             'numOfAppointmentsPerUser' => $numOfAppointmentsPerUser,
