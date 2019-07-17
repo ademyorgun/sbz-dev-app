@@ -203,9 +203,7 @@
                                                         @endif
 
                                                 @elseif(($row->type == 'select_dropdown' || $row->type == 'radio_btn') && property_exists($row->details, 'options'))
-
                                                     {!! $row->details->options->{$data->{$row->field}} ?? '' !!}
-
                                                 @elseif($row->type == 'date' || $row->type == 'timestamp')
                                                     {{ property_exists($row->details, 'format') ? \Carbon\Carbon::parse($data->{$row->field})->formatLocalized($row->details->format) : $data->{$row->field} }}
                                                 @elseif($row->type == 'checkbox')
@@ -292,7 +290,17 @@
                                                     {{ property_exists($row->details, 'format') ? \Carbon\Carbon::parse($data->{$row->field})->formatLocalized($row->details->format) : $data->{$row->field} }}
                                                 @else
                                                     @include('voyager::multilingual.input-hidden-bread-browse')
-                                                    <span>{{ $data->{$row->field} }}</span>
+                                                    @if ($row->field == 'call_agent_id')
+                                                        @php
+                                                            $model = app('App\User');
+                                                            $users = $model::where('id' , '=', $data->{$row->field})->get();
+                                                            @endphp 
+                                                        @foreach ($users as $user)
+                                                        <span>{{ $user->user_name }}</span>
+                                                        @endforeach
+                                                    @else 
+                                                        <span>{{ $data->{$row->field} }}</span>
+                                                    @endif
                                                 @endif
                                             </td>
                                         @endforeach

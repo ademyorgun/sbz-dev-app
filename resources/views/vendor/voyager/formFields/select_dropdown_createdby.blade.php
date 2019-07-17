@@ -1,3 +1,4 @@
+<div style="display: none">
 @if(isset($options->model) && isset($options->type))
 
     @if(class_exists($options->model))
@@ -30,34 +31,28 @@
                 @endphp
 
                 @if ($currentUserRole == 'SuperAdmin')
-                    
-                    <select
-                        class="form-control select2-ajax" name="{{ $options->column }}"
-                        data-get-items-route="{{route('voyager.' . $dataType->slug.'.relation')}}"
-                        data-get-items-field="{{$row->field}}"
-                        data-method="{{ isset($dataTypeContent) ? 'edit' : 'add' }}"
-                    >
-                        @if(!$row->required)
-                            <option value="">{{__('voyager::generic.none')}}</option>
-                        @endif
-
-                        @foreach($query as $relationshipData)
-                            <option value="{{ $relationshipData->{$options->key} }}" @if($dataTypeContent->{$options->column} == $relationshipData->{$options->key}){{ 'selected="selected"' }}@endif>{{ $relationshipData->{$options->label} }}</option>
-                        @endforeach
-                    
-                    </select>
-                    
-                @else
+                    <input type="hidden" name="{{ $options->column }}" value="{{ auth()->user()->id }}">
                     <select
                     class="form-control " name="{{ $options->column }}"
                     data-get-items-field="{{$row->field}}"
+                    disabled
                 >
-                    @foreach($query as $relationshipData)
-                        @if ($dataTypeContent->{$options->column} == $relationshipData->{$options->key})
-                            <option value="{{ $relationshipData->{$options->key} }}" @if($dataTypeContent->{$options->column} == $relationshipData->{$options->key}){{ 'selected="selected"' }}@endif>{{ $relationshipData->{$options->label} }}</option>
-                        @endif
-                    @endforeach
-                </select>
+                        <option value="{{ auth()->user()->id }}">{{ auth()->user()->user_name }}</option>
+
+                    </select>
+
+                    
+                @else
+                    <input type="hidden" name="{{ $options->column }}" value="{{ auth()->user()->id }}">
+                    <select
+                    class="form-control " name="{{ $options->column }}"
+                    data-get-items-field="{{$row->field}}"
+                    disabled
+                >
+                        <option value="{{ auth()->user()->id }}">{{ auth()->user()->user_name }}</option>
+
+                    </select>
+
                 @endif
                 
             @endif
@@ -71,3 +66,5 @@
     @endif
 
 @endif
+
+</div>
