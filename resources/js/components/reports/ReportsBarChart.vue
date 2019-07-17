@@ -60,7 +60,8 @@ export default {
 .card
     max-width: 45%
     width: 50%
-    display: inline-block
+    display: block
+    margin: 0.5em 1em
     background-color: #fff
     padding: 2em
     box-shadow: 0px 10px 40px rgba(0,0,0, 0.1)

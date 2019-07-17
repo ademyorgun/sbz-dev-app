@@ -16825,7 +16825,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".card[data-v-c14d2f02] {\n  max-width: 45%;\n  width: 50%;\n  display: inline-block;\n  background-color: #fff;\n  padding: 2em;\n  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);\n}\n@media (max-width: 700px) {\n.card[data-v-c14d2f02] {\n    max-width: 90%;\n    width: 100%;\n    margin-bottom: 2em;\n}\n}", ""]);
+exports.push([module.i, ".card[data-v-c14d2f02] {\n  max-width: 45%;\n  width: 50%;\n  display: block;\n  margin: 0.5em 1em;\n  background-color: #fff;\n  padding: 2em;\n  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);\n}\n@media (max-width: 700px) {\n.card[data-v-c14d2f02] {\n    max-width: 90%;\n    width: 100%;\n    margin-bottom: 2em;\n}\n}", ""]);
 
 // exports
 
@@ -16882,7 +16882,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".card[data-v-4a7b4b26] {\n  max-width: 45%;\n  width: 50%;\n  display: inline-block;\n  background-color: #fff;\n  padding: 2em;\n  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);\n}\n@media (max-width: 700px) {\n.card[data-v-4a7b4b26] {\n    max-width: 90%;\n    width: 100%;\n    margin-bottom: 2em;\n}\n}", ""]);
+exports.push([module.i, ".card[data-v-4a7b4b26] {\n  max-width: 45%;\n  width: 50%;\n  display: block;\n  margin: 0.5em 1em;\n  background-color: #fff;\n  padding: 2em;\n  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);\n}\n@media (max-width: 700px) {\n.card[data-v-4a7b4b26] {\n    max-width: 90%;\n    width: 100%;\n    margin-bottom: 2em;\n}\n}", ""]);
 
 // exports
 

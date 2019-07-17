@@ -79,21 +79,21 @@
                                     <legend class="text-{{ $row->details->legend->align ?? 'center' }}" style="background-color: {{ $row->details->legend->bgcolor ?? '#f0f0f0' }};padding: 5px;">{{ $row->details->legend->text }}</legend>
                                 @endif
 
-
                                 <div class="form-group @if($row->type == 'hidden') hidden @endif col-md-{{ $display_options->width ?? 3 }} {{ $errors->has($row->field) ? 'has-error' : '' }}" @if(isset($display_options->id)){{ "id=$display_options->id" }}@endif>
                                     {{ $row->slugify }}
-                                    <label class="control-label" for="name">{{ $row->display_name }}</label>
-                                    @include('voyager::multilingual.input-hidden-bread-edit-add')
-
+                                    @if ($row->field == 'Created_by')
+                                        <label class="control-label" for="name"> testing</label>
+                                    @else
+                                        <label class="control-label" for="name">{{ $row->display_name }}</label>
+                                        @include('voyager::multilingual.input-hidden-bread-edit-add')
+                                    @endif
                                     @php
                                         $options = $row->details;
                                     @endphp
                                     @if (isset($row->details->view) )
-                                        @include($row->details->view, ['currentUserRole' => $currentUserRole,'options' => $row->details,'row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $dataTypeContent->{$row->field}, 'action' => ($edit ? 'edit' : 'add')])
-                                    @elseif($row->type == 'relationship' && $row->field == 'appointment_belongsto_user_relationship')
-                                        {{-- we'd like to show a preselected user --}}    
-                                        @include('vendor.voyager.formFields.relationshipUser', ['options' => $row->details])
-                                        {{-- @include('voyager::formfields.relationship', ['options' => $row->details]) --}}
+                                        @include($row->details->view, ['users' => $users,'currentUserRole' => $currentUserRole,'options' => $row->details,'row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $dataTypeContent->{$row->field}, 'action' => ($edit ? 'edit' : 'add')])
+                                    @elseif($row->type == 'relationship' && $row->field == 'appointment_belongsto_user_relationship_1')
+                                        {{-- @include('vendor.voyager.formFields.select_dropdown_createdby', ['options' => $row->details]) --}}
                                     @elseif ($row->type == 'relationship')
                                         @include('voyager::formfields.relationship', ['options' => $row->details])
                                     @else

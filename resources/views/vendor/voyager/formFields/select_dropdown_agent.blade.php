@@ -10,10 +10,6 @@
     }
     $noRoles = true;
 @endphp
-
-@php
-    
-@endphp
 @if(isset($options->relationship))
 
     {{-- If this is a relationship and the method does not exist, show a warning message --}}

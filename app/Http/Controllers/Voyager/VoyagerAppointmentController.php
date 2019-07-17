@@ -187,7 +187,10 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
             $view = "voyager::$slug.edit-add";
         }
 
-        return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable'));
+        // Get all users 
+        $users = User::all();
+
+        return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'users'));
     }
 
     //***************************************

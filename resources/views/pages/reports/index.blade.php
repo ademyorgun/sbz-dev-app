@@ -85,9 +85,11 @@
     .row-flex {
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: center;
         margin-bottom: 3em;
         max-width: 100%;
+        margin-right: 0; 
+        margin-left: 0;
     }
     .panel-body.graphs {
         padding-right: 0;
