@@ -81,7 +81,8 @@
                                         @continue
                                     @endif
 
-                                    @if($row->display_name == 'Created_by' )
+                                    {{-- we dont to show these two fiels, so we jump them when iterating --}}
+                                    @if($row->display_name == 'Created_by' or $row->display_name == "Comments")
                                         @continue
                                     @endif
 

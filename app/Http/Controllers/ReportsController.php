@@ -48,7 +48,6 @@ class ReportsController extends Controller
 
         // Number of appointments per user
         $numOfAppointmentsPerUser = [];
-        // $users = User::all();
         $users = User::with(['appointments' => function ($query) use ($selectedYear, $selectedMonth, $isAgentMeetingDateSet) {
                             $query->whereYear('created_at', $selectedYear)
                             ->whereMonth('created_at', $selectedMonth)
@@ -159,6 +158,24 @@ class ReportsController extends Controller
         }
 
         // Number of appointments won per agnet
+        $numberOfAppointmentsWonPerAgent = [];
+        $numberOfAppointmentsNotWonPerAgent = [];
+        $numOfAppointmentsPerUser = [];
+        $users = User::with(['appointments' => function ($query) use ($selectedYear, $selectedMonth, $isAgentMeetingDateSet) {
+                            $query->whereYear('created_at', $selectedYear)
+                            ->whereMonth('created_at', $selectedMonth)
+                            ->when($isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                                return $query->whereNotNull('meeting_date');
+                            })
+                            // agent meeting date is not set
+                            ->when(!$isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                                return $query->whereNull('meeting_date');
+                            });
+                        }])->get();
+        foreach ($users as $key => $user) {
+            $numOfAppointmentsPerUser[$user->user_name] = count($user->appointments);
+        };
+
         // Returning the result
         return response()->json([
             'numOfAppointmentsPerUser' => $numOfAppointmentsPerUser,

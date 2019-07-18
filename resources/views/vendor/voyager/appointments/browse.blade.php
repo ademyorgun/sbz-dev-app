@@ -128,6 +128,7 @@
                                                 <a href="{{ $row->sortByUrl($orderBy, $sortOrder) }}">
                                             @endif
                                             
+                                            {{-- displaying custom names --}}
                                             @switch($row->display_name)
                                                 @case("Canton City")
                                                     Canton
@@ -136,6 +137,7 @@
                                                 @default
                                                     {{ $row->display_name }}
                                             @endswitch
+
                                             @if ($isServerSide)
                                                 @if ($row->isCurrentSortField($orderBy))
                                                     @if ($sortOrder == 'asc')
