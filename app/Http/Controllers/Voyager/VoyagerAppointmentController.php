@@ -346,7 +346,7 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
         // Check if a default search key is set
         $defaultSearchKey = $dataType->default_search_key ?? null;
 
-        $view = 'voyager::appointments.table';
+        $view = 'vendor.voyager.appointments.table';
 
         // render the table
         $table = Voyager::view($view, compact(

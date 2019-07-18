@@ -52,9 +52,9 @@
                 }
                 @endphp
                 <td>
-                    @if (isset($row->details->view))
-                        @include($row->details->view, ['row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $data->{$row->field}, 'action' => 'browse'])
-                    @elseif($row->type == 'image')
+                    {{-- @if (isset($row->details->view))
+                        @include($row->details->view, ['row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $data->{$row->field}, 'action' => 'browse']) --}}
+                    @if($row->type == 'image')
                         <img src="@if( !filter_var($data->{$row->field}, FILTER_VALIDATE_URL)){{ Voyager::image( $data->{$row->field} ) }}@else{{ $data->{$row->field} }}@endif" style="width:100px">
                     @elseif($row->type == 'relationship')
                         @include('voyager::formfields.relationship', ['view' => 'browse','options' => $row->details])
@@ -89,9 +89,7 @@
                             @endif
 
                     @elseif(($row->type == 'select_dropdown' || $row->type == 'radio_btn') && property_exists($row->details, 'options'))
-
                         {!! $row->details->options->{$data->{$row->field}} ?? '' !!}
-
                     @elseif($row->type == 'date' || $row->type == 'timestamp')
                         {{ property_exists($row->details, 'format') ? \Carbon\Carbon::parse($data->{$row->field})->formatLocalized($row->details->format) : $data->{$row->field} }}
                     @elseif($row->type == 'checkbox')
@@ -173,9 +171,22 @@
                         @else
                             {{ trans_choice('voyager::media.files', 0) }}
                         @endif
+                    
+                    @elseif($row->type == 'time')
+                        {{ property_exists($row->details, 'format') ? \Carbon\Carbon::parse($data->{$row->field})->formatLocalized($row->details->format) : $data->{$row->field} }}
                     @else
                         @include('voyager::multilingual.input-hidden-bread-browse')
-                        <span>{{ $data->{$row->field} }}</span>
+                        @if ($row->field == 'call_agent_id')
+                            @php
+                                $model = app('App\User');
+                                $users = $model::where('id' , '=', $data->{$row->field})->get();
+                                @endphp 
+                            @foreach ($users as $user)
+                            <span>{{ $user->user_name }}</span>
+                            @endforeach
+                        @else 
+                            <span>{{ $data->{$row->field} }}</span>
+                        @endif
                     @endif
                 </td>
             @endforeach
