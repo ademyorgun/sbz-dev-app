@@ -1,10 +1,19 @@
+/* 
+ * Appointmetn create page
+ */
+
 ul.radio li{
     width: 100%;
-    max-width: 200px;
+    max-width: 170px;
     float: left;
 }
 
 .voyager .alert {
     margin-bottom: 10px;
 }
+
+strong {
+    font-weight: 600;
+}
+
     

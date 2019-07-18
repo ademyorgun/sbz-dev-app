@@ -92,11 +92,32 @@
 
                                     <div class="form-group @if($row->type == 'hidden') hidden @endif col-md-{{ $display_options->width ?? 3 }} {{ $errors->has($row->field) ? 'has-error' : '' }}" @if(isset($display_options->id)){{ "id=$display_options->id" }}@endif>
                                         {{ $row->slugify }}
-                                        <label class="control-label" for="name">{{ $row->display_name }}</label>
-                                            @include('voyager::multilingual.input-hidden-bread-edit-add')
+                                        @switch($row->field)
+                                            @case('kind_of_medical_therapy_treatment')
+                                                <label class="control-lable">
+                                                    <strong>Supplementary question if YES </strong> - this could affect your change. Therefore, what kind is this treatment?
+                                                </label>
+                                                @break
+                                            @case('kind_of_drugs_and_for_what')
+                                                <label class="control-label">
+                                                    <strong>Supplementary question if YES</strong> - What are these drugs or what do you have to take them for?
+                                                </label>
+                                                @break
+                                            @case('kind_of_surgery_and_when')
+                                                <label class="control-label">
+                                                    <strong>Supplementary question if YES</strong> - What kind of surgery / when is this?
+                                                </label>
+                                                @break
+                                            @default
+                                                <label class="control-label">{{ $row->display_name }}</label>
+                                                @include('voyager::multilingual.input-hidden-bread-edit-add')
+                                        @endswitch
+                                        
+                                            
                                         @php
                                             $options = $row->details;
                                         @endphp
+
                                         @if (isset($row->details->view) )
                                             @include($row->details->view, ['currentUserRole' => $currentUserRole,'options' => $row->details,'row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $dataTypeContent->{$row->field}, 'action' => ($edit ? 'edit' : 'add')])
                                         @elseif($row->type == 'relationship' && $row->field == 'appointment_belongsto_user_relationship_1')
