@@ -16,6 +16,24 @@
         <i class="{{ $dataType->icon }}"></i>
         {{ __('voyager::generic.'.($edit ? 'edit' : 'add')).' '.$dataType->display_name_singular }}
     </h1>
+    <!-- GET CURRENT LOGED IN USER ROLE -->
+    @php
+        $currentUserRole = auth()->user()->role->name;
+    @endphp
+    @if ($currentUserRole == 'SuperAdmin' && $edit)
+        <form 
+            action="{{ route('voyager.appointment.duplicate', ['id' => $dataTypeContent->getKey()]) }}"
+            method="POST"    
+        >
+            <!-- CSRF TOKEN -->
+            {{ csrf_field() }}
+
+            {{ method_field("POST") }}
+            <button type="submit" class="btn btn-primary btn-add-new">
+                <i class="voyager-list"></i> <span>Duplicate appointment</span>
+            </button>
+        </form>
+    @endif
     @include('voyager::multilingual.language-selector')
 @stop
 
@@ -25,7 +43,7 @@
             <div class="col-md-12">
                 <div class="panel panel-primary panel-bordered">
                     <div class="panel-heading">
-                        <h3 class="panel-title panel-icon"><i class=""></i>Appoitment details</h3>
+                        <h3 class="panel-title panel-icon"><i class=""></i>Appointment details</h3>
                         <div class="panel-actions">
                             <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
                         </div>
@@ -71,7 +89,7 @@
                                         }
                                     @endphp
 
-                                    <!-- GET THE ROLE OPTIONS -->
+                                    <!-- GET CURRENT LOGED IN USER ROLE -->
                                     @php
                                         $currentUserRole = auth()->user()->role->name;
                                     @endphp
