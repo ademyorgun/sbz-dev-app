@@ -40,42 +40,76 @@
 <div class="page-content browse container-fluid" id="app">
     @include('voyager::alerts')
     <div class="row" >
-        <div class="col-md-12">
+        <div class="col-md-9">
             <div class="panel panel-primary panelbordered">
                 <div class="panel-heading">
-                        <h3 class="panel-title panel-icon"><i class="voyager-search"></i>{{ __('voyager::generic.filter') }}</h3>
-                        <div class="panel-actions">
-                            <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
-                        </div>
+                    <h3 class="panel-title panel-icon"><i class="voyager-search"></i>{{ __('voyager::generic.filter') }}</h3>
+                    <div class="panel-actions">
+                        <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
                     </div>
-                    <div class="panel-body mt-2">
-                        <appointment-filter @filter="getResults">
-                            @foreach ($dataType->addRows as $row)
-                                @if ($row->field == 'wanted_expert')
-                                    <template v-slot:experts>
-                                        @foreach ($row->details->options as $key => $option)
-                                            <option value="{{$key}}">{{ $option }}</option> 
-                                        @endforeach
-                                    </template>
-                                @elseif($row->field == 'canton_city')
-                                    <template v-slot:cities>
-                                        @foreach ($row->details->options as $key => $option)
-                                            <option value="{{$key}}">{{ $option }}</option> 
-                                        @endforeach
-                                    </template>
-                                @elseif($row->field == 'appointment_belongsto_user_relationship_1')
-                                    <template v-slot:users>
-                                        @foreach($users as $user)
-                                            <option value="{{ $user->id }}">{{ $user->user_name }}</option>
-                                        @endforeach
-                                    </template>
-                                @endif
-                            @endforeach
-                        </appointment-filter>
-                    </div>
+                </div>
+                <div class="panel-body mt-2">
+                    <appointment-filter @filter="getResults">
+                        @foreach ($dataType->addRows as $row)
+                            @if ($row->field == 'wanted_expert')
+                                <template v-slot:experts>
+                                    @foreach ($row->details->options as $key => $option)
+                                        <option value="{{$key}}">{{ $option }}</option> 
+                                    @endforeach
+                                </template>
+                            @elseif($row->field == 'canton_city')
+                                <template v-slot:cities>
+                                    @foreach ($row->details->options as $key => $option)
+                                        <option value="{{$key}}">{{ $option }}</option> 
+                                    @endforeach
+                                </template>
+                            @elseif($row->field == 'appointment_belongsto_user_relationship_1')
+                                <template v-slot:users>
+                                    @foreach($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->user_name }}</option>
+                                    @endforeach
+                                </template>
+                            @endif
+                        @endforeach
+                    </appointment-filter>
                 </div>
             </div>
         </div>
+        <div class="col-md-3">
+            <div class="panel panel-primary panelbordered">
+                <div class="panel-heading">
+                    <h3 class="panel-title panel-icon"><i class="voyager-external"></i>Multiple appointments assignment</h3>
+                    <div class="panel-actions">
+                        <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form id="agentAssignementForm" style="margin-top: 1.6em;">
+                        {{ method_field("PUT") }}
+                        <!-- CSRF TOKEN -->
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label class="control-lab">Choose an agent </label>
+                            <select
+                                class="form-control"
+                                name="selected_agent"
+                                aria-hidden="true"
+                            >
+                                <option disabled value selected>Please select one</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->user_name }}</option>  
+                                @endforeach
+                            </select>
+                            <input type="hidden" name="selected_ids" value="" class="selected_ids">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary save pull-right">Apply changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-primary panel-bordered">
@@ -86,33 +120,6 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        {{-- @if ($isServerSide)
-                            <form method="get" class="form-search">
-                                <div id="search-input">
-                                    <select id="search_key" name="key">
-                                        @foreach($searchable as $key)
-                                            <option value="{{ $key }}" @if($search->key == $key || (empty($search->key) && $key == $defaultSearchKey)){{ 'selected' }}@endif>{{ ucwords(str_replace('_', ' ', $key)) }}</option>
-                                        @endforeach
-                                    </select>
-                                    <select id="filter" name="filter">
-                                        <option value="contains" @if($search->filter == "contains"){{ 'selected' }}@endif>contains</option>
-                                        <option value="equals" @if($search->filter == "equals"){{ 'selected' }}@endif>=</option>
-                                    </select>
-                                    <div class="input-group col-md-12">
-                                        <input type="text" class="form-control" placeholder="{{ __('voyager::generic.search') }}" name="s" value="{{ $search->value }}">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-info btn-lg" type="submit">
-                                                <i class="voyager-search"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
-                                @if (Request::has('sort_order') && Request::has('order_by'))
-                                    <input type="hidden" name="sort_order" value="{{ Request::get('sort_order') }}">
-                                    <input type="hidden" name="order_by" value="{{ Request::get('order_by') }}">
-                                @endif
-                            </form>
-                        @endif --}}
                         <div class="table-responsive" id="table">
                             <table id="dataTable" class="table table-hover table-striped table-bordered">
                                 <thead>
@@ -433,6 +440,7 @@
                 })
             })
         @endif
+        // watches the checkboxe changes
         $('input[name="row_id"]').on('change', function () {
             var ids = [];
             $('input[name="row_id"]').each(function() {
@@ -442,5 +450,17 @@
             });
             $('.selected_ids').val(ids);
         });
+
+        // from to assign multiple appointments to one agent
+        $('#agentAssignementForm .btn').click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: ''
+                method:
+            }).done(function(data) {
+                console.log(data)
+            });
+            console.log($('#agentAssignementForm').serialize())
+        })
     </script>
 @stop

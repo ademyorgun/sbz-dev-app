@@ -2,29 +2,29 @@
   <div class="filter-form">
     <form id="form">
       <div class="row">
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
           <label class="control-label">Call Date start</label>
           <Datepicker class="datePicker" input-class="form-control" v-model="callDateStart" :format="dateFormat"></Datepicker>
           <!-- <datepicker v-model="callDateStart"></datepicker> -->
         </div>
 
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
           <label class="control-label">Call Date end</label>
           <Datepicker class="datePicker" input-class="form-control" v-model="callDateEnd" :format="dateFormat"></Datepicker>
         </div>
 
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
           <label class="control-label">Appointment Date start</label>
           <Datepicker class="datePicker" input-class="form-control" v-model="appointmentDateStart" :format="dateFormat"></Datepicker>
         </div>
 
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
           <label class="control-label">Appointment Date end</label>
           <Datepicker class="datePicker" input-class="form-control" v-model="appointmentDateEnd" :format="dateFormat"></Datepicker>
         </div>
 
         <!-- wanted expert -->
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
           <label class="control-label">Wanted Expert</label>
           <select
             class="form-control"
@@ -32,43 +32,45 @@
             aria-hidden="true"
             v-model="wantedExpert"
           >
-            <option disabled value>Please select one</option>
+            <option disabled value selected>Please select one</option>
             <slot name="experts"></slot>
           </select>
         </div>
 
         <!-- canton- city -->
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
           <label class="control-label">Canton</label>
           <select class="form-control" name="canton" aria-hidden="true" v-model="canton">
-            <option disabled value>Please select one</option>
+            <option disabled value selected>Please select one</option>
             <slot name="cities"></slot>
           </select>
         </div>
 
         <!-- user  -->
-        <div class="form-group col-md-3">
-          <label class="control-label">User</label>
+        <div class="form-group col-md-4">
+          <label class="control-label">Agent / Sales</label>
           <select class="form-control" name="wanted_expert" aria-hidden="true" v-model="userID">
-            <option disabled value>Please select one</option>
+            <option disabled value selected>Please select one</option>
             <slot name="users"></slot>
           </select>
         </div>
 
         <!-- Telephone number -->
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
           <label class="control-label">Telephone Number</label>
           <input
             type="number"
             class="form-control"
             name="telephone_number"
             step="any"
+            min="0" 
+            oninput="validity.valid||(value='');"
             v-model="phoneNumber"
           />
         </div>
 
         <!-- Appointment ID -->
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
           <label class="control-label">Appointment ID</label>
           <input
             type="number"

@@ -1793,6 +1793,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AppointmentFilter",
@@ -21507,7 +21509,7 @@ var render = function() {
       _c("div", { staticClass: "row" }, [
         _c(
           "div",
-          { staticClass: "form-group col-md-3" },
+          { staticClass: "form-group col-md-4" },
           [
             _c("label", { staticClass: "control-label" }, [
               _vm._v("Call Date start")
@@ -21530,7 +21532,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "form-group col-md-3" },
+          { staticClass: "form-group col-md-4" },
           [
             _c("label", { staticClass: "control-label" }, [
               _vm._v("Call Date end")
@@ -21553,7 +21555,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "form-group col-md-3" },
+          { staticClass: "form-group col-md-4" },
           [
             _c("label", { staticClass: "control-label" }, [
               _vm._v("Appointment Date start")
@@ -21576,7 +21578,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "form-group col-md-3" },
+          { staticClass: "form-group col-md-4" },
           [
             _c("label", { staticClass: "control-label" }, [
               _vm._v("Appointment Date end")
@@ -21597,7 +21599,7 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "form-group col-md-3" }, [
+        _c("div", { staticClass: "form-group col-md-4" }, [
           _c("label", { staticClass: "control-label" }, [
             _vm._v("Wanted Expert")
           ]),
@@ -21632,9 +21634,11 @@ var render = function() {
               }
             },
             [
-              _c("option", { attrs: { disabled: "", value: "" } }, [
-                _vm._v("Please select one")
-              ]),
+              _c(
+                "option",
+                { attrs: { disabled: "", value: "", selected: "" } },
+                [_vm._v("Please select one")]
+              ),
               _vm._v(" "),
               _vm._t("experts")
             ],
@@ -21642,7 +21646,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "form-group col-md-3" }, [
+        _c("div", { staticClass: "form-group col-md-4" }, [
           _c("label", { staticClass: "control-label" }, [_vm._v("Canton")]),
           _vm._v(" "),
           _c(
@@ -21675,9 +21679,11 @@ var render = function() {
               }
             },
             [
-              _c("option", { attrs: { disabled: "", value: "" } }, [
-                _vm._v("Please select one")
-              ]),
+              _c(
+                "option",
+                { attrs: { disabled: "", value: "", selected: "" } },
+                [_vm._v("Please select one")]
+              ),
               _vm._v(" "),
               _vm._t("cities")
             ],
@@ -21685,8 +21691,10 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "form-group col-md-3" }, [
-          _c("label", { staticClass: "control-label" }, [_vm._v("User")]),
+        _c("div", { staticClass: "form-group col-md-4" }, [
+          _c("label", { staticClass: "control-label" }, [
+            _vm._v("Agent / Sales")
+          ]),
           _vm._v(" "),
           _c(
             "select",
@@ -21718,9 +21726,11 @@ var render = function() {
               }
             },
             [
-              _c("option", { attrs: { disabled: "", value: "" } }, [
-                _vm._v("Please select one")
-              ]),
+              _c(
+                "option",
+                { attrs: { disabled: "", value: "", selected: "" } },
+                [_vm._v("Please select one")]
+              ),
               _vm._v(" "),
               _vm._t("users")
             ],
@@ -21728,7 +21738,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "form-group col-md-3" }, [
+        _c("div", { staticClass: "form-group col-md-4" }, [
           _c("label", { staticClass: "control-label" }, [
             _vm._v("Telephone Number")
           ]),
@@ -21743,7 +21753,13 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "number", name: "telephone_number", step: "any" },
+            attrs: {
+              type: "number",
+              name: "telephone_number",
+              step: "any",
+              min: "0",
+              oninput: "validity.valid||(value='');"
+            },
             domProps: { value: _vm.phoneNumber },
             on: {
               input: function($event) {
@@ -21756,7 +21772,7 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "form-group col-md-3" }, [
+        _c("div", { staticClass: "form-group col-md-4" }, [
           _c("label", { staticClass: "control-label" }, [
             _vm._v("Appointment ID")
           ]),
