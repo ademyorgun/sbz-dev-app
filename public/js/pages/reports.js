@@ -67268,7 +67268,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     numOfAppointmentsPerDay: {},
     numOfAppointmentsPerStatus: {},
     numOfAllApointmentsPerDayPositive: {},
-    numOfAllApointmentsPerDayNegative: {}
+    numOfAllApointmentsPerDayNegative: {},
+    numberOfAppointmentsWonPerDay: {}
   },
   methods: {
     fetchData: function fetchData(data) {
@@ -67281,6 +67282,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
         _this.numOfAppointmentsPerStatus = response.data.numOfAppointmentsPerStatus;
         _this.numOfAllApointmentsPerDayPositive = response.data.numOfAllApointmentsPerDayPositive;
         _this.numOfAllApointmentsPerDayNegative = response.data.numOfAllApointmentsPerDayNegative;
+        _this.numberOfAppointmentsWonPerDay = response.data.numberOfAppointmentsWonPerDay;
       });
     }
   }

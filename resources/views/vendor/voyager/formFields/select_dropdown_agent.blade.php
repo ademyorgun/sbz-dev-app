@@ -43,7 +43,6 @@
 
     @if ($currentUserRoleIsNotListed)
         <select class="form-control select2" name="{{ $row->field }}">
-            <?php $default = (isset($options->default) && !isset($dataTypeContent->{$row->field})) ? $options->default : null; ?>
             <option disabled selected value> -- Select an agent -- </option>
             @foreach($users as $key => $user)
                 <option value="{{ $user->id }}"@if((string)$selected_value == (string)$user->id){{ 'selected="selected"' }}@endif>{{ $user->user_name }}</option>
@@ -53,7 +52,6 @@
     @endif
 @else 
     <select class="form-control select2" name="{{ $row->field }}">
-        <?php $default = (isset($options->default) && !isset($dataTypeContent->{$row->field})) ? $options->default : null; ?>
         <option disabled selected value> -- Select an agent -- </option>
         @foreach($users as $key => $user)
             <option value="{{ $user->id }}"@if( (string)$selected_value == (string)$user->id){{ 'selected="selected"' }}@endif>{{ $user->user_name }}</option>

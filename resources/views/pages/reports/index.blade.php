@@ -73,6 +73,9 @@
                         <reports-bar-chart :data-to-load="numOfAllApointmentsPerDayPositive" background-color="#70D6FF" label="Positive"></reports-bar-chart>
                         <reports-bar-chart :data-to-load="numOfAllApointmentsPerDayNegative" background-color="#ED254E" label="Nositive"></reports-bar-chart>
                     </div>
+                    <div class="row row-flex">
+                         <reports-bar-chart :data-to-load="numberOfAppointmentsWonPerDay" background-color="#00CECB" label="Appointments won"></reports-bar-chart>
+                    </div>
                 </div>
             </div>
         </div>

@@ -28,7 +28,8 @@ const app = new Vue({
         numOfAppointmentsPerDay: {},
         numOfAppointmentsPerStatus: {},
         numOfAllApointmentsPerDayPositive: {},
-        numOfAllApointmentsPerDayNegative: {}
+        numOfAllApointmentsPerDayNegative: {},
+        numberOfAppointmentsWonPerDay: {}
     },
 
     methods: {
@@ -41,6 +42,7 @@ const app = new Vue({
                     this.numOfAppointmentsPerStatus = response.data.numOfAppointmentsPerStatus;
                     this.numOfAllApointmentsPerDayPositive = response.data.numOfAllApointmentsPerDayPositive;
                     this.numOfAllApointmentsPerDayNegative = response.data.numOfAllApointmentsPerDayNegative;
+                    this.numberOfAppointmentsWonPerDay = response.data.numberOfAppointmentsWonPerDay;
                 })
         }
     }

@@ -104,7 +104,8 @@ class ReportsController extends Controller
         // Number of appointments per Day with a positive and negative status
         $numOfAllApointmentsPerDayPositive = [];
         $numOfAllApointmentsPerDayNegative = [];
-        while($selectedDay > 0) {
+        $dayToUse = $selectedDay;
+        while($dayToUse > 0) {
             $allAppointmentsPositive = Appointment::whereYear('created_at', $selectedYear)
                                     ->whereMonth('created_at', $selectedMonth)
                                     ->when($isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
@@ -114,7 +115,7 @@ class ReportsController extends Controller
                                     ->when(!$isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
                                         return $query->whereNull('meeting_date');
                                     })
-                                    ->whereDay('created_at', $selectedDay)
+                                    ->whereDay('created_at', $dayToUse)
                                     ->where('comment_status', 'positive')
                                     ->get();
             $allAppointmentsNegative = Appointment::whereYear('created_at', $selectedYear)
@@ -126,18 +127,36 @@ class ReportsController extends Controller
                                     ->when(!$isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
                                         return $query->whereNull('meeting_date');
                                     })
-                                    ->whereDay('created_at', $selectedDay)
+                                    ->whereDay('created_at', $dayToUse)
                                     ->where('comment_status', 'negative')
                                     ->get();
 
-            $numOfAllApointmentsPerDayPositive[$selectedDay] = count($allAppointmentsPositive);
-            $numOfAllApointmentsPerDayNegative[$selectedDay] = count($allAppointmentsNegative);
+            $numOfAllApointmentsPerDayPositive[$dayToUse] = count($allAppointmentsPositive);
+            $numOfAllApointmentsPerDayNegative[$dayToUse] = count($allAppointmentsNegative);
 
-            $selectedDay = $selectedDay -1;
+            $dayToUse = $dayToUse -1;
         }
 
         // Number of appoitments won per day
-        
+        $numberOfAppointmentsWonPerDay = [];
+        $dayToUse = $selectedDay;
+        while($dayToUse > 0) {
+            $allAppointments = Appointment::whereYear('created_at', $selectedYear)
+                                    ->whereMonth('created_at', $selectedMonth)
+                                    ->when($isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                                        return $query->whereNotNull('meeting_date');
+                                    })
+                                    // agent meeting date is not set
+                                    ->when(!$isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                                        return $query->whereNull('meeting_date');
+                                    })
+                                    ->whereDay('created_at', $dayToUse)
+                                    ->whereNotNull('graduation_abschluss')
+                                    ->get();
+
+            $numberOfAppointmentsWonPerDay[$dayToUse] =count($allAppointments);   
+            $dayToUse = $dayToUse -1;                  
+        }
 
         // Number of appointments won per agnet
         // Returning the result
@@ -147,7 +166,8 @@ class ReportsController extends Controller
             'numOfAppointmentsPerDay' => $numOfAppointmentsPerDay,
             'numOfAppointmentsPerStatus' => $numOfAppointmentsPerStatus,
             'numOfAllApointmentsPerDayPositive' => $numOfAllApointmentsPerDayPositive,
-            'numOfAllApointmentsPerDayNegative' => $numOfAllApointmentsPerDayNegative
+            'numOfAllApointmentsPerDayNegative' => $numOfAllApointmentsPerDayNegative,
+            'numberOfAppointmentsWonPerDay' => $numberOfAppointmentsWonPerDay
         ]);
     }
 }

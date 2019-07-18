@@ -1,7 +1,8 @@
-/* ul.radio {
-    display: flex;
-    flex-direction: row;
-} */
+ul.radio li{
+    width: 100%;
+    max-width: 200px;
+    float: left;
+}
 
 .voyager .alert {
     margin-bottom: 10px;
