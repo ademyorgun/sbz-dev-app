@@ -63,7 +63,7 @@
                                             <option value="{{$key}}">{{ $option }}</option> 
                                         @endforeach
                                     </template>
-                                @elseif($row->field == 'appointment_belongsto_user_relationship')
+                                @elseif($row->field == 'appointment_belongsto_user_relationship_1')
                                     <template v-slot:users>
                                         @foreach($users as $user)
                                             <option value="{{ $user->id }}">{{ $user->user_name }}</option>
