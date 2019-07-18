@@ -24,6 +24,7 @@
         <form 
             action="{{ route('voyager.appointment.duplicate', ['id' => $dataTypeContent->getKey()]) }}"
             method="POST"    
+            style="display: inline-block"
         >
             <!-- CSRF TOKEN -->
             {{ csrf_field() }}

@@ -49,7 +49,10 @@ Route::group(['as' => 'voyager.'], function () {
         Route::post('appointments/filter', 'Voyager\VoyagerAppointmentController@filter')->name('appointment.filter');
         
         // Dublicating an appointment
-        Route::post('/appointments/{id}/duplicate', 'AppointmentDuplicationController@store')->name('appointment.duplicate');
+        Route::post('appointments/{id}/duplicate', 'AppointmentDuplicationController@store')->name('appointment.duplicate');
+
+        // Mass assignement of appointments to a user
+        Route::put('appointment/assign', 'AppointmentAssignementController@update')->name('appointment.assign');
     
         // Reports routes
         Route::get('reports', 'ReportsController@index')->name('reports.index');

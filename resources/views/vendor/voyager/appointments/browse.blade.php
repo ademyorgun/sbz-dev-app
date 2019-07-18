@@ -455,12 +455,14 @@
         $('#agentAssignementForm .btn').click(function(e) {
             e.preventDefault();
             $.ajax({
-                url: ''
-                method:
+                url: 'appointment/assign',
+                data: $('#agentAssignementForm').serialize(),
+                method: 'PUT'
             }).done(function(data) {
                 console.log(data)
+            }).error(function() {
+                console.error('shit happened');
             });
-            console.log($('#agentAssignementForm').serialize())
         })
     </script>
 @stop
