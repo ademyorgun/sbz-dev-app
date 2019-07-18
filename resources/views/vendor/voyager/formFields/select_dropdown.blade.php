@@ -2,6 +2,7 @@
     $optionsArray = clone $options;
     $optionsArray = (array)$optionsArray;
     $roleOptions = (isset($optionsArray['roleOptions']) ? (array)$optionsArray['roleOptions'] : '');
+    $currentUserRoleIsNotListed = false;
     if($roleOptions != '') {
         $roles = (array)$roleOptions['readonly'];
         $noRoles = false;
@@ -110,8 +111,25 @@
                         </optgroup>
                     @endif   
                 </select>
-            @endif      
+                @php
+                    $currentUserRoleIsNotListed = false;
+                @endphp
+                
+            @else
+                @php
+                    $currentUserRoleIsNotListed = true;
+                @endphp
+            @endif        
         @endforeach
+        @if ($currentUserRoleIsNotListed)
+            <select class="form-control select2" name="{{ $row->field }}">
+                @if(isset($options->options))
+                    @foreach($options->options as $key => $option)
+                        <option value="{{ $key }}" @if($default == $key && $selected_value === NULL){{ 'selected="selected"' }}@endif @if($selected_value == $key){{ 'selected="selected"' }}@endif>{{ $option }}</option>
+                    @endforeach
+                @endif
+            </select>
+        @endif
     @else 
         <select class="form-control select2" name="{{ $row->field }}">
             @if(isset($options->options))
