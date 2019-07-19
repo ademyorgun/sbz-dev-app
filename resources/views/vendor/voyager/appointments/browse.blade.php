@@ -2,6 +2,10 @@
 
 @section('page_title', __('voyager::generic.viewing').' '.$dataType->display_name_plural)
 
+@section('css')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@stop
+
 @section('page_header')
     <div class="container-fluid">
         <h1 class="page-title">
@@ -85,14 +89,14 @@
                 </div>
                 <div class="panel-body">
                     <form id="agentAssignementForm" style="margin-top: 1.6em;">
-                        {{ method_field("PUT") }}
+                        {{ method_field("POST") }}
                         <!-- CSRF TOKEN -->
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label class="control-lab">Choose an agent </label>
                             <select
                                 class="form-control"
-                                name="selected_agent"
+                                name="selected_agent_id"
                                 aria-hidden="true"
                             >
                                 <option disabled value selected>Please select one</option>
@@ -101,6 +105,8 @@
                                 @endforeach
                             </select>
                             <input type="hidden" name="selected_ids" value="" class="selected_ids">
+                            <div class="invalid-feedback" style="display: none; color: #dc3545;">Select an agent and an appointment(s)</div>
+                            <div class="valid-feedback" style="display: none; color: #28a745;">Changes done successfuly, refresh the page to see them</div>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary save pull-right">Apply changes</button>
@@ -373,6 +379,17 @@
 @if(!$dataType->server_side && config('dashboard.data_tables.responsive'))
     <link rel="stylesheet" href="{{ voyager_asset('lib/css/responsive.dataTables.min.css') }}">
 @endif
+<style>
+    .invalid-feedback {
+        display: none; 
+        color: #dc3545 
+    }
+
+    .valid-feedback {
+        display: none;
+        color: #28a745;
+    }
+</style>
 @stop
 
 @section('javascript')
@@ -453,16 +470,25 @@
 
         // from to assign multiple appointments to one agent
         $('#agentAssignementForm .btn').click(function(e) {
-            e.preventDefault();
-            $.ajax({
-                url: 'appointment/assign',
-                data: $('#agentAssignementForm').serialize(),
-                method: 'PUT'
-            }).done(function(data) {
-                console.log(data)
-            }).error(function() {
-                console.error('shit happened');
-            });
+            if($('.selected_ids').val() == '' || $('.selected_agent_id').val() == '') {
+                e.preventDefault();
+                $('#agentAssignementForm .invalid-feedback').show();
+            } else {
+                $('#agentAssignementForm .invalid-feedback').hide();
+                // $.ajax({
+                //     url: 'appointment/assign',
+                //     data: $('#agentAssignementForm').serialize(),
+                //     method: 'POST',
+                //     dataType: 'json'
+                // }).done(function(data) {
+                //     $('#agentAssignementForm .valid-feedback').show();
+                //     setTimeout(function() {
+                //         $('#agentAssignementForm .valid-feedback').hide();
+                //     }, 2000);
+                // }).fail(function() {
+                //     console.error('shit happened');
+                // });
+            }
         })
     </script>
 @stop

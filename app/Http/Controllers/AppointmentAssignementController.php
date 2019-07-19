@@ -16,12 +16,28 @@ class AppointmentAssignementController extends Controller
      */
     public function update(Request $request)
     {
+        $request->validate([
+            'selected_ids' => 'required',
+            'selected_agent_id' => 'required'
+        ]);
+
         $ids = $request->input('selected_ids');
+        $selected_agent_id = (int)$request->input('selected_agent_id');
         $ids = explode(',', $ids);
         
         $appointments = Appointment::whereIn('id', $ids)->get();
 
+        foreach ($appointments as $key => $appointment) {
+            $appointment->call_agent_id = $selected_agent_id;
 
-        dd($ids);
+            $appointment->save();
+        }
+
+        return redirect()
+        ->route("voyager.appointments.index")
+        ->with([
+            'message'    => __('voyager::generic.successfully_updated'),
+            'alert-type' => 'success',
+        ]);
     }
 }
