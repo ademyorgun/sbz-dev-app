@@ -54365,11 +54365,11 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Bentuzer")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [
-          _vm._v("Appointments Per user")
+          _vm._v("Appointments Per agent")
         ]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [
-          _vm._v("Appointments Won per user")
+          _vm._v("Appointments Won per agent")
         ])
       ])
     ])
@@ -67279,7 +67279,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     numOfAppointmentsPerStatus: {},
     numOfAllApointmentsPerDayPositive: {},
     numOfAllApointmentsPerDayNegative: {},
-    numberOfAppointmentsWonPerDay: {}
+    numberOfAppointmentsWonPerDay: {},
+    numberOfAppointmentsNotWonPerDay: {}
   },
   methods: {
     fetchData: function fetchData(data) {
@@ -67293,6 +67294,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
         _this.numOfAllApointmentsPerDayPositive = response.data.numOfAllApointmentsPerDayPositive;
         _this.numOfAllApointmentsPerDayNegative = response.data.numOfAllApointmentsPerDayNegative;
         _this.numberOfAppointmentsWonPerDay = response.data.numberOfAppointmentsWonPerDay;
+        _this.numberOfAppointmentsNotWonPerDay = response.data.numberOfAppointmentsNotWonPerDay;
       });
     }
   }

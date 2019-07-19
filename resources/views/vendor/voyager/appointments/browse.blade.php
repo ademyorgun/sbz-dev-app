@@ -88,7 +88,7 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <form id="agentAssignementForm" style="margin-top: 1.6em;">
+                    <form action="{{ route('voyager.appointment.assign') }}" id="agentAssignementForm" style="margin-top: 1.6em;" method="POST">
                         {{ method_field("POST") }}
                         <!-- CSRF TOKEN -->
                         {{ csrf_field() }}

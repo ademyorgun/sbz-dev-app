@@ -4,8 +4,8 @@
         <thead class="thead-light">
             <tr>
                 <th scope="col">Bentuzer</th>
-                <th scope="col">Appointments Per user</th>
-                <th scope="col">Appointments Won per user</th>
+                <th scope="col">Appointments Per agent</th>
+                <th scope="col">Appointments Won per agent</th>
             </tr>
         </thead>
         <tbody>
