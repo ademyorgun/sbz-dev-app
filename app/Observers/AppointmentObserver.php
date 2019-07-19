@@ -14,7 +14,12 @@ class AppointmentObserver
      */
     public function creating(Appointment $appointment)
     {
-        
+        //apointment was edited and without a visit date
+        if($appointment->meeting_date == null) {
+            $appointment->appointment_status = 'created';
+        } else {
+            $appointment->appointment_status = 'planned';
+        }
     }
     /**
      * Handle the appointment "created" event.
@@ -38,7 +43,19 @@ class AppointmentObserver
         // appointment reschduled
         if($appointment->duplicated_to_id != null) {
             $appointment->appointment_status = 're-scheduled';
+        } else {
+            // appointment was edited and without a visit date
+             if($appointment->meeting_date == null) {
+                $appointment->appointment_status = 'unplanned';
+            } else {
+                if(isset($appointment->call_agent_id)) {
+                    $appointment->appointment_status = 'assigned';
+                } else{
+                    $appointment->appointment_status = 'not assigned';
+                }
+            }
         }
+
     }
 
     /**
@@ -60,7 +77,7 @@ class AppointmentObserver
      */
     public function deleting(Appointment $appointment)
     {
-        //
+        $appointment->appointment_status = "deleted";
     }
 
     /**

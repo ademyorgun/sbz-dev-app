@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Appointment extends Model
 {
@@ -15,6 +16,13 @@ class Appointment extends Model
     //     'meeting_date',
     //     'call_date'
     // ];
+    
+    /**
+     * Enabling soft delete for users
+     * 
+     */
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
 
     /**
      * The storage format of the model's date columns.
