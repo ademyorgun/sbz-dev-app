@@ -2111,6 +2111,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ReportsUsersTable',
   props: {
@@ -54343,7 +54345,9 @@ var render = function() {
           return _c("tr", { key: index }, [
             _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(name))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(value))])
+            _c("th", [_vm._v(_vm._s(value.total))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(value.won))])
           ])
         }),
         0
@@ -54360,7 +54364,13 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Bentuzer")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Abschluss")])
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v("Appointments Per user")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v("Appointments Won per user")
+        ])
       ])
     ])
   }

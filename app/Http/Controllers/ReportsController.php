@@ -30,6 +30,12 @@ class ReportsController extends Controller
         $selectedDay = (int)$request->input('day');
         $isAgentMeetingDateSet = (boolean)$request->input('isAgentMeetingDateSet'); 
 
+        /**
+         * ttips for making this fuckign controller much much 
+         * cleaner
+         * using Local Scopes
+         * Apply DRY principle
+         */
         // 
         $appointmentPossibleStatus = ['open', 'positive', 'negative', 'not_home', 'processing', 'multi_year_contract'];
         
@@ -60,7 +66,14 @@ class ReportsController extends Controller
                             });
                         }])->get();
         foreach ($users as $key => $user) {
-            $numOfAppointmentsPerUser[$user->user_name] = count($user->appointments);
+            $numOfAppointmentsPerUser[$user->user_name]['total'] = count($user->appointments);
+            $numOfAppointmentsPerUser[$user->user_name]['won'] = 0;
+
+            foreach ($user->appointments as $key => $appointment) {
+                if( $appointment->graduation_abschluss != null ) {
+                    $numOfAppointmentsPerUser[$user->user_name]['won']++;
+                }
+            }
         };
 
         // Number of appointments per day
@@ -78,7 +91,9 @@ class ReportsController extends Controller
                             })
                             ->whereDay('created_at', $dayToUse)
                             ->get();
+            
             $numOfAppointmentsPerDay[$dayToUse] = count($allAppointments);
+
             
             $dayToUse = $dayToUse - 1;
         }
@@ -158,23 +173,36 @@ class ReportsController extends Controller
         }
 
         // Number of appointments won per agnet
-        $numberOfAppointmentsWonPerAgent = [];
-        $numberOfAppointmentsNotWonPerAgent = [];
-        $numOfAppointmentsPerUser = [];
-        $users = User::with(['appointments' => function ($query) use ($selectedYear, $selectedMonth, $isAgentMeetingDateSet) {
-                            $query->whereYear('created_at', $selectedYear)
-                            ->whereMonth('created_at', $selectedMonth)
-                            ->when($isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
-                                return $query->whereNotNull('meeting_date');
-                            })
-                            // agent meeting date is not set
-                            ->when(!$isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
-                                return $query->whereNull('meeting_date');
-                            });
-                        }])->get();
-        foreach ($users as $key => $user) {
-            $numOfAppointmentsPerUser[$user->user_name] = count($user->appointments);
-        };
+        $numberOfAppointmentsWonPerDay= [];
+        $numberOfAppointmentsNotWonPerDay = [];
+        $dayToUse = $selectedDay;
+        while($dayToUse > 0) {
+            $numberOfAppointmentsNotWonPerDay[$dayToUse] = 0;
+            $numberOfAppointmentsWonPerDay[$dayToUse] = 0;
+
+            $appointments = Appointment::whereYear('created_at', $selectedYear)
+                                ->whereMonth('created_at', $selectedMonth)
+                                ->when($isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                                    return $query->whereNotNull('meeting_date');
+                                })
+                                // agent meeting date is not set
+                                ->when(!$isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                                    return $query->whereNull('meeting_date');
+                                })
+                                ->whereDay('created_at', $dayToUse)
+                                ->get();
+
+            foreach ($appointments as $key => $appointment) {
+                // won or not won
+                if($appointment->graduation_abschluss == null) {
+                    $numberOfAppointmentsNotWonPerDay[$dayToUse]++;
+                } else {
+                    $numberOfAppointmentsWonPerDay[$dayToUse]++;
+                };
+            };
+
+            $dayToUse = $dayToUse - 1;
+        }
 
         // Returning the result
         return response()->json([
@@ -184,7 +212,8 @@ class ReportsController extends Controller
             'numOfAppointmentsPerStatus' => $numOfAppointmentsPerStatus,
             'numOfAllApointmentsPerDayPositive' => $numOfAllApointmentsPerDayPositive,
             'numOfAllApointmentsPerDayNegative' => $numOfAllApointmentsPerDayNegative,
-            'numberOfAppointmentsWonPerDay' => $numberOfAppointmentsWonPerDay
+            'numberOfAppointmentsWonPerDay' => $numberOfAppointmentsWonPerDay,
+            'numberOfAppointmentsNotWonPerDay' => $numberOfAppointmentsNotWonPerDay
         ]);
     }
 }

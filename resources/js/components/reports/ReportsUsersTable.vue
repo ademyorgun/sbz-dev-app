@@ -4,13 +4,15 @@
         <thead class="thead-light">
             <tr>
                 <th scope="col">Bentuzer</th>
-                <th scope="col">Abschluss</th>
+                <th scope="col">Appointments Per user</th>
+                <th scope="col">Appointments Won per user</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="(value, name, index) in usersData" :key="index">
                 <th scope="row">{{ name }}</th>
-                <td>{{ value }}</td>
+                <th>{{ value.total }}</th>
+                <td>{{ value.won }}</td>
             </tr>
         </tbody>
     </table>
