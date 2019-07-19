@@ -34,7 +34,7 @@ class AppointmentDuplicationController extends Controller
         return redirect()
             ->route("voyager.appointments.index")
             ->with([
-                'message'    => __('voyager::generic.successfully_updated'),
+                'message'    => "Appointment successfuly duplicated",
                 'alert-type' => 'success',
             ]);
     }

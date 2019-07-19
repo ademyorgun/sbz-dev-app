@@ -14,7 +14,7 @@ class AppointmentObserver
      */
     public function creating(Appointment $appointment)
     {
-        $appointment->appointment_status = 'test';
+        
     }
     /**
      * Handle the appointment "created" event.
@@ -33,7 +33,32 @@ class AppointmentObserver
      * @param  \App\Appointment  $appointment
      * @return void
      */
+    public function updating(Appointment $appointment)
+    {
+        // appointment reschduled
+        if($appointment->duplicated_to_id != null) {
+            $appointment->appointment_status = 're-scheduled';
+        }
+    }
+
+    /**
+     * Handle the appointment "updated" event.
+     *
+     * @param  \App\Appointment  $appointment
+     * @return void
+     */
     public function updated(Appointment $appointment)
+    {
+        //
+    }
+
+    /**
+     * Handle the appointment "deleting" event.
+     *
+     * @param  \App\Appointment  $appointment
+     * @return void
+     */
+    public function deleting(Appointment $appointment)
     {
         //
     }

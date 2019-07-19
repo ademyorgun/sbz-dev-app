@@ -100,14 +100,24 @@
                                         @continue
                                     @endif
 
-                                    {{-- we dont to show these two fiels, so we jump them when iterating --}}
-                                    @if($row->display_name == 'Created_by' or $row->display_name == "Comments")
+                                    {{-- we dont to LOAD this fiels, so we jump them when iterating --}}
+                                    @if( $row->display_name == "Comments")
+                                        @continue
+                                    @endif
+
+                                    {{-- we dont wan to show this field, but we need to have the input hidden
+                                        check the field that's been included for more details --}}
+                                    @if ($row->display_name == 'Created_by')
+                                        @if ($row->type == 'relationship' && $row->field == 'appointment_belongsto_user_relationship_1')
+                                            @include('vendor.voyager.formFields.select_dropdown_createdby', ['options' => $row->details])
+                                        @endif
                                         @continue
                                     @endif
 
                                     @if (isset($row->details->legend) && isset($row->details->legend->text))
                                         <legend class="text-{{ $row->details->legend->align ?? 'center' }}" style="background-color: {{ $row->details->legend->bgcolor ?? '#f0f0f0' }};padding: 5px;">{{ $row->details->legend->text }}</legend>
                                     @endif
+                                    
 
                                     <div class="form-group @if($row->type == 'hidden') hidden @endif col-md-{{ $display_options->width ?? 3 }} {{ $errors->has($row->field) ? 'has-error' : '' }}" @if(isset($display_options->id)){{ "id=$display_options->id" }}@endif>
                                         {{ $row->slugify }}
