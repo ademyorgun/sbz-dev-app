@@ -56,6 +56,10 @@ class AppointmentObserver
             }
         }
 
+        // Appointment has any status
+        if( $appointment->comment_status != null) {
+            $appointment->appointment_status = 'closed';
+        }    
     }
 
     /**
