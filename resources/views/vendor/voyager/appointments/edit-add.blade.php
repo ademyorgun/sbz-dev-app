@@ -20,19 +20,23 @@
     @php
         $currentUserRole = auth()->user()->role->name;
     @endphp
-    <form 
-        action="{{ route('voyager.appointment.duplicate', ['id' => $dataTypeContent->getKey()]) }}"
-        method="POST"    
-        style="display: inline-block"
-    >
-        <!-- CSRF TOKEN -->
-        {{ csrf_field() }}
 
-        {{ method_field("POST") }}
-        <button type="submit" class="btn btn-primary btn-add-new">
-            <i class="voyager-list"></i> <span>Duplicate appointment</span>
-        </button>
-    </form>
+    {{-- TO DUPLICATE THE CURRENT APPOINTMENT --}}
+    @if ($edit)
+        <form 
+            action="{{ route('voyager.appointment.duplicate', ['id' => $dataTypeContent->getKey()]) }}"
+            method="POST"    
+            style="display: inline-block"
+        >
+            <!-- CSRF TOKEN -->
+            {{ csrf_field() }}
+
+            {{ method_field("POST") }}
+            <button type="submit" class="btn btn-primary btn-add-new">
+                <i class="voyager-list"></i> <span>Duplicate appointment</span>
+            </button>
+        </form>
+    @endif
     @include('voyager::multilingual.language-selector')
 @stop
 
