@@ -272,9 +272,9 @@
                                                     @if ($row->field == 'call_agent_id')
                                                         @php
                                                             $model = app('App\User');
-                                                            $users = $model::where('id' , '=', $data->{$row->field})->get();
-                                                            @endphp 
-                                                        @foreach ($users as $user)
+                                                            $users2 = $model::where('id' , '=', $data->{$row->field})->get();
+                                                        @endphp 
+                                                        @foreach ($users2 as $user)
                                                         <span>{{ $user->user_name }}</span>
                                                         @endforeach
                                                     @else 
@@ -331,7 +331,7 @@
                         <!-- CSRF TOKEN -->
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label class="control-lab">Choose an agent </label>
+                            <label class="control-lab">Choose an agent</label>
                             <select
                                 class="form-control"
                                 name="selected_agent_id"
