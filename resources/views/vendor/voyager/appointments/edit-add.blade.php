@@ -188,11 +188,13 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <appointments-comments :appointment-id="{{$dataTypeContent->getKey()}}" ></appointments-comments>
+        @if ($edit)
+            <div class="row">
+                <div class="col-md-12">
+                    <appointments-comments :appointment-id="{{$dataTypeContent->getKey()}}"></appointments-comments>
+                </div>
             </div>
-        </div>
+        @endif
     </div>
 
     <div class="modal fade modal-danger" id="confirm_delete_modal">
