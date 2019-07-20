@@ -20,26 +20,24 @@
     @php
         $currentUserRole = auth()->user()->role->name;
     @endphp
-    @if ($currentUserRole == 'SuperAdmin' && $edit)
-        <form 
-            action="{{ route('voyager.appointment.duplicate', ['id' => $dataTypeContent->getKey()]) }}"
-            method="POST"    
-            style="display: inline-block"
-        >
-            <!-- CSRF TOKEN -->
-            {{ csrf_field() }}
+    <form 
+        action="{{ route('voyager.appointment.duplicate', ['id' => $dataTypeContent->getKey()]) }}"
+        method="POST"    
+        style="display: inline-block"
+    >
+        <!-- CSRF TOKEN -->
+        {{ csrf_field() }}
 
-            {{ method_field("POST") }}
-            <button type="submit" class="btn btn-primary btn-add-new">
-                <i class="voyager-list"></i> <span>Duplicate appointment</span>
-            </button>
-        </form>
-    @endif
+        {{ method_field("POST") }}
+        <button type="submit" class="btn btn-primary btn-add-new">
+            <i class="voyager-list"></i> <span>Duplicate appointment</span>
+        </button>
+    </form>
     @include('voyager::multilingual.language-selector')
 @stop
 
 @section('content')
-    <div class="page-content edit-add container-fluid">
+    <div class="page-content edit-add container-fluid" id="app"> 
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-primary panel-bordered">
@@ -190,6 +188,11 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <appointments-comments :appointment-id="{{$dataTypeContent->getKey()}}" ></appointments-comments>
+            </div>
+        </div>
     </div>
 
     <div class="modal fade modal-danger" id="confirm_delete_modal">
@@ -217,6 +220,9 @@
 @stop
 
 @section('javascript')
+    <!-- VUEJS -->
+    <script src="/js/pages/appointments.js"></script>
+
     <script>
         var params = {};
         var $file;

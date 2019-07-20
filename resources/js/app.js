@@ -4,13 +4,14 @@ require("./bootstrap");
 
 import AppointmentFilter from "./components/appointments/AppointmentsFilter.vue";
 import AppointmentsPaginator from "./components/appointments/AppointmentsPaginator.vue";
-
+import AppointmentsComments from './components/appointments/appointmentsComments/AppointmentComments.vue';
 const app = new Vue({
     el: "#app",
 
     components: {
         AppointmentFilter,
-        AppointmentsPaginator
+        AppointmentsPaginator,
+        AppointmentsComments
     },
 
     data: {

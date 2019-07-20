@@ -58,6 +58,11 @@ Route::group(['as' => 'voyager.'], function () {
         Route::get('reports', 'ReportsController@index')->name('reports.index');
         Route::post('reports', 'ReportsController@show');
 
+        // Comments
+        // Route::apiResource('comments', 'CommentsController');
+        Route::post('comments', 'CommentsController@index')->name('comments.index');
+        Route::post('comments/{id}', 'CommentsController@store')->name('comments.store');
+        
         event(new RoutingAdminAfter());
     });
 

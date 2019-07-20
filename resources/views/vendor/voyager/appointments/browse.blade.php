@@ -396,7 +396,7 @@
 
 @section('javascript')
     <!-- VUEJS -->
-    <script src="js/pages/appointments.js"></script>
+    <script src="/js/pages/appointments.js"></script>
     <!-- DataTables -->
     @if(!$dataType->server_side && config('dashboard.data_tables.responsive'))
         <script src="{{ voyager_asset('lib/js/dataTables.responsive.min.js') }}"></script>
