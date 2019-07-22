@@ -10,7 +10,7 @@
     {{ $row->slugify }}
     @switch($row->field)
         @case('kind_of_medical_therapy_treatment')
-            <label class="control-lable">
+            <label class="control-label">
                 <strong>Supplementary question if YES </strong> - this could affect your change. Therefore, what kind is this treatment?
             </label>
             @break
