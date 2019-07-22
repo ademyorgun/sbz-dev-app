@@ -1,24 +1,69 @@
-/* 
- * Appointmetn create page
- */
+/* * Appointmetn create page
+ * */
 
-ul.radio li{
-    width: 100%;
-    max-width: 170px;
-    float: left;
+ul.radio li {
+  width: 100%;
+  max-width: 170px;
+  float: left;
 }
 
 .voyager .alert {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 strong {
-    font-weight: 600;
+  font-weight: 600;
 }
 
-/*
- * Appointments browse page 
- */
-td.bg-color--blue {
-    bgcolor: #62a8ea !important;
+.voyager .panel .panel-body {
+  padding: 35px 10px;
 }
+
+.voyager #edit-create-questionaires.panel .form-group {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 700px) {
+  .voyager #edit-create-questionaires.panel .form-group {
+    flex-direction: column;
+  }
+}
+
+.voyager #edit-create-questionaires.panel .form-group .control-label {
+  width: 50% !important;
+}
+
+@media (max-width: 700px) {
+  .voyager #edit-create-questionaires.panel .form-group .control-label {
+    width: 100% !important;
+  }
+}
+
+.voyager #edit-create-questionaires.panel .form-group .form-control {
+  width: 50%;
+}
+
+@media (max-width: 700px) {
+  .voyager #edit-create-questionaires.panel .form-group .form-control {
+    width: 100% !important;
+  }
+}
+
+.voyager #edit-create-questionaires.panel .form-group .select2 {
+  width: 50% !important;
+}
+
+@media (max-width: 700px) {
+  .voyager #edit-create-questionaires.panel .form-group .select2 {
+    width: 100% !important;
+  }
+}
+
+/* * Appointments browse page 
+ * */
+
+td.bg-color--blue {
+  bgcolor: #62a8ea !important;
+}
+

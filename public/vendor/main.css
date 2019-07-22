@@ -1,0 +1,28 @@
+/* * Appointmetn create page
+ * */
+
+ul.radio li {
+  width: 100%;
+  max-width: 170px;
+  float: left;
+}
+
+.voyager .alert {
+  margin-bottom: 10px;
+}
+
+strong {
+  font-weight: 600;
+}
+
+.voyager .panel .panel-body {
+  padding: 35px 10px;
+}
+
+/* * Appointments browse page 
+ * */
+
+td.bg-color--blue {
+  bgcolor: #62a8ea !important;
+}
+

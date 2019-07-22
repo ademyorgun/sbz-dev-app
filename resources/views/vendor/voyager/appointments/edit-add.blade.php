@@ -42,144 +42,184 @@
 
 @section('content')
     <div class="page-content edit-add container-fluid" id="app"> 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-primary panel-bordered">
-                    <div class="panel-heading">
-                        <h3 class="panel-title panel-icon"><i class=""></i>Appointment details</h3>
-                        <div class="panel-actions">
-                            <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
-                        </div>
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <!-- form start -->
+        <form role="form"
+                class="form-edit-add"
+                action="{{ $edit ? route('voyager.'.$dataType->slug.'.update', $dataTypeContent->getKey()) : route('voyager.'.$dataType->slug.'.store') }}"
+                method="POST" enctype="multipart/form-data">
+            <!-- PUT Method if we are editing -->
+            @if($edit)
+                {{ method_field("PUT") }}
+            @endif
+
+            <!-- CSRF TOKEN -->
+            {{ csrf_field() }}
+
+            <!-- sperating the view -->
+            @php
+                $call_details_fields = [];
+                $customer_details_fields = [];
+                $visit_details_fields = [];
+                $sales_details_fields = [];
+                $questionaires_fields = [];
+                $system_details_fields = [];
+                $test= [];
+            @endphp
+
+            <!-- GET CURRENT LOGED IN USER ROLE -->
+            @php
+                $currentUserRole = auth()->user()->role->name;
+            @endphp
+
+            <!-- Adding / Editing -->
+            @php
+                $dataTypeRows = $dataType->{($edit ? 'editRows' : 'addRows' )};
+            @endphp
+
+            @foreach($dataTypeRows as $row)
+                {{-- if appoitment is created we show the following two rows --}}
+                @if(($row->field == 'comment_status' or $row->field == 'graduation_abschluss') &&  $add)
+                    @continue
+                @endif
+
+                {{-- we dont to LOAD this fiels, so we jump them when iterating --}}
+                @if( $row->display_name == "Comments")
+                    @continue
+                @endif
+
+                {{-- having mutliple groups for form inputs --}}
+                @php
+                    $view_group = isset($row->details->viewGroup) ? $row->details->viewGroup : null;
+                @endphp
+
+                @if (isset($row->details->legend) && isset($row->details->legend->text))
+                    <legend class="text-{{ $row->details->legend->align ?? 'center' }}" style="background-color: {{ $row->details->legend->bgcolor ?? '#f0f0f0' }};padding: 5px;">{{ $row->details->legend->text }}</legend>
+                @endif
+                
+                @php
+                    if($view_group == 'call details'){
+                        array_push($call_details_fields, $row);
+
+                    } elseif ($view_group == 'customer details') {
+                        array_push($customer_details_fields, $row);
+
+                    } elseif ($view_group == 'visit details') {
+                        array_push($visit_details_fields, $row);
+
+                    } elseif ($view_group == 'sales details') {
+                        array_push($sales_details_fields, $row);
+
+                    } elseif ($view_group == 'questionaires') {
+                        array_push($questionaires_fields, $row);
+
+                    } elseif ($view_group == 'system details') {
+                        array_push($system_details_fields, $row);
+
+                    } elseif($row->display_name == 'Created_by'){
+                        array_push($system_details_fields, $row);
+                    }
+                @endphp
+            @endforeach
+
+            <!-- call details panel -->
+            <div class="panel panel-primary panel-bordered">
+                <div class="panel-heading">
+                    <h3 class="panel-title panel-icon"><i class="voyager-telephone"></i>Call Details</h3>
+                    <div class="panel-actions">
+                        <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
                     </div>
-                    <div class="panel-body mt-1">
-                        <!-- form start -->
-                        <form role="form"
-                                class="form-edit-add"
-                                action="{{ $edit ? route('voyager.'.$dataType->slug.'.update', $dataTypeContent->getKey()) : route('voyager.'.$dataType->slug.'.store') }}"
-                                method="POST" enctype="multipart/form-data">
-                            <!-- PUT Method if we are editing -->
-                            @if($edit)
-                                {{ method_field("PUT") }}
-                            @endif
+                </div>
+                <div class="panel-body mt-1">
+                    @foreach ($call_details_fields as $row)
+                        @include('vendor.voyager.appointments.form-component')
+                    @endforeach
+                </div>
+            </div>
 
-                            <!-- CSRF TOKEN -->
-                            {{ csrf_field() }}
+            <!-- customer details panel -->
+            <div class="panel panel-primary panel-bordered">
+                <div class="panel-heading">
+                    <h3 class="panel-title panel-icon"><i class="voyager-person"></i>Customer Details</h3>
+                    <div class="panel-actions">
+                        <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
+                    </div>
+                </div>
+                <div class="panel-body mt-1">
+                    @foreach ($customer_details_fields as $row)
+                        @include('vendor.voyager.appointments.form-component')
+                    @endforeach
+                </div>
+            </div>
 
-                            <div class="panel-body">
+            <!-- call details panel -->
+            <div class="panel panel-primary panel-bordered">
+                <div class="panel-heading">
+                    <h3 class="panel-title panel-icon"><i class="voyager-paper-plane"></i>Visit Details</h3>
+                    <div class="panel-actions">
+                        <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
+                    </div>
+                </div>
+                <div class="panel-body mt-1">
+                    @foreach ($visit_details_fields as $row)
+                        @include('vendor.voyager.appointments.form-component')
+                    @endforeach
+                </div>
+            </div>
 
-                                @if (count($errors) > 0)
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
+            <!-- Sales details panel -->
+            <div class="panel panel-primary panel-bordered">
+                <div class="panel-heading">
+                    <h3 class="panel-title panel-icon"><i class="voyager-documentation"></i>Sales Details</h3>
+                    <div class="panel-actions">
+                        <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
+                    </div>
+                </div>
+                <div class="panel-body mt-1">
+                    @foreach ($sales_details_fields as $row)
+                        @include('vendor.voyager.appointments.form-component')
+                    @endforeach
+                </div>
+            </div>
 
-                                <!-- Adding / Editing -->
-                                @php
-                                    $dataTypeRows = $dataType->{($edit ? 'editRows' : 'addRows' )};
-                                @endphp
+            <!-- Questoinaires panel -->
+            <div class="panel panel-primary panel-bordered" id="edit-create-questionaires">
+                <div class="panel-heading">
+                    <h3 class="panel-title panel-icon"><i class="voyager-question"></i>Questionaires</h3>
+                    <div class="panel-actions">
+                        <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
+                    </div>
+                </div>
+                <div class="panel-body mt-1">
+                    @foreach ($questionaires_fields as $row)
+                        @include('vendor.voyager.appointments.form-component')
+                    @endforeach
+                </div>
+            </div>
 
-                                @foreach($dataTypeRows as $row)
-
-                                    <!-- GET THE DISPLAY OPTIONS -->
-                                    @php
-                                        $display_options = $row->details->display ?? NULL;
-                                        if ($dataTypeContent->{$row->field.'_'.($edit ? 'edit' : 'add')}) {
-                                            $dataTypeContent->{$row->field} = $dataTypeContent->{$row->field.'_'.($edit ? 'edit' : 'add')};
-                                        }
-                                    @endphp
-
-                                    <!-- GET CURRENT LOGED IN USER ROLE -->
-                                    @php
-                                        $currentUserRole = auth()->user()->role->name;
-                                    @endphp
-
-                                    {{-- if appoitment is created we show the following two rows --}}
-                                    @if(($row->field == 'comment_status' or $row->field == 'graduation_abschluss') &&  $add)
-                                        @continue
-                                    @endif
-
-                                    {{-- we dont to LOAD this fiels, so we jump them when iterating --}}
-                                    @if( $row->display_name == "Comments")
-                                        @continue
-                                    @endif
-
-                                    {{-- we dont wan to show this field, but we need to have the input hidden
-                                        check the field that's been included for more details --}}
-                                    @if ($row->display_name == 'Created_by')
-                                        @if ($row->type == 'relationship' && $row->field == 'appointment_belongsto_user_relationship_1')
-                                            @include('vendor.voyager.formFields.select_dropdown_createdby', ['options' => $row->details])
-                                        @endif
-                                        @continue
-                                    @endif
-
-                                    @if (isset($row->details->legend) && isset($row->details->legend->text))
-                                        <legend class="text-{{ $row->details->legend->align ?? 'center' }}" style="background-color: {{ $row->details->legend->bgcolor ?? '#f0f0f0' }};padding: 5px;">{{ $row->details->legend->text }}</legend>
-                                    @endif
-                                    
-
-                                    <div class="form-group @if($row->type == 'hidden') hidden @endif col-md-{{ $display_options->width ?? 3 }} {{ $errors->has($row->field) ? 'has-error' : '' }}" @if(isset($display_options->id)){{ "id=$display_options->id" }}@endif>
-                                        {{ $row->slugify }}
-                                        @switch($row->field)
-                                            @case('kind_of_medical_therapy_treatment')
-                                                <label class="control-lable">
-                                                    <strong>Supplementary question if YES </strong> - this could affect your change. Therefore, what kind is this treatment?
-                                                </label>
-                                                @break
-                                            @case('kind_of_drugs_and_for_what')
-                                                <label class="control-label">
-                                                    <strong>Supplementary question if YES</strong> - What are these drugs or what do you have to take them for?
-                                                </label>
-                                                @break
-                                            @case('kind_of_surgery_and_when')
-                                                <label class="control-label">
-                                                    <strong>Supplementary question if YES</strong> - What kind of surgery / when is this?
-                                                </label>
-                                                @break
-                                            @default
-                                                <label class="control-label">{{ $row->display_name }}</label>
-                                                @include('voyager::multilingual.input-hidden-bread-edit-add')
-                                        @endswitch
-                                        
-                                            
-                                        @php
-                                            $options = $row->details;
-                                        @endphp
-
-                                        @if (isset($row->details->view) )
-                                            @include($row->details->view, ['currentUserRole' => $currentUserRole,'options' => $row->details,'row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $dataTypeContent->{$row->field}, 'action' => ($edit ? 'edit' : 'add')])
-                                        @elseif($row->type == 'relationship' && $row->field == 'appointment_belongsto_user_relationship_1')
-                                            @include('vendor.voyager.formFields.select_dropdown_createdby', ['options' => $row->details])
-                                        @elseif ($row->type == 'relationship')
-                                            @include('voyager::formfields.relationship', ['options' => $row->details])
-                                        @else
-                                            {!! app('voyager')->formField($row, $dataType, $dataTypeContent, $options , $currentUserRole) !!}
-                                        @endif
-                                    
-                                        @foreach (app('voyager')->afterFormFields($row, $dataType, $dataTypeContent) as $after)
-                                            {!! $after->handle($row, $dataType, $dataTypeContent) !!}
-                                        @endforeach
-                                        @if ($errors->has($row->field))
-                                            @foreach ($errors->get($row->field) as $error)
-                                                <span class="help-block">{{ $error }}</span>
-                                            @endforeach
-                                        @endif
-                                    </div>
-                                @endforeach
-
-                            </div><!-- panel-body -->
-
-                            <div class="panel-footer">
-                                @section('submit-buttons')
-                                    <button type="submit" class="btn btn-primary save">{{ __('voyager::generic.save') }}</button>
-                                @stop
-                                @yield('submit-buttons')
-                            </div>
-                        </form>
-
+            <!-- Questoinaires panel -->
+            <div class="panel panel-primary panel-bordered">
+                <div class="panel-heading">
+                    <h3 class="panel-title panel-icon"><i class="voyager-laptop"></i>System Details</h3>
+                    <div class="panel-actions">
+                        <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
+                    </div>
+                </div>
+                <div class="panel-body mt-1">
+                    @foreach ($system_details_fields as $row)
+                        @include('vendor.voyager.appointments.form-component')
+                    @endforeach
+                    {{-- upload form --}}
+                    @if (false)
                         <iframe id="form_target" name="form_target" style="display:none"></iframe>
                         <form id="my_form" action="{{ route('voyager.upload') }}" target="form_target" method="post"
                                 enctype="multipart/form-data" style="width:0;height:0;overflow:hidden">
@@ -188,10 +228,17 @@
                             <input type="hidden" name="type_slug" id="type_slug" value="{{ $dataType->slug }}">
                             {{ csrf_field() }}
                         </form>
-                    </div>
+                    @endif
+                </div>
+                <div class="panel-footer">
+                    @section('submit-buttons')
+                        <button type="submit" class="btn btn-primary save">{{ __('voyager::generic.save') }}</button>
+                    @stop
+                    @yield('submit-buttons')
                 </div>
             </div>
-        </div>
+        </form>
+
         @if ($edit)
             <div class="row">
                 <div class="col-md-12">

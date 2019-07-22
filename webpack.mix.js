@@ -16,4 +16,4 @@ mix.js("resources/js/app.js", "public/js")
     .js("resources/js/vendor/voyager/app.js", "public/vendor/main.js")
     .js('resources/js/pages/appointment.js', 'public/js/pages/appointments.js')
     .js('resources/js/pages/reports.js', 'public/js/pages/reports.js')
-    .sass("resources/sass/vendor/app.sass", "public/vendor/main.css");
+    .sass("resources/sass/vendor/app.sass", "public/css/vendor/main.css");

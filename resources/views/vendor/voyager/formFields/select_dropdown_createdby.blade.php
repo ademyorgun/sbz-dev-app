@@ -1,4 +1,3 @@
-<div style="display: none">
 @if(isset($options->model) && isset($options->type))
 
     @if(class_exists($options->model))
@@ -40,8 +39,6 @@
                         <option value="{{ auth()->user()->id }}">{{ auth()->user()->user_name }}</option>
 
                     </select>
-
-                    
                 @else
                     <input type="hidden" name="{{ $options->column }}" value="{{ auth()->user()->id }}">
                     <select
@@ -67,4 +64,3 @@
 
 @endif
 
-</div>
