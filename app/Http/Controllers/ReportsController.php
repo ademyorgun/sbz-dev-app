@@ -163,8 +163,7 @@ class ReportsController extends Controller
             'numOfAllApointmentsPerDayPositive' => $numOfAllApointmentsPerDayPositive,
             'numOfAllApointmentsPerDayNegative' => $numOfAllApointmentsPerDayNegative,
             'numberOfAppointmentsWonPerDay' => $numberOfAppointmentsWonPerDay,
-            'numberOfAppointmentsNotWonPerDay' => $numberOfAppointmentsNotWonPerDay,
-            'numOfWonAppointments' => $numOfWonAppointments
+            'numberOfAppointmentsNotWonPerDay' => $numberOfAppointmentsNotWonPerDay
         ]);
     }
 }
