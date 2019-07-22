@@ -61,7 +61,8 @@ class Appointment extends Model
     }
 
     /**
-     * Scope a query to only include appointments of the current month
+     * Scope a query to only include appointments where 
+     * the meeting date is not null
      * 
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @param  mixed  $isAgentMeetingDateSet
@@ -74,6 +75,23 @@ class Appointment extends Model
                     // agent meeting date is not set
                     ->when(!$isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
                         return $query->whereNull('meeting_date');
+                    });
+    }
+
+    /**
+     * Scope a query to only include appointments won
+     * 
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  mixed  $isAppointmentWon
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeAppointmentWon($query, $isAppointmentWon) {
+        return $query->when($isAppointmentWon, function($query, $isAppointmentWon) {
+                        return $query->whereNotNull('graduation_abschluss');
+                    })
+                    // agent meeting date is not set
+                    ->when(!$isAppointmentWon, function($query, $isAppointmentWon) {
+                        return $query->whereNull('graduation_abschluss');
                     });
     }
 }

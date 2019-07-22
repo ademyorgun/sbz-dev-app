@@ -16,11 +16,21 @@
         </div>
       </div>
       <div class="row pr-2">
-        <div class="form-group pull-left col-md-6 col-sm-12 toggle">
+        <div class="form-group pull-left col-md-3 col-sm-12 toggle">
           <label class="control-label">Meeting date set:</label>
           <div class="toggle-button-wrapper">
             <toggle-button 
               v-model="isAgentMeetingDateSet"
+              :value="false"
+              :labels="{checked: 'Yes', unchecked: 'No'}"
+              @change="clearForm" />
+          </div>
+        </div>
+        <div class="form-group pull-left col-md-3 col-sm-12 toggle">
+          <label class="control-label">Appointment won:</label>
+          <div class="toggle-button-wrapper">
+            <toggle-button 
+              v-model="isAppointmentWon"
               :value="false"
               :labels="{checked: 'Yes', unchecked: 'No'}"
               @change="clearForm" />
@@ -54,7 +64,8 @@ export default {
       month: "",
       year: "",
       day: new Date().getDate(),
-      isAgentMeetingDateSet: true
+      isAgentMeetingDateSet: false,
+      isAppointmentWon: false
     };
   },
 

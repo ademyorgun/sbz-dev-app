@@ -5,6 +5,7 @@ import AppointmentFilter from "../components/appointments/AppointmentsFilter.vue
 import AppointmentsPaginator from "../components/appointments/AppointmentsPaginator.vue";
 import AppointmentsComments from '../components/appointments/appointmentsComments/AppointmentComments.vue';
 
+
 Vue.config.productionTip = false;
 
 const app = new Vue({

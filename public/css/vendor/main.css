@@ -16,7 +16,8 @@ strong {
 }
 
 .voyager .edit-add .panel .panel-body {
-  padding: 35px 10px;
+  padding: 30px 10px;
+  overflow: visible;
 }
 
 .voyager #edit-create-questionaires.panel .form-group {

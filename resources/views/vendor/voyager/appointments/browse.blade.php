@@ -368,6 +368,8 @@
         </div>
     </div>
 
+    
+
     {{-- Single delete modal --}}
     <div class="modal modal-danger fade" tabindex="-1" id="delete_modal" role="dialog">
         <div class="modal-dialog">
