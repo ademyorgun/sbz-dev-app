@@ -16,7 +16,7 @@
     @endphp
     @if (!$noRoles) 
         @foreach ($roles as $readonlyUserRole)
-            @if ($currentUserRole == strtolower($readonlyUserRole))
+            @if (strtolower($currentUserRole) == strtolower($readonlyUserRole))
                 {{ 'readonly' }}
             @endif      
         @endforeach

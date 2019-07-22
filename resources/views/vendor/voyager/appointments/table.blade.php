@@ -1,38 +1,40 @@
 <table id="dataTable" class="table table-hover table-striped table-bordered">
     <thead>
         <tr>
-            @can('delete',app($dataType->model_name))
-                <th>
-                    <input type="checkbox" class="select_all">
-                </th>
-            @endcan
             @foreach($dataType->browseRows as $row)
-            <th>
-                @if ($isServerSide)
-                    <a href="{{ $row->sortByUrl($orderBy, $sortOrder) }}">
+                @if ($loop->index == 1)
+                    @can('delete',app($dataType->model_name))
+                        <th>
+                            <input type="checkbox" class="select_all">
+                        </th>
+                    @endcan
                 @endif
-                
-                @switch($row->display_name)
-                    @case("Canton City")
-                        Canton
-                        @break
-                    @case(2)
-                        
-                        @break
-                    @default
-                        {{ $row->display_name }}
-                @endswitch
-                @if ($isServerSide)
-                    @if ($row->isCurrentSortField($orderBy))
-                        @if ($sortOrder == 'asc')
-                            <i class="voyager-angle-up pull-right"></i>
-                        @else
-                            <i class="voyager-angle-down pull-right"></i>
-                        @endif
+                <th>
+                    @if ($isServerSide)
+                        <a href="{{ $row->sortByUrl($orderBy, $sortOrder) }}">
                     @endif
-                    </a>
-                @endif
-            </th>
+                    
+                    {{-- displaying custom names --}}
+                    @switch($row->display_name)
+                        @case("Canton City")
+                            Canton
+                            @break
+                    
+                        @default
+                            {{ $row->display_name }}
+                    @endswitch
+
+                    @if ($isServerSide)
+                        @if ($row->isCurrentSortField($orderBy))
+                            @if ($sortOrder == 'asc')
+                                <i class="voyager-angle-up pull-right"></i>
+                            @else
+                                <i class="voyager-angle-down pull-right"></i>
+                            @endif
+                        @endif
+                        </a>
+                    @endif
+                </th>
             @endforeach
             <th class="actions text-right">{{ __('voyager::generic.actions') }}</th>
         </tr>
@@ -40,18 +42,23 @@
     <tbody>
         @foreach($dataTypeContent as $data)
         <tr>
-            @can('delete',app($dataType->model_name))
-                <td>
-                    <input type="checkbox" name="row_id" id="checkbox_{{ $data->getKey() }}" value="{{ $data->getKey() }}">
-                </td>
-            @endcan
             @foreach($dataType->browseRows as $row)
+                {{-- To alter the chebox selector to the second column --}}
+                @if ($loop->index == 1)
+                    @can('delete',app($dataType->model_name))
+                    <td>
+                        <input type="checkbox" name="row_id" id="checkbox_{{ $data->getKey() }}" value="{{ $data->getKey() }}">
+                    </td>
+                @endcan
+                @endif
                 @php
                 if ($data->{$row->field.'_browse'}) {
                     $data->{$row->field} = $data->{$row->field.'_browse'};
                 }
                 @endphp
-                <td>
+                <td @if ($row->field == "canton_city" or $row->field == 'meeting_time')
+                    {!! 'bgcolor="#62a8ea" style="color: #fff"'  !!}
+                @endif>
                     {{-- @if (isset($row->details->view))
                         @include($row->details->view, ['row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $data->{$row->field}, 'action' => 'browse']) --}}
                     @if($row->type == 'image')
@@ -91,7 +98,9 @@
                     @elseif(($row->type == 'select_dropdown' || $row->type == 'radio_btn') && property_exists($row->details, 'options'))
                         {!! $row->details->options->{$data->{$row->field}} ?? '' !!}
                     @elseif($row->type == 'date' || $row->type == 'timestamp')
-                        {{ property_exists($row->details, 'format') ? \Carbon\Carbon::parse($data->{$row->field})->formatLocalized($row->details->format) : $data->{$row->field} }}
+                        @if (isset($data->{$row->field}))
+                            {{ property_exists($row->details, 'format') ? \Carbon\Carbon::parse($data->{$row->field})->formatLocalized($row->details->format) : $data->{$row->field} }}
+                        @endif
                     @elseif($row->type == 'checkbox')
                         @if(property_exists($row->details, 'on') && property_exists($row->details, 'off'))
                             @if($data->{$row->field})
@@ -173,15 +182,17 @@
                         @endif
                     
                     @elseif($row->type == 'time')
-                        {{ property_exists($row->details, 'format') ? \Carbon\Carbon::parse($data->{$row->field})->formatLocalized($row->details->format) : $data->{$row->field} }}
+                        @if (isset($data->{$row->field}))
+                            {{ property_exists($row->details, 'format') ? \Carbon\Carbon::parse($data->{$row->field})->formatLocalized($row->details->format) : $data->{$row->field} }}
+                        @endif
                     @else
                         @include('voyager::multilingual.input-hidden-bread-browse')
                         @if ($row->field == 'call_agent_id')
                             @php
                                 $model = app('App\User');
-                                $users = $model::where('id' , '=', $data->{$row->field})->get();
-                                @endphp 
-                            @foreach ($users as $user)
+                                $users2 = $model::where('id' , '=', $data->{$row->field})->get();
+                            @endphp 
+                            @foreach ($users2 as $user)
                             <span>{{ $user->user_name }}</span>
                             @endforeach
                         @else 
