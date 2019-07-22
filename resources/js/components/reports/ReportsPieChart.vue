@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <base-pie-chart :chart-data="chartData"></base-pie-chart>
+    <base-pie-chart :chart-data="chartData" ></base-pie-chart>
   </div>
 </template>
 
@@ -52,6 +52,9 @@ export default {
           }
         ]
       };
+    },
+    chartOption() {
+
     }
   }
 };

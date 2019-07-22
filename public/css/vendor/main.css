@@ -16,4 +16,9 @@ strong {
     font-weight: 600;
 }
 
-    
+/*
+ * Appointments browse page 
+ */
+td.bg-color--blue {
+    bgcolor: #62a8ea !important;
+}

@@ -46,4 +46,34 @@ class Appointment extends Model
     {
         return $this->belongsTo('App\User', 'created_by');
     }
+
+    /**
+     * Scope a query to only include appointments of the current month
+     * 
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  mixed  $selectedYear
+     * @param  mixed  $selectedMonth
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSelectedMonth($query, $selectedYear, $selectedMonth) {
+        return $query->whereYear('created_at', $selectedYear)
+                    ->whereMonth('created_at', $selectedMonth);
+    }
+
+    /**
+     * Scope a query to only include appointments of the current month
+     * 
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  mixed  $isAgentMeetingDateSet
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeMeetingDate($query, $isAgentMeetingDateSet) {
+        return $query->when($isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                        return $query->whereNotNull('meeting_date');
+                    })
+                    // agent meeting date is not set
+                    ->when(!$isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                        return $query->whereNull('meeting_date');
+                    });
+    }
 }

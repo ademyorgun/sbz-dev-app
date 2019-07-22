@@ -46,7 +46,7 @@ return [
     'featured'               => 'Featured',
     'field_does_not_exist'   => 'Field does not exist',
     'first_name'             => 'First name',
-    'filter'                 => 'Fitler the results',
+    'filter'                 => 'Filter the results',
     'general_stats'          => 'General Stats',
     'home'                   => 'Home',
     'how_to_use'             => 'How To Use',
