@@ -9,9 +9,9 @@
         </div>
         <hr>
         <div class="reply">
-            <div class="avatar">
+            <!-- <div class="avatar">
                 <img :src="'/storage/'+current_user.avatar" alt="">
-            </div>
+            </div> -->
             <input 
                 type="text" 
                 v-model.trim="reply" 

@@ -9,9 +9,9 @@
           </span>
         </div>
         <div class="post-owner">
-          <div class="avatar">
+          <!-- <div class="avatar">
             <img :src="creator.avatar" alt />
-          </div>
+          </div> -->
           <div class="username">
             <a href="#">@{{ creator.user_name }}</a>
           </div>
@@ -90,7 +90,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 10px;
 }
 
 a {
@@ -108,7 +107,7 @@ hr {
 
 .comments-outside {
   box-shadow: 0 2px 30px rgba(0, 0, 0, 0.12);
-  margin: 0 auto;
+  margin: 0 auto !important;
   max-width: 100%;
 }
 
@@ -119,7 +118,7 @@ hr {
   display: flex;
   justify-content: space-between;
   color: #333;
-  min-height: 80px;
+  min-height: 70px;
   font-size: 20px;
 }
 

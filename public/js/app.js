@@ -2091,7 +2091,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n#comments {\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-align: center;\n  color: #2c3e50;\n  margin-top: 10px;\n}\na {\n  text-decoration: none;\n}\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #ececec;\n  margin: 1em 0;\n  padding: 0;\n}\n.comments-outside {\n  box-shadow: 0 2px 30px rgba(0, 0, 0, 0.12);\n  margin: 0 auto;\n  max-width: 100%;\n}\n.comments-header {\n  background-color: #fcfcfc;\n  padding: 10px;\n  align-items: center;\n  display: flex;\n  justify-content: space-between;\n  color: #333;\n  min-height: 80px;\n  font-size: 20px;\n}\n.comments-header .comments-stats span {\n  margin-left: 10px;\n  font-size: 18px;\n  font-weight: 500;\n}\n.post-owner {\n  display: flex;\n  align-items: center;\n}\n.post-owner .avatar > img {\n  width: 30px;\n  height: 30px;\n  border-radius: 100%;\n}\n.post-owner .username {\n  margin-left: 5px;\n}\n.post-owner .username > a {\n  color: #76838f;\n  font-size: 16px;\n  font-weight: 500;\n  margin-right: 8px;\n}\nhr {\n  margin-top: 10px;\n  margin-bottom: 10px;\n  padding: 0px 20px;\n}\n", ""]);
+exports.push([module.i, "\n#comments {\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-align: center;\n  color: #2c3e50;\n}\na {\n  text-decoration: none;\n}\nhr {\n  display: block;\n  height: 1px;\n  border: 0;\n  border-top: 1px solid #ececec;\n  margin: 1em 0;\n  padding: 0;\n}\n.comments-outside {\n  box-shadow: 0 2px 30px rgba(0, 0, 0, 0.12);\n  margin: 0 auto !important;\n  max-width: 100%;\n}\n.comments-header {\n  background-color: #fcfcfc;\n  padding: 10px;\n  align-items: center;\n  display: flex;\n  justify-content: space-between;\n  color: #333;\n  min-height: 70px;\n  font-size: 20px;\n}\n.comments-header .comments-stats span {\n  margin-left: 10px;\n  font-size: 18px;\n  font-weight: 500;\n}\n.post-owner {\n  display: flex;\n  align-items: center;\n}\n.post-owner .avatar > img {\n  width: 30px;\n  height: 30px;\n  border-radius: 100%;\n}\n.post-owner .username {\n  margin-left: 5px;\n}\n.post-owner .username > a {\n  color: #76838f;\n  font-size: 16px;\n  font-weight: 500;\n  margin-right: 8px;\n}\nhr {\n  margin-top: 10px;\n  margin-bottom: 10px;\n  padding: 0px 20px;\n}\n", ""]);
 
 // exports
 
@@ -22986,10 +22986,6 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "post-owner" }, [
-            _c("div", { staticClass: "avatar" }, [
-              _c("img", { attrs: { src: _vm.creator.avatar, alt: "" } })
-            ]),
-            _vm._v(" "),
             _c("div", { staticClass: "username" }, [
               _c("a", { attrs: { href: "#" } }, [
                 _vm._v("@" + _vm._s(_vm.creator.user_name))
@@ -23058,12 +23054,6 @@ var render = function() {
     _c("hr"),
     _vm._v(" "),
     _c("div", { staticClass: "reply" }, [
-      _c("div", { staticClass: "avatar" }, [
-        _c("img", {
-          attrs: { src: "/storage/" + _vm.current_user.avatar, alt: "" }
-        })
-      ]),
-      _vm._v(" "),
       _c("input", {
         directives: [
           {
@@ -23143,10 +23133,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "comment" }, [
-    _c("div", { staticClass: "avatar" }, [
-      _c("img", { attrs: { src: _vm.comment.avatar, alt: "" } })
-    ]),
-    _vm._v(" "),
     _c("div", { staticClass: "text" }, [
       _c("a", { staticClass: "username", attrs: { href: "#" } }, [
         _vm._v("@" + _vm._s(_vm.comment.user_username))

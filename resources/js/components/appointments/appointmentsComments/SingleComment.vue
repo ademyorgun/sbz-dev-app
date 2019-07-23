@@ -1,8 +1,8 @@
 <template>
     <div class="comment">
-        <div class="avatar">
+        <!-- <div class="avatar">
             <img :src="comment.avatar" alt="">
-        </div>
+        </div> -->
         <div class="text">
             <a class="username" href="#">@{{ comment.user_username }}</a> <span>{{ comment.body }}</span>
         </div>

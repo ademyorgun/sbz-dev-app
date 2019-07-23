@@ -4,17 +4,23 @@ require("./../bootstrap");
 import AppointmentFilter from "../components/appointments/AppointmentsFilter.vue";
 import AppointmentsPaginator from "../components/appointments/AppointmentsPaginator.vue";
 import AppointmentsComments from '../components/appointments/appointmentsComments/AppointmentComments.vue';
+import AppointmentsModalBtn from '../components/appointments/AppointmentsModalBtn.vue';
+import AppointmentsCommentsModal from '../components/appointments/AppointmentsCommentsModal.vue';
+import VModal from 'vue-js-modal'
 
 
 Vue.config.productionTip = false;
 
+Vue.use(VModal);
 const app = new Vue({
     el: "#app",
 
     components: {
         AppointmentFilter,
         AppointmentsPaginator,
-        AppointmentsComments
+        AppointmentsComments,
+        AppointmentsModalBtn,
+        AppointmentsCommentsModal
     },
 
     data: {
@@ -60,6 +66,12 @@ const app = new Vue({
                     }
                 });
             console.log(page, 'yay');
+        },
+
+        openCommentsModal(appointmentId) {
+            this.$modal.show('comments-modal', appointmentId);
         }
     }
 });
+
+
