@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    //
+    public function appointment()
+     {
+        return $this->belongsTo('App\Appointment');
+     }
+
+     public function user()
+     {
+        return $this->hasOne('App\User', 'id', 'user_id');
+     }
 }

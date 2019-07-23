@@ -34,6 +34,12 @@ class CommentsController extends Controller
         $currentUser = auth()->user();
         $creator = Appointment::findOrFail($id)->user;
 
+        foreach ($comments as $key => $comment) {
+            $comment->user_username = $comment->user->user_name;
+        };
+        foreach($previousAppointmentComments as $key => $comment) {
+            $comment->user_username = $comment->user->user_name;
+        }
         return response()->json([
             'comments' => $comments,
             'previousAppointmentComments' => $previousAppointmentComments,
@@ -61,11 +67,10 @@ class CommentsController extends Controller
         $comment->body = $request->body;
         $comment->appointment_id = $request->appointmentId;
         $comment->user_id = $user->id;
-        $comment->user_username = $user->user_name;
-        $comment->avatar = $user->avatar;
 
         $comment->save();
 
+        $comment->user_username = $comment->user->user_name;
 
         return response()->json([
             'comment' => $comment
