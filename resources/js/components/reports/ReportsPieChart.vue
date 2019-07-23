@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <base-pie-chart :chart-data="chartData" ></base-pie-chart>
+    <base-pie-chart :chart-data="chartData" :options="chartOption" ></base-pie-chart>
   </div>
 </template>
 
@@ -17,7 +17,6 @@ export default {
   props: {
     DataToLoad: {
       type: Object
-      // required: true
     }
   },
 
@@ -53,8 +52,26 @@ export default {
         ]
       };
     },
-    chartOption() {
 
+    chartOption() {
+      return { 
+        plugins: {
+          datalabels: {
+              formatter: (value, ctx) => {
+                  let sum = 0;
+                  let dataArr = ctx.chart.data.datasets[0].data;
+                  dataArr.map(data => {
+                      sum += data;
+                  });
+                  let percentage = (value*100 / sum).toFixed(2)+"%";
+                  if(percentage != '0.00%') {
+                    return percentage;
+                  }
+              },
+              color: '#000',
+          }
+        }
+      }
     }
   }
 };

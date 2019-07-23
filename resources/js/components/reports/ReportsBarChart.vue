@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <base-chart-bar :chart-data="ChartData"></base-chart-bar>
+        <base-chart-bar :chart-data="ChartData" :options="chartOption"></base-chart-bar>
     </div>
 </template>
 
@@ -51,6 +51,13 @@ export default {
                     }
                 ]
             };
+        },
+        chartOption() {
+            return { 
+                plugins: {
+                datalabels: false
+                }
+            }
         }
     }
 }

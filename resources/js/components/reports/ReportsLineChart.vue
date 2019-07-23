@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <BaseLineChart :chart-data="chartData"></BaseLineChart>
+    <BaseLineChart :chart-data="chartData" :options="chartOption"></BaseLineChart>
   </div>
 </template>
 
@@ -52,6 +52,13 @@ export default {
           }
         ]
       };
+    },
+    chartOption() {
+      return { 
+        plugins: {
+          datalabels: false
+        }
+      }
     }
   }
 };
