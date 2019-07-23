@@ -125,7 +125,7 @@
                     } elseif ($view_group == 'system details') {
                         array_push($system_details_fields, $row);
 
-                    } elseif($row->display_name == 'Created by'){
+                    } elseif($row->field == 'appointment_belongsto_user_relationship_1'){
                         array_push($system_details_fields, $row);
                     }
                 @endphp
