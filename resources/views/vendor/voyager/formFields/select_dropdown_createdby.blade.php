@@ -29,28 +29,15 @@
                     $query = $model::where($options->key, $dataTypeContent->{$options->column})->get();
                 @endphp
 
-                @if ($currentUserRole == 'SuperAdmin')
-                    <input type="hidden" name="{{ $options->column }}" value="{{ auth()->user()->id }}">
+                <input type="hidden" name="{{ $options->column }}" value="{{ auth()->user()->id }}">
                     <select
                     class="form-control " name="{{ $options->column }}"
                     data-get-items-field="{{$row->field}}"
                     disabled
                 >
-                        <option value="{{ auth()->user()->id }}">{{ auth()->user()->user_name }}</option>
+                    <option value="{{ auth()->user()->id }}">{{ auth()->user()->user_name }}</option>
 
-                    </select>
-                @else
-                    <input type="hidden" name="{{ $options->column }}" value="{{ auth()->user()->id }}">
-                    <select
-                    class="form-control " name="{{ $options->column }}"
-                    data-get-items-field="{{$row->field}}"
-                    disabled
-                >
-                        <option value="{{ auth()->user()->id }}">{{ auth()->user()->user_name }}</option>
-
-                    </select>
-
-                @endif
+                </select>
                 
             @endif
 

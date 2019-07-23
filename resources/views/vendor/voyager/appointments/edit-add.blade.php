@@ -125,7 +125,7 @@
                     } elseif ($view_group == 'system details') {
                         array_push($system_details_fields, $row);
 
-                    } elseif($row->display_name == 'Created_by'){
+                    } elseif($row->display_name == 'Created by'){
                         array_push($system_details_fields, $row);
                     }
                 @endphp
@@ -191,7 +191,7 @@
                 </div>
             </div>
 
-            <!-- Questoinaires panel -->
+            <!-- questionaires panel -->
             <div class="panel panel-primary panel-bordered" id="edit-create-questionaires">
                 <div class="panel-heading">
                     <h3 class="panel-title panel-icon"><i class="voyager-question"></i>Questionaires</h3>
@@ -206,7 +206,7 @@
                 </div>
             </div>
 
-            <!-- Questoinaires panel -->
+            <!-- system details panel -->
             <div class="panel panel-primary panel-bordered">
                 <div class="panel-heading">
                     <h3 class="panel-title panel-icon"><i class="voyager-laptop"></i>System Details</h3>
