@@ -9,7 +9,7 @@
     }
 @endphp
 <input 
-    type="date" 
+    type="text" 
     class="form-control datepicker--date-only" name="{{ $row->field }}"
     placeholder="{{ $row->display_name }}"
     

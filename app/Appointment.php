@@ -7,22 +7,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Appointment extends Model
 {
+    use SoftDeletes;
     /**
      * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    // protected $dates = [
-    //     'meeting_date',
-    //     'call_date'
-    // ];
-    
-    /**
-     * Enabling soft delete for users
      * 
      */
-    use SoftDeletes;
-    protected $dates = ['deleted_at'];
+    protected $dates = [
+        'deleted_at',
+        'meeting_date',
+        'call_date'
+    ];
 
     /**
      * The storage format of the model's date columns.
@@ -31,6 +25,25 @@ class Appointment extends Model
      */
     protected $dateFormat = 'Y-m-d H:i:s';
 
+    /**
+     * Mutator
+     * Set the appointment meeting date
+     * 
+     * 
+     */
+    public function setMeetingDateAttribute($value) {
+        $this->attributes['meeting_date'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+    }
+
+    /**
+     * Mutator
+     * Set the appointment call date
+     * 
+     * 
+     */
+    public function setCallDateAttribute($value) {
+        $this->attributes['call_date'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+    }
      /**
      * Get the comments for the appointment.
      */
