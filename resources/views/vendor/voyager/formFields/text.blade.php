@@ -2,10 +2,10 @@
     @if($row->required == 1) required @endif 
     type="text" class="form-control" name="{{ $row->field }}"
     placeholder="{{ old($row->field, $options->placeholder ?? $row->display_name) }}"
-    {!! isBreadSlugAutoGenerator($options) !!}
+    {{-- {!! isBreadSlugAutoGenerator($options) !!} --}}
     value="{{ old($row->field, $dataTypeContent->{$row->field} ?? $options->default ?? '') }}"
     @php
-        $options = (array)$options;
+        $options = isset($options) ? (array)$options: null;
         $roleOptions = (isset($options['roleOptions']) ? (array)$options['roleOptions'] : '');
         if($roleOptions != '') {
             $roles = (array)$roleOptions['readonly'];

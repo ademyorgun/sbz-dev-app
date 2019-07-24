@@ -70,7 +70,6 @@ export default {
                         this.hideSuccessMessage();
                         this.$modal.hide('geolocation-modal');
                     }, 2000);
-                    console.log(response);
                 })
                 .catch(err => {
                     this.hideLoader();

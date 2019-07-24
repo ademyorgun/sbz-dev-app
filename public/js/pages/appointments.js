@@ -2058,7 +2058,6 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.$modal.hide('geolocation-modal');
         }, 2000);
-        console.log(response);
       })["catch"](function (err) {
         _this.hideLoader();
 

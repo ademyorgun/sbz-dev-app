@@ -1,14 +1,19 @@
 @php
-    $optionsArray = clone $options;
-    $optionsArray = (array)$optionsArray;
-    $roleOptions = (isset($optionsArray['roleOptions']) ? (array)$optionsArray['roleOptions'] : '');
-    $currentUserRoleIsNotListed = false;
-    if($roleOptions != '') {
-        $roles = (array)$roleOptions['readonly'];
-        $noRoles = false;
-    } else {
+    $optionsArray = isset($options) ? clone $options: null;
+    if($optionsArray != null) {
+        $optionsArray = (array)$optionsArray;
+        $roleOptions = (isset($optionsArray['roleOptions']) ? (array)$optionsArray['roleOptions'] : '');
+        $currentUserRoleIsNotListed = false;
+        if($roleOptions != '') {
+            $roles = (array)$roleOptions['readonly'];
+            $noRoles = false;
+        } else {
+            $noRoles = true;
+        }
+    }  else {
         $noRoles = true;
     }
+    
 @endphp
 
 @php

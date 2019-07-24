@@ -8,7 +8,7 @@
         {!! isBreadSlugAutoGenerator($row->details) !!}
     value="{{ old($row->field, $dataTypeContent->{$row->field} ?? $row->details->default ?? '') }}"
     @php
-        $options = (array)$options;
+        $options = isset($options) ? (array)$options: null;
         $roleOptions = (isset($options['roleOptions']) ? (array)$options['roleOptions'] : '');
         if($roleOptions != '') {
             $roles = (array)$roleOptions['readonly'];
