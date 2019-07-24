@@ -305,6 +305,9 @@
                                                 @endif
                                             @endforeach
                                         </td>
+                                        {{-- @if (strtolower(auth()->user()->role) == 'superadmin' ||  strtolower(auth()->user()->role) == 'superadmin' == '')
+                                            
+                                        @endif --}}
                                         <td>
                                             <appointments-modal-btn :appointment-id="{{ $data->getKey() }}" @open-comments-modal="openCommentsModal"></appointments-modal-btn>
                                         </td>
