@@ -109,7 +109,8 @@ const app = new Vue({
                     };
                     this.pos = pos;
                 },() => {
-                    const point = new google.maps.LatLng(this.pos.lat, this.pos.lng);
+                    // const point = new google.maps.LatLng(this.pos.lat, this.pos.lng);
+                    var point = new google.maps.LatLng(38.41054600530499, -112.85153749999995);
                     const Geocoder = new google.maps.Geocoder;
                     Geocoder.geocode({ 'latLng': point }, function (results, status) {
                         if (status !== google.maps.GeocoderStatus.OK) {
@@ -119,8 +120,6 @@ const app = new Vue({
                         if (status == google.maps.GeocoderStatus.OK) {
                             console.log(results);
                             var address = (results[0].formatted_address);
-                            // create the Marker where the address variable is valid
-                            var marker = createMarker(point, "Marker 1", point + "<br> Closest Matching Address:" + address)
                         }
                     });
                 })

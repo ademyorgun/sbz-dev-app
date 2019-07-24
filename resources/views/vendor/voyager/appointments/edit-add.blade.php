@@ -285,7 +285,7 @@
 @section('javascript')
 
     <!-- GOOGLE MAP API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfZBXFr-23elkIiobEuJsP7B7OwzMv8gM"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdw_S7lZML8VVa7qppO6UsVjYcwinCCPk"></script>
     <script>
         window.Geocoder = google.maps.Geocoder;
         window.google = google;
