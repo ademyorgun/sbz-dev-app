@@ -52,6 +52,9 @@
             </div>
         @endif
 
+        <div class="row">
+            <appointments-geolocation-btn @get-geolocation="getGeolocation"></appointments-geolocation-btn>
+        </div>
         <!-- form start -->
         <form role="form"
                 class="form-edit-add"

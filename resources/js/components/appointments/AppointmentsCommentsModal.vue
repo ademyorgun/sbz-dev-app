@@ -49,6 +49,6 @@ export default {
     right: 0
     z-index: 4
     color: #76838f
-    font-size: 20px
+    font-size: 24px
     cursor: pointer
 </style>
