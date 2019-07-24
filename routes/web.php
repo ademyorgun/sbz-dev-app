@@ -63,6 +63,8 @@ Route::group(['as' => 'voyager.'], function () {
         Route::post('comments', 'CommentsController@index')->name('comments.index');
         Route::post('comments/{id}', 'CommentsController@store')->name('comments.store');
         
+        // Set appointment sale visit location
+        Route::put('appointment/{id}/location', 'AppointmentsSalesVisitLocation@update')->name('appointment.location');
         event(new RoutingAdminAfter());
     });
 

@@ -52,9 +52,15 @@
             </div>
         @endif
 
-        <div class="row">
-            <appointments-geolocation-btn @get-geolocation="getGeolocation"></appointments-geolocation-btn>
-        </div>
+        @if ($edit)
+            <div class="row">
+                <div class="col-12">
+                    <appointments-geolocation-btn @get-geolocation="getGeolocation" :appointment-id="{{$dataTypeContent->getKey()}}"></appointments-geolocation-btn>
+                    <appointments-geolocation-modal :appointment-id="{{$dataTypeContent->getKey()}}"></appointments-geolocation-modal>
+                </div>
+            </div>
+        @endif
+
         <!-- form start -->
         <form role="form"
                 class="form-edit-add"
@@ -245,7 +251,8 @@
         @if ($edit)
             <div class="row">
                 <div class="col-md-12">
-                    <appointments-comments :appointment-id="{{$dataTypeContent->getKey()}}"></appointments-comments>
+                    <appointments-comments :appointment-id="{{$dataTypeContent->getKey()}}">
+                    </appointments-comments>
                 </div>
             </div>
         @endif
@@ -276,6 +283,26 @@
 @stop
 
 @section('javascript')
+
+    <!-- GOOGLE MAP API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdw_S7lZML8VVa7qppO6UsVjYcwinCCPk"></script>
+    <script>
+        window.Geocoder = google.maps.Geocoder;
+        window.google = google;
+        // var point = new google.maps.LatLng(38.41054600530499, -112.85153749999995);
+        // Geocoder.geocode({ 'latLng': point }, function (results, status) {
+        //     if (status !== google.maps.GeocoderStatus.OK) {
+        //     alert(status);
+        //     }
+        //     // This is checking to see if the Geoeode Status is OK before proceeding
+        //     if (status == google.maps.GeocoderStatus.OK) {
+        //     console.log(results);
+        //     var address = (results[0].formatted_address);
+        //     // create the Marker where the address variable is valid
+        //     var marker = createMarker(point,"Marker 1", point + "<br> Closest Matching Address:" + address)
+        //     }
+        // });
+    </script>
     <!-- VUEJS -->
     <script src="/js/pages/appointments.js"></script>
 
@@ -345,4 +372,6 @@
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
+
+    
 @stop

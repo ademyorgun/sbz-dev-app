@@ -1728,6 +1728,9 @@ __webpack_require__.r(__webpack_exports__);
       appointmentId: 0
     };
   },
+  created: function created() {
+    this.$emit('set-appoitment-id', this.appointmentId);
+  },
   methods: {
     beforeOpen: function beforeOpen(event) {
       this.appointmentId = event.params;
@@ -1964,8 +1967,117 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'appointmentGeolocationBtn'
+  name: 'appointmentGeolocationBtn',
+  props: {
+    appointmentId: {
+      type: Number,
+      required: true
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'appointmentsGeolocationModal',
+  props: {
+    appointmentId: {
+      type: Number,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      address: '',
+      isLoaderActive: false,
+      isSucess: false
+    };
+  },
+  methods: {
+    saveAddress: function saveAddress() {
+      var _this = this;
+
+      var url = "/appointment/".concat(this.appointmentId, "/location");
+      var data = {
+        address: this.address
+      };
+      this.showLoader();
+      axios.put(url, data).then(function (response) {
+        _this.hideLoader();
+
+        _this.showSuccessMessage();
+
+        setTimeout(function () {
+          _this.hideSuccessMessage();
+
+          _this.$modal.hide('geolocation-modal');
+        }, 2000);
+        console.log(response);
+      })["catch"](function (err) {
+        _this.hideLoader();
+
+        console.log(err);
+      });
+    },
+    showLoader: function showLoader() {
+      this.isLoaderActive = true;
+    },
+    hideLoader: function hideLoader() {
+      this.isLoaderActive = false;
+    },
+    showSuccessMessage: function showSuccessMessage() {
+      this.isSucess = true;
+    },
+    hideSuccessMessage: function hideSuccessMessage() {
+      this.isSucess = false;
+    }
+  }
 });
 
 /***/ }),
@@ -2181,6 +2293,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 // module
 exports.push([module.i, ".filter-form {\n  margin-top: 1.6em;\n}\n.filter-form .btn {\n  margin-left: 1em;\n}\n.filter-form .pr-2 {\n  padding-right: 1em;\n}\n.filter-form .datePicker--input, .filter-form .datePicker--input[readonly] {\n  color: #76838f;\n  background-color: #fff !important;\n  background-image: none;\n  border: 1px solid #e4eaec;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=style&index=0&id=11006b67&scoped=true&lang=sass&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sass-loader/lib/loader.js??ref--9-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=style&index=0&id=11006b67&scoped=true&lang=sass& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".close-btn[data-v-11006b67] {\n  position: absolute;\n  top: 0;\n  right: 0;\n  z-index: 4;\n  color: #76838f;\n  font-size: 24px;\n  cursor: pointer;\n}\n.container .row[data-v-11006b67] {\n  padding: 20px;\n}\n.container .control-label[data-v-11006b67] {\n  font-size: 18px;\n  font-weight: 500;\n  margin-bottom: 16px;\n}\n.loader[data-v-11006b67] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  z-index: 100;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: rgba(255, 255, 255, 0.5);\n}\n.loader[data-v-11006b67]::after {\n  background-color: transparent;\n}\n.loader .spinning-loader[data-v-11006b67] {\n  width: 30px;\n  height: 30px;\n  border: 5px solid rgba(29, 161, 242, 0.2);\n  border-left-color: #1da1f2;\n  border-radius: 50%;\n  background: transparent;\n  -webkit-animation-name: rotate-s-loader-data-v-11006b67;\n          animation-name: rotate-s-loader-data-v-11006b67;\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n  -webkit-animation-duration: 1s;\n          animation-duration: 1s;\n  -webkit-animation-timing-function: linear;\n          animation-timing-function: linear;\n  position: relative;\n}\n@-webkit-keyframes rotate-s-loader-data-v-11006b67 {\nfrom {\n    transform: rotate(0);\n}\nto {\n    transform: rotate(360deg);\n}\n}\n@keyframes rotate-s-loader-data-v-11006b67 {\nfrom {\n    transform: rotate(0);\n}\nto {\n    transform: rotate(360deg);\n}\n}", ""]);
 
 // exports
 
@@ -21296,6 +21427,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=style&index=0&id=11006b67&scoped=true&lang=sass&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sass-loader/lib/loader.js??ref--9-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=style&index=0&id=11006b67&scoped=true&lang=sass& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--9-2!../../../../../node_modules/sass-loader/lib/loader.js??ref--9-3!../../../../../node_modules/vue-loader/lib??vue-loader-options!./appointmentsGeolocatoinModal.vue?vue&type=style&index=0&id=11006b67&scoped=true&lang=sass& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=style&index=0&id=11006b67&scoped=true&lang=sass&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/appointments/appointmentsComments/AppointmentComments.vue?vue&type=style&index=0&lang=css&":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/appointments/appointmentsComments/AppointmentComments.vue?vue&type=style&index=0&lang=css& ***!
@@ -22482,7 +22643,7 @@ var render = function() {
       on: {
         click: function($event) {
           $event.preventDefault()
-          return _vm.$emit("get-geolocation")
+          return _vm.$emit("get-geolocation", _vm.appointmentId)
         }
       }
     },
@@ -22490,6 +22651,119 @@ var render = function() {
       _c("i", { staticClass: "voyager-location" }),
       _vm._v(" "),
       _c("span", [_vm._v("Geolocation")])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=template&id=11006b67&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=template&id=11006b67&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "modal",
+    {
+      attrs: {
+        name: "geolocation-modal",
+        width: "100%",
+        height: "auto",
+        maxWidth: 600,
+        scrollable: true,
+        maxHeight: 400,
+        adaptive: true
+      }
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass: "close-btn",
+          on: {
+            click: function($event) {
+              return _vm.$modal.hide("geolocation-modal")
+            }
+          }
+        },
+        [_c("i", { staticClass: "voyager-x" })]
+      ),
+      _vm._v(" "),
+      _vm.isLoaderActive
+        ? _c("div", { staticClass: "loader" }, [
+            _c("div", { staticClass: "spinning-loader" })
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _vm.isSucess
+            ? _c("div", { staticClass: "form-group succes-message" }, [
+                _c("p", [
+                  _vm._v("Sales visit address has been saved succesfully")
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group col-12" }, [
+            _c("label", { staticClass: "control-label" }, [
+              _vm._v("Berater Standort")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.address,
+                  expression: "address"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text" },
+              domProps: { value: _vm.address },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.address = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group col-12" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary pull-right",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.saveAddress($event)
+                  }
+                }
+              },
+              [_c("span", [_vm._v("Save")])]
+            )
+          ])
+        ])
+      ])
     ]
   )
 }
@@ -37706,6 +37980,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _appointmentsGeolocatoinModal_vue_vue_type_template_id_11006b67_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./appointmentsGeolocatoinModal.vue?vue&type=template&id=11006b67&scoped=true& */ "./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=template&id=11006b67&scoped=true&");
+/* harmony import */ var _appointmentsGeolocatoinModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./appointmentsGeolocatoinModal.vue?vue&type=script&lang=js& */ "./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _appointmentsGeolocatoinModal_vue_vue_type_style_index_0_id_11006b67_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./appointmentsGeolocatoinModal.vue?vue&type=style&index=0&id=11006b67&scoped=true&lang=sass& */ "./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=style&index=0&id=11006b67&scoped=true&lang=sass&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _appointmentsGeolocatoinModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _appointmentsGeolocatoinModal_vue_vue_type_template_id_11006b67_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _appointmentsGeolocatoinModal_vue_vue_type_template_id_11006b67_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "11006b67",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************!*\
+  !*** ./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_appointmentsGeolocatoinModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./appointmentsGeolocatoinModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_appointmentsGeolocatoinModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=style&index=0&id=11006b67&scoped=true&lang=sass&":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=style&index=0&id=11006b67&scoped=true&lang=sass& ***!
+  \****************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_appointmentsGeolocatoinModal_vue_vue_type_style_index_0_id_11006b67_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--9-2!../../../../../node_modules/sass-loader/lib/loader.js??ref--9-3!../../../../../node_modules/vue-loader/lib??vue-loader-options!./appointmentsGeolocatoinModal.vue?vue&type=style&index=0&id=11006b67&scoped=true&lang=sass& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=style&index=0&id=11006b67&scoped=true&lang=sass&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_appointmentsGeolocatoinModal_vue_vue_type_style_index_0_id_11006b67_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_appointmentsGeolocatoinModal_vue_vue_type_style_index_0_id_11006b67_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_appointmentsGeolocatoinModal_vue_vue_type_style_index_0_id_11006b67_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_appointmentsGeolocatoinModal_vue_vue_type_style_index_0_id_11006b67_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_appointmentsGeolocatoinModal_vue_vue_type_style_index_0_id_11006b67_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=template&id=11006b67&scoped=true&":
+/*!*************************************************************************************************************************************************!*\
+  !*** ./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=template&id=11006b67&scoped=true& ***!
+  \*************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_appointmentsGeolocatoinModal_vue_vue_type_template_id_11006b67_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./appointmentsGeolocatoinModal.vue?vue&type=template&id=11006b67&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue?vue&type=template&id=11006b67&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_appointmentsGeolocatoinModal_vue_vue_type_template_id_11006b67_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_appointmentsGeolocatoinModal_vue_vue_type_template_id_11006b67_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/appointments/appointmentsComments/AppointmentComments.vue":
 /*!*******************************************************************************************!*\
   !*** ./resources/js/components/appointments/appointmentsComments/AppointmentComments.vue ***!
@@ -37984,8 +38345,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_appointments_AppointmentsModalBtn_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/appointments/AppointmentsModalBtn.vue */ "./resources/js/components/appointments/AppointmentsModalBtn.vue");
 /* harmony import */ var _components_appointments_AppointmentsCommentsModal_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/appointments/AppointmentsCommentsModal.vue */ "./resources/js/components/appointments/AppointmentsCommentsModal.vue");
 /* harmony import */ var _components_appointments_appointmentGeolocation_appointmentGeolocationBtn_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/appointments/appointmentGeolocation/appointmentGeolocationBtn.vue */ "./resources/js/components/appointments/appointmentGeolocation/appointmentGeolocationBtn.vue");
-/* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue-js-modal */ "./node_modules/vue-js-modal/dist/index.js");
-/* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(vue_js_modal__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _components_appointments_appointmentGeolocation_appointmentsGeolocatoinModal_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue */ "./resources/js/components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue");
+/* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue-js-modal */ "./node_modules/vue-js-modal/dist/index.js");
+/* harmony import */ var vue_js_modal__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(vue_js_modal__WEBPACK_IMPORTED_MODULE_8__);
 
 
 __webpack_require__(/*! ./../bootstrap */ "./resources/js/bootstrap.js");
@@ -37997,8 +38359,9 @@ __webpack_require__(/*! ./../bootstrap */ "./resources/js/bootstrap.js");
 
 
 
+
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.config.productionTip = false;
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_7___default.a);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_8___default.a);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: "#app",
   components: {
@@ -38007,14 +38370,16 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     AppointmentsComments: _components_appointments_appointmentsComments_AppointmentComments_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     AppointmentsModalBtn: _components_appointments_AppointmentsModalBtn_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
     AppointmentsCommentsModal: _components_appointments_AppointmentsCommentsModal_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-    AppointmentsGeolocationBtn: _components_appointments_appointmentGeolocation_appointmentGeolocationBtn_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+    AppointmentsGeolocationBtn: _components_appointments_appointmentGeolocation_appointmentGeolocationBtn_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+    AppointmentsGeolocationModal: _components_appointments_appointmentGeolocation_appointmentsGeolocatoinModal_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
   data: {
     filterData: {},
     paginationData: {},
     isResultsFiltered: false,
     pos: {},
-    googleMapAPI: 'AIzaSyCdw_S7lZML8VVa7qppO6UsVjYcwinCCPk'
+    googleMapAPI: 'AIzaSyCdw_S7lZML8VVa7qppO6UsVjYcwinCCPk',
+    appointmentId: 0
   },
   computed: {},
   methods: {
@@ -38075,10 +38440,11 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
      * 
      * 
      */
-    getGeolocation: function getGeolocation() {
+    getGeolocation: function getGeolocation(appointmentId) {
       var _this3 = this;
 
-      // Try HTML5 geolocation.
+      this.appointmentId = appointmentId; // Try HTML5 geolocation.
+
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
           var pos = {
@@ -38087,22 +38453,38 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
           };
           _this3.pos = pos;
         }, function () {
-          console.log(_this3.pos);
-          var latlng = _this3.pos.lat + _this3.pos.lng;
-          var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=".concat(latlng, "&key=").concat(_this3.googleMapAPI);
-          axios.get(url).then(function (response) {
-            return console.log(response);
+          var point = new google.maps.LatLng(_this3.pos.lat, _this3.pos.lng);
+          var Geocoder = new google.maps.Geocoder();
+          Geocoder.geocode({
+            'latLng': point
+          }, function (results, status) {
+            if (status !== google.maps.GeocoderStatus.OK) {
+              alert(status);
+            } // This is checking to see if the Geoeode Status is OK before proceeding
+
+
+            if (status == google.maps.GeocoderStatus.OK) {
+              console.log(results);
+              var address = results[0].formatted_address; // create the Marker where the address variable is valid
+
+              var marker = createMarker(point, "Marker 1", point + "<br> Closest Matching Address:" + address);
+            }
           });
-        })["catch"](function (err) {
-          return console.error(err, 'google map api');
         });
       } else {
         // Browser doesn't support Geolocation
         // so we open the modal to enter the location as text
         console.log('Geolocation is not supported by this browser');
+        this.$modal.show('geolocation-modal');
       }
     },
-    openGeolocationModal: function openGeolocationModal() {}
+    saveGeolocation: function saveGeolocation() {
+      axios.post('').then(function (response) {
+        return console.log(response);
+      })["catch"](function (err) {
+        return console.error(err);
+      });
+    }
   }
 });
 

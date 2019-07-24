@@ -33,6 +33,10 @@ export default {
     };
   },
 
+  created() {
+    this.$emit('set-appoitment-id', this.appointmentId);
+  },
+
   methods: {
     beforeOpen(event) {
       this.appointmentId = event.params;
