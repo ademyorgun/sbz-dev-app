@@ -334,44 +334,46 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-primary panelbordered">
-                <div class="panel-heading">
-                    <h3 class="panel-title panel-icon"><i class="voyager-external"></i>Multiple appointments assignment</h3>
-                    <div class="panel-actions">
-                        <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
+        @if ( strtolower(auth()->user()->role->name) == 'superadmin')
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary panelbordered">
+                    <div class="panel-heading">
+                        <h3 class="panel-title panel-icon"><i class="voyager-external"></i>Multiple appointments assignment</h3>
+                        <div class="panel-actions">
+                            <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <form action="{{ route('voyager.appointment.assign') }}" id="agentAssignementForm" style="margin-top: 1.6em;" method="POST">
+                            {{ method_field("POST") }}
+                            <!-- CSRF TOKEN -->
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <label class="control-lab">Choose an agent</label>
+                                <select
+                                    class="form-control"
+                                    name="selected_agent_id"
+                                    aria-hidden="true"
+                                >
+                                    <option disabled value selected>Please select one</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->user_name }}</option>  
+                                    @endforeach
+                                </select>
+                                <input type="hidden" name="selected_ids" value="" class="selected_ids">
+                                <div class="invalid-feedback" style="display: none; color: #dc3545;">Select an agent and an appointment(s)</div>
+                                <div class="valid-feedback" style="display: none; color: #28a745;">Changes done successfuly, refresh the page to see them</div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary save pull-right">Apply changes</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <div class="panel-body">
-                    <form action="{{ route('voyager.appointment.assign') }}" id="agentAssignementForm" style="margin-top: 1.6em;" method="POST">
-                        {{ method_field("POST") }}
-                        <!-- CSRF TOKEN -->
-                        {{ csrf_field() }}
-                        <div class="form-group">
-                            <label class="control-lab">Choose an agent</label>
-                            <select
-                                class="form-control"
-                                name="selected_agent_id"
-                                aria-hidden="true"
-                            >
-                                <option disabled value selected>Please select one</option>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->user_name }}</option>  
-                                @endforeach
-                            </select>
-                            <input type="hidden" name="selected_ids" value="" class="selected_ids">
-                            <div class="invalid-feedback" style="display: none; color: #dc3545;">Select an agent and an appointment(s)</div>
-                            <div class="valid-feedback" style="display: none; color: #28a745;">Changes done successfuly, refresh the page to see them</div>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary save pull-right">Apply changes</button>
-                        </div>
-                    </form>
                 </div>
             </div>
-            </div>
-        </div>
+        @endif
     </div>
 
     
