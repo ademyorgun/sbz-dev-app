@@ -38442,7 +38442,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     getGeolocation: function getGeolocation(appointmentId) {
       var _this3 = this;
 
-      this.appointmentId = appointmentId; // Try HTML5 geolocation.
+      this.appointmentId = appointmentId;
+      console.log('working???'); // Try HTML5 geolocation.
 
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -38452,16 +38453,18 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
           };
           _this3.pos = pos;
         }, function () {
-          // const point = new google.maps.LatLng(this.pos.lat, this.pos.lng);
-          var point = new google.maps.LatLng(38.41054600530499, -112.85153749999995);
+          var point = new google.maps.LatLng(_this3.pos.lat, _this3.pos.lng); // var point = new google.maps.LatLng(38.41054600530499, -112.85153749999995);
+
+          console.log('point', point);
           var Geocoder = new google.maps.Geocoder();
           Geocoder.geocode({
             'latLng': point
           }, function (results, status) {
             if (status !== google.maps.GeocoderStatus.OK) {
               alert(status);
-            } // This is checking to see if the Geoeode Status is OK before proceeding
+            }
 
+            console.log(results, status); // This is checking to see if the Geoeode Status is OK before proceeding
 
             if (status == google.maps.GeocoderStatus.OK) {
               console.log(results);

@@ -99,7 +99,7 @@ const app = new Vue({
          */
         getGeolocation(appointmentId) {
             this.appointmentId = appointmentId;
-
+            console.log('working???');
             // Try HTML5 geolocation.
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
@@ -109,13 +109,15 @@ const app = new Vue({
                     };
                     this.pos = pos;
                 },() => {
-                    // const point = new google.maps.LatLng(this.pos.lat, this.pos.lng);
-                    var point = new google.maps.LatLng(38.41054600530499, -112.85153749999995);
+                    const point = new google.maps.LatLng(this.pos.lat, this.pos.lng);
+                    // var point = new google.maps.LatLng(38.41054600530499, -112.85153749999995);
+                    console.log('point', point);
                     const Geocoder = new google.maps.Geocoder;
                     Geocoder.geocode({ 'latLng': point }, function (results, status) {
                         if (status !== google.maps.GeocoderStatus.OK) {
                             alert(status);
                         }
+                        console.log(results, status);
                         // This is checking to see if the Geoeode Status is OK before proceeding
                         if (status == google.maps.GeocoderStatus.OK) {
                             console.log(results);
