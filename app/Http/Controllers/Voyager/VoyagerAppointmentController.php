@@ -35,6 +35,7 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
         $users = User::all();
 
         // Get current loged in user Id
+        
         // Check permission
         $this->authorize('browse', app($dataType->model_name));
 

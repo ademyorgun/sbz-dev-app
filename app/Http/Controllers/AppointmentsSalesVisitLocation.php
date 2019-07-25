@@ -15,12 +15,21 @@ class AppointmentsSalesVisitLocation extends Controller
         $address = $request->input('address');
 
         $appointment = Appointment::findOrFail($id);
-        $appointment->sales_visit_location = $address;
 
-        $appointment->save();
-
-        return response()->json([
-            'message' => 'Sales visit address is successfuly saved'
-        ]) ;
+        if(isset($appointment->sales_visit_location)) {
+            return response()->json([
+                'message' => 'Sales visit location already exists',
+                'alert-type' => 'error'
+            ]);
+        } else {
+            $appointment->sales_visit_location = $address;
+            $appointment->save();
+    
+            return response()->json([
+                'message' => 'Sales visit address is successfuly saved',
+                'alert-type' => 'success',
+                'address' => $address
+            ]) ;
+        }
     }
 }
