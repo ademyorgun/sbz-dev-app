@@ -35,7 +35,8 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
         $users = User::all();
 
         // Get current loged in user Id
-        
+        $currentLogedUserRole = auth()->user()->role;
+
         // Check permission
         $this->authorize('browse', app($dataType->model_name));
 
@@ -293,7 +294,33 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
 
             // If we are using model scoping
             if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope'.ucfirst($dataType->scope))) {
-                $query = $model->{$dataType->scope}();
+                $query = $model->{$dataType->scope}()->when($appointmentID, function ($data, $appointmentID) {
+                                return $data->where('id', '=', $appointmentID);
+                            })
+                            ->when($phoneNumber, function ($data, $phoneNumber) {
+                                return $data->where('telephone_number', '=', $phoneNumber);
+                            })
+                            ->when($userID, function ($data, $userID) {
+                                return $data->where('call_agent_id', '=', $userID);
+                            })
+                            ->when($canton, function ($data, $canton) {
+                                return $data->where('canton_city', '=', $canton);
+                            })
+                            ->when($wantedExpert, function ($data, $wantedExpert) {
+                                return $data->where('wanted_expert', '=', $wantedExpert);
+                            })
+                            ->when($appointmentDateEnd, function ($data, $appointmentDateEnd) {
+                                return $data->where('meeting_date', '<=', $appointmentDateEnd);
+                            })
+                            ->when($appointmentDateStart, function ($data, $appointmentDateStart) {
+                                return $data->where('meeting_date', '>=', $appointmentDateStart);
+                            })
+                            ->when($callDateEnd, function ($data, $callDateEnd) {
+                                return $data->where('call_date', '<=', $callDateEnd);
+                            })
+                            ->when($callDateStart, function ($data, $callDateStart) {
+                                return $data->where('call_date', '>=', $callDateStart);
+                            });
             } else {
                 // $query = $model::select('*');
                 $query = $model::when($appointmentID, function ($data, $appointmentID) {

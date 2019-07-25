@@ -82,13 +82,14 @@ class Appointment extends Model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeMeetingDate($query, $isAgentMeetingDateSet) {
-        return $query->when($isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
-                        return $query->whereNotNull('meeting_date');
-                    })
-                    // agent meeting date is not set
-                    ->when(!$isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
-                        return $query->whereNull('meeting_date');
-                    });
+        return $query
+            ->when($isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                return $query->whereNotNull('meeting_date');
+            })
+            // agent meeting date is not set
+            ->when(!$isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
+                return $query->whereNull('meeting_date');
+        });
     }
 
     /**
@@ -99,12 +100,30 @@ class Appointment extends Model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeAppointmentWon($query, $isAppointmentWon) {
-        return $query->when($isAppointmentWon, function($query, $isAppointmentWon) {
-                        return $query->whereNotNull('graduation_abschluss');
-                    })
-                    // agent meeting date is not set
-                    ->when(!$isAppointmentWon, function($query, $isAppointmentWon) {
-                        return $query->whereNull('graduation_abschluss');
-                    });
+        return $query
+            ->when($isAppointmentWon, function($query, $isAppointmentWon) {
+                return $query->whereNotNull('graduation_abschluss');
+            })
+            // agent meeting date is not set
+            ->when(!$isAppointmentWon, function($query, $isAppointmentWon) {
+                return $query->whereNull('graduation_abschluss');
+        });
+    }
+
+    /**
+     * Scope a query to only include the appointments assigned 
+     * for the sales agent
+     * 
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  mixed  $isAppointmentWon
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSalesAgentAppointments($query) {
+        if(strtolower(auth()->user()->role->name) == 'sales_agent' ) {
+            return $query
+                ->where('call_agent_id', auth()->user()->id);
+        } else {
+            return $query;
+        }
     }
 }

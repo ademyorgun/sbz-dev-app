@@ -108,7 +108,7 @@ import singleComment from './SingleComment'
 
 .reply .reply--text {
     min-height: 40px;
-    padding: 10px 10px 10px 55px;
+    padding: 10px 10px 10px 20px;
     margin-right: 10px;
     border: 0;
     color: #333;

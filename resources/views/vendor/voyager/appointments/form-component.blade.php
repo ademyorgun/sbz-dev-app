@@ -11,17 +11,17 @@
     @switch($row->field)
         @case('kind_of_medical_therapy_treatment')
             <label class="control-label">
-                <strong>Supplementary question if YES </strong> - this could affect your change. Therefore, what kind is this treatment?
+                <strong>Zusatzfrage wenn JA</strong> - tDies könnte Auswirkungen auf Ihren Wechsel haben. Deshalb, welcher Art ist denn diese Behandlung?
             </label>
             @break
         @case('kind_of_drugs_and_for_what')
             <label class="control-label">
-                <strong>Supplementary question if YES</strong> - What are these drugs or what do you have to take them for?
+                <strong>Zusatzfrage wenn JA</strong> - Was sind das für Medikamente oder für was müssen Sie diese nehmen?
             </label>
             @break
         @case('kind_of_surgery_and_when')
             <label class="control-label">
-                <strong>Supplementary question if YES</strong> - What kind of surgery / when is this?
+                <strong>Zusatzfrage wenn JA</strong> - Was für eine Operation wann /ist das?
             </label>
             @break
         @default

@@ -14,11 +14,11 @@
 @section('page_header')
     <h1 class="page-title">
         <i class="{{ $dataType->icon }}"></i>
-        {{ __('voyager::generic.'.($edit ? 'edit' : 'add')).' '.$dataType->display_name_singular }}
+        {{ __('voyager::generic.'.($edit ? 'edit' : 'add')).' '.$dataType->display_name_singular }} {{ $edit ? 'Id '.$dataTypeContent->getKey() : '' }}
     </h1>
     <!-- GET CURRENT LOGED IN USER ROLE -->
     @php
-        $currentUserRole = auth()->user()->role->name;
+        $currentUserRole = strtolower(auth()->user()->role->name);
     @endphp
 
 @if ($edit)

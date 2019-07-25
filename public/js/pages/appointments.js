@@ -2467,7 +2467,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".card[data-v-416a96d8] {\n  position: fixed;\n  top: 80px;\n  right: 20px;\n  z-index: 10000;\n  box-shadow: 0px 4px 22px rgba(0, 0, 0, 0.1);\n  text-align: left;\n  font-size: 16px;\n  max-width: 200px;\n}\n@media (max-width: 600px) {\n.card[data-v-416a96d8] {\n    top: auto;\n    bottom: 30px;\n}\n}\n.card.success[data-v-416a96d8] {\n  background-color: #087E8B;\n  color: #fff;\n}\n.card.error[data-v-416a96d8] {\n  background-color: #FF3C38;\n  color: #fff;\n}\n.card .wrapper[data-v-416a96d8] {\n  padding: 20px;\n}", ""]);
+exports.push([module.i, ".card[data-v-416a96d8] {\n  position: fixed;\n  top: 80px;\n  right: 20px;\n  z-index: 10000;\n  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.08);\n  text-align: left;\n  font-size: 14px;\n  max-width: 300px;\n  width: 90%;\n}\n@media (max-width: 600px) {\n.card[data-v-416a96d8] {\n    top: auto;\n    bottom: 30px;\n}\n}\n.card.success[data-v-416a96d8] {\n  background-color: #00ba13;\n  color: #fff;\n}\n.card.error[data-v-416a96d8] {\n  background-color: #FF3C38;\n  color: #fff;\n}\n.card .wrapper[data-v-416a96d8] {\n  padding: 20px;\n}", ""]);
 
 // exports
 
@@ -2505,7 +2505,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.comments[data-v-51cf2c2a] {\n    margin-top: 20px;\n    padding: 20px;\n    padding-top: 0;\n}\n.comments-wrapper[data-v-51cf2c2a] {\n    padding-right: 10px;\n}\n.custom-scrollbar[data-v-51cf2c2a]::-webkit-scrollbar-track\n{\n    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);\n    border-radius: 10px;\n    background-color: #fff;\n}\n.custom-scrollbar[data-v-51cf2c2a]::-webkit-scrollbar\n{\n    width: 8px;\n    background-color: #fff;\n}\n.custom-scrollbar[data-v-51cf2c2a]::-webkit-scrollbar-thumb\n{\n    border-radius: 10px;\n    box-shadow: inset 0 0 6px rgba(0,0,0,.3);\n    background-color: #555;\n}\n\n/* Reply component */\n.reply[data-v-51cf2c2a] {\n    display: flex;\n    position: relative;\n    align-items: center;\n    background-color: rgb(247, 247, 247);\n    border-radius: 4px;\n    padding: 5px 10px;\n    overflow: hidden;\n}\n.reply .avatar[data-v-51cf2c2a] {\n    position: absolute;\n}\n.reply .avatar > img[data-v-51cf2c2a] {\n    width: 40px;\n    height: 40px;\n    border-radius: 100%;\n}\n.reply .reply--text[data-v-51cf2c2a] {\n    min-height: 40px;\n    padding: 10px 10px 10px 55px;\n    margin-right: 10px;\n    border: 0;\n    color: #333;\n    width: 100%;\n    outline: 0;\n    background-color: transparent;\n    box-shadow: none;\n}\n.reply input.reply--text[data-v-51cf2c2a]:valid {\n    margin-right: 71px;\n}\n.reply input.reply--text:valid + .reply--button[data-v-51cf2c2a] {\n    right: 10px;\n}\n.reply .reply--button[data-v-51cf2c2a] {\n    position: absolute;\n    right: -100px;\n    border: 1px solid #22a7f0;\n    background-color: transparent;\n    color: #22a7f0;\n    display: inline-block;\n    font-weight: 400;\n    text-align: center;\n    white-space: nowrap;\n    vertical-align: middle;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n    padding: 0.375rem 0.75rem;\n    font-size: 15px;\n    line-height: 1.5;\n    border-radius: 30px;\n    transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out, border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out, right 0.25s ease-in-out;\n    outline: 0;\n}\n.reply .reply--button[data-v-51cf2c2a]:hover {\n    color: #fff;\n    background-color: #2a629c;\n}\n.reply .reply--button[data-v-51cf2c2a]:focus,\n.reply .reply--button[data-v-51cf2c2a]:active {\n    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);\n}\nhr[data-v-51cf2c2a] {\n    margin-top: 10px;\n    margin-bottom: 10px;\n}\n", ""]);
+exports.push([module.i, "\n.comments[data-v-51cf2c2a] {\n    margin-top: 20px;\n    padding: 20px;\n    padding-top: 0;\n}\n.comments-wrapper[data-v-51cf2c2a] {\n    padding-right: 10px;\n}\n.custom-scrollbar[data-v-51cf2c2a]::-webkit-scrollbar-track\n{\n    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);\n    border-radius: 10px;\n    background-color: #fff;\n}\n.custom-scrollbar[data-v-51cf2c2a]::-webkit-scrollbar\n{\n    width: 8px;\n    background-color: #fff;\n}\n.custom-scrollbar[data-v-51cf2c2a]::-webkit-scrollbar-thumb\n{\n    border-radius: 10px;\n    box-shadow: inset 0 0 6px rgba(0,0,0,.3);\n    background-color: #555;\n}\n\n/* Reply component */\n.reply[data-v-51cf2c2a] {\n    display: flex;\n    position: relative;\n    align-items: center;\n    background-color: rgb(247, 247, 247);\n    border-radius: 4px;\n    padding: 5px 10px;\n    overflow: hidden;\n}\n.reply .avatar[data-v-51cf2c2a] {\n    position: absolute;\n}\n.reply .avatar > img[data-v-51cf2c2a] {\n    width: 40px;\n    height: 40px;\n    border-radius: 100%;\n}\n.reply .reply--text[data-v-51cf2c2a] {\n    min-height: 40px;\n    padding: 10px 10px 10px 20px;\n    margin-right: 10px;\n    border: 0;\n    color: #333;\n    width: 100%;\n    outline: 0;\n    background-color: transparent;\n    box-shadow: none;\n}\n.reply input.reply--text[data-v-51cf2c2a]:valid {\n    margin-right: 71px;\n}\n.reply input.reply--text:valid + .reply--button[data-v-51cf2c2a] {\n    right: 10px;\n}\n.reply .reply--button[data-v-51cf2c2a] {\n    position: absolute;\n    right: -100px;\n    border: 1px solid #22a7f0;\n    background-color: transparent;\n    color: #22a7f0;\n    display: inline-block;\n    font-weight: 400;\n    text-align: center;\n    white-space: nowrap;\n    vertical-align: middle;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n    padding: 0.375rem 0.75rem;\n    font-size: 15px;\n    line-height: 1.5;\n    border-radius: 30px;\n    transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out, border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out, right 0.25s ease-in-out;\n    outline: 0;\n}\n.reply .reply--button[data-v-51cf2c2a]:hover {\n    color: #fff;\n    background-color: #2a629c;\n}\n.reply .reply--button[data-v-51cf2c2a]:focus,\n.reply .reply--button[data-v-51cf2c2a]:active {\n    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);\n}\nhr[data-v-51cf2c2a] {\n    margin-top: 10px;\n    margin-bottom: 10px;\n}\n", ""]);
 
 // exports
 
@@ -38980,15 +38980,22 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
       this.isSavingGeolocation = true; // Try HTML5 geolocation.
 
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-          var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
-          _this3.pos = pos;
+        try {
+          navigator.geolocation.getCurrentPosition(function (position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            _this3.pos = pos;
 
-          _this3.getGoogleMapGeo(pos);
-        });
+            _this3.getGoogleMapGeo(pos);
+          });
+        } catch (e) {
+          console.error(e);
+          this.isSavingGeolocation = false;
+        }
+
+        ;
       } else {
         // Browser doesn't support Geolocation
         // so we open the modal to enter the location as text
@@ -39026,7 +39033,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
         });
       } catch (e) {
         this.isSavingGeolocation = false;
-        this.showNotificationModal(false, 'An error happened');
+        this.showNotificationModal(false, 'An error happened trying to get your current location');
       }
     },
 

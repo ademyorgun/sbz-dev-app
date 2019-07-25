@@ -11,7 +11,7 @@
                 @endif
                 <th>
                     @if ($isServerSide)
-                        <a href="{{ $row->sortByUrl($orderBy, $sortOrder) }}">
+                        <div>
                     @endif
                     
                     {{-- displaying custom names --}}
@@ -32,11 +32,12 @@
                                 <i class="voyager-angle-down pull-right"></i>
                             @endif
                         @endif
-                        </a>
+                        </div>
                     @endif
                 </th>
             @endforeach
             <th class="actions text-right">{{ __('voyager::generic.actions') }}</th>
+            <th>Feedback</th>
         </tr>
     </thead>
     <tbody>
@@ -46,17 +47,17 @@
                 {{-- To alter the chebox selector to the second column --}}
                 @if ($loop->index == 1)
                     @can('delete',app($dataType->model_name))
-                    <td>
-                        <input type="checkbox" name="row_id" id="checkbox_{{ $data->getKey() }}" value="{{ $data->getKey() }}">
-                    </td>
-                @endcan
+                        <td>
+                            <input type="checkbox" name="row_id" id="checkbox_{{ $data->getKey() }}" value="{{ $data->getKey() }}">
+                        </td>
+                    @endcan
                 @endif
                 @php
                 if ($data->{$row->field.'_browse'}) {
                     $data->{$row->field} = $data->{$row->field.'_browse'};
                 }
                 @endphp
-                <td @if ($row->field == "canton_city" or $row->field == 'meeting_time')
+                <td class="no-sort no-click" @if ($row->field == "canton_city" or $row->field == 'meeting_time')
                     {!! 'bgcolor="#62a8ea" style="color: #fff"'  !!}
                 @endif>
                     {{-- @if (isset($row->details->view))
@@ -207,6 +208,12 @@
                         @include('voyager::bread.partials.actions', ['action' => $action])
                     @endif
                 @endforeach
+            </td>
+            {{-- @if (strtolower(auth()->user()->role) == 'superadmin' ||  strtolower(auth()->user()->role) == 'superadmin' == '')
+                
+            @endif --}}
+            <td>
+                <appointments-modal-btn :appointment-id="{{ $data->getKey() }}" @open-comments-modal="openCommentsModal"></appointments-modal-btn>
             </td>
         </tr>
         @endforeach

@@ -107,14 +107,19 @@ const app = new Vue({
             this.isSavingGeolocation = true;
             // Try HTML5 geolocation.
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(position => {
-                    const pos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
-                    this.pos = pos;
-                    this.getGoogleMapGeo(pos);
-                });
+                try {
+                    navigator.geolocation.getCurrentPosition(position => {
+                        const pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        this.pos = pos;
+                        this.getGoogleMapGeo(pos);
+                    });
+                } catch(e) {
+                    console.error(e);
+                    this.isSavingGeolocation = false;
+                };
             } else {
                 // Browser doesn't support Geolocation
                 // so we open the modal to enter the location as text
@@ -146,7 +151,7 @@ const app = new Vue({
                 });
             } catch (e) {
                 this.isSavingGeolocation = false;
-                this.showNotificationModal(false, 'An error happened');
+                this.showNotificationModal(false, 'An error happened trying to get your current location');
             }
         },
 
