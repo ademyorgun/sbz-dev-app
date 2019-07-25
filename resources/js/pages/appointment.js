@@ -123,8 +123,8 @@ const app = new Vue({
         getGoogleMapGeo(pos) {
             console.group('geolocation function');
             try {
-                // const point = new google.maps.LatLng(pos.lat, pos.lng);
-                var point = new google.maps.LatLng(38.41054600530499, -112.85153749999995);
+                const point = new google.maps.LatLng(pos.lat, pos.lng);
+                // var point = new google.maps.LatLng(38.41054600530499, -112.85153749999995);
                 const Geocoder = new google.maps.Geocoder;
                 console.log('test');
                 Geocoder.geocode({ 'latLng': point }, function (results, status) {

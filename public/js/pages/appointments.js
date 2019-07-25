@@ -38469,8 +38469,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
       console.group('geolocation function');
 
       try {
-        // const point = new google.maps.LatLng(pos.lat, pos.lng);
-        var point = new google.maps.LatLng(38.41054600530499, -112.85153749999995);
+        var point = new google.maps.LatLng(pos.lat, pos.lng); // var point = new google.maps.LatLng(38.41054600530499, -112.85153749999995);
+
         var Geocoder = new google.maps.Geocoder();
         console.log('test');
         Geocoder.geocode({
