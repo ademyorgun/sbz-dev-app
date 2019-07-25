@@ -61,6 +61,13 @@ strong {
   }
 }
 
+.header-actions {
+  display: inline-block;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  margin-top: -10px;
+}
+
 /* * Appointments browse page 
  * */
 

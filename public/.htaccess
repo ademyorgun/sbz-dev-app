@@ -20,8 +20,8 @@
     RewriteRule ^ index.php [L]
 
     # # Forcing https
-    # RewriteCond %{HTTPS} !=on
-    # RewriteCond %{HTTP:X-Forwarded-Proto} !https 
-    # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-    # RewriteCond %{HTTP_HOST} !=sbzapp.test
+    RewriteEngine On 
+    RewriteCond %{SERVER_PORT} 80 
+    RewriteCond %{HTTP_HOST} !=sbzapp.test
+    RewriteRule ^(.*)$ https://www.yourdomain.com/$1 [R,L]
 </IfModule>

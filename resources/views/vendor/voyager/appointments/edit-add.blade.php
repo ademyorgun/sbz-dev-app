@@ -21,21 +21,36 @@
         $currentUserRole = auth()->user()->role->name;
     @endphp
 
-    {{-- TO DUPLICATE THE CURRENT APPOINTMENT --}}
-    @if ($edit)
-        <form 
-            action="{{ route('voyager.appointment.duplicate', ['id' => $dataTypeContent->getKey()]) }}"
-            method="POST"    
-            style="display: inline-block"
-        >
-            <!-- CSRF TOKEN -->
-            {{ csrf_field() }}
+@if ($edit)
+        {{-- TO DUPLICATE THE CURRENT APPOINTMENT --}}
+        <div class="header-actions">
+            <form 
+                action="{{ route('voyager.appointment.duplicate', ['id' => $dataTypeContent->getKey()]) }}"
+                method="POST"    
+                style="display: inline-block"
+            >
+                <!-- CSRF TOKEN -->
+                {{ csrf_field() }}
 
-            {{ method_field("POST") }}
-            <button type="submit" class="btn btn-primary btn-add-new">
-                <i class="voyager-list"></i> <span>Duplicate appointment</span>
-            </button>
-        </form>
+                {{ method_field("POST") }}
+                <button type="submit" class="btn btn-primary">
+                    <i class="voyager-list"></i> <span>Duplicate appointment</span>
+                </button>
+            </form>
+
+            <div style="display: inline-block">
+                <appointments-geolocation-btn 
+                    @get-geolocation="getGeolocation" 
+                    :appointment-id="{{$dataTypeContent->getKey()}}"
+                    :is-loading="isSavingGeolocation"
+                >
+                </appointments-geolocation-btn>
+                <appointments-geolocation-modal :appointment-id="{{$dataTypeContent->getKey()}}"></appointments-geolocation-modal>
+            </div>
+                <!-- notification modal -->
+                <base-notification-modal :message="responseMessage" :is-success="isGeoSavedSuccess" v-if="isNotificationModalOn"></base-notification-modal>
+        </div>
+        
     @endif
     @include('voyager::multilingual.language-selector')
 @stop
@@ -49,15 +64,6 @@
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
-            </div>
-        @endif
-
-        @if ($edit)
-            <div class="row">
-                <div class="col-12">
-                    <appointments-geolocation-btn @get-geolocation="getGeolocation" :appointment-id="{{$dataTypeContent->getKey()}}"></appointments-geolocation-btn>
-                    <appointments-geolocation-modal :appointment-id="{{$dataTypeContent->getKey()}}"></appointments-geolocation-modal>
-                </div>
             </div>
         @endif
 

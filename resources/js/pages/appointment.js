@@ -3,19 +3,19 @@ require("./../bootstrap");
 
 import AppointmentFilter from "../components/appointments/AppointmentsFilter.vue";
 import AppointmentsPaginator from "../components/appointments/AppointmentsPaginator.vue";
-import AppointmentsComments from '../components/appointments/appointmentsComments/AppointmentComments.vue';
-import AppointmentsModalBtn from '../components/appointments/AppointmentsModalBtn.vue';
-import AppointmentsCommentsModal from '../components/appointments/AppointmentsCommentsModal.vue';
-import AppointmentsGeolocationBtn from '../components/appointments/appointmentGeolocation/appointmentGeolocationBtn.vue';
-import AppointmentsGeolocationModal from '../components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue';
-import VModal from 'vue-js-modal';
-
+import AppointmentsComments from "../components/appointments/appointmentsComments/AppointmentComments.vue";
+import AppointmentsModalBtn from "../components/appointments/AppointmentsModalBtn.vue";
+import AppointmentsCommentsModal from "../components/appointments/AppointmentsCommentsModal.vue";
+import AppointmentsGeolocationBtn from "../components/appointments/appointmentGeolocation/appointmentGeolocationBtn.vue";
+import AppointmentsGeolocationModal from "../components/appointments/appointmentGeolocation/appointmentsGeolocatoinModal.vue";
+import BaseNotificationModal from "../components/baseComponents/BaseNotificationModal.vue";
+import VModal from "vue-js-modal";
 
 Vue.config.productionTip = false;
 
 Vue.use(VModal);
 const app = new Vue({
-    el: "#app",
+    el: ".side-body",
 
     components: {
         AppointmentFilter,
@@ -24,7 +24,8 @@ const app = new Vue({
         AppointmentsModalBtn,
         AppointmentsCommentsModal,
         AppointmentsGeolocationBtn,
-        AppointmentsGeolocationModal
+        AppointmentsGeolocationModal,
+        BaseNotificationModal
     },
 
     data: {
@@ -32,18 +33,22 @@ const app = new Vue({
         paginationData: {},
         isResultsFiltered: false,
         pos: {},
-        googleMapAPI: 'AIzaSyCdw_S7lZML8VVa7qppO6UsVjYcwinCCPk',
+        googleMapAPI: "AIzaSyCdw_S7lZML8VVa7qppO6UsVjYcwinCCPk",
         appointmentId: 0,
-        address: ''
+        address: "",
+        isSavingGeolocation: false,
+        isNotificationModalOn: false,
+        isGeoSavedSuccess: false,
+        responseMessage: ''
     },
 
     computed: {},
 
     methods: {
         /**
-         * 
-         * @param {*} data 
-         * @param {*} page 
+         *
+         * @param {*} data
+         * @param {*} page
          */
         getResults(data, page = 1) {
             this.filterData = data;
@@ -64,8 +69,8 @@ const app = new Vue({
         },
 
         /**
-         * 
-         * @param {*} page 
+         *
+         * @param {*} page
          */
         paginatorChangePage(page) {
             axios
@@ -85,51 +90,53 @@ const app = new Vue({
         },
 
         /**
-         * 
-         * @param {*} appointmentId 
+         *
+         * @param {*} appointmentId
          */
         openCommentsModal(appointmentId) {
-            this.$modal.show('comments-modal', appointmentId);
+            this.$modal.show("comments-modal", appointmentId);
         },
 
         /**
          * Get the user location
-         * 
-         * 
+         *
+         *
          */
         getGeolocation(appointmentId) {
             this.appointmentId = appointmentId;
+            this.isSavingGeolocation = true;
             // Try HTML5 geolocation.
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position) => {
+                navigator.geolocation.getCurrentPosition(position => {
                     const pos = {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     };
                     this.pos = pos;
                     this.getGoogleMapGeo(pos);
-                })
+                });
             } else {
                 // Browser doesn't support Geolocation
                 // so we open the modal to enter the location as text
-                console.log('Geolocation is not supported by this browser');
-                this.$modal.show('geolocation-modal');
+                this.showNotificationModal(false, "Geolocation is not supported by this browser");
+                this.$modal.show("geolocation-modal");
+                this.isSavingGeolocation = false;
             }
         },
 
         /**
-         * 
-         * @param {*} pos 
+         *
+         * @param {*} pos
          */
         getGoogleMapGeo(pos) {
             try {
                 const point = new google.maps.LatLng(pos.lat, pos.lng);
                 // var point = new google.maps.LatLng(38.41054600530499, -112.85153749999995);
-                const Geocoder = new google.maps.Geocoder;
-                Geocoder.geocode({ 'latLng': point },  (results, status) => {
+                const Geocoder = new google.maps.Geocoder();
+                Geocoder.geocode({ latLng: point }, (results, status) => {
                     if (status !== google.maps.GeocoderStatus.OK) {
                         // we open the modal to enter the location as text
-                        this.$modal.show('geolocation-modal');
+                        this.$modal.show("geolocation-modal");
                     }
                     // This is checking to see if the Geoeode Status is OK before proceeding
                     if (status == google.maps.GeocoderStatus.OK) {
@@ -137,24 +144,48 @@ const app = new Vue({
                         this.saveGeolocation(results[0].formatted_address);
                     }
                 });
-            } catch(e) {
-                console.error(e);
-            };
+            } catch (e) {
+                this.isSavingGeolocation = false;
+                this.showNotificationModal(false, 'An error happened');
+            }
         },
-        
+
         /**
-         * 
+         *
          */
         saveGeolocation(address) {
             const url = `/appointment/${this.appointmentId}/location`;
             const data = {
                 address: address
             };
-            axios.put(url, data)
-                .then(response => console.log(response))
-                .catch(err => console.error(err));
+            axios
+                .put(url, data)
+                .then(response => {
+                    if (response.data.alertType == 'error') {
+                        this.showNotificationModal(false, response.data.message);
+                    } else {
+                        this.showNotificationModal(true, response.data.message);
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    this.showNotificationModal(false, 'An error happend');
+                });
+        },
+
+        /**
+         * 
+         * @param {boolean} saved ( succes or failed )
+         * @param {string} message 
+         */
+        showNotificationModal(saved, message) {
+            this.isSavingGeolocation = false;
+            this.isGeoSavedSuccess = saved;
+            this.isNotificationModalOn = true;
+            this.responseMessage = message;
+            setTimeout(() => {
+                this.isNotificationModalOn = false;
+            }, 4000);
         }
     }
 });
-
-

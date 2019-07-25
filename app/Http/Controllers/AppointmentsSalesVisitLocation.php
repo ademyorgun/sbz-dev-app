@@ -19,7 +19,7 @@ class AppointmentsSalesVisitLocation extends Controller
         if(isset($appointment->sales_visit_location)) {
             return response()->json([
                 'message' => 'Sales visit location already exists',
-                'alert-type' => 'error'
+                'alertType' => 'error'
             ]);
         } else {
             $appointment->sales_visit_location = $address;
@@ -27,8 +27,7 @@ class AppointmentsSalesVisitLocation extends Controller
     
             return response()->json([
                 'message' => 'Sales visit address is successfuly saved',
-                'alert-type' => 'success',
-                'address' => $address
+                'alertType' => 'success'
             ]) ;
         }
     }
