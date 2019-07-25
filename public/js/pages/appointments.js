@@ -38445,6 +38445,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
       this.appointmentId = appointmentId;
       console.log('working???'); // Try HTML5 geolocation.
 
+      console.log('testing 1');
+
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
           var pos = {
@@ -38452,32 +38454,46 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
             lng: position.coords.longitude
           };
           _this3.pos = pos;
-        }, function () {
-          var point = new google.maps.LatLng(_this3.pos.lat, _this3.pos.lng); // var point = new google.maps.LatLng(38.41054600530499, -112.85153749999995);
 
-          console.log('point', point);
-          var Geocoder = new google.maps.Geocoder();
-          Geocoder.geocode({
-            'latLng': point
-          }, function (results, status) {
-            if (status !== google.maps.GeocoderStatus.OK) {
-              alert(status);
-            }
-
-            console.log(results, status); // This is checking to see if the Geoeode Status is OK before proceeding
-
-            if (status == google.maps.GeocoderStatus.OK) {
-              console.log(results);
-              var address = results[0].formatted_address;
-            }
-          });
+          _this3.getGoogleMapGeo(pos);
         });
+        console.log('testing 2');
       } else {
         // Browser doesn't support Geolocation
         // so we open the modal to enter the location as text
         console.log('Geolocation is not supported by this browser');
         this.$modal.show('geolocation-modal');
       }
+    },
+    getGoogleMapGeo: function getGoogleMapGeo(pos) {
+      console.group('geolocation function');
+
+      try {
+        // const point = new google.maps.LatLng(pos.lat, pos.lng);
+        var point = new google.maps.LatLng(38.41054600530499, -112.85153749999995);
+        var Geocoder = new google.maps.Geocoder();
+        console.log('test');
+        Geocoder.geocode({
+          'latLng': point
+        }, function (results, status) {
+          console.log('function test');
+
+          if (status !== google.maps.GeocoderStatus.OK) {
+            alert(status);
+          }
+
+          console.log(results, status); // This is checking to see if the Geoeode Status is OK before proceeding
+
+          if (status == google.maps.GeocoderStatus.OK) {
+            console.log(results);
+            var address = results[0].formatted_address;
+          }
+        });
+      } catch (e) {
+        console.error(e);
+      }
+
+      console.groupEnd();
     },
     saveGeolocation: function saveGeolocation() {
       axios.post('').then(function (response) {

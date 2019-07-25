@@ -287,7 +287,6 @@
     <!-- GOOGLE MAP API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdw_S7lZML8VVa7qppO6UsVjYcwinCCPk"></script>
     <script>
-        window.Geocoder = google.maps.Geocoder;
         window.google = google;
         // var point = new google.maps.LatLng(38.41054600530499, -112.85153749999995);
         // Geocoder.geocode({ 'latLng': point }, function (results, status) {
