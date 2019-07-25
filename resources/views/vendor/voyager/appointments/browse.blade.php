@@ -50,7 +50,8 @@
         <div class="col-md-12">
             <div class="panel panel-primary panelbordered">
                 <div class="panel-heading">
-                    <h3 class="panel-title panel-icon"><i class="voyager-search"></i>{{ __('voyager::generic.filter') }}</h3>
+                    {{-- appointments filter --}}
+                    <h3 class="panel-title panel-icon"><i class="voyager-search"></i>Suche nach</h3>
                     <div class="panel-actions">
                         <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
                     </div>
@@ -87,7 +88,8 @@
             <div class="col-md-12">
                 <div class="panel panel-primary panel-bordered">
                     <div class="panel-heading">
-                        <h3 class="panel-title panel-icon"><i class="voyager-list"></i>{{ __('voyager::generic.results') }}</h3>
+                        {{-- results --}}
+                        <h3 class="panel-title panel-icon"><i class="voyager-list"></i>Resultate</h3>
                         <div class="panel-actions">
                             <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
                         </div>

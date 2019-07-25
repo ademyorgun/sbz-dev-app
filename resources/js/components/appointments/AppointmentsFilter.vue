@@ -3,29 +3,29 @@
     <form id="form">
       <div class="row">
         <div class="form-group col-md-4">
-          <label class="control-label">Call Date start</label>
+          <label class="control-label">Anrufdatum von</label>
           <Datepicker class="datePicker" input-class="form-control" v-model="callDateStart" :format="dateFormat"></Datepicker>
           <!-- <datepicker v-model="callDateStart"></datepicker> -->
         </div>
 
         <div class="form-group col-md-4">
-          <label class="control-label">Call Date end</label>
+          <label class="control-label">Anrufdatum bis</label>
           <Datepicker class="datePicker" input-class="form-control" v-model="callDateEnd" :format="dateFormat"></Datepicker>
         </div>
 
         <div class="form-group col-md-4">
-          <label class="control-label">Appointment Date start</label>
+          <label class="control-label">Termindatum von</label>
           <Datepicker class="datePicker" input-class="form-control" v-model="appointmentDateStart" :format="dateFormat"></Datepicker>
         </div>
 
         <div class="form-group col-md-4">
-          <label class="control-label">Appointment Date end</label>
+          <label class="control-label">Termindatum bis</label>
           <Datepicker class="datePicker" input-class="form-control" v-model="appointmentDateEnd" :format="dateFormat"></Datepicker>
         </div>
 
         <!-- wanted expert -->
         <div class="form-group col-md-4">
-          <label class="control-label">Wanted Expert</label>
+          <label class="control-label">Gewünschter Experte</label>
           <select
             class="form-control"
             name="wanted_expert"
@@ -39,7 +39,7 @@
 
         <!-- canton- city -->
         <div class="form-group col-md-4">
-          <label class="control-label">Canton</label>
+          <label class="control-label">Kanton</label>
           <select class="form-control" name="canton" aria-hidden="true" v-model="canton">
             <option disabled value selected>Please select one</option>
             <slot name="cities"></slot>
@@ -48,7 +48,7 @@
 
         <!-- user  -->
         <div class="form-group col-md-4">
-          <label class="control-label">Agent / Sales</label>
+          <label class="control-label">Agent / Berater</label>
           <select class="form-control" name="wanted_expert" aria-hidden="true" v-model="userID">
             <option disabled value selected>Please select one</option>
             <slot name="users"></slot>
@@ -57,7 +57,7 @@
 
         <!-- Telephone number -->
         <div class="form-group col-md-4">
-          <label class="control-label">Telephone Number</label>
+          <label class="control-label">Telefonnummer</label>
           <input
             type="number"
             class="form-control"
@@ -71,7 +71,7 @@
 
         <!-- Appointment ID -->
         <div class="form-group col-md-4">
-          <label class="control-label">Appointment ID</label>
+          <label class="control-label">Termin ID</label>
           <input
             type="number"
             class="form-control"
@@ -84,11 +84,13 @@
       <div class="row pr-2">
         <button class="btn btn-light pull-right" @click.prevent="clearForm">
           <i class="voyager-trash"></i>
-          <span>Clear filter</span>
+          <!-- clear filter -->
+          <span>Löschen</span>
         </button>
         <button class="btn btn-primary pull-right" @click.prevent="$emit('filter', $data)">
           <i class="voyager-search"></i>
-          <span>Fitler results</span>
+          <!-- filter results -->
+          <span>Suchen</span>
         </button>
       </div>
     </form>

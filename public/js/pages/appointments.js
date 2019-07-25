@@ -1847,6 +1847,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AppointmentFilter",
@@ -22221,7 +22223,7 @@ var render = function() {
           { staticClass: "form-group col-md-4" },
           [
             _c("label", { staticClass: "control-label" }, [
-              _vm._v("Call Date start")
+              _vm._v("Anrufdatum von")
             ]),
             _vm._v(" "),
             _c("Datepicker", {
@@ -22244,7 +22246,7 @@ var render = function() {
           { staticClass: "form-group col-md-4" },
           [
             _c("label", { staticClass: "control-label" }, [
-              _vm._v("Call Date end")
+              _vm._v("Anrufdatum bis")
             ]),
             _vm._v(" "),
             _c("Datepicker", {
@@ -22267,7 +22269,7 @@ var render = function() {
           { staticClass: "form-group col-md-4" },
           [
             _c("label", { staticClass: "control-label" }, [
-              _vm._v("Appointment Date start")
+              _vm._v("Termindatum von")
             ]),
             _vm._v(" "),
             _c("Datepicker", {
@@ -22290,7 +22292,7 @@ var render = function() {
           { staticClass: "form-group col-md-4" },
           [
             _c("label", { staticClass: "control-label" }, [
-              _vm._v("Appointment Date end")
+              _vm._v("Termindatum bis")
             ]),
             _vm._v(" "),
             _c("Datepicker", {
@@ -22310,7 +22312,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-4" }, [
           _c("label", { staticClass: "control-label" }, [
-            _vm._v("Wanted Expert")
+            _vm._v("Gewünschter Experte")
           ]),
           _vm._v(" "),
           _c(
@@ -22356,7 +22358,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-4" }, [
-          _c("label", { staticClass: "control-label" }, [_vm._v("Canton")]),
+          _c("label", { staticClass: "control-label" }, [_vm._v("Kanton")]),
           _vm._v(" "),
           _c(
             "select",
@@ -22402,7 +22404,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-4" }, [
           _c("label", { staticClass: "control-label" }, [
-            _vm._v("Agent / Sales")
+            _vm._v("Agent / Berater")
           ]),
           _vm._v(" "),
           _c(
@@ -22449,7 +22451,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-4" }, [
           _c("label", { staticClass: "control-label" }, [
-            _vm._v("Telephone Number")
+            _vm._v("Telefonnummer")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -22482,9 +22484,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-4" }, [
-          _c("label", { staticClass: "control-label" }, [
-            _vm._v("Appointment ID")
-          ]),
+          _c("label", { staticClass: "control-label" }, [_vm._v("Termin ID")]),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -22525,7 +22525,7 @@ var render = function() {
           [
             _c("i", { staticClass: "voyager-trash" }),
             _vm._v(" "),
-            _c("span", [_vm._v("Clear filter")])
+            _c("span", [_vm._v("Löschen")])
           ]
         ),
         _vm._v(" "),
@@ -22543,7 +22543,7 @@ var render = function() {
           [
             _c("i", { staticClass: "voyager-search" }),
             _vm._v(" "),
-            _c("span", [_vm._v("Fitler results")])
+            _c("span", [_vm._v("Suchen")])
           ]
         )
       ])
