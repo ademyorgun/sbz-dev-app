@@ -23148,7 +23148,12 @@ var render = function() {
     _c("div", { staticClass: "reply" }, [
       _c("div", { staticClass: "avatar" }, [
         _c("img", {
-          attrs: { src: "/storage/" + _vm.current_user.avatar, alt: "" }
+          attrs: {
+            src:
+              "https://sbz-appointment.fra1.digitaloceanspaces.com/" +
+              _vm.current_user.avatar,
+            alt: ""
+          }
         })
       ]),
       _vm._v(" "),
@@ -23232,7 +23237,14 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "comment" }, [
     _c("div", { staticClass: "avatar" }, [
-      _c("img", { attrs: { src: _vm.comment.avatar, alt: "" } })
+      _c("img", {
+        attrs: {
+          src:
+            "https://sbz-appointment.fra1.digitaloceanspaces.com/" +
+            _vm.comment.avatar,
+          alt: ""
+        }
+      })
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "text" }, [

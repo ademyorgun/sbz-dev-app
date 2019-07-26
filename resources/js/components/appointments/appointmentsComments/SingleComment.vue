@@ -1,7 +1,7 @@
 <template>
     <div class="comment">
         <div class="avatar">
-            <img :src="comment.avatar" alt="">
+            <img :src=" 'https://sbz-appointment.fra1.digitaloceanspaces.com/' + comment.avatar" alt="">
         </div>
         <div class="text">
             <a class="username" href="#">@{{ comment.user_username }}</a> <span>{{ comment.body }}</span>

@@ -10,7 +10,7 @@
         <hr>
         <div class="reply">
             <div class="avatar">
-                <img :src="'/storage/'+current_user.avatar" alt="">
+                <img :src="'https://sbz-appointment.fra1.digitaloceanspaces.com/'+current_user.avatar" alt="">
             </div>
             <input 
                 type="text" 
