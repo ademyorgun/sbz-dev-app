@@ -324,13 +324,13 @@
                                 {{-- show the server generated paginator before filtering --}}
                                 <div v-if="!isResultsFiltered">
                                     {{ $dataTypeContent->appends([
-                                    's' => $search->value,
-                                    'filter' => $search->filter,
-                                    'key' => $search->key,
-                                    'order_by' => $orderBy,
-                                    'sort_order' => $sortOrder,
-                                    'showSoftDeleted' => $showSoftDeleted,
-                                ])->links() }}    
+                                        's' => $search->value,
+                                        'filter' => $search->filter,
+                                        'key' => $search->key,
+                                        'order_by' => $orderBy,
+                                        'sort_order' => $sortOrder,
+                                        'showSoftDeleted' => $showSoftDeleted,
+                                    ])->links() }}    
                                 </div>
 
                             </div>
@@ -381,8 +381,6 @@
         @endif
     </div>
 
-    
-
     {{-- Single delete modal --}}
     <div class="modal modal-danger fade" tabindex="-1" id="delete_modal" role="dialog">
         <div class="modal-dialog">
@@ -402,6 +400,7 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+</div>
 @stop
 
 @section('css')

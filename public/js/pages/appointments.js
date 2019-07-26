@@ -38905,7 +38905,7 @@ __webpack_require__(/*! ./../bootstrap */ "./resources/js/bootstrap.js");
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.config.productionTip = false;
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_9___default.a);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
-  el: ".side-body",
+  el: "#app",
   components: {
     AppointmentFilter: _components_appointments_AppointmentsFilter_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     AppointmentsPaginator: _components_appointments_AppointmentsPaginator_vue__WEBPACK_IMPORTED_MODULE_2__["default"],

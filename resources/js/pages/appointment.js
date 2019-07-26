@@ -15,7 +15,7 @@ Vue.config.productionTip = false;
 
 Vue.use(VModal);
 const app = new Vue({
-    el: ".side-body",
+    el: "#app",
 
     components: {
         AppointmentFilter,

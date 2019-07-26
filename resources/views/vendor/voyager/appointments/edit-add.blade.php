@@ -12,51 +12,50 @@
 @section('page_title', __('voyager::generic.'.($edit ? 'edit' : 'add')).' '.$dataType->display_name_singular)
 
 @section('page_header')
-    <h1 class="page-title">
-        <i class="{{ $dataType->icon }}"></i>
-        {{ __('voyager::generic.'.($edit ? 'edit' : 'add')).' '.$dataType->display_name_singular }} {{ $edit ? 'Id '.$dataTypeContent->getKey() : '' }}
-    </h1>
-    <!-- GET CURRENT LOGED IN USER ROLE -->
-    @php
-        $currentUserRole = strtolower(auth()->user()->role->name);
-    @endphp
-
-@if ($edit)
-        {{-- TO DUPLICATE THE CURRENT APPOINTMENT --}}
-        <div class="header-actions">
-            <form 
-                action="{{ route('voyager.appointment.duplicate', ['id' => $dataTypeContent->getKey()]) }}"
-                method="POST"    
-                style="display: inline-block"
-            >
-                <!-- CSRF TOKEN -->
-                {{ csrf_field() }}
-
-                {{ method_field("POST") }}
-                <button type="submit" class="btn btn-primary">
-                    <i class="voyager-list"></i> <span>Duplicate appointment</span>
-                </button>
-            </form>
-
-            <div style="display: inline-block">
-                <appointments-geolocation-btn 
-                    @get-geolocation="getGeolocation" 
-                    :appointment-id="{{$dataTypeContent->getKey()}}"
-                    :is-loading="isSavingGeolocation"
-                >
-                </appointments-geolocation-btn>
-                <appointments-geolocation-modal :appointment-id="{{$dataTypeContent->getKey()}}"></appointments-geolocation-modal>
-            </div>
-                <!-- notification modal -->
-                <base-notification-modal :message="responseMessage" :is-success="isGeoSavedSuccess" v-if="isNotificationModalOn"></base-notification-modal>
-        </div>
-        
-    @endif
-    @include('voyager::multilingual.language-selector')
+    
 @stop
 
 @section('content')
     <div class="page-content edit-add container-fluid" id="app"> 
+        <h1 class="page-title">
+            <i class="{{ $dataType->icon }}"></i>
+            {{ __('voyager::generic.'.($edit ? 'edit' : 'add')).' '.$dataType->display_name_singular }} {{ $edit ? 'Id '.$dataTypeContent->getKey() : '' }}
+        </h1>
+        <!-- GET CURRENT LOGED IN USER ROLE -->
+        @php
+            $currentUserRole = strtolower(auth()->user()->role->name);
+        @endphp
+
+        @if ($edit)
+            {{-- TO DUPLICATE THE CURRENT APPOINTMENT --}}
+            <div class="header-actions">
+                <form 
+                    action="{{ route('voyager.appointment.duplicate', ['id' => $dataTypeContent->getKey()]) }}"
+                    method="POST"    
+                    style="display: inline-block"
+                >
+                    <!-- CSRF TOKEN -->
+                    {{ csrf_field() }}
+                    {{ method_field("POST") }}
+                    <button type="submit" class="btn btn-primary">
+                        <i class="voyager-list"></i> <span>Duplicate appointment</span>
+                    </button>
+                </form>
+
+                <div style="display: inline-block">
+                    <appointments-geolocation-btn 
+                        @get-geolocation="getGeolocation" 
+                        :appointment-id="{{$dataTypeContent->getKey()}}"
+                        :is-loading="isSavingGeolocation"
+                    >
+                    </appointments-geolocation-btn>
+                    <appointments-geolocation-modal :appointment-id="{{$dataTypeContent->getKey()}}"></appointments-geolocation-modal>
+                </div>
+                    <!-- notification modal -->
+                    <base-notification-modal :message="responseMessage" :is-success="isGeoSavedSuccess" v-if="isNotificationModalOn"></base-notification-modal>
+            </div>
+        @endif
+        @include('voyager::multilingual.language-selector')
         @if (count($errors) > 0)
             <div class="alert alert-danger">
                 <ul>
