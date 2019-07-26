@@ -9,9 +9,9 @@
         </div>
         <hr>
         <div class="reply">
-            <!-- <div class="avatar">
+            <div class="avatar">
                 <img :src="'/storage/'+current_user.avatar" alt="">
-            </div> -->
+            </div>
             <input 
                 type="text" 
                 v-model.trim="reply" 
@@ -108,7 +108,7 @@ import singleComment from './SingleComment'
 
 .reply .reply--text {
     min-height: 40px;
-    padding: 10px 10px 10px 20px;
+    padding: 10px 10px 10px 55px;
     margin-right: 10px;
     border: 0;
     color: #333;

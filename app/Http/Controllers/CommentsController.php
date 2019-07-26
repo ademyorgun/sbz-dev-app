@@ -36,9 +36,11 @@ class CommentsController extends Controller
 
         foreach ($comments as $key => $comment) {
             $comment->user_username = $comment->user->user_name;
+            $comment->avatar = $comment->user->avatar;
         };
         foreach($previousAppointmentComments as $key => $comment) {
             $comment->user_username = $comment->user->user_name;
+            $comment->avatar = $comment->user->avatar;
         }
         return response()->json([
             'comments' => $comments,
@@ -71,6 +73,7 @@ class CommentsController extends Controller
         $comment->save();
 
         $comment->user_username = $comment->user->user_name;
+        $comment->avatar = $comment->user->avatar;
 
         return response()->json([
             'comment' => $comment

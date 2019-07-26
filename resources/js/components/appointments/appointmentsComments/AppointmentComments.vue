@@ -9,9 +9,9 @@
           </span>
         </div>
         <div class="post-owner">
-          <!-- <div class="avatar">
+          <div class="avatar">
             <img :src="creator.avatar" alt />
-          </div> -->
+          </div>
           <div class="username">
             <a href="#">@{{ creator.user_name }}</a>
           </div>
