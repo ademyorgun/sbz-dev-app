@@ -344,7 +344,8 @@
                 <div class="col-md-12">
                     <div class="panel panel-primary panelbordered">
                     <div class="panel-heading">
-                        <h3 class="panel-title panel-icon"><i class="voyager-external"></i>Multiple appointments assignment</h3>
+                        <!-- Multiple appointments assignment -->
+                        <h3 class="panel-title panel-icon"><i class="voyager-external"></i>Zuteilung der Termine</h3>
                         <div class="panel-actions">
                             <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
                         </div>
@@ -355,13 +356,14 @@
                             <!-- CSRF TOKEN -->
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label class="control-lab">Choose an agent</label>
+                                {{-- choose an agent --}}
+                                <label class="control-lab">Agent auswählen</label>
                                 <select
                                     class="form-control"
                                     name="selected_agent_id"
                                     aria-hidden="true"
                                 >
-                                    <option disabled value selected>Please select one</option>
+                                    <option disabled value selected>Bitte auswählen</option>
                                     @foreach ($users as $user)
                                         <option value="{{ $user->id }}">{{ $user->user_name }}</option>  
                                     @endforeach
@@ -371,7 +373,7 @@
                                 <div class="valid-feedback" style="display: none; color: #28a745;">Changes done successfuly, refresh the page to see them</div>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary save pull-right">Apply changes</button>
+                                <button type="submit" class="btn btn-primary save pull-right">Zuteilen</button>
                             </div>
                         </form>
                     </div>

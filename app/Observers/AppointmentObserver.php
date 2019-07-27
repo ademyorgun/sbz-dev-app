@@ -16,9 +16,9 @@ class AppointmentObserver
     {
         //apointment was edited and without a visit date
         if($appointment->meeting_date == null) {
-            $appointment->appointment_status = 'created';
+            $appointment->appointment_status = 'erstellt'; // created
         } else {
-            $appointment->appointment_status = 'planned';
+            $appointment->appointment_status = 'geplant'; // planned
         }
     }
     /**
@@ -46,20 +46,25 @@ class AppointmentObserver
         } else {
             // appointment was edited and without a visit date
              if($appointment->meeting_date == null) {
-                $appointment->appointment_status = 'unplanned';
+                $appointment->appointment_status = 'ungeplant'; // unplanned
             } else {
                 if(isset($appointment->call_agent_id)) {
-                    $appointment->appointment_status = 'assigned';
+                    $appointment->appointment_status = 'zugeteilt'; // assigned
                 } else{
-                    $appointment->appointment_status = 'not assigned';
+                    $appointment->appointment_status = 'nicht zugeteilt'; // not assigned
                 }
             }
         }
 
         // Appointment has any status
         if( $appointment->comment_status != null) {
-            $appointment->appointment_status = 'closed';
-        }    
+            $appointment->appointment_status = 'abgeschlossen'; // closed
+        }   
+        
+        // Appointment has a geo tracking location saved
+        if( $appointment->sales_visit_location != null ) {
+            $appointment->appointment_status = 'besucht'; // visited
+        }
     }
 
     /**
@@ -81,7 +86,7 @@ class AppointmentObserver
      */
     public function deleting(Appointment $appointment)
     {
-        $appointment->appointment_status = "deleted";
+        $appointment->appointment_status = "gelöscht"; // deleted
     }
 
     /**

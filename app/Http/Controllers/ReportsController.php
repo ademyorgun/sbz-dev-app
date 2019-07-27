@@ -38,7 +38,8 @@ class ReportsController extends Controller
          * Apply DRY principle
          */
         // 
-        $appointmentPossibleStatus = ['open', 'positive', 'negative', 'not_home', 'processing', 'multi_year_contract'];
+        // $appointmentClosingCommentStatuses = ['open', 'positive', 'negative', 'not_home', 'processing', 'multi_year_contract', 'no appointment accepted];
+        $appointmentClosingCommentStatuses = ['offen', 'positiv', 'negativ', 'Nicht zu Hause', 'Behandlung', 'MJV', 'Wollte k.T'];
         
         // Appoitments for the selected year/month
         $allAppointments = Appointment::SelectedMonth($selectedYear, $selectedMonth)
@@ -66,8 +67,26 @@ class ReportsController extends Controller
 
         // Number of appointments per day
         $numOfAppointmentsPerDay = [];
+
+        $numOfAllApointmentsPerDayPositive = [];
+        $numOfAllApointmentsPerDayNegative = [];
+        
+        $numberOfAppointmentsWonPerDay = [];
+        $numberOfAppointmentsNotWonPerDay = [];
+
+        $numOfAppointmentsPerStatus = [];
+        foreach ($appointmentClosingCommentStatuses as $key => $status) {
+            $numOfAppointmentsPerStatus[$status] = 0;
+        }
+
         $dayToUse = $selectedDay; // we gonna need the selectedDay value later
         while ($dayToUse > 0) {
+            $allAppointmentsPositive = [];
+            $allAppointmentsNegative = [];
+
+            $numberOfAppointmentsNotWonPerDay[$dayToUse] = 0;
+            $numberOfAppointmentsWonPerDay[$dayToUse] = 0;
+
             $allAppointments = Appointment::SelectedMonth($selectedYear, $selectedMonth)
                             ->meetingDate($isAgentMeetingDateSet)
                             ->whereDay('created_at', $dayToUse)
@@ -75,70 +94,35 @@ class ReportsController extends Controller
                             ->get();
             
             $numOfAppointmentsPerDay[$dayToUse] = count($allAppointments);
-            
-            $dayToUse = $dayToUse - 1;
-        }
 
-        // Number of appointments per status --------- graphs
-        $numOfAppointmentsPerStatus = [];
-        foreach ($appointmentPossibleStatus as $key => $status) {
-            $allAppointments = Appointment::SelectedMonth($selectedYear, $selectedMonth)
-                            ->meetingDate($isAgentMeetingDateSet)
-                            ->appointmentWon($isAppointmentWon)
-                            ->where('comment_status', $status)->get();
+            foreach($allAppointments as $key => $appointment) {
+                if( strtolower($appointment->comment_status) == 'positiv') {
+                    array_push($allAppointmentsPositive, $appointment);
+                };
+                if (strtolower($appointment->comment_status) == 'negativ') {
+                    array_push($allAppointmentsNegative, $appointment);
+                };
+                // won or not won
+                if ($appointment->graduation_abschluss == null) {
+                    $numberOfAppointmentsNotWonPerDay[$dayToUse]++;
+                };
+                if($appointment->graduation_abschluss != null) {
+                    $numberOfAppointmentsWonPerDay[$dayToUse]++;
+                };
 
-            $numOfAppointmentsPerStatus[$status] = count($allAppointments);
-        }
-
-        // Number of appointments per Day with a positive and negative status --------- graphs
-        $numOfAllApointmentsPerDayPositive = [];
-        $numOfAllApointmentsPerDayNegative = [];
-        $dayToUse = $selectedDay;
-        while($dayToUse > 0) {
-            $allAppointmentsPositive = Appointment::SelectedMonth($selectedYear, $selectedMonth)
-                                    ->meetingDate($isAgentMeetingDateSet)
-                                    ->whereDay('created_at', $dayToUse)
-                                    ->where('comment_status', 'positive')
-                                    ->appointmentWon($isAppointmentWon)
-                                    ->get();
-            $allAppointmentsNegative = Appointment::SelectedMonth($selectedYear, $selectedMonth)
-                                    ->meetingDate($isAgentMeetingDateSet)
-                                    ->whereDay('created_at', $dayToUse)
-                                    ->where('comment_status', 'negative')
-                                    ->appointmentWon($isAppointmentWon)
-                                    ->get();
+                // Num of appointment per status 
+                foreach ($appointmentClosingCommentStatuses as $key => $status) {
+                    if( strtolower($appointment->comment_status) == strtolower($status) ) {
+                        $numOfAppointmentsPerStatus[$status]++;
+                    }
+                }
+            }
 
             $numOfAllApointmentsPerDayPositive[$dayToUse] = count($allAppointmentsPositive);
             $numOfAllApointmentsPerDayNegative[$dayToUse] = count($allAppointmentsNegative);
-
-            $dayToUse = $dayToUse -1;
-        }
-
-        // Number of appoitments won/not won per day --------- graphs
-        $numberOfAppointmentsWonPerDay= [];
-        $numberOfAppointmentsNotWonPerDay = [];
-        $dayToUse = $selectedDay;
-        while($dayToUse > 0) {
-            $numberOfAppointmentsNotWonPerDay[$dayToUse] = 0;
-            $numberOfAppointmentsWonPerDay[$dayToUse] = 0;
-
-            $appointments = Appointment::SelectedMonth($selectedYear, $selectedMonth)
-                                ->meetingDate($isAgentMeetingDateSet)
-                                ->whereDay('created_at', $dayToUse)
-                                ->appointmentWon($isAppointmentWon)
-                                ->get();
-
-            foreach ($appointments as $key => $appointment) {
-                // won or not won
-                if($appointment->graduation_abschluss == null) {
-                    $numberOfAppointmentsNotWonPerDay[$dayToUse]++;
-                } else {
-                    $numberOfAppointmentsWonPerDay[$dayToUse]++;
-                };
-            };
-
+            
             $dayToUse = $dayToUse - 1;
-        };
+        }
 
         // Returning the result
         return response()->json([
