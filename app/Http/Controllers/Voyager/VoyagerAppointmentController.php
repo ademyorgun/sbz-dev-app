@@ -301,7 +301,7 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
                                 return $data->where('telephone_number', '=', $phoneNumber);
                             })
                             ->when($userID, function ($data, $userID) {
-                                return $data->where('call_agent_id', '=', $userID);
+                                return $data->where('sales_agent_id', '=', $userID);
                             })
                             ->when($canton, function ($data, $canton) {
                                 return $data->where('canton_city', '=', $canton);
@@ -330,7 +330,7 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
                                 return $data->where('telephone_number', '=', $phoneNumber);
                             })
                             ->when($userID, function ($data, $userID) {
-                                return $data->where('call_agent_id', '=', $userID);
+                                return $data->where('sales_agent_id', '=', $userID);
                             })
                             ->when($canton, function ($data, $canton) {
                                 return $data->where('canton_city', '=', $canton);

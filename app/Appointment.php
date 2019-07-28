@@ -32,7 +32,9 @@ class Appointment extends Model
      * 
      */
     public function setMeetingDateAttribute($value) {
-        $this->attributes['meeting_date'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+        if(isset($value)) {
+            $this->attributes['meeting_date'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+        }
     }
 
     /**
@@ -121,7 +123,7 @@ class Appointment extends Model
     public function scopeSalesAgentAppointments($query) {
         if(strtolower(auth()->user()->role->name) == 'sales_agent' ) {
             return $query
-                ->where('call_agent_id', auth()->user()->id);
+                ->where('sales_agent_id', auth()->user()->id);
         } else {
             return $query;
         }

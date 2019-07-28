@@ -29,18 +29,20 @@
         @if ($edit)
             {{-- TO DUPLICATE THE CURRENT APPOINTMENT --}}
             <div class="header-actions">
-                <form 
-                    action="{{ route('voyager.appointment.duplicate', ['id' => $dataTypeContent->getKey()]) }}"
-                    method="POST"    
-                    style="display: inline-block"
-                >
-                    <!-- CSRF TOKEN -->
-                    {{ csrf_field() }}
-                    {{ method_field("POST") }}
-                    <button type="submit" class="btn btn-primary">
-                        <i class="voyager-list"></i> <span>Duplicate appointment</span>
-                    </button>
-                </form>
+                @if ((strtolower(auth()->user()->role->name) == 'superadmin') || (strtolower(auth()->user()->role->name) == 'call_center_manager'))
+                    <form 
+                        action="{{ route('voyager.appointment.duplicate', ['id' => $dataTypeContent->getKey()]) }}"
+                        method="POST"    
+                        style="display: inline-block"
+                    >
+                        <!-- CSRF TOKEN -->
+                        {{ csrf_field() }}
+                        {{ method_field("POST") }}
+                        <button type="submit" class="btn btn-primary">
+                            <i class="voyager-list"></i> <span>Duplicate appointment</span>
+                        </button>
+                    </form>
+                @endif
 
                 <div style="display: inline-block">
                     <appointments-geolocation-btn 
@@ -175,21 +177,6 @@
                 </div>
             </div>
 
-            <!-- call details panel -->
-            <div class="panel panel-primary panel-bordered">
-                <div class="panel-heading">
-                    <h3 class="panel-title panel-icon"><i class="voyager-paper-plane"></i>Visit Details</h3>
-                    <div class="panel-actions">
-                        <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
-                    </div>
-                </div>
-                <div class="panel-body mt-1">
-                    @foreach ($visit_details_fields as $row)
-                        @include('vendor.voyager.appointments.form-component')
-                    @endforeach
-                </div>
-            </div>
-
             <!-- Sales details panel -->
             <div class="panel panel-primary panel-bordered">
                 <div class="panel-heading">
@@ -200,6 +187,21 @@
                 </div>
                 <div class="panel-body mt-1">
                     @foreach ($sales_details_fields as $row)
+                        @include('vendor.voyager.appointments.form-component')
+                    @endforeach
+                </div>
+            </div>
+
+            <!-- call details panel -->
+            <div class="panel panel-primary panel-bordered">
+                <div class="panel-heading">
+                    <h3 class="panel-title panel-icon"><i class="voyager-paper-plane"></i>Visit Details</h3>
+                    <div class="panel-actions">
+                        <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
+                    </div>
+                </div>
+                <div class="panel-body mt-1">
+                    @foreach ($visit_details_fields as $row)
                         @include('vendor.voyager.appointments.form-component')
                     @endforeach
                 </div>

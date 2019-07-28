@@ -73,10 +73,10 @@
                         <reports-bar-chart :data-to-load="numOfAllApointmentsPerDayPositive" background-color="#70D6FF" label="Appointments with Positive Status"></reports-bar-chart>
                         <reports-bar-chart :data-to-load="numOfAllApointmentsPerDayNegative" background-color="#ED254E" label="Appointments with Negative Status"></reports-bar-chart>
                     </div>
-                    <div class="row row-flex">
+                    {{-- <div class="row row-flex">
                         <reports-bar-chart :data-to-load="numberOfAppointmentsWonPerDay" background-color="#00CECB" label="Appointments Won"></reports-bar-chart>
                         <reports-bar-chart :data-to-load="numberOfAppointmentsNotWonPerDay" background-color="#ED254E" label="Appointments not Won"></reports-bar-chart>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

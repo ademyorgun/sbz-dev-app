@@ -28,7 +28,7 @@ class AppointmentAssignementController extends Controller
         $appointments = Appointment::whereIn('id', $ids)->get();
 
         foreach ($appointments as $key => $appointment) {
-            $appointment->call_agent_id = $selected_agent_id;
+            $appointment->sales_agent_id = $selected_agent_id;
 
             $appointment->save();
         }
