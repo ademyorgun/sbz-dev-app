@@ -96,7 +96,7 @@
 $(document).ready(function () {
   var date = new Date();
   $(".datepicker--date-only").datetimepicker({
-    format: "DD/MM/YYYY" // format: "YYYY-MM-DD"
+    format: "DD-MM-YYYY" // format: "YYYY-MM-DD"
 
   });
   $("#call-date").children(".form-control").attr("readonly", "readonly").val( // date
@@ -107,7 +107,7 @@ $(document).ready(function () {
   //     (date.getMonth() + 1).toString().padStart(2, 0) +
   //     "-" +
   //     date.getFullYear().toString()
-  date.getDate().toString().padStart(2, 0) + "/" + (date.getMonth() + 1).toString().padStart(2, 0) + "/" + date.getFullYear().toString());
+  date.getDate().toString().padStart(2, 0) + "-" + (date.getMonth() + 1).toString().padStart(2, 0) + "-" + date.getFullYear().toString());
   $(".datepicker--time-only").datetimepicker({
     format: "HH:mm"
   }); // disable chaging the value by mouse scroll

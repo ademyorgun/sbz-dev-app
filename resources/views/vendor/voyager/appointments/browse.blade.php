@@ -43,7 +43,97 @@
 @section('content')
 {{-- call agent shouldn't see any appointments --}}
 @if (strtolower(auth()->user()->role->name) == 'sales_agent' )
-    @include('vendor.voyager.inc.browse_sales_agent')
+    @php
+    $appointmentsGroupFeedbackPending = [];
+    $appointmentsGroupOpen = [];
+    $appointmentsGroupClosed = [];
+
+    foreach ($dataTypeContent as $key => $appointment) { 
+        $now = now()->toDateString();
+        if(isset($appointment->meeting_date)) {
+            $meeting_date = $appointment->meeting_date->toDateString();
+            // group feedback pending
+            if(!isset($appointment->comment_status) && ( $meeting_date < $now )) {
+                array_push($appointmentsGroupFeedbackPending, $appointment);
+            }
+            // group appointment open 
+            elseif(!isset($appointment->comment_status) && ( $meeting_date >= $now )) { 
+                array_push($appointmentsGroupOpen, $appointment);
+            }
+        // group closed appointments
+        } elseif(isset($appointment->comment_status)) {
+            array_push($appointmentsGroupClosed, $appointment);
+        }
+    }
+@endphp
+
+<div class="page-content browse container-fluid" id="app">    
+    {{-- comments modal --}}
+    @include('voyager::alerts')
+    <div class="row" >
+        <div class="col-md-12">
+            <div class="panel panel-primary panelbordered">
+                <div class="panel-heading">
+                    {{-- appointments filter --}}
+                    <h3 class="panel-title panel-icon"><i class="voyager-search"></i>Suche nach</h3>
+                    <div class="panel-actions">
+                        <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
+                    </div>
+                </div>
+                <div class="panel-body mt-2">
+                    <appointment-filter @filter="getResults">
+                        @foreach ($dataType->addRows as $row)
+                            @if ($row->field == 'wanted_expert')
+                                <template v-slot:experts>
+                                    @foreach ($row->details->options as $key => $option)
+                                        <option value="{{$key}}">{{ $option }}</option> 
+                                    @endforeach
+                                </template>
+                            @elseif($row->field == 'canton_city')
+                                <template v-slot:cities>
+                                    @foreach ($row->details->options as $key => $option)
+                                        <option value="{{$key}}">{{ $option }}</option> 
+                                    @endforeach
+                                </template>
+                            @elseif($row->field == 'appointment_belongsto_user_relationship_1')
+                                <template v-slot:users>
+                                    @foreach($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->user_name }}</option>
+                                    @endforeach
+                                </template>
+                            @endif
+                        @endforeach
+                    </appointment-filter>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- Feedback open group --}}
+    @include('vendor.voyager.inc.browse_table_agent', 
+    [
+        'tableName' => 'Feedback offen', 
+        'eltId' => 'feedbackOpen',
+        'disableActions' => false,
+        'dataTypeContent' => $appointmentsGroupFeedbackPending
+    ])
+    {{-- Open appointments group --}}
+    @include('vendor.voyager.inc.browse_table_agent', 
+    [
+        'tableName' => 'Offene Termine', 
+        'eltId' => 'openAppointments',
+        'disableActions' => false,
+        'dataTypeContent' => $appointmentsGroupOpen
+    ])
+    {{-- Closed appointments group --}}
+    @include('vendor.voyager.inc.browse_table_agent', 
+    [
+        'tableName' => 'Abgeschlosse Termine', 
+        'eltId' => 'closedAppointments',
+        'disableActions' => true,
+        'dataTypeContent' => $appointmentsGroupClosed
+    ])
+</div>
+
 @elseif (strtolower(auth()->user()->role->name) != 'call_agent')
     <div class="page-content browse container-fluid" id="app">    
         {{-- comments modal --}}

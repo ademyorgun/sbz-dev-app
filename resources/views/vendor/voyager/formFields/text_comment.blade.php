@@ -22,9 +22,16 @@
         @endforeach
     @endif
 
+    // we want the users with role
+    // sales agents to be able to edit this 
+    // field for one time only
     @if(isset($edit))
         @if($edit)
-            {{ 'readonly' }}
+            @if(strtolower(auth()->user()->role->name) == 'sales_agent' && !isset($dataTypeContent->{$row->field}))
+                // editable
+            @else
+                {{ 'readonly' }}
+            @endif
         @endif
     @endif
        >

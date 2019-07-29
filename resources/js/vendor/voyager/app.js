@@ -2,7 +2,7 @@ $(document).ready(function() {
     var date = new Date();
 
     $(".datepicker--date-only").datetimepicker({
-        format: "DD/MM/YYYY"
+        format: "DD-MM-YYYY"
         // format: "YYYY-MM-DD"
     });
 
@@ -22,9 +22,9 @@ $(document).ready(function() {
                 .getDate()
                 .toString()
                 .padStart(2, 0) +
-                "/" +
+                "-" +
                 (date.getMonth() + 1).toString().padStart(2, 0) +
-                "/" +
+                "-" +
                 date.getFullYear().toString()
         );
 

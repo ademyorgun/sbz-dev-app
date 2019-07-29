@@ -86,6 +86,12 @@
                                     @include('voyager::formfields.relationship')
                                 </div>
                             @endcan
+
+                            <div class="form-group">
+                                <label for="">{{ __('voyager::additions.only_closing_feedback') }}</label>
+                                <input type="checkbox" class="custom-control-input" name="only_closing_feedback" {{ $dataTypeContent->only_closing_feedback ? 'checked="checked"' : '' }}>
+                            </div>
+
                             @php
                             if (isset($dataTypeContent->locale)) {
                                 $selected_locale = $dataTypeContent->locale;

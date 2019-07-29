@@ -33,7 +33,7 @@ class Appointment extends Model
      */
     public function setMeetingDateAttribute($value) {
         if(isset($value)) {
-            $this->attributes['meeting_date'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+            $this->attributes['meeting_date'] = \Carbon\Carbon::createFromFormat('d-m-Y', $value)->format('Y-m-d');
         }
     }
 
@@ -44,7 +44,7 @@ class Appointment extends Model
      * 
      */
     public function setCallDateAttribute($value) {
-        $this->attributes['call_date'] = \Carbon\Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+        $this->attributes['call_date'] = \Carbon\Carbon::createFromFormat('d-m-Y', $value)->format('Y-m-d');
     }
      /**
      * Get the comments for the appointment.
