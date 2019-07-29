@@ -3,7 +3,8 @@ require("./../bootstrap");
 
 import ReportsFilter from '../components/reports/ReportsFilter.vue';
 import ReportsBarChart from '../components/reports/ReportsBarChart.vue';
-import ReportsUsersTable from '../components/reports/ReportsUsersTable.vue';
+import ReportsSalesAgentsTable from '../components/reports/ReportsSalesAgentsTable.vue';
+import ReportsCallAgentsTable from '../components/reports/ReportsCallAgentsTable.vue';
 import ReportsPieChart from '../components/reports/ReportsPieChart.vue';
 import ReportsLineChart from '../components/reports/ReportsLineChart.vue';
 import ReportsTotalCard from '../components/reports/ReportsTotalCard.vue';
@@ -16,15 +17,17 @@ const app = new Vue({
     components: {
         ReportsFilter,
         ReportsBarChart,
-        ReportsUsersTable,
+        ReportsSalesAgentsTable,
         ReportsPieChart,
         ReportsLineChart,
-        ReportsTotalCard
+        ReportsTotalCard,
+        ReportsCallAgentsTable
     },
 
     data: {
         numOfAllApointments: 0,
-        numOfAppointmentsPerUser: {},
+        numOfAppointmentsPerSalesAgent: [],
+        numOfAppointmentsPerCallAgent: [],
         numOfAppointmentsPerDay: {},
         numOfAppointmentsPerStatus: {},
         numOfAllApointmentsPerDayPositive: {},
@@ -37,14 +40,17 @@ const app = new Vue({
         fetchData(data) {
             axios.post('/reports', data)
                 .then((response) => {
-                    this.numOfAllApointments = response.data.numOfAllApointments;
-                    this.numOfAppointmentsPerUser = response.data.numOfAppointmentsPerUser;
-                    this.numOfAppointmentsPerDay = response.data.numOfAppointmentsPerDay;
-                    this.numOfAppointmentsPerStatus = response.data.numOfAppointmentsPerStatus;
-                    this.numOfAllApointmentsPerDayPositive = response.data.numOfAllApointmentsPerDayPositive;
-                    this.numOfAllApointmentsPerDayNegative = response.data.numOfAllApointmentsPerDayNegative;
-                    this.numberOfAppointmentsWonPerDay = response.data.numberOfAppointmentsWonPerDay;
-                    this.numberOfAppointmentsNotWonPerDay = response.data.numberOfAppointmentsNotWonPerDay;
+                    const res = response.data;
+                    this.numOfAllApointments = res.numOfAllApointments;
+                    this.numOfAppointmentsPerDay = res.numOfAppointmentsPerDay;
+                    this.numOfAppointmentsPerStatus = res.numOfAppointmentsPerStatus;
+                    this.numOfAllApointmentsPerDayPositive = res.numOfAllApointmentsPerDayPositive;
+                    this.numOfAllApointmentsPerDayNegative = res.numOfAllApointmentsPerDayNegative;
+                    this.numberOfAppointmentsWonPerDay = res.numberOfAppointmentsWonPerDay;
+                    this.numberOfAppointmentsNotWonPerDay = res.numberOfAppointmentsNotWonPerDay;
+                    
+                    this.numOfAppointmentsPerSalesAgent = _.sortBy(res.numOfAppointmentsPerSalesAgent, 'total').reverse();
+                    this.numOfAppointmentsPerCallAgent = _.sortBy(res.numOfAppointmentsPerCallAgent, 'total').reverse();
                 })
         }
     }

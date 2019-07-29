@@ -5,14 +5,12 @@
             <tr>
                 <th scope="col">Bentuzer</th>
                 <th scope="col">Appointments Per agent</th>
-                <th scope="col">Appointments Won per agent</th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(value, name, index) in usersData" :key="index">
-                <th scope="row">{{ name }}</th>
+            <tr v-for="(value, index) in callAgentsData" :key="index">
+                <th scope="row">{{ value.name }}</th>
                 <th>{{ value.total }}</th>
-                <td>{{ value.won }}</td>
             </tr>
         </tbody>
     </table>
@@ -21,10 +19,10 @@
 
 <script>
 export default {
-    name: 'ReportsUsersTable',
+    name: 'ReportsSalesAgentsTable',
     props: {
-        usersData: {
-            type: Object,
+        callAgentsData: {
+            type: Array,
             required: true
         }
     }
@@ -34,5 +32,4 @@ export default {
 <style scoped lang="sass">
 .table-responsive 
     margin-top: 2em
-
 </style>

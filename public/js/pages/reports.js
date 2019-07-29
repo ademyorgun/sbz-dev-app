@@ -1830,6 +1830,46 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'ReportsSalesAgentsTable',
+  props: {
+    callAgentsData: {
+      type: Array,
+      required: true
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsFilter.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsFilter.vue?vue&type=script&lang=js& ***!
@@ -2102,6 +2142,48 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'ReportsSalesAgentsTable',
+  props: {
+    salesAgentsData: {
+      type: Array,
+      required: true
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsTotalCard.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsTotalCard.vue?vue&type=script&lang=js& ***!
@@ -2123,48 +2205,6 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     ReportsTotal: {
       type: Number
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsUsersTable.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsUsersTable.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'ReportsUsersTable',
-  props: {
-    usersData: {
-      type: Object,
-      required: true
     }
   }
 });
@@ -18221,6 +18261,25 @@ exports.push([module.i, ".card[data-v-c14d2f02] {\n  max-width: 45%;\n  width: 5
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=style&index=0&id=da3f0944&scoped=true&lang=sass&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sass-loader/lib/loader.js??ref--9-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=style&index=0&id=da3f0944&scoped=true&lang=sass& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".table-responsive[data-v-da3f0944] {\n  margin-top: 2em;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsFilter.vue?vue&type=style&index=0&lang=sass&":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sass-loader/lib/loader.js??ref--9-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsFilter.vue?vue&type=style&index=0&lang=sass& ***!
@@ -18278,6 +18337,25 @@ exports.push([module.i, ".card[data-v-4a7b4b26] {\n  max-width: 45%;\n  width: 5
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=style&index=0&id=31d1d628&scoped=true&lang=sass&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sass-loader/lib/loader.js??ref--9-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=style&index=0&id=31d1d628&scoped=true&lang=sass& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".table-responsive[data-v-31d1d628] {\n  margin-top: 2em;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsTotalCard.vue?vue&type=style&index=0&id=300e2ea0&scoped=true&lang=sass&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sass-loader/lib/loader.js??ref--9-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsTotalCard.vue?vue&type=style&index=0&id=300e2ea0&scoped=true&lang=sass& ***!
@@ -18291,25 +18369,6 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 // module
 exports.push([module.i, ".card[data-v-300e2ea0] {\n  padding: 2em;\n  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);\n  margin-top: 1.2em;\n}", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsUsersTable.vue?vue&type=style&index=0&id=6b8c1f1a&scoped=true&lang=sass&":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sass-loader/lib/loader.js??ref--9-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsUsersTable.vue?vue&type=style&index=0&id=6b8c1f1a&scoped=true&lang=sass& ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".table-responsive[data-v-6b8c1f1a] {\n  margin-top: 2em;\n}", ""]);
 
 // exports
 
@@ -53569,6 +53628,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=style&index=0&id=da3f0944&scoped=true&lang=sass&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sass-loader/lib/loader.js??ref--9-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=style&index=0&id=da3f0944&scoped=true&lang=sass& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--9-2!../../../../node_modules/sass-loader/lib/loader.js??ref--9-3!../../../../node_modules/vue-loader/lib??vue-loader-options!./ReportsCallAgentsTable.vue?vue&type=style&index=0&id=da3f0944&scoped=true&lang=sass& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=style&index=0&id=da3f0944&scoped=true&lang=sass&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsFilter.vue?vue&type=style&index=0&lang=sass&":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sass-loader/lib/loader.js??ref--9-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsFilter.vue?vue&type=style&index=0&lang=sass& ***!
@@ -53659,15 +53748,15 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsTotalCard.vue?vue&type=style&index=0&id=300e2ea0&scoped=true&lang=sass&":
-/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sass-loader/lib/loader.js??ref--9-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsTotalCard.vue?vue&type=style&index=0&id=300e2ea0&scoped=true&lang=sass& ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=style&index=0&id=31d1d628&scoped=true&lang=sass&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sass-loader/lib/loader.js??ref--9-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=style&index=0&id=31d1d628&scoped=true&lang=sass& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--9-2!../../../../node_modules/sass-loader/lib/loader.js??ref--9-3!../../../../node_modules/vue-loader/lib??vue-loader-options!./ReportsTotalCard.vue?vue&type=style&index=0&id=300e2ea0&scoped=true&lang=sass& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsTotalCard.vue?vue&type=style&index=0&id=300e2ea0&scoped=true&lang=sass&");
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--9-2!../../../../node_modules/sass-loader/lib/loader.js??ref--9-3!../../../../node_modules/vue-loader/lib??vue-loader-options!./ReportsSalesAgentsTable.vue?vue&type=style&index=0&id=31d1d628&scoped=true&lang=sass& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=style&index=0&id=31d1d628&scoped=true&lang=sass&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -53689,15 +53778,15 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsUsersTable.vue?vue&type=style&index=0&id=6b8c1f1a&scoped=true&lang=sass&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sass-loader/lib/loader.js??ref--9-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsUsersTable.vue?vue&type=style&index=0&id=6b8c1f1a&scoped=true&lang=sass& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsTotalCard.vue?vue&type=style&index=0&id=300e2ea0&scoped=true&lang=sass&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sass-loader/lib/loader.js??ref--9-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsTotalCard.vue?vue&type=style&index=0&id=300e2ea0&scoped=true&lang=sass& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--9-2!../../../../node_modules/sass-loader/lib/loader.js??ref--9-3!../../../../node_modules/vue-loader/lib??vue-loader-options!./ReportsUsersTable.vue?vue&type=style&index=0&id=6b8c1f1a&scoped=true&lang=sass& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsUsersTable.vue?vue&type=style&index=0&id=6b8c1f1a&scoped=true&lang=sass&");
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--9-2!../../../../node_modules/sass-loader/lib/loader.js??ref--9-3!../../../../node_modules/vue-loader/lib??vue-loader-options!./ReportsTotalCard.vue?vue&type=style&index=0&id=300e2ea0&scoped=true&lang=sass& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsTotalCard.vue?vue&type=style&index=0&id=300e2ea0&scoped=true&lang=sass&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -55452,6 +55541,61 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=template&id=da3f0944&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=template&id=da3f0944&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "table-responsive" }, [
+    _c("table", { staticClass: "table table-striped table-bordered" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.callAgentsData, function(value, index) {
+          return _c("tr", { key: index }, [
+            _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(value.name))]),
+            _vm._v(" "),
+            _c("th", [_vm._v(_vm._s(value.total))])
+          ])
+        }),
+        0
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-light" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Bentuzer")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v("Appointments Per agent")
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsFilter.vue?vue&type=template&id=083abcec&":
 /*!************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsFilter.vue?vue&type=template&id=083abcec& ***!
@@ -55728,38 +55872,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsTotalCard.vue?vue&type=template&id=300e2ea0&scoped=true&":
-/*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsTotalCard.vue?vue&type=template&id=300e2ea0&scoped=true& ***!
-  \***************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card" }, [
-    _c("h1", [_vm._v(_vm._s(_vm.ReportsTotal))]),
-    _vm._v(" "),
-    _c("p", [_vm._v("Total of appointments for this month")])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsUsersTable.vue?vue&type=template&id=6b8c1f1a&scoped=true&":
-/*!****************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsUsersTable.vue?vue&type=template&id=6b8c1f1a&scoped=true& ***!
-  \****************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=template&id=31d1d628&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=template&id=31d1d628&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -55777,9 +55893,9 @@ var render = function() {
       _vm._v(" "),
       _c(
         "tbody",
-        _vm._l(_vm.usersData, function(value, name, index) {
+        _vm._l(_vm.salesAgentsData, function(value, index) {
           return _c("tr", { key: index }, [
-            _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(name))]),
+            _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(value.name))]),
             _vm._v(" "),
             _c("th", [_vm._v(_vm._s(value.total))]),
             _vm._v(" "),
@@ -55811,6 +55927,34 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsTotalCard.vue?vue&type=template&id=300e2ea0&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/reports/ReportsTotalCard.vue?vue&type=template&id=300e2ea0&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card" }, [
+    _c("h1", [_vm._v(_vm._s(_vm.ReportsTotal))]),
+    _vm._v(" "),
+    _c("p", [_vm._v("Total of appointments for this month")])
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -68235,6 +68379,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/reports/ReportsCallAgentsTable.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/reports/ReportsCallAgentsTable.vue ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ReportsCallAgentsTable_vue_vue_type_template_id_da3f0944_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ReportsCallAgentsTable.vue?vue&type=template&id=da3f0944&scoped=true& */ "./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=template&id=da3f0944&scoped=true&");
+/* harmony import */ var _ReportsCallAgentsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReportsCallAgentsTable.vue?vue&type=script&lang=js& */ "./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ReportsCallAgentsTable_vue_vue_type_style_index_0_id_da3f0944_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ReportsCallAgentsTable.vue?vue&type=style&index=0&id=da3f0944&scoped=true&lang=sass& */ "./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=style&index=0&id=da3f0944&scoped=true&lang=sass&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ReportsCallAgentsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ReportsCallAgentsTable_vue_vue_type_template_id_da3f0944_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ReportsCallAgentsTable_vue_vue_type_template_id_da3f0944_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "da3f0944",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/reports/ReportsCallAgentsTable.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsCallAgentsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ReportsCallAgentsTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsCallAgentsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=style&index=0&id=da3f0944&scoped=true&lang=sass&":
+/*!******************************************************************************************************************************!*\
+  !*** ./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=style&index=0&id=da3f0944&scoped=true&lang=sass& ***!
+  \******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsCallAgentsTable_vue_vue_type_style_index_0_id_da3f0944_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--9-2!../../../../node_modules/sass-loader/lib/loader.js??ref--9-3!../../../../node_modules/vue-loader/lib??vue-loader-options!./ReportsCallAgentsTable.vue?vue&type=style&index=0&id=da3f0944&scoped=true&lang=sass& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=style&index=0&id=da3f0944&scoped=true&lang=sass&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsCallAgentsTable_vue_vue_type_style_index_0_id_da3f0944_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsCallAgentsTable_vue_vue_type_style_index_0_id_da3f0944_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsCallAgentsTable_vue_vue_type_style_index_0_id_da3f0944_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsCallAgentsTable_vue_vue_type_style_index_0_id_da3f0944_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsCallAgentsTable_vue_vue_type_style_index_0_id_da3f0944_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=template&id=da3f0944&scoped=true&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=template&id=da3f0944&scoped=true& ***!
+  \***************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsCallAgentsTable_vue_vue_type_template_id_da3f0944_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ReportsCallAgentsTable.vue?vue&type=template&id=da3f0944&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsCallAgentsTable.vue?vue&type=template&id=da3f0944&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsCallAgentsTable_vue_vue_type_template_id_da3f0944_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsCallAgentsTable_vue_vue_type_template_id_da3f0944_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/reports/ReportsFilter.vue":
 /*!***********************************************************!*\
   !*** ./resources/js/components/reports/ReportsFilter.vue ***!
@@ -68496,6 +68727,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/reports/ReportsSalesAgentsTable.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/reports/ReportsSalesAgentsTable.vue ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ReportsSalesAgentsTable_vue_vue_type_template_id_31d1d628_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ReportsSalesAgentsTable.vue?vue&type=template&id=31d1d628&scoped=true& */ "./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=template&id=31d1d628&scoped=true&");
+/* harmony import */ var _ReportsSalesAgentsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReportsSalesAgentsTable.vue?vue&type=script&lang=js& */ "./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ReportsSalesAgentsTable_vue_vue_type_style_index_0_id_31d1d628_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ReportsSalesAgentsTable.vue?vue&type=style&index=0&id=31d1d628&scoped=true&lang=sass& */ "./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=style&index=0&id=31d1d628&scoped=true&lang=sass&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ReportsSalesAgentsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ReportsSalesAgentsTable_vue_vue_type_template_id_31d1d628_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ReportsSalesAgentsTable_vue_vue_type_template_id_31d1d628_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "31d1d628",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/reports/ReportsSalesAgentsTable.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsSalesAgentsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ReportsSalesAgentsTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsSalesAgentsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=style&index=0&id=31d1d628&scoped=true&lang=sass&":
+/*!*******************************************************************************************************************************!*\
+  !*** ./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=style&index=0&id=31d1d628&scoped=true&lang=sass& ***!
+  \*******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsSalesAgentsTable_vue_vue_type_style_index_0_id_31d1d628_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--9-2!../../../../node_modules/sass-loader/lib/loader.js??ref--9-3!../../../../node_modules/vue-loader/lib??vue-loader-options!./ReportsSalesAgentsTable.vue?vue&type=style&index=0&id=31d1d628&scoped=true&lang=sass& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=style&index=0&id=31d1d628&scoped=true&lang=sass&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsSalesAgentsTable_vue_vue_type_style_index_0_id_31d1d628_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsSalesAgentsTable_vue_vue_type_style_index_0_id_31d1d628_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsSalesAgentsTable_vue_vue_type_style_index_0_id_31d1d628_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsSalesAgentsTable_vue_vue_type_style_index_0_id_31d1d628_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsSalesAgentsTable_vue_vue_type_style_index_0_id_31d1d628_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=template&id=31d1d628&scoped=true&":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=template&id=31d1d628&scoped=true& ***!
+  \****************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsSalesAgentsTable_vue_vue_type_template_id_31d1d628_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ReportsSalesAgentsTable.vue?vue&type=template&id=31d1d628&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsSalesAgentsTable.vue?vue&type=template&id=31d1d628&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsSalesAgentsTable_vue_vue_type_template_id_31d1d628_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsSalesAgentsTable_vue_vue_type_template_id_31d1d628_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/reports/ReportsTotalCard.vue":
 /*!**************************************************************!*\
   !*** ./resources/js/components/reports/ReportsTotalCard.vue ***!
@@ -68583,93 +68901,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/reports/ReportsUsersTable.vue":
-/*!***************************************************************!*\
-  !*** ./resources/js/components/reports/ReportsUsersTable.vue ***!
-  \***************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ReportsUsersTable_vue_vue_type_template_id_6b8c1f1a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ReportsUsersTable.vue?vue&type=template&id=6b8c1f1a&scoped=true& */ "./resources/js/components/reports/ReportsUsersTable.vue?vue&type=template&id=6b8c1f1a&scoped=true&");
-/* harmony import */ var _ReportsUsersTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReportsUsersTable.vue?vue&type=script&lang=js& */ "./resources/js/components/reports/ReportsUsersTable.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _ReportsUsersTable_vue_vue_type_style_index_0_id_6b8c1f1a_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ReportsUsersTable.vue?vue&type=style&index=0&id=6b8c1f1a&scoped=true&lang=sass& */ "./resources/js/components/reports/ReportsUsersTable.vue?vue&type=style&index=0&id=6b8c1f1a&scoped=true&lang=sass&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _ReportsUsersTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ReportsUsersTable_vue_vue_type_template_id_6b8c1f1a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ReportsUsersTable_vue_vue_type_template_id_6b8c1f1a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  "6b8c1f1a",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/reports/ReportsUsersTable.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/reports/ReportsUsersTable.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************!*\
-  !*** ./resources/js/components/reports/ReportsUsersTable.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsUsersTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ReportsUsersTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsUsersTable.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsUsersTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/reports/ReportsUsersTable.vue?vue&type=style&index=0&id=6b8c1f1a&scoped=true&lang=sass&":
-/*!*************************************************************************************************************************!*\
-  !*** ./resources/js/components/reports/ReportsUsersTable.vue?vue&type=style&index=0&id=6b8c1f1a&scoped=true&lang=sass& ***!
-  \*************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsUsersTable_vue_vue_type_style_index_0_id_6b8c1f1a_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--9-2!../../../../node_modules/sass-loader/lib/loader.js??ref--9-3!../../../../node_modules/vue-loader/lib??vue-loader-options!./ReportsUsersTable.vue?vue&type=style&index=0&id=6b8c1f1a&scoped=true&lang=sass& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsUsersTable.vue?vue&type=style&index=0&id=6b8c1f1a&scoped=true&lang=sass&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsUsersTable_vue_vue_type_style_index_0_id_6b8c1f1a_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsUsersTable_vue_vue_type_style_index_0_id_6b8c1f1a_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsUsersTable_vue_vue_type_style_index_0_id_6b8c1f1a_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsUsersTable_vue_vue_type_style_index_0_id_6b8c1f1a_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_lib_loader_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsUsersTable_vue_vue_type_style_index_0_id_6b8c1f1a_scoped_true_lang_sass___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/js/components/reports/ReportsUsersTable.vue?vue&type=template&id=6b8c1f1a&scoped=true&":
-/*!**********************************************************************************************************!*\
-  !*** ./resources/js/components/reports/ReportsUsersTable.vue?vue&type=template&id=6b8c1f1a&scoped=true& ***!
-  \**********************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsUsersTable_vue_vue_type_template_id_6b8c1f1a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ReportsUsersTable.vue?vue&type=template&id=6b8c1f1a&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/reports/ReportsUsersTable.vue?vue&type=template&id=6b8c1f1a&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsUsersTable_vue_vue_type_template_id_6b8c1f1a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReportsUsersTable_vue_vue_type_template_id_6b8c1f1a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
 /***/ "./resources/js/pages/reports.js":
 /*!***************************************!*\
   !*** ./resources/js/pages/reports.js ***!
@@ -68683,13 +68914,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_reports_ReportsFilter_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/reports/ReportsFilter.vue */ "./resources/js/components/reports/ReportsFilter.vue");
 /* harmony import */ var _components_reports_ReportsBarChart_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/reports/ReportsBarChart.vue */ "./resources/js/components/reports/ReportsBarChart.vue");
-/* harmony import */ var _components_reports_ReportsUsersTable_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/reports/ReportsUsersTable.vue */ "./resources/js/components/reports/ReportsUsersTable.vue");
-/* harmony import */ var _components_reports_ReportsPieChart_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/reports/ReportsPieChart.vue */ "./resources/js/components/reports/ReportsPieChart.vue");
-/* harmony import */ var _components_reports_ReportsLineChart_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/reports/ReportsLineChart.vue */ "./resources/js/components/reports/ReportsLineChart.vue");
-/* harmony import */ var _components_reports_ReportsTotalCard_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/reports/ReportsTotalCard.vue */ "./resources/js/components/reports/ReportsTotalCard.vue");
+/* harmony import */ var _components_reports_ReportsSalesAgentsTable_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/reports/ReportsSalesAgentsTable.vue */ "./resources/js/components/reports/ReportsSalesAgentsTable.vue");
+/* harmony import */ var _components_reports_ReportsCallAgentsTable_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/reports/ReportsCallAgentsTable.vue */ "./resources/js/components/reports/ReportsCallAgentsTable.vue");
+/* harmony import */ var _components_reports_ReportsPieChart_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/reports/ReportsPieChart.vue */ "./resources/js/components/reports/ReportsPieChart.vue");
+/* harmony import */ var _components_reports_ReportsLineChart_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/reports/ReportsLineChart.vue */ "./resources/js/components/reports/ReportsLineChart.vue");
+/* harmony import */ var _components_reports_ReportsTotalCard_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/reports/ReportsTotalCard.vue */ "./resources/js/components/reports/ReportsTotalCard.vue");
 
 
 __webpack_require__(/*! ./../bootstrap */ "./resources/js/bootstrap.js");
+
 
 
 
@@ -68703,14 +68936,16 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   components: {
     ReportsFilter: _components_reports_ReportsFilter_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     ReportsBarChart: _components_reports_ReportsBarChart_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    ReportsUsersTable: _components_reports_ReportsUsersTable_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    ReportsPieChart: _components_reports_ReportsPieChart_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    ReportsLineChart: _components_reports_ReportsLineChart_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-    ReportsTotalCard: _components_reports_ReportsTotalCard_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+    ReportsSalesAgentsTable: _components_reports_ReportsSalesAgentsTable_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    ReportsPieChart: _components_reports_ReportsPieChart_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    ReportsLineChart: _components_reports_ReportsLineChart_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+    ReportsTotalCard: _components_reports_ReportsTotalCard_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    ReportsCallAgentsTable: _components_reports_ReportsCallAgentsTable_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   data: {
     numOfAllApointments: 0,
-    numOfAppointmentsPerUser: {},
+    numOfAppointmentsPerSalesAgent: [],
+    numOfAppointmentsPerCallAgent: [],
     numOfAppointmentsPerDay: {},
     numOfAppointmentsPerStatus: {},
     numOfAllApointmentsPerDayPositive: {},
@@ -68723,14 +68958,16 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
       var _this = this;
 
       axios.post('/reports', data).then(function (response) {
-        _this.numOfAllApointments = response.data.numOfAllApointments;
-        _this.numOfAppointmentsPerUser = response.data.numOfAppointmentsPerUser;
-        _this.numOfAppointmentsPerDay = response.data.numOfAppointmentsPerDay;
-        _this.numOfAppointmentsPerStatus = response.data.numOfAppointmentsPerStatus;
-        _this.numOfAllApointmentsPerDayPositive = response.data.numOfAllApointmentsPerDayPositive;
-        _this.numOfAllApointmentsPerDayNegative = response.data.numOfAllApointmentsPerDayNegative;
-        _this.numberOfAppointmentsWonPerDay = response.data.numberOfAppointmentsWonPerDay;
-        _this.numberOfAppointmentsNotWonPerDay = response.data.numberOfAppointmentsNotWonPerDay;
+        var res = response.data;
+        _this.numOfAllApointments = res.numOfAllApointments;
+        _this.numOfAppointmentsPerDay = res.numOfAppointmentsPerDay;
+        _this.numOfAppointmentsPerStatus = res.numOfAppointmentsPerStatus;
+        _this.numOfAllApointmentsPerDayPositive = res.numOfAllApointmentsPerDayPositive;
+        _this.numOfAllApointmentsPerDayNegative = res.numOfAllApointmentsPerDayNegative;
+        _this.numberOfAppointmentsWonPerDay = res.numberOfAppointmentsWonPerDay;
+        _this.numberOfAppointmentsNotWonPerDay = res.numberOfAppointmentsNotWonPerDay;
+        _this.numOfAppointmentsPerSalesAgent = _.sortBy(res.numOfAppointmentsPerSalesAgent, 'total').reverse();
+        _this.numOfAppointmentsPerCallAgent = _.sortBy(res.numOfAppointmentsPerCallAgent, 'total').reverse();
       });
     }
   }

@@ -21,23 +21,40 @@
                 @endif
 
             @else
-                
-                @php
+                @if ($add)
+                    @php
                     $currentUserRole = auth()->user()->role->name;
 
                     $model = app($options->model);
                     $query = $model::where($options->key, $dataTypeContent->{$options->column})->get();
-                @endphp
+                    @endphp
 
-                <input type="hidden" name="{{ $options->column }}" value="{{ auth()->user()->id }}">
-                    <select
-                    class="form-control " name="{{ $options->column }}"
-                    data-get-items-field="{{$row->field}}"
-                    disabled
-                >
-                    <option value="{{ auth()->user()->id }}">{{ auth()->user()->user_name }}</option>
+                    <input type="hidden" name="{{ $options->column }}" value="{{ auth()->user()->id }}">
+                        <select
+                        class="form-control " name="{{ $options->column }}"
+                        data-get-items-field="{{$row->field}}"
+                        disabled
+                    >
+                        <option value="{{ auth()->user()->id }}">{{ auth()->user()->user_name }}</option>
 
-                </select>
+                    </select> 
+                @else 
+                    @if (!is_null($dataTypeContent->{$options->column}))
+                        @php
+                            $model = app($options->model);
+                            $query = $model::where($options->key, $dataTypeContent->{$options->column})->first();
+                        @endphp
+                        <input type="hidden" name="{{ $options->column }}" value="{{ $dataTypeContent->{$options->column} }}">
+                            <select
+                            class="form-control " name="{{ $options->column }}"
+                            data-get-items-field="{{$row->field}}"
+                            disabled
+                        >
+                            <option value="{{ $dataTypeContent->{$options->column} }}">{{ $query->user_name }}</option>
+                        </select> 
+                    @endif
+                @endif
+                
                 
             @endif
 

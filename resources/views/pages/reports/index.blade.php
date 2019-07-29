@@ -44,13 +44,28 @@
         <div class="col-md-12">
             <div class="panel panel-primary panelbordered">
                 <div class="panel-heading">
-                    <h3 class="panel-title panel-icon"><i class="voyager-archive"></i>{{ __('voyager::generic.appointments_per_user') }}</h3>
+                    <h3 class="panel-title panel-icon"><i class="voyager-archive"></i>{{ __('voyager::additions.appointments_per_sales_agent') }}</h3>
                     <div class="panel-actions">
                         <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
                     </div>
                 </div>
                 <div class="panel-body mt-2">
-                    <reports-users-table :users-data="numOfAppointmentsPerUser"></reports-users-table>
+                    <reports-sales-agents-table :sales-agents-data="numOfAppointmentsPerSalesAgent"></reports-sales-agents-table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary panelbordered">
+                <div class="panel-heading">
+                    <h3 class="panel-title panel-icon"><i class="voyager-archive"></i>{{ __('voyager::additions.appointments_per_call_agent') }}</h3>
+                    <div class="panel-actions">
+                        <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
+                    </div>
+                </div>
+                <div class="panel-body mt-2">
+                    <reports-call-agents-table :call-agents-data="numOfAppointmentsPerCallAgent"></reports-call-agents-table>
                 </div>
             </div>
         </div>

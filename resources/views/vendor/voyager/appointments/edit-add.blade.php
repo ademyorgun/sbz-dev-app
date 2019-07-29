@@ -143,6 +143,8 @@
 
                     } elseif($row->field == 'appointment_belongsto_user_relationship_1'){
                         array_push($system_details_fields, $row);
+                    } else {
+                        array_push($test, $row);
                     }
                 @endphp
             @endforeach

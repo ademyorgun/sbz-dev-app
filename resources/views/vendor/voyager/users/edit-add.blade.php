@@ -14,6 +14,7 @@
 @stop
 
 @section('content')
+
     <div class="page-content container-fluid">
         
         <form class="form-edit-add" role="form"
@@ -74,6 +75,7 @@
                                 <input type="password" class="form-control" id="password" name="password" value="" autocomplete="new-password">
                             </div>
 
+
                             @can('editRoles', $dataTypeContent)
                                 <div class="form-group">
                                     <label for="default_role">{{ __('voyager::profile.role_default') }}</label>
@@ -88,8 +90,23 @@
                             @endcan
 
                             <div class="form-group">
-                                <label for="">{{ __('voyager::additions.only_closing_feedback') }}</label>
+                                <label for="only_closing_feedback">{{ __('voyager::additions.only_closing_feedback') }}</label>
                                 <input type="checkbox" class="custom-control-input" name="only_closing_feedback" {{ $dataTypeContent->only_closing_feedback ? 'checked="checked"' : '' }}>
+                            </div>
+
+                            @php
+                                $userRole = strtolower(auth()->user()->role->name);
+                            @endphp
+
+                            <div class="form-group">
+                            <label for="">Call center</label>
+                                @php
+                                    $dataTypeRows = $dataType->{(isset($dataTypeContent->id) ? 'editRows' : 'addRows' )};
+
+                                    $row     = $dataTypeRows->where('field', 'user_belongsto_call_center_relationship')->first();
+                                    $options = $row->details;
+                                @endphp
+                                @include('voyager::formfields.relationship')
                             </div>
 
                             @php
