@@ -178,7 +178,7 @@
             </div>
 
             <!-- Sales details panel -->
-            <div class="panel panel-primary panel-bordered">
+            <div class="panel panel-primary panel-bordered" id="salesSection">
                 <div class="panel-heading">
                     <h3 class="panel-title panel-icon"><i class="voyager-documentation"></i>Sales Details</h3>
                     <div class="panel-actions">
@@ -335,6 +335,9 @@
         }
 
         $('document').ready(function () {
+            
+            
+
             $('.toggleswitch').bootstrapToggle();
 
             //Init datepicker for date fields if data-datepicker attribute defined
@@ -379,5 +382,40 @@
         });
     </script>
 
+    @if (strtolower(auth()->user()->role->name) == 'sales_agent')
+        <script>
+            // to make the labels clickable on teh 
+            // radio button, one click trggers two,
+            // we only want to fire our event son 
+            // click the second 
+            var count = 1;
+            // watch radio button for click
+            // when clicked if checked
+            // show sales section
+            // and if positiv is checked
+            $('document').ready(function() {
+                // this section and field has to be hidden
+                $('#comment_feedback_input').hide();
+                $('#salesSection').hide();
+
+                $('#comment_status_radios').click(function(e) {
+                    if(count == 2) {
+                        if ($("input[name='comment_status']:checked").val()) {
+                            count = 1;
+                            $('#comment_feedback_input').show();
+                            
+                            if($("input[name='comment_status']:checked").val().toLowerCase() == 'positive') {
+                                $('#salesSection').show();
+                            } else {
+                                $('#salesSection').hide();
+                            }
+                        } 
+                    } else {
+                        count++;
+                    }
+                });
+            });
+        </script>
+    @endif
     
 @stop

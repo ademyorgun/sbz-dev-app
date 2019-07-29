@@ -38,8 +38,8 @@ class ReportsController extends Controller
          * Apply DRY principle
          */
         // 
-        // $appointmentClosingCommentStatuses = ['open', 'positive', 'negative', 'not_home', 'processing', 'multi_year_contract', 'no appointment accepted];
-        $appointmentClosingCommentStatuses = ['offen', 'positiv', 'negativ', 'Nicht zu Hause', 'Behandlung', 'MJV', 'Wollte k.T'];
+        $appointmentClosingCommentStatuses = ['open', 'positive', 'negative', 'not_home', 'processing', 'multi_year_contract', 'wollte k.t'];
+        // $appointmentClosingCommentStatuses = ['offen', 'positiv', 'negativ', 'Nicht zu Hause', 'Behandlung', 'MJV', 'Wollte k.T'];
         
         // Appoitments for the selected year/month
         $allAppointments = Appointment::SelectedMonth($selectedYear, $selectedMonth)
@@ -96,10 +96,10 @@ class ReportsController extends Controller
             $numOfAppointmentsPerDay[$dayToUse] = count($allAppointments);
 
             foreach($allAppointments as $key => $appointment) {
-                if( strtolower($appointment->comment_status) == 'positiv') {
+                if( strtolower($appointment->comment_status) == 'positive') {
                     array_push($allAppointmentsPositive, $appointment);
                 };
-                if (strtolower($appointment->comment_status) == 'negativ') {
+                if (strtolower($appointment->comment_status) == 'negative') {
                     array_push($allAppointmentsNegative, $appointment);
                 };
                 // won or not won
