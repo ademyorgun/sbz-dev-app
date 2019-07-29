@@ -52,4 +52,12 @@ class User extends \TCG\Voyager\Models\User
     public function appointments() {
         return $this->hasMany('App\Appointment', 'sales_agent_id', 'id');
     }
+
+    /**
+     * Get the call center for the user
+     */
+    public function callCenter()
+    {
+        return $this->belongsTo('App\CallCenter', 'created_by', 'id');
+    }
 }

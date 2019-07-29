@@ -2,12 +2,28 @@
 
 namespace App;
 
+use App\Scopes\CallAgentsScope;
+use App\Scopes\SalesAgentsScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Appointment extends Model
 {
     use SoftDeletes;
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new CallAgentsScope);
+        static::addGlobalScope(new SalesAgentsScope);
+    }
+
     /**
      * The attributes that should be mutated to dates.
      * 
@@ -112,20 +128,4 @@ class Appointment extends Model
         });
     }
 
-    /**
-     * Scope a query to only include the appointments assigned 
-     * for the sales agent
-     * 
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  mixed  $isAppointmentWon
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeSalesAgentAppointments($query) {
-        if(strtolower(auth()->user()->role->name) == 'sales_agent' ) {
-            return $query
-                ->where('sales_agent_id', auth()->user()->id);
-        } else {
-            return $query;
-        }
-    }
 }

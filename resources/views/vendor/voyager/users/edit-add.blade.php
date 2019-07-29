@@ -99,7 +99,7 @@
                             @endphp
 
                             <div class="form-group">
-                            <label for="">Call center</label>
+                            <label for="">Call center ( let empty to see all appointments )</label>
                                 @php
                                     $dataTypeRows = $dataType->{(isset($dataTypeContent->id) ? 'editRows' : 'addRows' )};
 
