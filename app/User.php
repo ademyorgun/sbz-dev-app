@@ -50,6 +50,6 @@ class User extends \TCG\Voyager\Models\User
      * Get the appointments for the user
      */
     public function appointments() {
-        return $this->hasMany('App\Appointment', 'call_agent_id', 'id');
+        return $this->hasMany('App\Appointment', 'sales_agent_id', 'id');
     }
 }
