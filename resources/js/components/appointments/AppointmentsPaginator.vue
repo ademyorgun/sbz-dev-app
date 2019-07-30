@@ -1,5 +1,5 @@
 <template>
-    <paginator :data="paginationData" @pagination-change-page="changePage"></paginator>
+    <paginator :data="data" @pagination-change-page="changePage"></paginator>
 </template>
 
 <script>
@@ -15,12 +15,34 @@ export default {
   props: {
     paginationData: {
       type: Object
+    },
+    initialPaginationData: {
+      type: Object
     }
   },
+
+  computed: {
+    data() {
+      if(this.isEmpty(this.paginationData)) {
+        return this.initialPaginationData;
+      } else {
+        return this.paginationData;
+      }
+    }
+  },
+
   methods: {
       changePage(page = 1) {
           console.log(page, 'paginator');
           this.$emit('get-results', page);
+      },
+
+      isEmpty(obj) {
+          for(var key in obj) {
+              if(obj.hasOwnProperty(key))
+                  return false;
+          }
+          return true;
       }
   },
 };

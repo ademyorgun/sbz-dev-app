@@ -87,7 +87,7 @@
           <!-- clear filter -->
           <span>Löschen</span>
         </button>
-        <button class="btn btn-primary pull-right" @click.prevent="$emit('filter', $data)">
+        <button class="btn btn-primary pull-right" @click.prevent="$emit('filter', $data, isAgentView)">
           <i class="voyager-search"></i>
           <!-- filter results -->
           <span>Suchen</span>
@@ -107,6 +107,13 @@ export default {
     Datepicker,
   },
 
+  props: {
+    isAgentView: {
+      type: Boolean,
+      required: false
+    }
+  },
+
   data() {
     return {
       callDateStart: new Date(),
@@ -124,7 +131,7 @@ export default {
 
   methods: {
     clearForm() {
-      this.callDateStart = "";
+      this.callDateStart = new Date();
       this.callDateEnd = "";
       this.appointmentDateStart = "";
       this.appointmentDateEnd = "";
@@ -133,10 +140,6 @@ export default {
       this.user = "";
       this.phoneNumber = "";
       this.appointmentID = "";
-    },
-
-    filter() {
-
     }
   }
 };

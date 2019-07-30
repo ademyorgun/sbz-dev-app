@@ -36,6 +36,8 @@ class Appointment extends Model
         'call_date'
     ];
 
+    protected $perPage = 50;
+
     /**
      * The storage format of the model's date columns.
      *

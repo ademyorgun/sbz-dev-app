@@ -1,3 +1,6 @@
+@php
+    $currentLogedInUserRole =strtolower(auth()->user()->role->name);
+@endphp
 @extends('voyager::master')
 
 @section('page_title', __('voyager::generic.viewing').' '.$dataType->display_name_plural)
@@ -41,48 +44,12 @@
 @stop
 
 @section('content')
-{{-- call agent shouldn't see any appointments --}}
-@php
-    $currentLogedInUserRole =strtolower(auth()->user()->role->name);
-@endphp
+
+
 @if ($currentLogedInUserRole == 'sales_agent' )
-    @php
-    $appointmentsGroupFeedbackPending = [];
-    $appointmentsGroupOpen = [];
-    $appointmentsGroupClosed = [];
-
-    foreach ($dataTypeContent as $key => $appointment) { 
-        $now = now()->toDateString();
-
-        if(isset($appointment->meeting_date)) {
-            $meeting_date = $appointment->meeting_date->toDateString();
-            // group feedback pending
-
-            if(!isset($appointment->comment_status) && ( $meeting_date < $now )) {
-                array_push($appointmentsGroupFeedbackPending, $appointment);
-
-            } // group appointment open 
-            elseif(!isset($appointment->comment_status) && ( $meeting_date >= $now )) { 
-                array_push($appointmentsGroupOpen, $appointment);
-
-            } 
-            elseif(isset($appointment->comment_status)) {
-                if($appointment->comment_status == 'open' && ( $meeting_date >= $now )){
-                    // group appointment open 
-                    array_push($appointmentsGroupOpen, $appointment);
-
-                } else {
-                    // group closed appointments
-                    array_push($appointmentsGroupClosed, $appointment);
-
-                }
-            }
-        } 
-    }
-@endphp
-
 <div class="page-content browse container-fluid" id="app">    
     {{-- comments modal --}}
+    <appointments-comments-modal></appointments-comments-modal>
     @include('voyager::alerts')
     <div class="row" >
         <div class="col-md-12">
@@ -95,7 +62,7 @@
                     </div>
                 </div>
                 <div class="panel-body mt-2">
-                    <appointment-filter @filter="getResults">
+                    <appointment-filter @filter="getResults" :is-agent-view="true">
                         @foreach ($dataType->addRows as $row)
                             @if ($row->field == 'wanted_expert')
                                 <template v-slot:experts>
@@ -122,29 +89,35 @@
             </div>
         </div>
     </div>
+    
+{{-- {{ dd([$dataTypeContent, $appointmentsGroupOpen] ) }} --}}
+
     {{-- Feedback open group --}}
-    @include('vendor.voyager.inc.browse_table_agent', 
+    @include('vendor.voyager.appointments.browse_agent_panel', 
     [
         'tableName' => 'Feedback offen', 
         'eltId' => 'feedbackOpen',
         'disableActions' => false,
-        'dataTypeContent' => $appointmentsGroupFeedbackPending
+        'dataTypeContent' => $appointmentsGroupFeedbackPending,
+        'pagination' => $dataTypeContent
     ])
     {{-- Open appointments group --}}
-    @include('vendor.voyager.inc.browse_table_agent', 
+    @include('vendor.voyager.appointments.browse_agent_panel', 
     [
         'tableName' => 'Offene Termine', 
         'eltId' => 'openAppointments',
         'disableActions' => false,
-        'dataTypeContent' => $appointmentsGroupOpen
+        'dataTypeContent' => $appointmentsGroupOpen,
+        'pagination' => $dataTypeContent
     ])
     {{-- Closed appointments group --}}
-    @include('vendor.voyager.inc.browse_table_agent', 
+    @include('vendor.voyager.appointments.browse_agent_panel', 
     [
         'tableName' => 'Abgeschlosse Termine', 
         'eltId' => 'closedAppointments',
         'disableActions' => true,
-        'dataTypeContent' => $appointmentsGroupClosed
+        'dataTypeContent' => $appointmentsGroupClosed,
+        'pagination' => $dataTypeContent
     ])
 </div>
 
@@ -164,7 +137,7 @@
                         </div>
                     </div>
                     <div class="panel-body mt-2">
-                        <appointment-filter @filter="getResults">
+                        <appointment-filter @filter="getResults" :is-agent-view="false">
                             @foreach ($dataType->addRows as $row)
                                 @if ($row->field == 'wanted_expert')
                                     <template v-slot:experts>
@@ -435,19 +408,10 @@
                             </div>
                             @if ($isServerSide)
                                 <div class="pull-right">
-                                    <appointments-paginator :pagination-data="paginationData" @get-results="paginatorChangePage" v-if="isResultsFiltered"></appointments-paginator>
-                                    {{-- show the server generated paginator before filtering --}}
-                                    <div v-if="!isResultsFiltered">
-                                        {{ $dataTypeContent->appends([
-                                            's' => $search->value,
-                                            'filter' => $search->filter,
-                                            'key' => $search->key,
-                                            'order_by' => $orderBy,
-                                            'sort_order' => $sortOrder,
-                                            'showSoftDeleted' => $showSoftDeleted,
-                                        ])->links() }}    
-                                    </div>
-
+                                    <appointments-paginator :pagination-data="paginationData" @get-results="paginatorChangePage" :initial-pagination-data="{{ $dataTypeContent->toJson() }}"></appointments-paginator>
+                                    {{-- <div v-if="!isResultsFiltered">
+                                        {{ $dataTypeContent->links() }}    
+                                    </div> --}}
                                 </div>
                             @endif
                         </div>

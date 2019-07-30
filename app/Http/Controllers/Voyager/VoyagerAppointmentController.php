@@ -129,6 +129,35 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
             $view = "voyager::$slug.browse";
         }
 
+        $appointmentsGroupFeedbackPending = [];
+        $appointmentsGroupOpen = [];
+        $appointmentsGroupClosed = [];
+        if (strtolower(auth()->user()->role->name) == 'sales_agent') {
+
+            foreach ($dataTypeContent as $key => $appointment) {
+                $now = now()->toDateString();
+
+                if (isset($appointment->meeting_date)) {
+                    $meeting_date = $appointment->meeting_date->toDateString();
+                    // group feedback pending
+
+                    if (!isset($appointment->comment_status) && ($meeting_date < $now)) {
+                        array_push($appointmentsGroupFeedbackPending, $appointment);
+                    } // group appointment open 
+                    elseif (!isset($appointment->comment_status) && ($meeting_date >= $now)) {
+                        array_push($appointmentsGroupOpen, $appointment);
+                    } elseif (isset($appointment->comment_status)) {
+                        if ($appointment->comment_status == 'open' && ($meeting_date >= $now)) {
+                            // group appointment open 
+                            array_push($appointmentsGroupOpen, $appointment);
+                        } else {
+                            // group closed appointments
+                            array_push($appointmentsGroupClosed, $appointment);
+                        }
+                    }
+                }
+            }
+        }
         return Voyager::view($view, compact(
             'dataType',
             'dataTypeContent',
@@ -142,7 +171,10 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
             'defaultSearchKey',
             'usesSoftDeletes',
             'showSoftDeleted',
-            'users'
+            'users',
+            'appointmentsGroupFeedbackPending',
+            'appointmentsGroupOpen',
+            'appointmentsGroupClosed'
         ));
     }
 
@@ -278,6 +310,8 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
         $appointmentDateStart = $request->input('appointmentDateStart');
         $callDateEnd = $request->input('callDateEnd');
         $callDateStart = $request->input('callDateStart');
+        $isAgentView = $request->input('isAgentView');
+
         if ($appointmentDateEnd != null) {
             $appointmentDateEnd = Carbon::parse($appointmentDateEnd, 'Europe/London')->format('Y-m-d');
         }
@@ -365,11 +399,11 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
                     ->when($callDateStart, function ($data, $callDateStart) {
                         return $data->where('call_date', '>=', $callDateStart);
                     });
+
             } else {
-                // $query = $model::select('*');
                 $query = $model::when($appointmentID, function ($data, $appointmentID) {
-                    return $data->where('id', '=', $appointmentID);
-                })
+                        return $data->where('id', '=', $appointmentID);
+                    })
                     ->when($phoneNumber, function ($data, $phoneNumber) {
                         return $data->where('telephone_number', '=', $phoneNumber);
                     })
@@ -396,19 +430,8 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
                     });
             }
 
-            // // Use withTrashed() if model uses SoftDeletes and if toggle is selected
-            // if ($model && in_array(SoftDeletes::class, class_uses($model)) && app('VoyagerAuth')->user()->can('delete', app($dataType->model_name))) {
-            //     $usesSoftDeletes = true;
-
-            //     if ($request->get('showSoftDeleted')) {
-            //         $showSoftDeleted = true;
-            //         $query = $query->withTrashed();
-            //     }
-            // }
-
             // If a column has a relationship associated with it, we do not want to show that field
             $this->removeRelationshipField($dataType, 'browse');
-
 
             if ($orderBy && in_array($orderBy, $dataType->fields())) {
                 $querySortOrder = (!empty($sortOrder)) ? $sortOrder : 'desc';
@@ -441,38 +464,44 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
         // Check if a default search key is set
         $defaultSearchKey = $dataType->default_search_key ?? null;
 
-        $view = 'vendor.voyager.appointments.table';
+        // Different data for different views
+        if($isAgentView) {
+            $view = 'vendor.voyager.inc';
 
-        // render the table
-        $table = Voyager::view($view, compact(
-            'dataType',
-            'dataTypeContent',
-            'isModelTranslatable',
-            'search',
-            'orderBy',
-            'orderColumn',
-            'sortOrder',
-            'searchable',
-            'isServerSide',
-            'defaultSearchKey',
-            'usesSoftDeletes',
-            'showSoftDeleted',
-            'users'
-        ))->render();
+        } else {
+            $view = 'vendor.voyager.appointments.table';
 
-        // render the paginator
-        $paginator = view('vendor.voyager.inc.paginator', compact(
-            'dataTypeContent',
-            'search',
-            'orderBy',
-            'sortOrder',
-            'showSoftDeleted'
-        ))->render();
+            // render the table
+            $table = Voyager::view($view, compact(
+                'dataType',
+                'dataTypeContent',
+                'isModelTranslatable',
+                'search',
+                'orderBy',
+                'orderColumn',
+                'sortOrder',
+                'searchable',
+                'isServerSide',
+                'defaultSearchKey',
+                'usesSoftDeletes',
+                'showSoftDeleted',
+                'users'
+            ))->render();
 
-        return response()->json([
-            'table' => $table,
-            'paginator' => $paginator,
-            'dataTypeContent' => $dataTypeContent
-        ]);
+            // render the paginator
+            $paginator = view('vendor.voyager.inc.paginator', compact(
+                'dataTypeContent',
+                'search',
+                'orderBy',
+                'sortOrder',
+                'showSoftDeleted'
+            ))->render();
+
+            return response()->json([
+                'table' => $table,
+                'paginator' => $paginator,
+                'dataTypeContent' => $dataTypeContent
+            ]);
+        }
     }
 }

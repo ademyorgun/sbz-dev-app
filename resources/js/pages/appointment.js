@@ -39,7 +39,8 @@ const app = new Vue({
         isSavingGeolocation: false,
         isNotificationModalOn: false,
         isGeoSavedSuccess: false,
-        responseMessage: ''
+        responseMessage: '',
+        isAgentView: false,
     },
 
     computed: {},
@@ -50,22 +51,43 @@ const app = new Vue({
          * @param {*} data
          * @param {*} page
          */
-        getResults(data, page = 1) {
+        getResults(data, isAgentView ) {
+            this.isAgentView = isAgentView;
             this.filterData = data;
-            axios
-                .post("appointments/filter?page=" + page, data)
-                .then(response => {
-                    try {
-                        // update the table
-                        let table = document.querySelector("#table");
-                        table.innerHTML = response.data.table;
+            if (!isAgentView) {
+                axios
+                    .post("appointments/filter?", data)
+                    .then(response => {
+                        try {
+                            // update the table
+                            let table = document.querySelector("#table");
+                            table.innerHTML = response.data.table;
 
-                        this.paginationData = response.data.dataTypeContent;
-                        this.isResultsFiltered = true;
-                    } catch (e) {
-                        console.warn(e);
-                    }
-                });
+                            this.paginationData = response.data.dataTypeContent;
+                            this.isResultsFiltered = true;
+                        } catch (e) {
+                            console.warn(e);
+                        }
+                    });
+            } else {
+                let customData = data;
+                customData.isAgentView = isAgentView;
+                axios
+                    .post("appointments/filter?", customData)
+                    .then(response => {
+                        try {
+                            // update the table
+                            let table = document.querySelector("#table");
+                            table.innerHTML = response.data.table;
+
+                            this.paginationData = response.data.dataTypeContent;
+                            this.isResultsFiltered = true;
+                        } catch (e) {
+                            console.warn(e);
+                        }
+                    });
+            }
+           
         },
 
         /**

@@ -1815,6 +1815,12 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  props: {
+    isAgentView: {
+      type: Boolean,
+      required: false
+    }
+  },
   data: function data() {
     return {
       callDateStart: new Date(),
@@ -1831,7 +1837,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     clearForm: function clearForm() {
-      this.callDateStart = "";
+      this.callDateStart = new Date();
       this.callDateEnd = "";
       this.appointmentDateStart = "";
       this.appointmentDateEnd = "";
@@ -1840,8 +1846,7 @@ __webpack_require__.r(__webpack_exports__);
       this.user = "";
       this.phoneNumber = "";
       this.appointmentID = "";
-    },
-    filter: function filter() {}
+    }
   }
 });
 
@@ -1871,6 +1876,18 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     paginationData: {
       type: Object
+    },
+    initialPaginationData: {
+      type: Object
+    }
+  },
+  computed: {
+    data: function data() {
+      if (this.isEmpty(this.paginationData)) {
+        return this.initialPaginationData;
+      } else {
+        return this.paginationData;
+      }
     }
   },
   methods: {
@@ -1878,6 +1895,13 @@ __webpack_require__.r(__webpack_exports__);
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       console.log(page, 'paginator');
       this.$emit('get-results', page);
+    },
+    isEmpty: function isEmpty(obj) {
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key)) return false;
+      }
+
+      return true;
     }
   }
 });
@@ -22908,7 +22932,7 @@ var render = function() {
             on: {
               click: function($event) {
                 $event.preventDefault()
-                return _vm.$emit("filter", _vm.$data)
+                return _vm.$emit("filter", _vm.$data, _vm.isAgentView)
               }
             }
           },
@@ -22945,7 +22969,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("paginator", {
-    attrs: { data: _vm.paginationData },
+    attrs: { data: _vm.data },
     on: { "pagination-change-page": _vm.changePage }
   })
 }
