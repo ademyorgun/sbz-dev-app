@@ -4,7 +4,7 @@
         <thead class="thead-light">
             <tr>
                 <th scope="col">Bentuzer</th>
-                <th scope="col">Appointments Per agent</th>
+                <th scope="col">Termine pro call</th>
             </tr>
         </thead>
         <tbody>

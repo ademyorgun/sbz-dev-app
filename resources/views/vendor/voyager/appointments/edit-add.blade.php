@@ -19,7 +19,7 @@
     <div class="page-content edit-add container-fluid" id="app"> 
         <h1 class="page-title">
             <i class="{{ $dataType->icon }}"></i>
-            {{ __('voyager::generic.'.($edit ? 'edit' : 'add')).' '.$dataType->display_name_singular }} {{ $edit ? 'Id '.$dataTypeContent->getKey() : '' }}
+            {{ __('voyager::generic.'.($edit ? 'edit' : 'add')).' '.'Termin' }} {{ $edit ? 'Id '.$dataTypeContent->getKey() : '' }}
         </h1>
         <!-- GET CURRENT LOGED IN USER ROLE -->
         @php
@@ -39,7 +39,7 @@
                         {{ csrf_field() }}
                         {{ method_field("POST") }}
                         <button type="submit" class="btn btn-primary">
-                            <i class="voyager-list"></i> <span>Duplicate appointment</span>
+                            <i class="voyager-list"></i> <span>Termin duplizieren</span>
                         </button>
                     </form>
                 @endif
@@ -152,7 +152,7 @@
             <!-- call details panel -->
             <div class="panel panel-primary panel-bordered">
                 <div class="panel-heading">
-                    <h3 class="panel-title panel-icon"><i class="voyager-telephone"></i>Call Details</h3>
+                    <h3 class="panel-title panel-icon"><i class="voyager-telephone"></i>Anruf Details</h3>
                     <div class="panel-actions">
                         <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
                     </div>
@@ -167,7 +167,7 @@
             <!-- customer details panel -->
             <div class="panel panel-primary panel-bordered">
                 <div class="panel-heading">
-                    <h3 class="panel-title panel-icon"><i class="voyager-person"></i>Customer Details</h3>
+                    <h3 class="panel-title panel-icon"><i class="voyager-person"></i>Kunden Details</h3>
                     <div class="panel-actions">
                         <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
                     </div>
@@ -182,7 +182,7 @@
             <!-- Sales details panel -->
             <div class="panel panel-primary panel-bordered" id="salesSection">
                 <div class="panel-heading">
-                    <h3 class="panel-title panel-icon"><i class="voyager-documentation"></i>Sales Details</h3>
+                    <h3 class="panel-title panel-icon"><i class="voyager-documentation"></i>ok</h3>
                     <div class="panel-actions">
                         <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
                     </div>
@@ -197,7 +197,7 @@
             <!-- call details panel -->
             <div class="panel panel-primary panel-bordered">
                 <div class="panel-heading">
-                    <h3 class="panel-title panel-icon"><i class="voyager-paper-plane"></i>Visit Details</h3>
+                    <h3 class="panel-title panel-icon"><i class="voyager-paper-plane"></i>Termin Details</h3>
                     <div class="panel-actions">
                         <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
                     </div>
@@ -212,7 +212,7 @@
             <!-- questionaires panel -->
             <div class="panel panel-primary panel-bordered" id="edit-create-questionaires">
                 <div class="panel-heading">
-                    <h3 class="panel-title panel-icon"><i class="voyager-question"></i>Questionaires</h3>
+                    <h3 class="panel-title panel-icon"><i class="voyager-question"></i>Fragen</h3>
                     <div class="panel-actions">
                         <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
                     </div>

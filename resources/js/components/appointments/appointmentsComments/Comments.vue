@@ -16,7 +16,7 @@
                 type="text" 
                 v-model.trim="reply" 
                 class="reply--text" 
-                placeholder="Leave a comment..."
+                placeholder="Kommentar erfassen..."
                 maxlength="250"
                 required
                 @keyup.enter="submitComment"

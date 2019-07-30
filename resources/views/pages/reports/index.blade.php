@@ -16,7 +16,8 @@
         <div class="col-md-9">
             <div class="panel panel-primary panelbordered">
                 <div class="panel-heading">
-                    <h3 class="panel-title panel-icon"><i class="voyager-search"></i>{{ __('voyager::generic.reports') }}</h3>
+                    {{-- Reports --}}
+                    <h3 class="panel-title panel-icon"><i class="voyager-search"></i>Berichte</h3>
                     <div class="panel-actions">
                         <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
                     </div>
@@ -29,7 +30,8 @@
         <div class="col-md-3">
             <div class="panel panel-primary panelbordered">
                 <div class="panel-heading">
-                    <h3 class="panel-title panel-icon"><i class="voyager-archive"></i>{{ __('voyager::generic.appointments_per_month') }}</h3>
+                    {{-- appointments per month --}}
+                    <h3 class="panel-title panel-icon"><i class="voyager-archive"></i>Termine in diesem Monat</h3>
                     <div class="panel-actions">
                         <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
                     </div>
@@ -44,7 +46,8 @@
         <div class="col-md-12">
             <div class="panel panel-primary panelbordered">
                 <div class="panel-heading">
-                    <h3 class="panel-title panel-icon"><i class="voyager-archive"></i>{{ __('voyager::additions.appointments_per_sales_agent') }}</h3>
+                    {{-- number of appointments per sales agent --}}
+                    <h3 class="panel-title panel-icon"><i class="voyager-archive"></i>Anzahl Termine pro Sales</h3>
                     <div class="panel-actions">
                         <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
                     </div>
@@ -59,7 +62,8 @@
         <div class="col-md-12">
             <div class="panel panel-primary panelbordered">
                 <div class="panel-heading">
-                    <h3 class="panel-title panel-icon"><i class="voyager-archive"></i>{{ __('voyager::additions.appointments_per_call_agent') }}</h3>
+                    {{-- number of appointments per call agent --}}
+                    <h3 class="panel-title panel-icon"><i class="voyager-archive"></i>Anzahl Termine pro Call agent</h3>
                     <div class="panel-actions">
                         <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
                     </div>
@@ -74,19 +78,20 @@
         <div class="col-md-12">
             <div class="panel panel-primary panelbordered">
                 <div class="panel-heading" style="margin-bottom: 2em">
-                    <h3 class="panel-title panel-icon"><i class="voyager-bar-chart"></i>{{ __('voyager::generic.general_stats') }}</h3>
+                    {{-- general stats --}}
+                    <h3 class="panel-title panel-icon"><i class="voyager-bar-chart"></i>Berichtübersicht</h3>
                     <div class="panel-actions">
                         <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
                     </div>
                 </div>
                 <div class="panel-body mt-2 graphs">
                     <div class="row row-flex">
-                        <reports-bar-chart :data-to-load="numOfAppointmentsPerDay" background-color="#E4572E" label="Appointment per day"></reports-bar-chart>
+                        <reports-bar-chart :data-to-load="numOfAppointmentsPerDay" background-color="#E4572E" label="Termine pro Tag"></reports-bar-chart>
                         <reports-pie-chart :data-to-load="numOfAppointmentsPerStatus"></reports-pie-chart>
                     </div>
                     <div class="row row-flex">
-                        <reports-bar-chart :data-to-load="numOfAllApointmentsPerDayPositive" background-color="#70D6FF" label="Appointments with Positive Status"></reports-bar-chart>
-                        <reports-bar-chart :data-to-load="numOfAllApointmentsPerDayNegative" background-color="#ED254E" label="Appointments with Negative Status"></reports-bar-chart>
+                        <reports-bar-chart :data-to-load="numOfAllApointmentsPerDayPositive" background-color="#70D6FF" label="Positive Termine"></reports-bar-chart>
+                        <reports-bar-chart :data-to-load="numOfAllApointmentsPerDayNegative" background-color="#ED254E" label="Negative Termine"></reports-bar-chart>
                     </div>
                     {{-- <div class="row row-flex">
                         <reports-bar-chart :data-to-load="numberOfAppointmentsWonPerDay" background-color="#00CECB" label="Appointments Won"></reports-bar-chart>

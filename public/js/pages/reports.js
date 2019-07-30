@@ -1932,6 +1932,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ReportsFiler",
@@ -2172,6 +2178,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ReportsSalesAgentsTable',
   props: {
@@ -2193,6 +2201,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -55583,9 +55592,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Bentuzer")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [
-          _vm._v("Appointments Per agent")
-        ])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Termine pro call")])
       ])
     ])
   }
@@ -55615,7 +55622,7 @@ var render = function() {
     _c("form", { attrs: { id: "form" } }, [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "form-group col-md-6" }, [
-          _c("label", { staticClass: "control-label" }, [_vm._v("Year")]),
+          _c("label", { staticClass: "control-label" }, [_vm._v("Jahr")]),
           _vm._v(" "),
           _c(
             "select",
@@ -55655,7 +55662,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-6" }, [
-          _c("label", { staticClass: "control-label" }, [_vm._v("Month")]),
+          _c("label", { staticClass: "control-label" }, [_vm._v("Monat")]),
           _vm._v(" "),
           _c(
             "select",
@@ -55701,7 +55708,7 @@ var render = function() {
           { staticClass: "form-group pull-left col-md-3 col-sm-12 toggle" },
           [
             _c("label", { staticClass: "control-label" }, [
-              _vm._v("Meeting date set:")
+              _vm._v("Termin vorhanden")
             ]),
             _vm._v(" "),
             _c(
@@ -55733,7 +55740,7 @@ var render = function() {
           { staticClass: "form-group pull-left col-md-3 col-sm-12 toggle" },
           [
             _c("label", { staticClass: "control-label" }, [
-              _vm._v("Appointment won:")
+              _vm._v("Termin gewonnen")
             ]),
             _vm._v(" "),
             _c(
@@ -55774,7 +55781,7 @@ var render = function() {
           [
             _c("i", { staticClass: "voyager-trash" }),
             _vm._v(" "),
-            _c("span", [_vm._v("Clear filter")])
+            _c("span", [_vm._v("Abbrechen")])
           ]
         ),
         _vm._v(" "),
@@ -55792,7 +55799,7 @@ var render = function() {
           [
             _c("i", { staticClass: "voyager-search" }),
             _vm._v(" "),
-            _c("span", [_vm._v("Fitler results")])
+            _c("span", [_vm._v("Ergebnisse anzeigen")])
           ]
         )
       ])
@@ -55916,12 +55923,10 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Bentuzer")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [
-          _vm._v("Appointments Per agent")
-        ]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Termine pro Sales")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [
-          _vm._v("Appointments Won per agent")
+          _vm._v('Termine pro Sales "GEWONNEN"')
         ])
       ])
     ])
@@ -55951,7 +55956,7 @@ var render = function() {
   return _c("div", { staticClass: "card" }, [
     _c("h1", [_vm._v(_vm._s(_vm.ReportsTotal))]),
     _vm._v(" "),
-    _c("p", [_vm._v("Total of appointments for this month")])
+    _c("p", [_vm._v("Total der Termine")])
   ])
 }
 var staticRenderFns = []

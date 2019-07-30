@@ -87,7 +87,7 @@ return [
     'results'                => 'Result',
     'reports'                => 'Reports',
     'route'                  => 'Route',
-    'save'                   => 'Save',
+    'save'                   => 'Speichern',
     'search'                 => 'Search',
     'select_all'             => 'Select All',
     'select_group'           => 'Select Existing Group or Add New',

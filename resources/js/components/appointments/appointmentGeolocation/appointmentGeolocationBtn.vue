@@ -3,7 +3,8 @@
         <base-loader v-if="isLoading"></base-loader>
         <button class="btn btn-primary" @click.prevent="submit">
             <i class="voyager-location"></i>
-            <span>Geolocation</span>
+            <!-- geolocation -->
+            <span>Standort ermitteln</span>
         </button>
     </div>
 </template>

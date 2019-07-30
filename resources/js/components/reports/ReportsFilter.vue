@@ -3,13 +3,15 @@
     <form id="form">
       <div class="row">
         <div class="form-group col-md-6">
-          <label class="control-label">Year</label>
+          <!-- year -->
+          <label class="control-label">Jahr</label>
           <select class="form-control" v-model="year">
             <option v-for="(year, index) in yearsToShow" :value="year" :key="index">{{year}}</option>
           </select>
         </div>
         <div class="form-group col-md-6">
-          <label class="control-label">Month</label>
+          <!-- month -->
+          <label class="control-label">Monat</label>
           <select class="form-control" v-model="month">
             <option v-for="(month, index) in monthsToShow" :value="month" :key="index">{{month}}</option>
           </select>
@@ -17,7 +19,8 @@
       </div>
       <div class="row pr-2">
         <div class="form-group pull-left col-md-3 col-sm-12 toggle">
-          <label class="control-label">Meeting date set:</label>
+          <!-- meeting date set -->
+          <label class="control-label">Termin vorhanden</label>
           <div class="toggle-button-wrapper">
             <toggle-button 
               v-model="isAgentMeetingDateSet"
@@ -27,7 +30,8 @@
           </div>
         </div>
         <div class="form-group pull-left col-md-3 col-sm-12 toggle">
-          <label class="control-label">Appointment won:</label>
+          <!-- appointment won -->
+          <label class="control-label">Termin gewonnen</label>
           <div class="toggle-button-wrapper">
             <toggle-button 
               v-model="isAppointmentWon"
@@ -38,11 +42,13 @@
         </div>
         <button class="btn btn-light pull-right" @click.prevent="clearForm">
           <i class="voyager-trash"></i>
-          <span>Clear filter</span>
+          <!-- clear filter -->
+          <span>Abbrechen</span>
         </button>
         <button class="btn btn-primary pull-right" @click.prevent="$emit('fetch-data', $data)">
           <i class="voyager-search"></i>
-          <span>Fitler results</span>
+          <!-- filter results -->
+          <span>Ergebnisse anzeigen</span>
         </button>
       </div>
     </form>

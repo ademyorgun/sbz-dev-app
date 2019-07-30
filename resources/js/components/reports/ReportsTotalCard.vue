@@ -1,7 +1,8 @@
 <template>
     <div class="card">
         <h1>{{ ReportsTotal }}</h1>
-        <p>Total of appointments for this month</p>
+        <!-- total of appointments for this month -->
+        <p>Total der Termine</p>
     </div>
 </template>
 

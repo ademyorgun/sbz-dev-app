@@ -1973,6 +1973,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'appointmentGeolocationBtn',
@@ -22900,7 +22901,7 @@ var render = function() {
         [
           _c("i", { staticClass: "voyager-location" }),
           _vm._v(" "),
-          _c("span", [_vm._v("Geolocation")])
+          _c("span", [_vm._v("Standort ermitteln")])
         ]
       )
     ],
@@ -23170,7 +23171,7 @@ var render = function() {
         staticClass: "reply--text",
         attrs: {
           type: "text",
-          placeholder: "Leave a comment...",
+          placeholder: "Kommentar erfassen...",
           maxlength: "250",
           required: ""
         },

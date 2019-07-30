@@ -23082,7 +23082,7 @@ var render = function() {
         staticClass: "reply--text",
         attrs: {
           type: "text",
-          placeholder: "Leave a comment...",
+          placeholder: "Kommentar erfassen...",
           maxlength: "250",
           required: ""
         },
