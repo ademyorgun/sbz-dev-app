@@ -132,6 +132,12 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'comment_status' => [
+            'required' => 'Conversion status is required',
+        ],
+        'sales_visit_location' => [
+            'required' => 'Performing geolocation is required',
+        ]
     ],
 
     /*

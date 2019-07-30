@@ -170,6 +170,8 @@ const app = new Vue({
                         this.showNotificationModal(false, response.data.message);
                     } else {
                         this.showNotificationModal(true, response.data.message);
+                        const salesVisitLocationField = document.querySelector('#salesVisitLocation input');
+                        salesVisitLocationField.value = data.address;
                     }
                 })
                 .catch(err => {

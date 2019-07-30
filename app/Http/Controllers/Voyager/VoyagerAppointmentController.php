@@ -228,6 +228,7 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
         if(strtolower(auth()->user()->role->name) == 'sales_agent') {
             $validatedData = $request->validate([
                 'comment_status' => 'required',
+                'sales_visit_location' => 'required'
             ]);
         }
 

@@ -39078,6 +39078,9 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
           _this5.showNotificationModal(false, response.data.message);
         } else {
           _this5.showNotificationModal(true, response.data.message);
+
+          var salesVisitLocationField = document.querySelector('#salesVisitLocation input');
+          salesVisitLocationField.value = data.address;
         }
       })["catch"](function (err) {
         console.error(err);

@@ -58,22 +58,24 @@
             if(!isset($appointment->comment_status) && ( $meeting_date < $now )) {
                 array_push($appointmentsGroupFeedbackPending, $appointment);
 
-            }
-            // group appointment open 
+            } // group appointment open 
             elseif(!isset($appointment->comment_status) && ( $meeting_date >= $now )) { 
                 array_push($appointmentsGroupOpen, $appointment);
 
             } 
-            elseif($appointment->comment_status == 'open' && ( $meeting_date >= $now )) {
-                array_push($appointmentsGroupOpen, $appointment);
+            elseif(isset($appointment->comment_status)) {
+                if($appointment->comment_status == 'open' && ( $meeting_date >= $now )){
+                    // group appointment open 
+                    array_push($appointmentsGroupOpen, $appointment);
+
+                } else {
+                    // group closed appointments
+                    array_push($appointmentsGroupClosed, $appointment);
+
+
+                }
             }
-
-        // group closed appointments
-        } elseif(isset($appointment->comment_status)) {
-            array_push($appointmentsGroupClosed, $appointment);
-
-        }
-
+        } 
     }
 @endphp
 

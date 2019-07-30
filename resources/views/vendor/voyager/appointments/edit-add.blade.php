@@ -393,17 +393,29 @@
             var count = 1;
             
             $('document').ready(function() {
+                // this section and field has to be hidden
+                $('#comment_feedback_input').hide();
+                $('#salesSection').hide();
+                
                 if($("input[name='comment_status']:checked").val()) {
                     if($("input[name='comment_status']:checked").val().toLowerCase() == 'open') {
                         // remove readonly from visit time and visit date fields
                         $('#visitDate').find('input').prop('readonly', false);
                         $('#visitTime').find('input').prop('readonly', false);
+                        $('#comment_feedback_input').show();
+
+                    } else if ($("input[name='comment_status']:checked").val().toLowerCase() == 'positive') {   
+                        $('#comment_feedback_input').show();
+                        $('#salesSection').show();
+
+                    } else {
+                        $('#comment_feedback_input').show();
+                        
                     }
+                    
                 }
 
-                // this section and field has to be hidden
-                $('#comment_feedback_input').hide();
-                $('#salesSection').hide();
+                
 
                 $('#comment_status_radios').click(function() {
                     if(count == 2) {
