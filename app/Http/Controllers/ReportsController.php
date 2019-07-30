@@ -40,7 +40,16 @@ class ReportsController extends Controller
         // 
         $appointmentClosingCommentStatuses = ['open', 'positive', 'negative', 'not_home', 'processing', 'multi_year_contract', 'wollte k.t'];
         // $appointmentClosingCommentStatuses = ['offen', 'positiv', 'negativ', 'Nicht zu Hause', 'Behandlung', 'MJV', 'Wollte k.T'];
-        
+        $statusDe = [
+            'open' => 'offen',
+            'positive' => 'positiv',
+            'negative' => 'negativ',
+            'not_home' => 'Nicht zu Hause',
+            'processing' => 'Behandlung',
+            'multi_year_contract' => 'MJV',
+            'wollte k.t' => 'Wollte k.T'
+        ];
+
         // Appoitments for the selected year/month
         $allAppointments = Appointment::SelectedMonth($selectedYear, $selectedMonth)
                             ->meetingDate($isAgentMeetingDateSet)
@@ -84,10 +93,10 @@ class ReportsController extends Controller
 
         $numOfAppointmentsPerStatus = [];
         foreach ($appointmentClosingCommentStatuses as $key => $status) {
-            $numOfAppointmentsPerStatus[$status] = 0;
+            $numOfAppointmentsPerStatus[$statusDe[strtolower($status)]] = 0;
         }
 
-        $dayToUse = $selectedDay; // we gonna need the selectedDay value later
+        $dayToUse = $selectedDay;
         while ($dayToUse > 0) {
             $allAppointmentsPositive = [];
             $allAppointmentsNegative = [];
@@ -121,7 +130,9 @@ class ReportsController extends Controller
                 // Num of appointment per status 
                 foreach ($appointmentClosingCommentStatuses as $key => $status) {
                     if( strtolower($appointment->comment_status) == strtolower($status) ) {
-                        $numOfAppointmentsPerStatus[$status]++;
+                        if(isset($statusDe[strtolower($status)])) {
+                            $numOfAppointmentsPerStatus[$statusDe[strtolower($status)]]++;
+                        }
                     }
                 }
             }
