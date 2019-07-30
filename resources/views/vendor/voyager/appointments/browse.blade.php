@@ -215,8 +215,10 @@
                                                     @endcan
                                                     <th class="actions text-right">{{ __('voyager::generic.actions') }}</th>
                                                     <th>Feedback</th>
-                                                    <th>Call center</th>
-                                                @endif
+                                                    @if ($currentLogedInUserRole == 'superadmin')
+                                                        <th>Call center</th>
+                                                    @endif
+                                                    @endif
                                                 <th>
                                                     @if ($isServerSide)
                                                         <div>
@@ -260,19 +262,21 @@
                                                     <td>
                                                         <appointments-modal-btn :appointment-id="{{ $data->getKey() }}" @open-comments-modal="openCommentsModal"></appointments-modal-btn>
                                                     </td>
-                                                    <td>
-                                                        @php
-                                                            $model = app('App\User');
-                                                            if(isset($data->created_by)) {
-                                                                $createdBy = $model::where('id' , '=', $data->created_by)->first();
-                                                                if(strtolower($createdBy->role->name) == 'call_agent' || strtolower($createdBy->role->name) == 'call_center_manager') {
-                                                                    if(isset($createdBy->callCenter->name)) {
-                                                                       echo $createdBy->callCenter->name;
+                                                    @if ($currentLogedInUserRole == 'superadmin')
+                                                        <td>
+                                                            @php
+                                                                $model = app('App\User');
+                                                                if(isset($data->created_by)) {
+                                                                    $createdBy = $model::where('id' , '=', $data->created_by)->first();
+                                                                    if(strtolower($createdBy->role->name) == 'call_agent' || strtolower($createdBy->role->name) == 'call_center_manager') {
+                                                                        if(isset($createdBy->callCenter->name)) {
+                                                                        echo $createdBy->callCenter->name;
+                                                                        }
                                                                     }
                                                                 }
-                                                            }
-                                                        @endphp 
-                                                    </td>
+                                                            @endphp 
+                                                        </td>
+                                                    @endif
                                                 @endif
                                                 @php
                                                 if ($data->{$row->field.'_browse'}) {

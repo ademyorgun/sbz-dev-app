@@ -109,7 +109,7 @@ export default {
 
   data() {
     return {
-      callDateStart: null,
+      callDateStart: new Date(),
       callDateEnd: null,
       appointmentDateStart: null,
       appointmentDateEnd: null,
@@ -118,7 +118,7 @@ export default {
       userID: null,
       phoneNumber: null,
       appointmentID: null,
-      dateFormat: 'yyyy MM dd'
+      dateFormat: 'dd MM yyyy'
     };
   },
 
@@ -133,6 +133,10 @@ export default {
       this.user = "";
       this.phoneNumber = "";
       this.appointmentID = "";
+    },
+
+    filter() {
+
     }
   }
 };

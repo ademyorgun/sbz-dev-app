@@ -1817,7 +1817,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      callDateStart: null,
+      callDateStart: new Date(),
       callDateEnd: null,
       appointmentDateStart: null,
       appointmentDateEnd: null,
@@ -1826,7 +1826,7 @@ __webpack_require__.r(__webpack_exports__);
       userID: null,
       phoneNumber: null,
       appointmentID: null,
-      dateFormat: 'yyyy MM dd'
+      dateFormat: 'dd MM yyyy'
     };
   },
   methods: {
@@ -1840,7 +1840,8 @@ __webpack_require__.r(__webpack_exports__);
       this.user = "";
       this.phoneNumber = "";
       this.appointmentID = "";
-    }
+    },
+    filter: function filter() {}
   }
 });
 
