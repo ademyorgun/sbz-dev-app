@@ -267,14 +267,11 @@
                                                                 $createdBy = $model::where('id' , '=', $data->created_by)->first();
                                                                 if(strtolower($createdBy->role->name) == 'call_agent' || strtolower($createdBy->role->name) == 'call_center_manager') {
                                                                     if(isset($createdBy->callCenter->name)) {
-                                                                        $center =  $createdBy->callCenter->name;
+                                                                       echo $createdBy->callCenter->name;
                                                                     }
                                                                 }
                                                             }
                                                         @endphp 
-                                                        @if (isset($center))
-                                                            {{ $center }}
-                                                        @endif
                                                     </td>
                                                 @endif
                                                 @php
