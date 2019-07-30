@@ -59,12 +59,18 @@ class ReportsController extends Controller
         // Number of appointments per user 
         $numOfAppointmentsPerSalesAgent = [];
         $numOfAppointmentsPerCallAgent = [];
-        $users = User::with(['appointments' => function ($query) use ($selectedYear, $selectedMonth, $isAgentMeetingDateSet) {
+        $salesAgentsWithAppointments = User::with(['appointments' => function ($query) use ($selectedYear, $selectedMonth, $isAgentMeetingDateSet) {
                             $query->SelectedMonth($selectedYear, $selectedMonth)
                             ->meetingDate($isAgentMeetingDateSet);
                         }])->get();
 
-        foreach ($users as $key => $user) {
+
+        $callAgentsWithAppointments = User::with(['callAgentsAppointments' => function ($query) use ($selectedYear, $selectedMonth, $isAgentMeetingDateSet) {
+                                        $query->SelectedMonth($selectedYear, $selectedMonth)
+                                            ->meetingDate($isAgentMeetingDateSet);
+                                    }])->get();;
+
+        foreach ($salesAgentsWithAppointments as $key => $user) {
             if(strtolower($user->role->name) == 'sales_agent') {
                 $numOfAppointmentsPerSalesAgent[$user->user_name]['total'] = count($user->appointments);
                 $numOfAppointmentsPerSalesAgent[$user->user_name]['won'] = 0;
@@ -75,12 +81,15 @@ class ReportsController extends Controller
                         $numOfAppointmentsPerSalesAgent[$user->user_name]['won']++;
                     }
                 }
-            } elseif(strtolower($user->role->name) == 'call_agent') {
-                $numOfAppointmentsPerCallAgent[$user->user_name]['total'] = count($user->appointments);
+            }
+        };
+
+        foreach ($callAgentsWithAppointments as $key => $user) {
+            if (strtolower($user->role->name) == 'call_agent') {
+                $numOfAppointmentsPerCallAgent[$user->user_name]['total'] = count($user->callAgentsAppointments);
                 $numOfAppointmentsPerCallAgent[$user->user_name]['name'] = $user->user_name;
             }
-            
-        };
+        }
 
         // Number of appointments per day
         $numOfAppointmentsPerDay = [];

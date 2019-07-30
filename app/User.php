@@ -47,10 +47,18 @@ class User extends \TCG\Voyager\Models\User
     protected $dates = ['deleted_at'];
 
     /**
-     * Get the appointments for the user
+     * Get the appointments assigned for the sales agents
      */
     public function appointments() {
         return $this->hasMany('App\Appointment', 'sales_agent_id', 'id');
+    }
+
+    /**
+     * Get the appointments created by call agents
+     */
+    public function callAgentsAppointments()
+    {
+        return $this->hasMany('App\Appointment', 'created_by', 'id');
     }
 
     /**
