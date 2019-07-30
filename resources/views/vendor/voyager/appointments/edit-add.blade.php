@@ -297,19 +297,6 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdw_S7lZML8VVa7qppO6UsVjYcwinCCPk"></script>
     <script>
         window.google = google;
-        // var point = new google.maps.LatLng(38.41054600530499, -112.85153749999995);
-        // Geocoder.geocode({ 'latLng': point }, function (results, status) {
-        //     if (status !== google.maps.GeocoderStatus.OK) {
-        //     alert(status);
-        //     }
-        //     // This is checking to see if the Geoeode Status is OK before proceeding
-        //     if (status == google.maps.GeocoderStatus.OK) {
-        //     console.log(results);
-        //     var address = (results[0].formatted_address);
-        //     // create the Marker where the address variable is valid
-        //     var marker = createMarker(point,"Marker 1", point + "<br> Closest Matching Address:" + address)
-        //     }
-        // });
     </script>
     <!-- VUEJS -->
     <script src="/js/pages/appointments.js"></script>

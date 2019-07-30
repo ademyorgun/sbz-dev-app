@@ -72,7 +72,6 @@
                     // group closed appointments
                     array_push($appointmentsGroupClosed, $appointment);
 
-
                 }
             }
         } 

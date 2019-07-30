@@ -34,8 +34,6 @@
         $options = $row->details;
     @endphp
 
-    {{-- we dont wan to show this field, but we need to have the input hidden
-        check the field that's been included for more details --}}
     @if (isset($row->details->view) )
         @include($row->details->view, ['currentUserRole' => $currentUserRole,'options' => $row->details,'row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $dataTypeContent->{$row->field}, 'action' => ($edit ? 'edit' : 'add')])
     @elseif($row->type == 'relationship' && $row->field == 'appointment_belongsto_user_relationship_1')

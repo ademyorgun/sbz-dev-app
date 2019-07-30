@@ -24,7 +24,6 @@
 @if (!$noRoles) 
     @foreach ($roles as $readonlyUserRole)
         @if ($currentUserRole == strtolower($readonlyUserRole))
-            {{-- {{ dd($users) }} --}}
             <select name="{{ $row->field }}" class="form-control" disabled="disabled">
                 <optgroup label="{{ __('voyager::generic.custom') }}">
                 @foreach($users as $key => $user)
@@ -37,7 +36,7 @@
             @php
                 $currentUserRoleIsNotListed = false;
             @endphp
-            
+            @break
         @else
             @php
                 $currentUserRoleIsNotListed = true;

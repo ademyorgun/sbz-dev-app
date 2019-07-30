@@ -119,7 +119,7 @@
                 @php
                     $currentUserRoleIsNotListed = false;
                 @endphp
-                
+                @break
             @else
                 @php
                     $currentUserRoleIsNotListed = true;
