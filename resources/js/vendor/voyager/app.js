@@ -2,7 +2,8 @@ $(document).ready(function() {
     var date = new Date();
 
     $(".datepicker--date-only").datetimepicker({
-        format: "DD-MM-YYYY"
+        format: "DD-MM-YYYY",
+        // minDate: startDate
         // format: "YYYY-MM-DD"
     });
 

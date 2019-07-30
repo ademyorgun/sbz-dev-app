@@ -386,36 +386,72 @@
 
     @if (strtolower(auth()->user()->role->name) == 'sales_agent')
         <script>
-            // to make the labels clickable on teh 
+            // to make the labels clickable on the
             // radio button, one click trggers two,
             // we only want to fire our event son 
             // click the second 
             var count = 1;
-            // watch radio button for click
-            // when clicked if checked
-            // show sales section
-            // and if positiv is checked
+            
             $('document').ready(function() {
+                if($("input[name='comment_status']:checked").val()) {
+                    if($("input[name='comment_status']:checked").val().toLowerCase() == 'open') {
+                        // remove readonly from visit time and visit date fields
+                        $('#visitDate').find('input').prop('readonly', false);
+                        $('#visitTime').find('input').prop('readonly', false);
+                    }
+                }
+
                 // this section and field has to be hidden
                 $('#comment_feedback_input').hide();
                 $('#salesSection').hide();
 
-                $('#comment_status_radios').click(function(e) {
+                $('#comment_status_radios').click(function() {
                     if(count == 2) {
                         if ($("input[name='comment_status']:checked").val()) {
                             count = 1;
+
                             $('#comment_feedback_input').show();
-                            
+
                             if($("input[name='comment_status']:checked").val().toLowerCase() == 'positive') {
                                 $('#salesSection').show();
+                                $('#visitDate').find('input').prop('readonly', true);
+                                $('#visitTime').find('input').prop('readonly', true);
+
+                            } else if($("input[name='comment_status']:checked").val().toLowerCase() == 'open') {
+                                // remove readonly from visit time and visit date fields
+                                
+                                var startDate = new Date();
+                                var startDate = startDate.setDate(startDate.getDate() - 1);
+                                var oldDate = $("#visitDate .datepicker--date-only").val();
+                                var test = $("#visitDate .datepicker--date-only").datetimepicker('destroy');
+
+                                $("#visitDate  .datepicker--date-only").datetimepicker({
+                                    format: "DD-MM-YYYY",
+                                    minDate: startDate
+                                });
+
+                                $("#visitDate  .datepicker--date-only").val(oldDate);
+
+                                $('#visitDate').find('input').prop('readonly', false);
+                                $('#visitTime').find('input').prop('readonly', false);
+
                             } else {
                                 $('#salesSection').hide();
+                                $('#visitDate').find('input').prop('readonly', true);
+                                $('#visitTime').find('input').prop('readonly', true);
+
                             }
                         } 
                     } else {
                         count++;
+
                     }
                 });
+
+                // Sales agent can only save the appointment, 
+                // when a conversion status is selected 
+                // and geolocation is performed
+
             });
         </script>
     @endif

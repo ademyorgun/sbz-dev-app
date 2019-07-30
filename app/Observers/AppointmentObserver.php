@@ -43,22 +43,30 @@ class AppointmentObserver
         // appointment reschduled
         if($appointment->duplicated_to_id != null) {
             $appointment->appointment_status = 'Neu geplant'; // re-sechduled
+
         } else {
             // appointment was edited and without a visit date
              if($appointment->meeting_date == null) {
                 $appointment->appointment_status = 'ungeplant'; // unplanned
+
             } else {
                 if(isset($appointment->sales_agent_id)) {
                     $appointment->appointment_status = 'zugeteilt'; // assigned
+
                 } else{
                     $appointment->appointment_status = 'nicht zugeteilt'; // not assigned
+
                 }
             }
         }
 
         // Appointment has any status
         if( $appointment->comment_status != null) {
-            $appointment->appointment_status = 'abgeschlossen'; // closed
+            if($appointment->comment_status == 'open') {
+                $appointment->appointment_status = 'Neu geplant'; // re-sechduled
+            } else {
+                $appointment->appointment_status = 'abgeschlossen'; // closed
+            }
         }   
         
         // Appointment has a geo tracking location saved

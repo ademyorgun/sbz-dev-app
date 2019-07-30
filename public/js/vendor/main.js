@@ -96,7 +96,8 @@
 $(document).ready(function () {
   var date = new Date();
   $(".datepicker--date-only").datetimepicker({
-    format: "DD-MM-YYYY" // format: "YYYY-MM-DD"
+    format: "DD-MM-YYYY" // minDate: startDate
+    // format: "YYYY-MM-DD"
 
   });
   $("#call-date").children(".form-control").attr("readonly", "readonly").val( // date

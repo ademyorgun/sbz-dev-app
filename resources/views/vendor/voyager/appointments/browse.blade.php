@@ -50,20 +50,30 @@
 
     foreach ($dataTypeContent as $key => $appointment) { 
         $now = now()->toDateString();
+
         if(isset($appointment->meeting_date)) {
             $meeting_date = $appointment->meeting_date->toDateString();
             // group feedback pending
+
             if(!isset($appointment->comment_status) && ( $meeting_date < $now )) {
                 array_push($appointmentsGroupFeedbackPending, $appointment);
+
             }
             // group appointment open 
             elseif(!isset($appointment->comment_status) && ( $meeting_date >= $now )) { 
                 array_push($appointmentsGroupOpen, $appointment);
+
+            } 
+            elseif($appointment->comment_status == 'open' && ( $meeting_date >= $now )) {
+                array_push($appointmentsGroupOpen, $appointment);
             }
+
         // group closed appointments
         } elseif(isset($appointment->comment_status)) {
             array_push($appointmentsGroupClosed, $appointment);
+
         }
+
     }
 @endphp
 
