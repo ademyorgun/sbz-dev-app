@@ -70,3 +70,7 @@ Route::group(['as' => 'voyager.'], function () {
 
     event(new RoutingAfter());
 });
+
+if (App::environment('production', 'staging')) {
+    URL::forceScheme('https');
+}

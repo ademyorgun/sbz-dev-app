@@ -39,7 +39,7 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
         $this->authorize('browse', app($dataType->model_name));
 
         $getter = $dataType->server_side ? 'paginate' : 'get';
-        
+
         // Row data and options
         foreach ($dataType->addRows as $key => $row) {
             $dataType->addRows[$key]['col_width'] = $row->details->width ?? 100;
@@ -67,7 +67,7 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
         if (strlen($dataType->model_name) != 0) {
             $model = app($dataType->model_name);
 
-            if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope'.ucfirst($dataType->scope))) {
+            if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope' . ucfirst($dataType->scope))) {
                 $query = $model->{$dataType->scope}();
             } else {
                 $query = $model::select('*');
@@ -88,7 +88,7 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
 
             if ($search->value != '' && $search->key && $search->filter) {
                 $search_filter = ($search->filter == 'equals') ? '=' : 'LIKE';
-                $search_value = ($search->filter == 'equals') ? $search->value : '%'.$search->value.'%';
+                $search_value = ($search->filter == 'equals') ? $search->value : '%' . $search->value . '%';
                 $query->where($search->key, $search_filter, $search_value);
             }
 
@@ -169,9 +169,9 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
         $this->authorize('add', app($dataType->model_name));
 
         $dataTypeContent = (strlen($dataType->model_name) != 0)
-                            ? new $dataType->model_name()
-                            : false;
-        
+            ? new $dataType->model_name()
+            : false;
+
         foreach ($dataType->addRows as $key => $row) {
             $dataType->addRows[$key]['col_width'] = $row->details->width ?? 100;
         }
@@ -209,11 +209,11 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
         event(new BreadDataUpdated($dataType, $data));
 
         return redirect()
-        ->route("voyager.{$dataType->slug}.index")
-        ->with([
-            'message'    => __('voyager::generic.successfully_updated')." {$dataType->display_name_singular}",
-            'alert-type' => 'success',
-        ]);
+            ->route("voyager.{$dataType->slug}.index")
+            ->with([
+                'message'    => __('voyager::generic.successfully_updated') . " {$dataType->display_name_singular}",
+                'alert-type' => 'success',
+            ]);
     }
 
     // POST BR(E)AD
@@ -225,7 +225,7 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
 
         // agents can only save an appoitment if geolocation 
         // is performed and conversion status is made
-        if(strtolower(auth()->user()->role->name) == 'sales_agent') {
+        if (strtolower(auth()->user()->role->name) == 'sales_agent') {
             $validatedData = $request->validate([
                 'comment_status' => 'required',
                 'sales_visit_location' => 'required'
@@ -278,26 +278,26 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
         $appointmentDateStart = $request->input('appointmentDateStart');
         $callDateEnd = $request->input('callDateEnd');
         $callDateStart = $request->input('callDateStart');
-        if($appointmentDateEnd != null ) {
+        if ($appointmentDateEnd != null) {
             $appointmentDateEnd = Carbon::parse($appointmentDateEnd, 'Europe/London')->format('Y-m-d');
-        } 
-        if($appointmentDateStart != null ) {
+        }
+        if ($appointmentDateStart != null) {
             $appointmentDateStart = Carbon::parse($appointmentDateStart, 'Europe/London')->format('Y-m-d');
-        } 
-        if($callDateEnd != null ) {
+        }
+        if ($callDateEnd != null) {
             $callDateEnd = Carbon::parse($callDateEnd, 'Europe/London')->format('Y-m-d');
-        } 
-        if($callDateStart != null ) {
+        }
+        if ($callDateStart != null) {
             $callDateStart = Carbon::parse($callDateStart, 'Europe/London')->format('Y-m-d');
-        } 
-        
-        
+        }
+
+
         // dd($phoneNumber);
 
         // dd( Carbon::parse($callDateStart, 'Europe/London')->format('Y-m-d'));
         // GET THE SLUG
         $slug = 'appointments';
-        
+
         // GET THE DataType based on the slug
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
@@ -308,7 +308,7 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
         $this->authorize('browse', app($dataType->model_name));
 
         $getter = $dataType->server_side ? 'paginate' : 'get';
-        
+
         // Row data and options
         foreach ($dataType->addRows as $key => $row) {
             $dataType->addRows[$key]['col_width'] = $row->details->width ?? 100;
@@ -337,63 +337,63 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
             $model = app($dataType->model_name);
 
             // If we are using model scoping
-            if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope'.ucfirst($dataType->scope))) {
+            if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope' . ucfirst($dataType->scope))) {
                 $query = $model->{$dataType->scope}()->when($appointmentID, function ($data, $appointmentID) {
-                                return $data->where('id', '=', $appointmentID);
-                            })
-                            ->when($phoneNumber, function ($data, $phoneNumber) {
-                                return $data->where('telephone_number', '=', $phoneNumber);
-                            })
-                            ->when($userID, function ($data, $userID) {
-                                return $data->where('sales_agent_id', '=', $userID);
-                            })
-                            ->when($canton, function ($data, $canton) {
-                                return $data->where('canton_city', '=', $canton);
-                            })
-                            ->when($wantedExpert, function ($data, $wantedExpert) {
-                                return $data->where('wanted_expert', '=', $wantedExpert);
-                            })
-                            ->when($appointmentDateEnd, function ($data, $appointmentDateEnd) {
-                                return $data->where('meeting_date', '<=', $appointmentDateEnd);
-                            })
-                            ->when($appointmentDateStart, function ($data, $appointmentDateStart) {
-                                return $data->where('meeting_date', '>=', $appointmentDateStart);
-                            })
-                            ->when($callDateEnd, function ($data, $callDateEnd) {
-                                return $data->where('call_date', '<=', $callDateEnd);
-                            })
-                            ->when($callDateStart, function ($data, $callDateStart) {
-                                return $data->where('call_date', '>=', $callDateStart);
-                            });
+                    return $data->where('id', '=', $appointmentID);
+                })
+                    ->when($phoneNumber, function ($data, $phoneNumber) {
+                        return $data->where('telephone_number', '=', $phoneNumber);
+                    })
+                    ->when($userID, function ($data, $userID) {
+                        return $data->where('sales_agent_id', '=', $userID);
+                    })
+                    ->when($canton, function ($data, $canton) {
+                        return $data->where('canton_city', '=', $canton);
+                    })
+                    ->when($wantedExpert, function ($data, $wantedExpert) {
+                        return $data->where('wanted_expert', '=', $wantedExpert);
+                    })
+                    ->when($appointmentDateEnd, function ($data, $appointmentDateEnd) {
+                        return $data->where('meeting_date', '<=', $appointmentDateEnd);
+                    })
+                    ->when($appointmentDateStart, function ($data, $appointmentDateStart) {
+                        return $data->where('meeting_date', '>=', $appointmentDateStart);
+                    })
+                    ->when($callDateEnd, function ($data, $callDateEnd) {
+                        return $data->where('call_date', '<=', $callDateEnd);
+                    })
+                    ->when($callDateStart, function ($data, $callDateStart) {
+                        return $data->where('call_date', '>=', $callDateStart);
+                    });
             } else {
                 // $query = $model::select('*');
                 $query = $model::when($appointmentID, function ($data, $appointmentID) {
-                                return $data->where('id', '=', $appointmentID);
-                            })
-                            ->when($phoneNumber, function ($data, $phoneNumber) {
-                                return $data->where('telephone_number', '=', $phoneNumber);
-                            })
-                            ->when($userID, function ($data, $userID) {
-                                return $data->where('sales_agent_id', '=', $userID);
-                            })
-                            ->when($canton, function ($data, $canton) {
-                                return $data->where('canton_city', '=', $canton);
-                            })
-                            ->when($wantedExpert, function ($data, $wantedExpert) {
-                                return $data->where('wanted_expert', '=', $wantedExpert);
-                            })
-                            ->when($appointmentDateEnd, function ($data, $appointmentDateEnd) {
-                                return $data->where('meeting_date', '<=', $appointmentDateEnd);
-                            })
-                            ->when($appointmentDateStart, function ($data, $appointmentDateStart) {
-                                return $data->where('meeting_date', '>=', $appointmentDateStart);
-                            })
-                            ->when($callDateEnd, function ($data, $callDateEnd) {
-                                return $data->where('call_date', '<=', $callDateEnd);
-                            })
-                            ->when($callDateStart, function ($data, $callDateStart) {
-                                return $data->where('call_date', '>=', $callDateStart);
-                            });
+                    return $data->where('id', '=', $appointmentID);
+                })
+                    ->when($phoneNumber, function ($data, $phoneNumber) {
+                        return $data->where('telephone_number', '=', $phoneNumber);
+                    })
+                    ->when($userID, function ($data, $userID) {
+                        return $data->where('sales_agent_id', '=', $userID);
+                    })
+                    ->when($canton, function ($data, $canton) {
+                        return $data->where('canton_city', '=', $canton);
+                    })
+                    ->when($wantedExpert, function ($data, $wantedExpert) {
+                        return $data->where('wanted_expert', '=', $wantedExpert);
+                    })
+                    ->when($appointmentDateEnd, function ($data, $appointmentDateEnd) {
+                        return $data->where('meeting_date', '<=', $appointmentDateEnd);
+                    })
+                    ->when($appointmentDateStart, function ($data, $appointmentDateStart) {
+                        return $data->where('meeting_date', '>=', $appointmentDateStart);
+                    })
+                    ->when($callDateEnd, function ($data, $callDateEnd) {
+                        return $data->where('call_date', '<=', $callDateEnd);
+                    })
+                    ->when($callDateStart, function ($data, $callDateStart) {
+                        return $data->where('call_date', '>=', $callDateStart);
+                    });
             }
 
             // // Use withTrashed() if model uses SoftDeletes and if toggle is selected
@@ -409,7 +409,7 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
             // If a column has a relationship associated with it, we do not want to show that field
             $this->removeRelationshipField($dataType, 'browse');
 
-            
+
             if ($orderBy && in_array($orderBy, $dataType->fields())) {
                 $querySortOrder = (!empty($sortOrder)) ? $sortOrder : 'desc';
                 $dataTypeContent = call_user_func([
@@ -459,7 +459,7 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
             'showSoftDeleted',
             'users'
         ))->render();
-        
+
         // render the paginator
         $paginator = view('vendor.voyager.inc.paginator', compact(
             'dataTypeContent',

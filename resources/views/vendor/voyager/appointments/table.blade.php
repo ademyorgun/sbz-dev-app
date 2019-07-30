@@ -8,21 +8,15 @@
                             <input type="checkbox" class="select_all">
                         </th>
                     @endcan
+                    <th class="actions text-right">{{ __('voyager::generic.actions') }}</th>
+                    <th>Feedback</th>
                 @endif
                 <th>
                     @if ($isServerSide)
                         <div>
                     @endif
                     
-                    {{-- displaying custom names --}}
-                    @switch($row->display_name)
-                        @case("Canton City")
-                            Canton
-                            @break
-                    
-                        @default
-                            {{ $row->display_name }}
-                    @endswitch
+                    {{ $row->display_name }}
 
                     @if ($isServerSide)
                         @if ($row->isCurrentSortField($orderBy))
@@ -36,14 +30,13 @@
                     @endif
                 </th>
             @endforeach
-            <th class="actions text-right">{{ __('voyager::generic.actions') }}</th>
-            <th>Feedback</th>
         </tr>
     </thead>
     <tbody>
         @foreach($dataTypeContent as $data)
         <tr>
             @foreach($dataType->browseRows as $row)
+
                 {{-- To alter the chebox selector to the second column --}}
                 @if ($loop->index == 1)
                     @can('delete',app($dataType->model_name))
@@ -51,6 +44,16 @@
                             <input type="checkbox" name="row_id" id="checkbox_{{ $data->getKey() }}" value="{{ $data->getKey() }}">
                         </td>
                     @endcan
+                    <td class="no-sort no-click" id="bread-actions">
+                        @foreach(Voyager::actions() as $action)
+                            @if (!method_exists($action, 'massAction'))
+                                @include('voyager::bread.partials.actions', ['action' => $action])
+                            @endif
+                        @endforeach
+                    </td>
+                    <td>
+                        <appointments-modal-btn :appointment-id="{{ $data->getKey() }}" @open-comments-modal="openCommentsModal"></appointments-modal-btn>
+                    </td>
                 @endif
                 @php
                 if ($data->{$row->field.'_browse'}) {
@@ -60,8 +63,18 @@
                 <td class="no-sort no-click" @if ($row->field == "canton_city" or $row->field == 'meeting_time')
                     {!! 'bgcolor="#62a8ea" style="color: #fff"'  !!}
                 @endif>
-                    {{-- @if (isset($row->details->view))
-                        @include($row->details->view, ['row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $data->{$row->field}, 'action' => 'browse']) --}}
+
+                    @if ($row->field == 'sales_agent_id')
+                        @php
+                            $model = app('App\User');
+                            $users2 = $model::where('id' , '=', $data->{$row->field})->get();
+                        @endphp 
+                        @foreach ($users2 as $user)
+                            <span>{{ $user->user_name }}</span>
+                        @endforeach
+                        @continue
+                    @endif 
+
                     @if($row->type == 'image')
                         <img src="@if( !filter_var($data->{$row->field}, FILTER_VALIDATE_URL)){{ Voyager::image( $data->{$row->field} ) }}@else{{ $data->{$row->field} }}@endif" style="width:100px">
                     @elseif($row->type == 'relationship')
@@ -188,34 +201,11 @@
                         @endif
                     @else
                         @include('voyager::multilingual.input-hidden-bread-browse')
-                        @if ($row->field == 'call_agent_id')
-                            @php
-                                $model = app('App\User');
-                                $users2 = $model::where('id' , '=', $data->{$row->field})->get();
-                            @endphp 
-                            @foreach ($users2 as $user)
-                            <span>{{ $user->user_name }}</span>
-                            @endforeach
-                        @else 
                             <span>{{ $data->{$row->field} }}</span>
-                        @endif
                     @endif
                 </td>
             @endforeach
-            <td class="no-sort no-click" id="bread-actions">
-                @foreach(Voyager::actions() as $action)
-                    @if (!method_exists($action, 'massAction'))
-                        @include('voyager::bread.partials.actions', ['action' => $action])
-                    @endif
-                @endforeach
-            </td>
-            {{-- @if (strtolower(auth()->user()->role) == 'superadmin' ||  strtolower(auth()->user()->role) == 'superadmin' == '')
-                
-            @endif --}}
-            <td>
-                <appointments-modal-btn :appointment-id="{{ $data->getKey() }}" @open-comments-modal="openCommentsModal"></appointments-modal-btn>
-            </td>
         </tr>
         @endforeach
     </tbody>
-</table>
+    </table>
