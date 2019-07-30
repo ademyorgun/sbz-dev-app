@@ -42,7 +42,10 @@
 
 @section('content')
 {{-- call agent shouldn't see any appointments --}}
-@if (strtolower(auth()->user()->role->name) == 'sales_agent' )
+@php
+    $currentLogedInUserRole =strtolower(auth()->user()->role->name);
+@endphp
+@if ($currentLogedInUserRole == 'sales_agent' )
     @php
     $appointmentsGroupFeedbackPending = [];
     $appointmentsGroupOpen = [];
@@ -145,7 +148,7 @@
     ])
 </div>
 
-@elseif (strtolower(auth()->user()->role->name) != 'call_agent')
+@elseif ($currentLogedInUserRole != 'call_agent')
     <div class="page-content browse container-fluid" id="app">    
         {{-- comments modal --}}
         <appointments-comments-modal></appointments-comments-modal>
@@ -212,6 +215,7 @@
                                                     @endcan
                                                     <th class="actions text-right">{{ __('voyager::generic.actions') }}</th>
                                                     <th>Feedback</th>
+                                                    <th>Call center</th>
                                                 @endif
                                                 <th>
                                                     @if ($isServerSide)
@@ -255,6 +259,22 @@
                                                     </td>
                                                     <td>
                                                         <appointments-modal-btn :appointment-id="{{ $data->getKey() }}" @open-comments-modal="openCommentsModal"></appointments-modal-btn>
+                                                    </td>
+                                                    <td>
+                                                        @php
+                                                            $model = app('App\User');
+                                                            if(isset($data->created_by)) {
+                                                                $createdBy = $model::where('id' , '=', $data->created_by)->first();
+                                                                if(strtolower($createdBy->role->name) == 'call_agent' || strtolower($createdBy->role->name) == 'call_center_manager') {
+                                                                    if(isset($createdBy->callCenter->name)) {
+                                                                        $center =  $createdBy->callCenter->name;
+                                                                    }
+                                                                }
+                                                            }
+                                                        @endphp 
+                                                        @if (isset($center))
+                                                            {{ $center }}
+                                                        @endif
                                                     </td>
                                                 @endif
                                                 @php
@@ -433,7 +453,7 @@
                     </div>
                 </div>
             </div>
-            @if ( strtolower(auth()->user()->role->name) == 'superadmin')
+            @if ( $currentLogedInUserRole == 'superadmin')
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-primary panelbordered">

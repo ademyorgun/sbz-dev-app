@@ -58,6 +58,6 @@ class User extends \TCG\Voyager\Models\User
      */
     public function callCenter()
     {
-        return $this->belongsTo('App\CallCenter', 'created_by', 'id');
+        return $this->belongsTo('App\CallCenter', 'call_center_id', 'id');
     }
 }
