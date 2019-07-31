@@ -179,6 +179,21 @@
                 </div>
             </div>
 
+            <!-- call details panel -->
+            <div class="panel panel-primary panel-bordered">
+                <div class="panel-heading">
+                    <h3 class="panel-title panel-icon"><i class="voyager-paper-plane"></i>Termin Details</h3>
+                    <div class="panel-actions">
+                        <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
+                    </div>
+                </div>
+                <div class="panel-body mt-1">
+                    @foreach ($visit_details_fields as $row)
+                        @include('vendor.voyager.appointments.form-component')
+                    @endforeach
+                </div>
+            </div>
+
             <!-- Sales details panel -->
             <div class="panel panel-primary panel-bordered" id="salesSection">
                 <div class="panel-heading">
@@ -194,20 +209,14 @@
                 </div>
             </div>
 
-            <!-- call details panel -->
-            <div class="panel panel-primary panel-bordered">
-                <div class="panel-heading">
-                    <h3 class="panel-title panel-icon"><i class="voyager-paper-plane"></i>Termin Details</h3>
-                    <div class="panel-actions">
-                        <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
+             @if ($edit)
+                <div class="row">
+                    <div class="col-md-12">
+                        <appointments-comments :appointment-id="{{$dataTypeContent->getKey()}}">
+                        </appointments-comments>
                     </div>
                 </div>
-                <div class="panel-body mt-1">
-                    @foreach ($visit_details_fields as $row)
-                        @include('vendor.voyager.appointments.form-component')
-                    @endforeach
-                </div>
-            </div>
+            @endif
 
             <!-- questionaires panel -->
             <div class="panel panel-primary panel-bordered" id="edit-create-questionaires">
@@ -256,15 +265,6 @@
                 </div>
             </div>
         </form>
-
-        @if ($edit)
-            <div class="row">
-                <div class="col-md-12">
-                    <appointments-comments :appointment-id="{{$dataTypeContent->getKey()}}">
-                    </appointments-comments>
-                </div>
-            </div>
-        @endif
     </div>
 
     <div class="modal fade modal-danger" id="confirm_delete_modal">
