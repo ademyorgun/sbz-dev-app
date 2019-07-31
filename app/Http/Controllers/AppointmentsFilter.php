@@ -26,7 +26,6 @@ class AppointmentsFilter extends BaseVoyagerBaseController
         // GET THE SLUG
         $slug = 'appointments';
         
-
         // Different data for different views
         if ($isAgentView) {
             $now = now()->toDateString();

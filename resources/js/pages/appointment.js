@@ -58,6 +58,7 @@ const app = new Vue({
             this.isAgentView = isAgentView;
             data.isAgentView = isAgentView;
             this.filterData = data;
+            
             if (!isAgentView) {
                 axios
                     .post("appointments/filter", data)

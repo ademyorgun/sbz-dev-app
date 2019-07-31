@@ -405,7 +405,13 @@
                             </div>
                             @if ($isServerSide)
                                 <div class="pull-right">
-                                    <appointments-paginator :pagination-data="paginationData" @get-results="paginatorChangePage" :initial-pagination-data="{{ $dataTypeContent->toJson() }}"></appointments-paginator>
+                                    <appointments-paginator 
+                                    :pagination-data="paginationData" 
+                                    @get-results="paginatorChangePage" 
+                                    :initial-pagination-data="{{ $dataTypeContent->toJson() }}"
+                                    table-id="table"
+                                >
+                            </appointments-paginator>
                                 </div>
                             @endif
                         </div>

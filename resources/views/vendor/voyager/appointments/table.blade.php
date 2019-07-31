@@ -1,3 +1,6 @@
+@php
+    $currentLogedInUserRole =strtolower(auth()->user()->role->name);
+@endphp
 <table id="dataTable" class="table table-hover table-striped table-bordered">
     <thead>
         <tr>
@@ -10,7 +13,10 @@
                     @endcan
                     <th class="actions text-right">{{ __('voyager::generic.actions') }}</th>
                     <th>Feedback</th>
-                @endif
+                    @if ($currentLogedInUserRole == 'superadmin')
+                        <th>Call center</th>
+                    @endif
+                    @endif
                 <th>
                     @if ($isServerSide)
                         <div>
@@ -54,6 +60,21 @@
                     <td>
                         <appointments-modal-btn :appointment-id="{{ $data->getKey() }}" @open-comments-modal="openCommentsModal"></appointments-modal-btn>
                     </td>
+                    @if ($currentLogedInUserRole == 'superadmin')
+                        <td>
+                            @php
+                                $model = app('App\User');
+                                if(isset($data->created_by)) {
+                                    $createdBy = $model::where('id' , '=', $data->created_by)->first();
+                                    if(strtolower($createdBy->role->name) == 'call_agent' || strtolower($createdBy->role->name) == 'call_center_manager') {
+                                        if(isset($createdBy->callCenter->name)) {
+                                        echo $createdBy->callCenter->name;
+                                        }
+                                    }
+                                }
+                            @endphp 
+                        </td>
+                    @endif
                 @endif
                 @php
                 if ($data->{$row->field.'_browse'}) {
@@ -208,4 +229,4 @@
         </tr>
         @endforeach
     </tbody>
-    </table>
+</table>
