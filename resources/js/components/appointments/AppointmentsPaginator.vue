@@ -18,6 +18,9 @@ export default {
     },
     initialPaginationData: {
       type: Object
+    },
+    tableId: {
+      type: String
     }
   },
 
@@ -34,7 +37,7 @@ export default {
   methods: {
       changePage(page = 1) {
           console.log(page, 'paginator');
-          this.$emit('get-results', page);
+          this.$emit('get-results', page, this.tableId);
       },
 
       isEmpty(obj) {

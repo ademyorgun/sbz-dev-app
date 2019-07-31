@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use App\Scopes\CallAgentsScope;
 use App\Scopes\SalesAgentsScope;
 use App\Scopes\OrderingAppointmentsScope;
@@ -36,7 +37,7 @@ class Appointment extends Model
         'call_date'
     ];
 
-    protected $perPage = 50;
+    protected $perPage = 1;
 
     /**
      * The storage format of the model's date columns.
@@ -132,4 +133,61 @@ class Appointment extends Model
         });
     }
 
+    /**
+     * Scope filter appointemtns
+     * 
+     * 
+     */
+    public function scopeFilterAppointments($query, $request) {
+        $appointmentID = $request->input('appointmentID');
+        $phoneNumber = $request->input('phoneNumber');
+        $userID = $request->input('userID');
+        $canton = $request->input('canton');
+        $wantedExpert = $request->input('wantedExpert');
+        $appointmentDateEnd = $request->input('appointmentDateEnd');
+        $appointmentDateStart = $request->input('appointmentDateStart');
+        $callDateEnd = $request->input('callDateEnd');
+        $callDateStart = $request->input('callDateStart');
+
+        if ($appointmentDateEnd != null) {
+            $appointmentDateEnd = Carbon::parse($appointmentDateEnd, 'Europe/London')->format('Y-m-d');
+        }
+        if ($appointmentDateStart != null) {
+            $appointmentDateStart = Carbon::parse($appointmentDateStart, 'Europe/London')->format('Y-m-d');
+        }
+        if ($callDateEnd != null) {
+            $callDateEnd = Carbon::parse($callDateEnd, 'Europe/London')->format('Y-m-d');
+        }
+        if ($callDateStart != null) {
+            $callDateStart = Carbon::parse($callDateStart, 'Europe/London')->format('Y-m-d');
+        }
+
+        return $query->when($appointmentID, function ($data, $appointmentID) {
+                return $data->where('id', '=', $appointmentID);
+            })
+            ->when($phoneNumber, function ($data, $phoneNumber) {
+                return $data->where('telephone_number', '=', $phoneNumber);
+            })
+            ->when($userID, function ($data, $userID) {
+                return $data->where('sales_agent_id', '=', $userID);
+            })
+            ->when($canton, function ($data, $canton) {
+                return $data->where('canton_city', '=', $canton);
+            })
+            ->when($wantedExpert, function ($data, $wantedExpert) {
+                return $data->where('wanted_expert', '=', $wantedExpert);
+            })
+            ->when($appointmentDateEnd, function ($data, $appointmentDateEnd) {
+                return $data->where('meeting_date', '<=', $appointmentDateEnd);
+            })
+            ->when($appointmentDateStart, function ($data, $appointmentDateStart) {
+                return $data->where('meeting_date', '>=', $appointmentDateStart);
+            })
+            ->when($callDateEnd, function ($data, $callDateEnd) {
+                return $data->where('call_date', '<=', $callDateEnd);
+            })
+            ->when($callDateStart, function ($data, $callDateStart) {
+                return $data->where('call_date', '>=', $callDateStart);
+            });
+    }
 }

@@ -41,6 +41,9 @@ const app = new Vue({
         isGeoSavedSuccess: false,
         responseMessage: '',
         isAgentView: false,
+        feedbackOpenPaginator: {},
+        openAppointmentsPaginator: {},
+        closedAppointmentsPaginator: {}
     },
 
     computed: {},
@@ -51,12 +54,13 @@ const app = new Vue({
          * @param {*} data
          * @param {*} page
          */
-        getResults(data, isAgentView ) {
+        getResults(data, isAgentView) {
             this.isAgentView = isAgentView;
+            data.isAgentView = isAgentView;
             this.filterData = data;
             if (!isAgentView) {
                 axios
-                    .post("appointments/filter?", data)
+                    .post("appointments/filter", data)
                     .then(response => {
                         try {
                             // update the table
@@ -69,18 +73,24 @@ const app = new Vue({
                             console.warn(e);
                         }
                     });
-            } else {
-                let customData = data;
-                customData.isAgentView = isAgentView;
+            } else { // agent view
                 axios
-                    .post("appointments/filter?", customData)
+                    .post("appointments/filter", this.filterData)
                     .then(response => {
                         try {
-                            // update the table
-                            let table = document.querySelector("#table");
-                            table.innerHTML = response.data.table;
+                            // update the tables
+                            let feedbackOpen = document.querySelector("#feedbackOpen");
+                            let openAppointments = document.querySelector("#openAppointments");
+                            let closedAppointments = document.querySelector("#closedAppointments");
 
-                            this.paginationData = response.data.dataTypeContent;
+                            feedbackOpen.innerHTML = response.data.feedbackOpen;
+                            openAppointments.innerHTML = response.data.openAppointments;
+                            closedAppointments.innerHTML = response.data.closedAppointments;
+
+                            this.feedbackOpenPaginator = response.data.feedbackOpenPaginator;
+                            this.openAppointmentsPaginator = response.data.openAppointmentsPaginator;
+                            this.closedAppointmentsPaginator = response.data.closedAppointmentsPaginator;
+
                             this.isResultsFiltered = true;
                         } catch (e) {
                             console.warn(e);
@@ -94,21 +104,55 @@ const app = new Vue({
          *
          * @param {*} page
          */
-        paginatorChangePage(page) {
-            axios
-                .post("appointments/filter?page=" + page, this.filterData)
-                .then(response => {
-                    try {
-                        // update the table
-                        let table = document.querySelector("#table");
-                        table.innerHTML = response.data.table;
+        paginatorChangePage(page, tableId) {
+            if (tableId == 'table') {
+                axios
+                    .post("appointments/filter?page=" + page, this.filterData)
+                    .then(response => {
+                        try {
+                            // update the table
+                            let table = document.querySelector("#table");
+                            table.innerHTML = response.data.table;
 
-                        this.paginationData = response.data.dataTypeContent;
-                        this.isResultsFiltered = true;
-                    } catch (e) {
-                        console.warn(e);
-                    }
-                });
+                            this.paginationData = response.data.dataTypeContent;
+                            this.isResultsFiltered = true;
+                        } catch (e) {
+                            console.warn(e);
+                        }
+                    });
+                // agent view
+            } else {
+                let customData = this.filterData;
+                customData.isAgentView = true;
+                axios
+                    .post("appointments/filter?page=" + page, customData)
+                    .then(response => {
+                        try {
+                            // update the table
+                            if (tableId == 'feedbackOpen') {
+                                let feedbackOpen = document.querySelector("#feedbackOpen");
+                                feedbackOpen.innerHTML = response.data.feedbackOpen;
+                                this.feedbackOpenPaginator = response.data.feedbackOpenPaginator;
+
+                            } else if (tableId == 'openAppointments') {
+                                let openAppointments = document.querySelector("#openAppointments");
+                                openAppointments.innerHTML = response.data.openAppointments;
+                                this.openAppointmentsPaginator = response.data.openAppointmentsPaginator;
+
+                            } else if (tableId == 'closedAppointments') {
+                                let closedAppointments = document.querySelector("#closedAppointments");
+                                closedAppointments.innerHTML = response.data.closedAppointments;
+                                this.closedAppointmentsPaginator = response.data.closedAppointmentsPaginator;
+
+                            }
+
+                            this.isResultsFiltered = true;
+                        } catch (e) {
+                            console.warn(e);
+                        }
+                    });
+            }
+            
         },
 
         /**

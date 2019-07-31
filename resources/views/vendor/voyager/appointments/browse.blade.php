@@ -99,7 +99,6 @@
         'eltId' => 'feedbackOpen',
         'disableActions' => false,
         'dataTypeContent' => $appointmentsGroupFeedbackPending,
-        'pagination' => $dataTypeContent
     ])
     {{-- Open appointments group --}}
     @include('vendor.voyager.appointments.browse_agent_panel', 
@@ -108,7 +107,6 @@
         'eltId' => 'openAppointments',
         'disableActions' => false,
         'dataTypeContent' => $appointmentsGroupOpen,
-        'pagination' => $dataTypeContent
     ])
     {{-- Closed appointments group --}}
     @include('vendor.voyager.appointments.browse_agent_panel', 
@@ -117,7 +115,6 @@
         'eltId' => 'closedAppointments',
         'disableActions' => true,
         'dataTypeContent' => $appointmentsGroupClosed,
-        'pagination' => $dataTypeContent
     ])
 </div>
 
@@ -409,9 +406,6 @@
                             @if ($isServerSide)
                                 <div class="pull-right">
                                     <appointments-paginator :pagination-data="paginationData" @get-results="paginatorChangePage" :initial-pagination-data="{{ $dataTypeContent->toJson() }}"></appointments-paginator>
-                                    {{-- <div v-if="!isResultsFiltered">
-                                        {{ $dataTypeContent->links() }}    
-                                    </div> --}}
                                 </div>
                             @endif
                         </div>

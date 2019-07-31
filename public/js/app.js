@@ -1879,6 +1879,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     initialPaginationData: {
       type: Object
+    },
+    tableId: {
+      type: String
     }
   },
   computed: {
@@ -1894,7 +1897,7 @@ __webpack_require__.r(__webpack_exports__);
     changePage: function changePage() {
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       console.log(page, 'paginator');
-      this.$emit('get-results', page);
+      this.$emit('get-results', page, this.tableId);
     },
     isEmpty: function isEmpty(obj) {
       for (var key in obj) {

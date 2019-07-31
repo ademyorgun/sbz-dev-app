@@ -131,15 +131,15 @@ return [
     'dashboard' => [
         // Add custom list items to navbar's dropdown
         'navbar_items' => [
-            'voyager::generic.profile' => [
-                'route'      => 'voyager.profile',
-                'classes'    => 'class-full-of-rum',
-                'icon_class' => 'voyager-person',
-            ],
-            'voyager::generic.home' => [
-                'route'        => '/',
-                'icon_class'   => 'voyager-home',
-                'target_blank' => true,
+            // 'voyager::generic.profile' => [
+            //     'route'      => 'voyager.profile',
+            //     'classes'    => 'class-full-of-rum',
+            //     'icon_class' => 'voyager-person',
+            // ],
+            'voyager::additions.appointments' => [
+                'route'        => '/appointments',
+                'icon_class'   => 'voyager-calendar',
+                'target_blank' => false,
             ],
             'voyager::generic.logout' => [
                 'route'      => 'voyager.logout',

@@ -1,4 +1,4 @@
-<div class="row" id="{{ $eltId }}">
+<div class="row">
     <div class="col-md-12">
         <div class="panel panel-primary panel-bordered">
             <div class="panel-heading">
@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="panel-body">
-                <div class="table-responsive" id="table">
+                <div class="table-responsive" id="{{ $eltId }}">
                     <table id="dataTable" class="table table-hover table-striped table-bordered">
                         <thead>
                             <tr>
@@ -45,6 +45,7 @@
                         </thead>
                         <tbody>
                             @foreach($dataTypeContent as $data)
+
                             <tr>
                                 @foreach($dataType->browseRows as $row)
                                     {{-- To alter the chebox selector to the second column --}}
@@ -234,6 +235,15 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="pull-right">
+                    <appointments-paginator 
+                        :pagination-data="{{$eltId . 'Paginator'}}" 
+                        @get-results="paginatorChangePage" 
+                        :initial-pagination-data="{{ $dataTypeContent->toJson() }}"
+                        table-id="{{ $eltId }}"
+                    >
+                    </appointments-paginator>
                 </div>
             </div>
         </div>
