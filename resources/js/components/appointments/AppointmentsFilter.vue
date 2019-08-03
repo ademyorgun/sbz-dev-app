@@ -48,7 +48,7 @@
 
         <!-- user  -->
         <div class="form-group col-md-4">
-          <label class="control-label">Agent / Berater</label>
+          <label class="control-label">Sales Agent</label>
           <select class="form-control" name="wanted_expert" aria-hidden="true" v-model="userID">
             <option disabled value selected>Please select one</option>
             <slot name="users"></slot>

@@ -22678,7 +22678,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-4" }, [
           _c("label", { staticClass: "control-label" }, [
-            _vm._v("Agent / Berater")
+            _vm._v("Sales Agent")
           ]),
           _vm._v(" "),
           _c(

@@ -105,7 +105,12 @@ class ReportsController extends Controller
             $numOfAppointmentsPerStatus[$statusDe[strtolower($status)]] = 0;
         }
 
-        $dayToUse = $selectedDay;
+        if(now()->month == $selectedMonth) {
+            $dayToUse = $selectedDay;
+        } else {
+            $dayToUse = \Carbon\Carbon::createFromDate($selectedYear, $selectedMonth)->daysInMonth;
+        }
+
         while ($dayToUse > 0) {
             $allAppointmentsPositive = [];
             $allAppointmentsNegative = [];

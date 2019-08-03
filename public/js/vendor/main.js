@@ -100,15 +100,7 @@ $(document).ready(function () {
     // format: "YYYY-MM-DD"
 
   });
-  $("#call-date").children(".form-control").attr("readonly", "readonly").val( // date
-  //     .getDate()
-  //     .toString()
-  //     .padStart(2, 0) +
-  //     "-" +
-  //     (date.getMonth() + 1).toString().padStart(2, 0) +
-  //     "-" +
-  //     date.getFullYear().toString()
-  date.getDate().toString().padStart(2, 0) + "-" + (date.getMonth() + 1).toString().padStart(2, 0) + "-" + date.getFullYear().toString());
+  $("#call-date").children(".form-control").val(date.getDate().toString().padStart(2, 0) + "-" + (date.getMonth() + 1).toString().padStart(2, 0) + "-" + date.getFullYear().toString());
   $(".datepicker--time-only").datetimepicker({
     format: "HH:mm"
   }); // disable chaging the value by mouse scroll
@@ -120,11 +112,7 @@ $(document).ready(function () {
   });
   $("form").on("blur", "input[type=number]", function (e) {
     $(this).off("mousewheel.disableScroll");
-  }); // $('form').on('focus', 'input[type=number]', function (e) {
-  //     $(this).on('mousewheel.disableScroll', function (e) {
-  //         e.preventDefault()
-  //     })
-  // });
+  });
 });
 
 /***/ }),

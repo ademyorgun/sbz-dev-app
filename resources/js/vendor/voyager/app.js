@@ -9,16 +9,7 @@ $(document).ready(function() {
 
     $("#call-date")
         .children(".form-control")
-        .attr("readonly", "readonly")
         .val(
-            // date
-            //     .getDate()
-            //     .toString()
-            //     .padStart(2, 0) +
-            //     "-" +
-            //     (date.getMonth() + 1).toString().padStart(2, 0) +
-            //     "-" +
-            //     date.getFullYear().toString()
             date
                 .getDate()
                 .toString()
@@ -42,9 +33,4 @@ $(document).ready(function() {
     $("form").on("blur", "input[type=number]", function(e) {
         $(this).off("mousewheel.disableScroll");
     });
-    // $('form').on('focus', 'input[type=number]', function (e) {
-    //     $(this).on('mousewheel.disableScroll', function (e) {
-    //         e.preventDefault()
-    //     })
-    // });
 });

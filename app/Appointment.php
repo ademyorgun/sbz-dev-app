@@ -7,12 +7,9 @@ use App\Scopes\CallAgentsScope;
 use App\Scopes\SalesAgentsScope;
 use App\Scopes\OrderingAppointmentsScope;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Appointment extends Model
 {
-    use SoftDeletes;
-
     /**
      * The "booting" method of the model.
      *
@@ -32,7 +29,6 @@ class Appointment extends Model
      * 
      */
     protected $dates = [
-        'deleted_at',
         'meeting_date',
         'call_date'
     ];
