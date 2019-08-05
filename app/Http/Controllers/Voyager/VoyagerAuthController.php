@@ -52,6 +52,6 @@ class VoyagerAuthController extends BaseVoyagerAuthController
      */
     public function redirectTo()
     {
-        return route('voyager.appointments.index');
+        return config('voyager.user.redirect', route('voyager.dashboard'));
     }
 }

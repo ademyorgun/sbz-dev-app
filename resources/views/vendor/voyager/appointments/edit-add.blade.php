@@ -149,6 +149,8 @@
                 @endphp
             @endforeach
 
+            {{ dd($test) }}
+
             <!-- call details panel -->
             <div class="panel panel-primary panel-bordered">
                 <div class="panel-heading">
