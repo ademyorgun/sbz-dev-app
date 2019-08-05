@@ -238,9 +238,11 @@
                                                                 $model = app('App\User');
                                                                 if(isset($data->created_by)) {
                                                                     $createdBy = $model::where('id' , '=', $data->created_by)->first();
-                                                                    if(strtolower($createdBy->role->name) == 'call_agent' || strtolower($createdBy->role->name) == 'call_center_manager') {
-                                                                        if(isset($createdBy->callCenter->name)) {
-                                                                        echo $createdBy->callCenter->name;
+                                                                    if(isset($createdBy->role)) {
+                                                                        if(strtolower($createdBy->role->name) == 'call_agent' || strtolower($createdBy->role->name) == 'call_center_manager') {
+                                                                            if(isset($createdBy->callCenter->name)) {
+                                                                            echo $createdBy->callCenter->name;
+                                                                            }
                                                                         }
                                                                     }
                                                                 }
