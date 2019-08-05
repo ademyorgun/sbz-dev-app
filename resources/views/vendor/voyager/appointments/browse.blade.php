@@ -177,9 +177,6 @@
                                     <thead>
                                         <tr>
                                             @foreach($dataType->browseRows as $row)
-                                                @if ($row->field == 'call_agent_id')
-                                                    @continue
-                                                @endif
                                                 @if ($loop->index == 1)
                                                     @can('delete',app($dataType->model_name))
                                                         <th>
@@ -217,10 +214,6 @@
                                         @foreach($dataTypeContent as $data)
                                         <tr>
                                             @foreach($dataType->browseRows as $row)
-                                                @if ($row->field == 'call_agent_id')
-                                                    @continue
-                                                @endif 
-
                                                 @if ($loop->index == 1)
                                                     @can('delete',app($dataType->model_name))
                                                         <td>
@@ -262,7 +255,7 @@
                                                     {!! 'bgcolor="#62a8ea" style="color: #fff"'  !!}
                                                 @endif>
 
-                                                    @if ($row->field == 'sales_agent_id')
+                                                    @if ($row->field == 'sales_agent_id' || $row->field == 'call_agent_id')
                                                         @php
                                                             $model = app('App\User');
                                                             $users2 = $model::where('id' , '=', $data->{$row->field})->get();
