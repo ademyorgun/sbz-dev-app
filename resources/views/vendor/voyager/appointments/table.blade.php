@@ -5,6 +5,9 @@
     <thead>
         <tr>
             @foreach($dataType->browseRows as $row)
+                @if ($row->field == 'call_agent_id')
+                    @continue
+                @endif
                 @if ($loop->index == 1)
                     @can('delete',app($dataType->model_name))
                         <th>
@@ -34,7 +37,7 @@
                         @endif
                         </div>
                     @endif
-                </th>
+                </th> 
             @endforeach
         </tr>
     </thead>
@@ -42,8 +45,10 @@
         @foreach($dataTypeContent as $data)
         <tr>
             @foreach($dataType->browseRows as $row)
+                @if ($row->field == 'call_agent_id')
+                    @continue
+                @endif 
 
-                {{-- To alter the chebox selector to the second column --}}
                 @if ($loop->index == 1)
                     @can('delete',app($dataType->model_name))
                         <td>
@@ -64,13 +69,11 @@
                         <td>
                             @php
                                 $model = app('App\User');
-                                if(isset($data->created_by)) {
-                                    $createdBy = $model::where('id' , '=', $data->created_by)->first();
-                                    if(isset($createdBy->role)) {
-                                        if(strtolower($createdBy->role->name) == 'call_agent' || strtolower($createdBy->role->name) == 'call_center_manager') {
-                                            if(isset($createdBy->callCenter->name)) {
-                                            echo $createdBy->callCenter->name;
-                                            }
+                                if(isset($data->call_agent_id)) {
+                                    $callAgent = $model::where('id', $data->call_agent_id)->first();
+                                    if(isset($callAgent->role)) {
+                                        if(isset($callAgent->callCenter->name)) {
+                                            echo $callAgent->callCenter->name;
                                         }
                                     }
                                 }
@@ -96,7 +99,7 @@
                             <span>{{ $user->user_name }}</span>
                         @endforeach
                         @continue
-                    @endif 
+                    @endif
 
                     @if($row->type == 'image')
                         <img src="@if( !filter_var($data->{$row->field}, FILTER_VALIDATE_URL)){{ Voyager::image( $data->{$row->field} ) }}@else{{ $data->{$row->field} }}@endif" style="width:100px">

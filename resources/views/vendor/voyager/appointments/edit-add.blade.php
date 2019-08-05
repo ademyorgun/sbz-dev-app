@@ -254,8 +254,7 @@
                                     onchange="$('#my_form').submit();this.value='';">
                             <input type="hidden" name="type_slug" id="type_slug" value="{{ $dataType->slug }}">
                             {{ csrf_field() }}
-                        </form>
-                    @endif
+                        </form>      @endif
                 </div>
                 <div class="panel-footer">
                     @section('submit-buttons')

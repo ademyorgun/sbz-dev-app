@@ -19,8 +19,7 @@
 <?php $selected_value = (isset($dataTypeContent->{$row->field}) && !is_null(old($row->field, $dataTypeContent->{$row->field}))) ? old($row->field, $dataTypeContent->{$row->field}) : old($row->field); ?>
 @php
     $model = app('App\User');
-    $role = app('App\Role')::where('name', 'call_agent')->first();
-    $users = $model::where('role_id', $role->id)->get();
+    $users = $model::all();
 @endphp  
 @if (!$noRoles) 
     @if (strtolower(auth()->user()->role->name) == 'call_agent')
@@ -36,9 +35,6 @@
             @if ($currentUserRole == strtolower($readonlyUserRole))
                 <select name="{{ $row->field }}" class="form-control" disabled="disabled">
                     <optgroup label="{{ __('voyager::generic.custom') }}">
-                    @if (strtolower(auth()->user()->role->name) == 'call_agent')
-                        <option value="{{ auth()->user()->id }}">{{ auth()->user()->user_name }}</option>
-                    @endif
                     @foreach($users as $key => $user)
                         @if ((string)$selected_value == (string)$user->id)
                             <option value="{{ ($user->id == '_empty_' ? '' : $user->id) }}"  @if((int)$selected_value == (int)$user->id){{ 'selected="selected"' }}@endif>{{ $user->user_name }}</option>
