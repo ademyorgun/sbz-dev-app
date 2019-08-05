@@ -30,13 +30,12 @@
                     @endphp
 
                     <input type="hidden" name="{{ $options->column }}" value="{{ auth()->user()->id }}">
-                        <select
+                    <select
                         class="form-control " name="{{ $options->column }}"
                         data-get-items-field="{{$row->field}}"
                         disabled
                     >
                         <option value="{{ auth()->user()->id }}">{{ auth()->user()->user_name }}</option>
-
                     </select> 
                 @else 
                     @if (!is_null($dataTypeContent->{$options->column}))

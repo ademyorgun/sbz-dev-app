@@ -23,38 +23,52 @@
     $users = $model::where('role_id', $role->id)->get();
 @endphp  
 @if (!$noRoles) 
-    @foreach ($roles as $readonlyUserRole)
-        @if ($currentUserRole == strtolower($readonlyUserRole))
-            <select name="{{ $row->field }}" class="form-control" disabled="disabled">
-                <optgroup label="{{ __('voyager::generic.custom') }}">
-                @foreach($users as $key => $user)
-                    @if ((string)$selected_value == (string)$user->id)
-                        <option value="{{ ($user->id == '_empty_' ? '' : $user->id) }}"  @if((int)$selected_value == (int)$user->id){{ 'selected="selected"' }}@endif>{{ $user->user_name }}</option>
+    @if (strtolower(auth()->user()->role->name) == 'call_agent')
+        <input type="hidden" name="{{ $row->field }}" value="{{ auth()->user()->id }}">
+        <select
+            class="form-control" 
+            disabled
+        >
+            <option value="{{ auth()->user()->id }}">{{ auth()->user()->user_name }}</option>
+        </select> 
+    @else 
+        @foreach ($roles as $readonlyUserRole)
+            @if ($currentUserRole == strtolower($readonlyUserRole))
+                <select name="{{ $row->field }}" class="form-control" disabled="disabled">
+                    <optgroup label="{{ __('voyager::generic.custom') }}">
+                    @if (strtolower(auth()->user()->role->name) == 'call_agent')
+                        <option value="{{ auth()->user()->id }}">{{ auth()->user()->user_name }}</option>
                     @endif
+                    @foreach($users as $key => $user)
+                        @if ((string)$selected_value == (string)$user->id)
+                            <option value="{{ ($user->id == '_empty_' ? '' : $user->id) }}"  @if((int)$selected_value == (int)$user->id){{ 'selected="selected"' }}@endif>{{ $user->user_name }}</option>
+                        @endif
+                    @endforeach
+                    </optgroup> 
+                </select>
+                @php
+                    $currentUserRoleIsNotListed = false;
+                @endphp
+                @break
+            @else
+                @php
+                    $currentUserRoleIsNotListed = true;
+                @endphp
+            @endif   
+
+        @endforeach
+
+        @if ($currentUserRoleIsNotListed)
+            <select class="form-control select2" name="{{ $row->field }}">
+                <option disabled selected value> -- Select an agent -- </option>
+                @foreach($users as $key => $user)
+                    <option value="{{ $user->id }}"@if((string)$selected_value == (string)$user->id){{ 'selected="selected"' }}@endif>{{ $user->user_name }}</option>
                 @endforeach
-                </optgroup> 
+                
             </select>
-            @php
-                $currentUserRoleIsNotListed = false;
-            @endphp
-            @break
-        @else
-            @php
-                $currentUserRoleIsNotListed = true;
-            @endphp
-        @endif   
-
-    @endforeach
-
-    @if ($currentUserRoleIsNotListed)
-        <select class="form-control select2" name="{{ $row->field }}">
-            <option disabled selected value> -- Select an agent -- </option>
-            @foreach($users as $key => $user)
-                <option value="{{ $user->id }}"@if((string)$selected_value == (string)$user->id){{ 'selected="selected"' }}@endif>{{ $user->user_name }}</option>
-            @endforeach
-            
-        </select>
+        @endif
     @endif
+
 @else 
     <select class="form-control select2" name="{{ $row->field }}">
         <option disabled selected value> -- Select an agent -- </option>

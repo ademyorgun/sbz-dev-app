@@ -259,7 +259,7 @@
                 </div>
                 <div class="panel-footer">
                     @section('submit-buttons')
-                        <button type="submit" class="btn btn-primary save pull-right">{{ __('voyager::generic.save') }}</button>
+                        <button type="submit" class="btn btn-primary save">{{ __('voyager::generic.save') }}</button>
                     @stop
                     @yield('submit-buttons')
                 </div>
