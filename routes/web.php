@@ -22,15 +22,9 @@ Route::get('/adminset', function () {
     dd("Done");
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
-
-// Route::group(['prefix' => 'admin'], function () {
-    
-// });
-
-
-Voyager::routes(['register' => false]);
+Voyager::routes();
 
 Route::group(['as' => 'voyager.'], function () {
     event(new Routing());
