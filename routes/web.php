@@ -30,7 +30,7 @@ Auth::routes();
 // });
 
 
-Voyager::routes();
+Voyager::routes(['register' => false]);
 
 Route::group(['as' => 'voyager.'], function () {
     event(new Routing());
