@@ -4,5 +4,6 @@
     "/css/vendor/main.css": "/css/vendor/main.css",
     "/js/pages/appointments.js": "/js/pages/appointments.js",
     "/js/pages/reports.js": "/js/pages/reports.js",
+    "/js/pages/users.js": "/js/pages/users.js",
     "/js/vendor/main.js": "/js/vendor/main.js"
 }

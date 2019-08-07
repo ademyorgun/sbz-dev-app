@@ -28,6 +28,7 @@ class LogSuccessfulLogin
      */
     public function handle(Login $event)
     {
+        
         $user = $event->user;
         activity('login')
             ->performedOn($user)

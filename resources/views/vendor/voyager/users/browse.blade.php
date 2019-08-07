@@ -37,7 +37,7 @@
 @stop
 
 @section('content')
-    <div class="page-content browse container-fluid">
+    <div class="page-content browse container-fluid" id="app">
         @include('voyager::alerts')
         <div class="row">
             <div class="col-md-12">
@@ -251,9 +251,16 @@
                                             @endforeach
                                         </td>
                                         <td class="no-sort no-click">
-                                            <a href="{{ route('voyager.user.log', ['id' => $data->id ]) }}" title="Log" class="btn btn-sm btn-primary pull-right log btn-user-log">
+                                            {{-- <a href="{{ route('voyager.user.log', ['id' => $data->id ]) }}" title="Log" class="btn btn-sm btn-primary pull-right log btn-user-log">
                                                 <i class="voyager-window-list"></i> <span class="hidden-xs hidden-sm">Log</span>
-                                            </a>
+                                            </a> --}}
+                                            <base-button
+                                                btn-name="log"
+                                                icon-name="voyager-window-list"
+                                                :data="{{ $data->id }}"
+                                                @clicked="showLogModal"
+                                            >
+                                            </base-button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -284,59 +291,11 @@
                 </div>
             </div>
         </div>
+        {{-- Log modal --}}
+        <user-log-modal></user-log-modal>
     </div>
 
-    {{-- Log modal --}}
-   <div class="modal modal-info fade" tabindex="-1" id="modal-log" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="voyager-data"></i>@{{ table.name }}</h4>
-                </div>
-                <div class="modal-body" style="overflow:scroll">
-                    <table class="table table-striped" id="log-table">
-                        <thead>
-                        <tr>
-                            <th>Ip Adress</th>
-                            <th>Data</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr v-for="row in table.rows">
-                            <td>@{{ row.IP }}</td>
-                            <td>@{{ row.date }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">Close</button>
-                    <nav aria-label="Page navigation example pull-left" v-if="numberOfPages > 1" style="display: inline-block; float: left">
-                        <ul class="pagination" style="margin: 0">
-                            <li v-if="currentPage == 1" class="page-item disabled">
-                                <a class="page-link pagination-btn" @click.prevent="loadUserLog($event)" :href="previousPageUrl">Previous</a>
-                            </li>
-                            <li v-if="currentPage != 1" class="page-item">
-                                <a class="page-link pagination-btn" @click.prevent="loadUserLog($event)" :href="previousPageUrl">Previous</a>
-                            </li>
-                            <li v-for="page in linksToPagesToShow" class="page-item">
-                                <a class="page-link pagination-btn" @click.prevent="loadUserLog($event)" :href="page.link">@{{ page.number }}</a>
-                            </li>
-                            <li class="page-item" v-if="currentPage != numberOfPages">
-                                <a class="page-link pagination-btn" @click.prevent="loadUserLog($event)" :href="nextPageUrl" >Next</a>
-                            </li>
-                            <li class="page-item disabled" v-if="currentPage == numberOfPages">
-                                <a class="page-link pagination-btn " @click.prevent="loadUserLog($event)" :href="nextPageUrl" >Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    
 
     {{-- Single delete modal --}}
     <div class="modal modal-danger fade" tabindex="-1" id="delete_modal" role="dialog">
@@ -366,6 +325,7 @@
 @stop
 
 @section('javascript')
+<script src="js/pages/users.js"></script>
     <!-- DataTables -->
     @if(!$dataType->server_side && config('dashboard.data_tables.responsive'))
         <script src="{{ voyager_asset('lib/js/dataTables.responsive.min.js') }}"></script>
@@ -439,114 +399,5 @@
             $('.selected_ids').val(ids);
         });
 
-        $('.btn-user-log').on('click', function (e) {
-            e.preventDefault();
-            // getting the proper url for the log
-            href = $(this).attr('href');
-            table.name = $(this).data('name');
-            loadUserLog(href);
-            $('#modal-log').modal('show');
-        });
-
-
-        function loadUserLog(href) {
-            table.rows = [];
-            $.get(href, function (data) {
-                hasMorePages = data.hasMorePages;
-                currentPage = data.currentPageNumber;
-                numberOfPages = data.numberOfPages;
-                nextPageUrl = data.nextPageUrl;
-                previousPageUrl = data.previousPageUrl;
-                pagesToShow = [];
-                linksToPagesToShow = [];
-                // set the pages to show on the pagination track
-                if(currentPage == 1 ) { 
-                    if(numberOfPages <= 3) {
-                        for(i = 1; i < numberOfPages + 1; i++) {
-                            pagesToShow.push(i)
-                        };
-                    } else {
-                        pagesToShow = [1,2,3];
-                    };
-                    console.log('first case');
-                } else if( currentPage == numberOfPages) {
-                    if(numberOfPages == 2) {
-                        pagesToShow = [numberOfPages-1, numberOfPages];
-                    }
-                    
-                    console.log('second case');
-                } else {
-                    var a = currentPage;
-                    if(numberOfPages <= 3) {
-                        for(i = 1; i < numberOfPages + 1; i++) {
-                            pagesToShow.push(i)
-                        }
-                    } else {
-                        pagesToShow = [a-1 , a, a+1];
-                        console.log('third case');
-                    }
-                };
-
-                $.each(data.userLog.data, function (key, val) {
-                    // console.log(val);  
-                    table.rows.push({
-                        IP: val.id,
-                        date: val.created_at
-                    });
-                });
-
-                $.each(pagesToShow, function (key, val) {
-                    linksToPagesToShow.push({
-                        link: `${href}?page=${val}`,
-                        number: val
-                    });
-                });
-            });
-        };
-
-        // User log modal
-        var table = {
-            name: 'hola',
-            rows: []
-        };
-        var hasMorePages = false;
-        var currentPage = 1;
-        var numberOfPages = 1;
-        var pagesToShow = [1,3];
-        var href = 'test';
-        var nextPageUrl = 'test';
-        var previousPageUrl = 'test';
-        var linksToPagesToShow =[];
-
-        var vueData = {
-            table: table,
-            hasMorePages: hasMorePages,
-            currentPage: currentPage,
-            numberOfPages: numberOfPages,
-            pagesToShow: pagesToShow,
-            link: href,
-            nextPageUrl: nextPageUrl,
-            previousPageUrl: previousPageUrl,
-            linksToPagesToShow: linksToPagesToShow
-
-        };
-
-        new Vue({
-            el: '#modal-log',
-
-            data: {
-                vueData
-            },
-
-            methods: {
-                loadUserLog: function(event) {
-                    try {
-                        loadUserLog(event.currentTarget.getAttribute('href'));
-                    } catch(e) {
-                        console.log(e);
-                    }
-                }
-            },
-        });
     </script>
 @stop

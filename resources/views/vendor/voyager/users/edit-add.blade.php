@@ -170,7 +170,7 @@
                 const first_name = $('#first_name').val().replace(/\s/g, "");
                 const last_name = $('#last_name').val().replace(/\s/g, "");
                 // set the username
-                $('#user_name').val(first_name + '_' + last_name);
+                $('#user_name').val(first_name + ' ' + last_name);
             });
         });
     </script>
