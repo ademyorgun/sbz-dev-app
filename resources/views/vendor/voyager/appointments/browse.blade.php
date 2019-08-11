@@ -119,6 +119,13 @@
 </div>
 
 @elseif ($currentLogedInUserRole != 'call_agent')
+@php
+    if($currentLogedInUserRole == 'call_center_managner') {
+        $isAgentView = true;
+    } else {
+        $isAgentView = false;
+    }
+@endphp
     <div class="page-content browse container-fluid" id="app">    
         {{-- comments modal --}}
         <appointments-comments-modal></appointments-comments-modal>
@@ -134,7 +141,7 @@
                         </div>
                     </div>
                     <div class="panel-body mt-2">
-                        <appointment-filter @filter="getResults" :is-agent-view="false">
+                        <appointment-filter @filter="getResults" :is-agent-view="@if($currentLogedInUserRole == 'call_center_manager') true @else false @endif">
                             @foreach ($dataType->addRows as $row)
                                 @if ($row->field == 'wanted_expert')
                                     <template v-slot:experts>

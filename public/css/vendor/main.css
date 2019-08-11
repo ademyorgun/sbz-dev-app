@@ -1,1 +1,86 @@
-ul.radio li{width:100%;max-width:170px;float:left}.voyager .alert{margin-bottom:10px}strong{font-weight:600}.voyager .edit-add .panel .panel-body{padding:30px 10px;overflow:visible}.voyager #edit-create-questionaires.panel .form-group{display:flex;flex-direction:row}@media (max-width:700px){.voyager #edit-create-questionaires.panel .form-group{flex-direction:column}}.voyager #edit-create-questionaires.panel .form-group .control-label{width:50%!important}@media (max-width:700px){.voyager #edit-create-questionaires.panel .form-group .control-label{width:100%!important}}.voyager #edit-create-questionaires.panel .form-group .form-control{width:50%}@media (max-width:700px){.voyager #edit-create-questionaires.panel .form-group .form-control{width:100%!important}}.voyager #edit-create-questionaires.panel .form-group .select2{width:50%!important}@media (max-width:700px){.voyager #edit-create-questionaires.panel .form-group .select2{width:100%!important}}#comment_feedback_input input{font-size:22px;font-weight:700}.header-actions{display:inline-block;margin-left:20px;margin-bottom:20px;margin-top:-10px}.control-label{font-weight:500}td.bg-color--blue{bgcolor:#62a8ea!important}
+/* * Appointmetn create page
+ * */
+
+ul.radio li {
+  width: 100%;
+  max-width: 170px;
+  float: left;
+}
+
+.voyager .alert {
+  margin-bottom: 10px;
+}
+
+strong {
+  font-weight: 600;
+}
+
+.voyager .edit-add .panel .panel-body {
+  padding: 30px 10px;
+  overflow: visible;
+}
+
+.voyager #edit-create-questionaires.panel .form-group {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 700px) {
+  .voyager #edit-create-questionaires.panel .form-group {
+    flex-direction: column;
+  }
+}
+
+.voyager #edit-create-questionaires.panel .form-group .control-label {
+  width: 50% !important;
+}
+
+@media (max-width: 700px) {
+  .voyager #edit-create-questionaires.panel .form-group .control-label {
+    width: 100% !important;
+  }
+}
+
+.voyager #edit-create-questionaires.panel .form-group .form-control {
+  width: 50%;
+}
+
+@media (max-width: 700px) {
+  .voyager #edit-create-questionaires.panel .form-group .form-control {
+    width: 100% !important;
+  }
+}
+
+.voyager #edit-create-questionaires.panel .form-group .select2 {
+  width: 50% !important;
+}
+
+@media (max-width: 700px) {
+  .voyager #edit-create-questionaires.panel .form-group .select2 {
+    width: 100% !important;
+  }
+}
+
+#comment_feedback_input input {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.header-actions {
+  display: inline-block;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  margin-top: -10px;
+}
+
+.control-label {
+  font-weight: 500;
+}
+
+/* * Appointments browse page 
+ * */
+
+td.bg-color--blue {
+  bgcolor: #62a8ea !important;
+}
+

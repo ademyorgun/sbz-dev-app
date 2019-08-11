@@ -573,6 +573,13 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
     // POST BR(E)AD
     public function update(Request $request, $id)
     {
+        if(strtolower(auth()->user()->role->name) == 'sales_agent') {
+            $request->validate([
+                'comment_status' => 'required',
+                'sales_visit_location' => 'required'
+            ]);
+        };
+        
         $slug = $this->getSlug($request);
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();

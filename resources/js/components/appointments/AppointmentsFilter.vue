@@ -47,7 +47,7 @@
         </div>
 
         <!-- user  -->
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-4" v-if="!isAgentView">
           <label class="control-label">Sales Agent</label>
           <select class="form-control" name="wanted_expert" aria-hidden="true" v-model="userID">
             <option disabled value selected>Please select one</option>
@@ -116,7 +116,7 @@ export default {
 
   data() {
     return {
-      callDateStart: new Date(),
+      callDateStart: null,
       callDateEnd: null,
       appointmentDateStart: null,
       appointmentDateEnd: null,
@@ -131,15 +131,15 @@ export default {
 
   methods: {
     clearForm() {
-      this.callDateStart = new Date();
-      this.callDateEnd = "";
-      this.appointmentDateStart = "";
-      this.appointmentDateEnd = "";
-      this.wantedExpert = "";
-      this.canton = "";
-      this.user = "";
-      this.phoneNumber = "";
-      this.appointmentID = "";
+      this.callDateStart = null;
+      this.callDateEnd = null;
+      this.appointmentDateStart = null;
+      this.appointmentDateEnd = null;
+      this.wantedExpert = null;
+      this.canton = null;
+      this.user = null;
+      this.phoneNumber = null;
+      this.appointmentID = null;
     }
   }
 };
