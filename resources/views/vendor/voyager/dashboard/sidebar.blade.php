@@ -30,7 +30,7 @@
 
         </div>
         <div id="adminmenu">
-            @if (strtolower(auth()->user()->role->name) == 'superadmin')
+            @if (strtolower(auth()->user()->role->name) == 'superadmin' || strtolower(auth()->user()->role->name) == 'sales_agent')
                 <admin-menu :items="{{ menu('admin', '_json') }}"></admin-menu>
             @else
                 <admin-menu :items="{{ menu('admin', '_json')->forget(1)}}"></admin-menu>
