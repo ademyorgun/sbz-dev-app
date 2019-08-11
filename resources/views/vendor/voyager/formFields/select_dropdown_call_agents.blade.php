@@ -58,9 +58,10 @@
             <select class="form-control select2" name="{{ $row->field }}">
                 <option disabled selected value> -- Select an agent -- </option>
                 @foreach($users as $key => $user)
-                    <option value="{{ $user->id }}"@if((string)$selected_value == (string)$user->id){{ 'selected="selected"' }}@endif>{{ $user->user_name }}</option>
+                    @if (strtolower($user->role->name) == 'call_agent')
+                        <option value="{{ $user->id }}"@if((string)$selected_value == (string)$user->id){{ 'selected="selected"' }}@endif>{{ $user->user_name }}</option>
+                    @endif
                 @endforeach
-                
             </select>
         @endif
     @endif
@@ -69,7 +70,9 @@
     <select class="form-control select2" name="{{ $row->field }}">
         <option disabled selected value> -- Select an agent -- </option>
         @foreach($users as $key => $user)
-            <option value="{{ $user->id }}"@if( (string)$selected_value == (string)$user->id){{ 'selected="selected"' }}@endif>{{ $user->user_name }}</option>
+            @if (strtolower($user->role->name) == 'call_agent')
+                <option value="{{ $user->id }}"@if( (string)$selected_value == (string)$user->id){{ 'selected="selected"' }}@endif>{{ $user->user_name }}</option>
+            @endif
         @endforeach
     </select>
 @endif
