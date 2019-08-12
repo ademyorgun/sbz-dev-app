@@ -18,9 +18,9 @@ class CallAgentsScope implements Scope
     public function apply(Builder $builder, Model $model)
     {
         if(strtolower(auth()->user()->role->name) == 'call_center_manager' && isset(auth()->user()->call_center_id)) {
-            $builder->where('created_by', '=', auth()->user()->id);
+            return $builder->where('created_by', '=', auth()->user()->id);
         } else {
-            $builder;
+            return $builder;
         }
     }
 }

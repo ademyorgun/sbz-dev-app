@@ -169,12 +169,14 @@ class AppointmentsFilter extends BaseVoyagerBaseController
 
                 if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope' . ucfirst($dataType->scope))) {
                     $query = $model->{$dataType->scope}()
-                        ->whereNotIn('comment_status', ['positive', 'negative', 'not_home', 'processing', 'multi_year_contract', 'wollte k.t'])
                         ->where('meeting_date', '>=', $now)
+                        ->whereNull('comment_status')
+                        ->orWhere('comment_status', 'open')
                         ->FilterAppointments($request);
                 } else {
-                    $query = $model::whereNotIn('comment_status', ['positive', 'negative', 'not_home', 'processing', 'multi_year_contract', 'wollte k.t'])
-                        ->where('meeting_date', '>=', $now)
+                    $query = $model::where('meeting_date', '>=', $now)
+                        ->whereNull('comment_status')
+                        ->orWhere('comment_status', 'open')
                         ->FilterAppointments($request);
                 }
 
@@ -269,10 +271,10 @@ class AppointmentsFilter extends BaseVoyagerBaseController
 
                 if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope' . ucfirst($dataType->scope))) {
                     $query = $model->{$dataType->scope}()
-                        ->whereNotNull('comment_status')
+                        ->where('comment_status', '!=', 'open')
                         ->FilterAppointments($request);
                 } else {
-                    $query = $model::whereNotNull('comment_status')
+                    $query = $model::where('comment_status', '!=', 'open')
                         ->FilterAppointments($request);
                 }
 
