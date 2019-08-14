@@ -42,38 +42,40 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-primary panelbordered">
-                <div class="panel-heading">
-                    {{-- number of appointments per sales agent --}}
-                    <h3 class="panel-title panel-icon"><i class="voyager-archive"></i>Anzahl Termine pro Sales</h3>
-                    <div class="panel-actions">
-                        <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
+    @if (strtolower(auth()->user()->role->name) != 'sales_agent')    
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary panelbordered">
+                    <div class="panel-heading">
+                        {{-- number of appointments per sales agent --}}
+                        <h3 class="panel-title panel-icon"><i class="voyager-archive"></i>Anzahl Termine pro Sales</h3>
+                        <div class="panel-actions">
+                            <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
+                        </div>
                     </div>
-                </div>
-                <div class="panel-body mt-2">
-                    <reports-sales-agents-table :sales-agents-data="numOfAppointmentsPerSalesAgent"></reports-sales-agents-table>
+                    <div class="panel-body mt-2">
+                        <reports-sales-agents-table :sales-agents-data="numOfAppointmentsPerSalesAgent"></reports-sales-agents-table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-primary panelbordered">
-                <div class="panel-heading">
-                    {{-- number of appointments per call agent --}}
-                    <h3 class="panel-title panel-icon"><i class="voyager-archive"></i>Anzahl Termine pro Call agent</h3>
-                    <div class="panel-actions">
-                        <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary panelbordered">
+                    <div class="panel-heading">
+                        {{-- number of appointments per call agent --}}
+                        <h3 class="panel-title panel-icon"><i class="voyager-archive"></i>Anzahl Termine pro Call agent</h3>
+                        <div class="panel-actions">
+                            <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
+                        </div>
                     </div>
-                </div>
-                <div class="panel-body mt-2">
-                    <reports-call-agents-table :call-agents-data="numOfAppointmentsPerCallAgent"></reports-call-agents-table>
+                    <div class="panel-body mt-2">
+                        <reports-call-agents-table :call-agents-data="numOfAppointmentsPerCallAgent"></reports-call-agents-table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-primary panelbordered">

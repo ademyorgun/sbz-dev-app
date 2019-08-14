@@ -11,7 +11,7 @@
     @switch($row->field)
         @case('kind_of_medical_therapy_treatment')
             <label class="control-label">
-                <strong>Zusatzfrage wenn JA</strong> - tDies könnte Auswirkungen auf Ihren Wechsel haben. Deshalb, welcher Art ist denn diese Behandlung?
+                <strong>Zusatzfrage wenn JA</strong> - Dies könnte Auswirkungen auf Ihren Wechsel haben. Deshalb, welcher Art ist denn diese Behandlung?
             </label>
             @break
         @case('kind_of_drugs_and_for_what')
