@@ -33,6 +33,20 @@
     @else 
         @foreach ($roles as $readonlyUserRole)
             @if ($currentUserRole == strtolower($readonlyUserRole))
+                @php
+                    $fieldValue = null;
+                    foreach($users as $key => $user) {
+                        if((string)$selected_value == (string)$user->id) {
+                            $fieldValue = ($user->id == '_empty_' ? '' : $user->id);
+                        }
+                    }
+                @endphp
+
+                {{-- we add the input type text because when the select field is disabled the 
+                value is deleted from our db --}}
+                <input type="hidden" name="{{ $row->field }}" value="{{ $fieldValue }}">
+
+                {{-- then we show the disabled field --}}
                 <select name="{{ $row->field }}" class="form-control" disabled="disabled">
                     <optgroup label="{{ __('voyager::generic.custom') }}">
                     @foreach($users as $key => $user)

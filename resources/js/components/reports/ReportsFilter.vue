@@ -40,6 +40,7 @@
               @change="clearForm" />
           </div>
         </div>
+        
         <button class="btn btn-light pull-right" @click.prevent="clearForm">
           <i class="voyager-trash"></i>
           <!-- clear filter -->

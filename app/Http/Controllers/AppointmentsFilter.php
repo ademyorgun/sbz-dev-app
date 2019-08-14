@@ -7,7 +7,6 @@ use App\User;
 use Illuminate\Http\Request;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Database\Schema\SchemaManager;
-use Illuminate\Pagination\LengthAwarePaginator;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController as BaseVoyagerBaseController;
 
 class AppointmentsFilter extends BaseVoyagerBaseController

@@ -105,6 +105,20 @@
     @if (!$noRoles) 
         @foreach ($roles as $readonlyUserRole)
             @if ($currentUserRole == strtolower($readonlyUserRole))
+                @php
+                    $fieldValue = null;
+                    foreach($options->options  as $key => $option) {
+                        if((string)$selected_value == (string)$key) {
+                            $fieldValue = ($key == '_empty_' ? '' : $key);
+                        }
+                    }
+                @endphp
+
+                {{-- we add the input type text because when the select field is disabled the 
+                value is deleted from our db --}}
+                <input type="hidden" name="{{ $row->field }}" value="{{ $fieldValue }}">
+
+                {{-- then we show the disabled field --}}
                 <select name="{{ $row->field }}" class="form-control" disabled="disabled">
                     @if(isset($options->options))
                         <optgroup label="{{ __('voyager::generic.custom') }}">
