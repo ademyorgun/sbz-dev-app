@@ -174,14 +174,28 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
                     $query = $model->{$dataType->scope}()
                         // ->whereNotIn('comment_status', ['positive', 'negative', 'not_home', 'processing', 'multi_year_contract', 'wollte k.t'])
                         ->where('meeting_date', '>=', $now)
-                        ->whereNull('comment_status')
-                        ->orWhere('comment_status', 'open');
+                        ->where(function($query) {
+                            $query
+                                ->where(function($query) {
+                                    $query
+                                        ->where('comment_status', 'open')
+                                        ->orWhere('comment_status', 'not_home');
+                                })
+                                ->orWhere('comment_status', null);
+                        });
                 } else {
                     $query = $model::
                         // whereNotIn('comment_status', ['positive', 'negative', 'not_home', 'processing', 'multi_year_contract', 'wollte k.t'])
                         where('meeting_date', '>=', $now)
-                        ->whereNull('comment_status')
-                        ->orWhere('comment_status', 'open');
+                        ->where(function ($query) {
+                            $query
+                                ->where(function ($query) {
+                                    $query
+                                        ->where('comment_status', 'open')
+                                        ->orWhere('comment_status', 'not_home');
+                                })
+                                ->orWhere('comment_status', null);
+                        });
                 }
 
                 // Use withTrashed() if model uses SoftDeletes and if toggle is selected
@@ -276,10 +290,10 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
 
                 if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope' . ucfirst($dataType->scope))) {
                     $query = $model->{$dataType->scope}()
-                        ->where('comment_status', '!=', 'open');
+                        ->whereNotIn('comment_status', ['open', 'not_home']);
                 } else {
                     $query = $model::select('*')
-                        ->where('comment_status', '!=', 'open');
+                        ->whereNotIn('comment_status', ['open', 'not_home']);
                 }
 
                 // Use withTrashed() if model uses SoftDeletes and if toggle is selected

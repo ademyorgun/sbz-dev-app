@@ -376,11 +376,14 @@
             // radio button, one click trggers two,
             // we only want to fire our event son 
             // click the second 
+
+            // Sales agent can only save the appointment, 
+            // when a conversion status is selected 
+            // and geolocation is performed
             var count = 1;
             
             $('document').ready(function() {
                 // this section and field has to be hidden
-                $('#comment_feedback_input').hide();
                 $('#salesSection').hide();
                 
                 if($("input[name='comment_status']:checked").val()) {
@@ -388,17 +391,10 @@
                         // remove readonly from visit time and visit date fields
                         $('#visitDate').find('input').prop('readonly', false);
                         $('#visitTime').find('input').prop('readonly', false);
-                        $('#comment_feedback_input').show();
 
                     } else if ($("input[name='comment_status']:checked").val().toLowerCase() == 'positive') {   
-                        $('#comment_feedback_input').show();
                         $('#salesSection').show();
-
-                    } else {
-                        $('#comment_feedback_input').show();
-                        
-                    }
-                    
+                    } 
                 }
 
                 
@@ -442,14 +438,10 @@
                         } 
                     } else {
                         count++;
-
                     }
                 });
 
-                // Sales agent can only save the appointment, 
-                // when a conversion status is selected 
-                // and geolocation is performed
-
+                
             });
         </script>
     @endif

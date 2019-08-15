@@ -169,13 +169,27 @@ class AppointmentsFilter extends BaseVoyagerBaseController
                 if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope' . ucfirst($dataType->scope))) {
                     $query = $model->{$dataType->scope}()
                         ->where('meeting_date', '>=', $now)
-                        ->whereNull('comment_status')
-                        ->orWhere('comment_status', 'open')
+                        ->where(function ($query) {
+                            $query
+                                ->where(function ($query) {
+                                    $query
+                                        ->where('comment_status', 'open')
+                                        ->orWhere('comment_status', 'not_home');
+                                })
+                                ->orWhere('comment_status', null);
+                        })
                         ->FilterAppointments($request);
                 } else {
                     $query = $model::where('meeting_date', '>=', $now)
-                        ->whereNull('comment_status')
-                        ->orWhere('comment_status', 'open')
+                        ->where(function ($query) {
+                            $query
+                                ->where(function ($query) {
+                                    $query
+                                        ->where('comment_status', 'open')
+                                        ->orWhere('comment_status', 'not_home');
+                                })
+                                ->orWhere('comment_status', null);
+                        })
                         ->FilterAppointments($request);
                 }
 
@@ -270,10 +284,10 @@ class AppointmentsFilter extends BaseVoyagerBaseController
 
                 if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope' . ucfirst($dataType->scope))) {
                     $query = $model->{$dataType->scope}()
-                        ->where('comment_status', '!=', 'open')
+                        ->whereNotIn('comment_status', ['open', 'not_home'])
                         ->FilterAppointments($request);
                 } else {
-                    $query = $model::where('comment_status', '!=', 'open')
+                    $query = $model::whereNotIn('comment_status', ['open', 'not_home'])
                         ->FilterAppointments($request);
                 }
 
