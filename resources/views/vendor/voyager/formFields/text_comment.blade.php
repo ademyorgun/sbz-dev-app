@@ -4,7 +4,7 @@
     class="form-control" name="{{ $row->field }}"
     placeholder="{{ old($row->field, $options->placeholder ?? $row->display_name) }}"
     {{-- {!! isBreadSlugAutoGenerator($options) !!} --}}
-    value="{{ old($row->field, $dataTypeContent->{$row->field} ?? $options->default ?? '') }}"
+    value="{{ isset($dataTypeContent->{$row->field}) ? $dataTypeContent->{$row->field} : '' }}"
     @php
         $options = isset($options) ? (array)$options: null;
         $roleOptions = (isset($options['roleOptions']) ? (array)$options['roleOptions'] : '');
@@ -23,9 +23,7 @@
         @endforeach
     @endif
 
-    // we want the users with role
-    // sales agents to be able to edit this 
-    // field for one time only
+    {{--   we want the users with role sales agents to be able to edit this field for one time only --}}
     @if(isset($edit))
         @if($edit)
             @if(strtolower(auth()->user()->role->name) == 'sales_agent' && !isset($dataTypeContent->{$row->field}))
@@ -35,6 +33,5 @@
             @endif
         @endif
     @endif
-       >
-
+       >{{ isset($dataTypeContent->{$row->field}) ? $dataTypeContent->{$row->field} : '' }}
 </textarea>

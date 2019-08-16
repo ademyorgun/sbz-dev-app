@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Voyager;
 
 use App\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Events\BreadDataUpdated;
 use TCG\Voyager\Database\Schema\SchemaManager;
-use Illuminate\Pagination\LengthAwarePaginator;
 use TCG\Voyager\Http\Controllers\VoyagerBaseController as BaseVoyagerBaseController;
 
 class VoyagerAppointmentController extends BaseVoyagerBaseController
