@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Comment;
 use App\Appointment;
 
 class AppointmentObserver
@@ -72,6 +73,20 @@ class AppointmentObserver
         // Appointment has a geo tracking location saved
         if( $appointment->sales_visit_location != null ) {
             $appointment->appointment_status = 'besucht'; // visited
+        }
+
+        // We want to add the feedback/comment to the comments
+        // add it only if this is the first time we are adding a comment
+        $oldCommentFeedback = Appointment::where('id', $appointment->id)->first()->comment_feedback;
+
+        if($appointment->comment_feedback != $oldCommentFeedback) {
+            $newComment = new Comment;
+            
+            $newComment->user_id = auth()->user()->id;
+            $newComment->appointment_id = $appointment->id;
+            $newComment->body = $appointment->comment_feedback;
+            
+            $newComment->save();
         }
     }
 
