@@ -46,33 +46,49 @@
                         <tbody>
                             @foreach($dataTypeContent as $data)
 
+                            {{-- we wont to disable edditing the appointment if more than 3 are shown --}}
+                            @if ($eltId != 'closedAppointments')
+                                @if ($loop->index >= 3)
+                                    @php
+                                        $moreThan3Apps = true;
+                                    @endphp
+
+                                @else 
+                                    @php
+                                        $moreThan3Apps = false;
+                                    @endphp
+                                @endif
+                            @endif
+
                             <tr>
                                 @foreach($dataType->browseRows as $row)
                                     {{-- To alter the chebox selector to the second column --}}
                                     @if ($loop->index == 1 )
                                         @if (!$disableActions)
                                             <td class="no-sort no-click" id="bread-actions">
-                                                @foreach(Voyager::actions() as $action)
-                                                    @if (!method_exists($action, 'massAction'))
-                                                        @php $action = new $action($dataType, $data); @endphp
-                                                        @if ($action->shouldActionDisplayOnDataType())
-                                                            @if ($data)
-                                                                @can ($action->getPolicy(), $data)
-                                                                    <a href="{{ $action->getRoute($dataType->name) }}" title="{{ $action->getTitle() }}" {!! $action->convertAttributesToHtml() !!}>
-                                                                        <i class="{{ $action->getIcon() }}"></i> <span>Anruf datum</span> <!-- edit -->
-                                                                    </a>
-                                                                @endcan
-                                                            @elseif (method_exists($action, 'massAction'))
-                                                                <form method="post" action="{{ route('voyager.'.$dataType->slug.'.action') }}" style="display:inline">
-                                                                    {{ csrf_field() }}
-                                                                    <button type="submit" {!! $action->convertAttributesToHtml() !!}><i class="{{ $action->getIcon() }}"></i>Anruf datum</button> <!-- edit -->
-                                                                    <input type="hidden" name="action" value="{{ get_class($action) }}">
-                                                                    <input type="hidden" name="ids" value="" class="selected_ids">
-                                                                </form>
+                                                @if (!$moreThan3Apps)
+                                                    @foreach(Voyager::actions() as $action)
+                                                        @if (!method_exists($action, 'massAction'))
+                                                            @php $action = new $action($dataType, $data); @endphp
+                                                            @if ($action->shouldActionDisplayOnDataType())
+                                                                @if ($data)
+                                                                    @can ($action->getPolicy(), $data)
+                                                                        <a href="{{ $action->getRoute($dataType->name) }}" title="{{ $action->getTitle() }}" {!! $action->convertAttributesToHtml() !!}>
+                                                                            <i class="{{ $action->getIcon() }}"></i> <span>Anruf datum</span> <!-- edit -->
+                                                                        </a>
+                                                                    @endcan
+                                                                @elseif (method_exists($action, 'massAction'))
+                                                                    <form method="post" action="{{ route('voyager.'.$dataType->slug.'.action') }}" style="display:inline">
+                                                                        {{ csrf_field() }}
+                                                                        <button type="submit" {!! $action->convertAttributesToHtml() !!}><i class="{{ $action->getIcon() }}"></i>Anruf datum</button> <!-- edit -->
+                                                                        <input type="hidden" name="action" value="{{ get_class($action) }}">
+                                                                        <input type="hidden" name="ids" value="" class="selected_ids">
+                                                                    </form>
+                                                                @endif
                                                             @endif
                                                         @endif
-                                                    @endif
-                                                @endforeach
+                                                    @endforeach
+                                                @endif
                                             </td>
                                         @endif
                                     @endif
