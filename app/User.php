@@ -58,7 +58,7 @@ class User extends \TCG\Voyager\Models\User
      */
     public function callAgentsAppointments()
     {
-        return $this->hasMany('App\Appointment', 'created_by', 'id');
+        return $this->hasMany('App\Appointment', 'call_agent_id', 'id');
     }
 
     /**

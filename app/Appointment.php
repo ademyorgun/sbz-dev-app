@@ -45,7 +45,9 @@ class Appointment extends Model
     /**
      * Mutator
      * Set the appointment meeting date
-     * 
+     * the reason for needing this mutator is that
+     * mysql only accepts one date format for storing dates
+     * so we have to change the format of the date before storing it
      * 
      */
     public function setMeetingDateAttribute($value) {

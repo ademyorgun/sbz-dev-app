@@ -442,6 +442,9 @@
                                 <div class="form-group">
                                     {{-- choose an agent --}}
                                     <label class="control-lab">Agent auswählen</label>
+                                    @php
+                                        $salesAgentRole = TCG\Voyager\Models\Role::where('name', 'sales_agent')->first();
+                                    @endphp
                                     <select
                                         class="form-control"
                                         name="selected_agent_id"
@@ -449,7 +452,9 @@
                                     >
                                         <option disabled value selected>Bitte auswählen</option>
                                         @foreach ($users as $user)
-                                            <option value="{{ $user->id }}">{{ $user->user_name }}</option>  
+                                            @if ($user->role->id == $salesAgentRole->id)
+                                                <option value="{{ $user->id }}">{{ $user->user_name }}</option>  
+                                            @endif
                                         @endforeach
                                     </select>
                                     <input type="hidden" name="selected_ids" value="" class="selected_ids">
