@@ -91,7 +91,9 @@
     </div>
     
 {{-- {{ dd([$dataTypeContent, $appointmentsGroupOpen] ) }} --}}
-
+    {{-- if feedback open group is not null,
+    the agent shouldn't be able to edit the 
+    open appointments  --}}
     {{-- Feedback open group --}}
     @include('vendor.voyager.appointments.browse_agent_panel', 
     [
@@ -105,7 +107,7 @@
     [
         'tableName' => 'Offene Termine', 
         'eltId' => 'openAppointments',
-        'disableActions' => false,
+        'disableActions' => (count($appointmentsGroupFeedbackPending) == 0) ? false : true,
         'dataTypeContent' => $appointmentsGroupOpen,
     ])
     {{-- Closed appointments group --}}

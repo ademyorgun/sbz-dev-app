@@ -56,6 +56,12 @@ Route::group(['as' => 'voyager.'], function () {
         
         // Set appointment sale visit location
         Route::put('appointment/{id}/location', 'AppointmentsSalesVisitLocation@update')->name('appointment.location');
+
+        // Appointment show route
+        Route::get('ppointments/{appointment}/edit', 'Voyager\VoyagerAppointmentController@edit')
+            ->name('appointments.edit')
+            ->middleware('sales.agent');
+
         event(new RoutingAdminAfter());
     });
 
