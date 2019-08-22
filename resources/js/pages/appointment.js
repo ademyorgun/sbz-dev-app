@@ -70,6 +70,8 @@ const app = new Vue({
 
                             this.paginationData = response.data.dataTypeContent;
                             this.isResultsFiltered = true;
+
+                            watchTableCheckboxes();
                         } catch (e) {
                             console.warn(e);
                         }
@@ -117,6 +119,9 @@ const app = new Vue({
 
                             this.paginationData = response.data.dataTypeContent;
                             this.isResultsFiltered = true;
+
+                            // watch checkboxes
+                            watchTableCheckboxes();
                         } catch (e) {
                             console.warn(e);
                         }

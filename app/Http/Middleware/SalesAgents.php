@@ -20,7 +20,10 @@ class SalesAgents
         // The appointment are ordered by visit date in decending order
         if(strtolower(auth()->user()->role->name) == 'sales_agent') {
             $appointmentId = $request->route('appointment');
+            // check if appointments with open feedback exist
 
+            // check if its more than 3rd appointment open with 
+            // visit date desc order
         }
         return $next($request);
     }

@@ -38996,6 +38996,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
             table.innerHTML = response.data.table;
             _this.paginationData = response.data.dataTypeContent;
             _this.isResultsFiltered = true;
+            watchTableCheckboxes();
           } catch (e) {
             console.warn(e);
           }
@@ -39036,7 +39037,9 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
             var table = document.querySelector("#table");
             table.innerHTML = response.data.table;
             _this2.paginationData = response.data.dataTypeContent;
-            _this2.isResultsFiltered = true;
+            _this2.isResultsFiltered = true; // watch checkboxes
+
+            watchTableCheckboxes();
           } catch (e) {
             console.warn(e);
           }
