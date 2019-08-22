@@ -24,7 +24,7 @@
           <div class="toggle-button-wrapper">
             <toggle-button 
               v-model="isAgentMeetingDateSet"
-              :value="false"
+              :value="true"
               :labels="{checked: 'Yes', unchecked: 'No'}"
               @change="clearForm" />
           </div>
@@ -71,7 +71,7 @@ export default {
       month: "",
       year: "",
       day: new Date().getDate(),
-      isAgentMeetingDateSet: false,
+      isAgentMeetingDateSet: true,
       isAppointmentWon: false
     };
   },
