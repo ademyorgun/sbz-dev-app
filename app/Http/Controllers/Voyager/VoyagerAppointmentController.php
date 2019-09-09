@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Voyager;
 
+use App\CallCenter;
 use App\User;
 use Illuminate\Http\Request;
 use TCG\Voyager\Facades\Voyager;
@@ -37,6 +38,9 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
 
             // GET ALL the Users
             $users = User::all();
+
+            // All Call centers
+            $callCenters = CallCenter::all();
 
             // Check permission
             $this->authorize('browse', app($dataType->model_name));
@@ -360,6 +364,7 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
                 'usesSoftDeletes',
                 'showSoftDeleted',
                 'users',
+                'callCenters',
                 'appointmentsGroupFeedbackPending',
                 'appointmentsGroupOpen',
                 'appointmentsGroupClosed'
@@ -377,6 +382,9 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
 
             // GET ALL the Users
             $users = User::all();
+
+            // All Call centers
+            $callCenters = CallCenter::all();
 
             // Check permission
             $this->authorize('browse', app($dataType->model_name));
@@ -510,6 +518,7 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
                 'usesSoftDeletes',
                 'showSoftDeleted',
                 'users',
+                'callCenters',
                 'appointmentsGroupFeedbackPending',
                 'appointmentsGroupOpen',
                 'appointmentsGroupClosed'

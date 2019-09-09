@@ -55,6 +55,15 @@
           </select>
         </div>
 
+        <!-- call center  -->
+        <div class="form-group col-md-4" v-if="!isAgentView">
+          <label class="control-label">Call Center</label>
+          <select class="form-control" name="wanted_expert" aria-hidden="true" v-model="callCenterId">
+            <option disabled value selected>Please select one</option>
+            <slot name="call-centers"></slot>
+          </select>
+        </div>
+
         <!-- Telephone number -->
         <div class="form-group col-md-4">
           <label class="control-label">Telefonnummer</label>
@@ -125,6 +134,7 @@ export default {
       userID: null,
       phoneNumber: null,
       appointmentID: null,
+      callCenterId: null,
       dateFormat: 'dd MM yyyy'
     };
   },
@@ -137,9 +147,10 @@ export default {
       this.appointmentDateEnd = null;
       this.wantedExpert = null;
       this.canton = null;
-      this.user = null;
+      this.userID = null;
       this.phoneNumber = null;
       this.appointmentID = null;
+      this.callCenterId = null;
     }
   }
 };

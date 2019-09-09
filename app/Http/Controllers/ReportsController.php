@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use App\User;
 use App\Appointment;
+use App\Role;
 
 class ReportsController extends Controller
 {
@@ -157,6 +158,10 @@ class ReportsController extends Controller
             $dayToUse = $dayToUse - 1;
         }
 
+        // call centers
+        $callAgentRoleId = Role::where('name', 'call_agent')->id;
+        $callAgents = User::where('role_id', $callAgentRoleId)->with('callAgentsAppointments')->all();
+
         // Returning the result
         return response()->json([
             'numOfAppointmentsPerSalesAgent' => $numOfAppointmentsPerSalesAgent,
@@ -167,7 +172,8 @@ class ReportsController extends Controller
             'numOfAllApointmentsPerDayPositive' => $numOfAllApointmentsPerDayPositive,
             'numOfAllApointmentsPerDayNegative' => $numOfAllApointmentsPerDayNegative,
             'numberOfAppointmentsWonPerDay' => $numberOfAppointmentsWonPerDay,
-            'numberOfAppointmentsNotWonPerDay' => $numberOfAppointmentsNotWonPerDay
+            'numberOfAppointmentsNotWonPerDay' => $numberOfAppointmentsNotWonPerDay,
+            'callAgents' => $callAgents
         ]);
     }
 }

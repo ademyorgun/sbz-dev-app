@@ -168,6 +168,13 @@
                                     </template>
                                 @endif
                             @endforeach
+                            @if (isset($callCenters))
+                                <template v-slot:call-centers>
+                                    @foreach($callCenters as $callCenter)
+                                        <option value="{{ $callCenter->id }}">{{ $callCenter->name }}</option>
+                                    @endforeach
+                                </template>
+                            @endif
                         </appointment-filter>
                     </div>
                 </div>

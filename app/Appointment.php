@@ -146,6 +146,7 @@ class Appointment extends Model
         $appointmentDateStart = $request->input('appointmentDateStart');
         $callDateEnd = $request->input('callDateEnd');
         $callDateStart = $request->input('callDateStart');
+        $callCenterId = $request->input('callCenterId');
 
         if ($appointmentDateEnd != null) {
             $appointmentDateEnd = Carbon::parse($appointmentDateEnd, 'Europe/London')->format('Y-m-d');
@@ -160,17 +161,17 @@ class Appointment extends Model
             $callDateStart = Carbon::parse($callDateStart, 'Europe/London')->format('Y-m-d');
         }
 
-        return $query->when($appointmentID, function ($data, $appointmentID) {
+        $resultQuery =  $query->when($appointmentID, function ($data, $appointmentID) {
                 return $data->where('id', '=', $appointmentID);
             })
             ->when($phoneNumber, function ($data, $phoneNumber) {
                 return $data->where('telephone_number', '=', $phoneNumber);
             })
-            ->when($userID, function ($data, $userID) {
-                return $data->where('sales_agent_id', '=', $userID);
-            })
             ->when($canton, function ($data, $canton) {
                 return $data->where('canton_city', '=', $canton);
+            })
+            ->when($userID, function ($data, $userID) {
+                return $data->where('sales_agent_id', '=', $userID);
             })
             ->when($wantedExpert, function ($data, $wantedExpert) {
                 return $data->where('wanted_expert', '=', $wantedExpert);
@@ -186,6 +187,22 @@ class Appointment extends Model
             })
             ->when($callDateStart, function ($data, $callDateStart) {
                 return $data->where('call_date', '>=', $callDateStart);
-            });
+            });   
+
+        if(isset($callCenterId)) {
+            // users the belongs to this callCenter
+            // if users is empty, we get no results
+            $callAgents = CallCenter::find($callCenterId)->users;
+
+            $callAgentsIds = $callAgents->pluck('id')->all();
+
+            return $resultQuery
+                ->when($callAgentsIds, function ($data, $callAgentsIds) {
+                    return $data->whereIn('call_agent_id', $callAgentsIds);
+                });
+
+        } else {
+            return $resultQuery;
+        }
     }
 }

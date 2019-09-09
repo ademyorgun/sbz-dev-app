@@ -60,7 +60,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="panel panel-primary panelbordered">
                     <div class="panel-heading">
                         {{-- number of appointments per call agent --}}
@@ -71,6 +71,20 @@
                     </div>
                     <div class="panel-body mt-2">
                         <reports-call-agents-table :call-agents-data="numOfAppointmentsPerCallAgent"></reports-call-agents-table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-primary panelbordered">
+                    <div class="panel-heading">
+                        {{-- number of appointments per call agent --}}
+                        <h3 class="panel-title panel-icon"><i class="voyager-archive"></i>Call centers</h3>
+                        <div class="panel-actions">
+                            <a class="panel-action voyager-angle-up" data-toggle="panel-collapse" aria-hidden="true"></a>
+                        </div>
+                    </div>
+                    <div class="panel-body mt-2">
+                        <reports-call-centers-table :call-agents-data="numOfAppointmentsPerCallAgent"></reports-call-centers-table>
                     </div>
                 </div>
             </div>

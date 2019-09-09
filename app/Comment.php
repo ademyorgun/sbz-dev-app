@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    public function appointment()
+       public function appointment()
      {
         return $this->belongsTo('App\Appointment');
      }

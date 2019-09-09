@@ -8,6 +8,7 @@ import ReportsCallAgentsTable from '../components/reports/ReportsCallAgentsTable
 import ReportsPieChart from '../components/reports/ReportsPieChart.vue';
 import ReportsLineChart from '../components/reports/ReportsLineChart.vue';
 import ReportsTotalCard from '../components/reports/ReportsTotalCard.vue';
+import ReportsCallCentersTable from '../components/reports/ReportsCallCentersTable.vue';
 
 Vue.config.productionTip = false;
 
@@ -21,7 +22,8 @@ const app = new Vue({
         ReportsPieChart,
         ReportsLineChart,
         ReportsTotalCard,
-        ReportsCallAgentsTable
+        ReportsCallAgentsTable,
+        ReportsCallCentersTable
     },
 
     data: {

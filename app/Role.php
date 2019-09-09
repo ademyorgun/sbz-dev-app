@@ -22,4 +22,8 @@ class Role extends Model
     {
         return $this->belongsToMany(Voyager::modelClass('Permission'));
     }
+
+    public function allUsers() {
+        return $this->hasMany('App\User', 'role_id');
+    }
 }
