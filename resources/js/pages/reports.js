@@ -35,7 +35,8 @@ const app = new Vue({
         numOfAllApointmentsPerDayPositive: {},
         numOfAllApointmentsPerDayNegative: {},
         numberOfAppointmentsWonPerDay: {},
-        numberOfAppointmentsNotWonPerDay: {}
+        numberOfAppointmentsNotWonPerDay: {},
+        callCenters: []
     },
 
     methods: {
@@ -51,6 +52,7 @@ const app = new Vue({
                     this.numberOfAppointmentsWonPerDay = res.numberOfAppointmentsWonPerDay;
                     this.numberOfAppointmentsNotWonPerDay = res.numberOfAppointmentsNotWonPerDay;
                     
+                    this.callCenters = _.sortBy(res.callCenters, 'totalAppointments').reverse();
                     this.numOfAppointmentsPerSalesAgent = _.sortBy(res.numOfAppointmentsPerSalesAgent, 'total').reverse();
                     this.numOfAppointmentsPerCallAgent = _.sortBy(res.numOfAppointmentsPerCallAgent, 'total').reverse();
                 })

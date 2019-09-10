@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use App\User;
 use App\Appointment;
+use App\CallCenter;
 use App\Role;
 
 class ReportsController extends Controller
@@ -89,6 +90,9 @@ class ReportsController extends Controller
             if (strtolower($user->role->name) == 'call_agent') {
                 $numOfAppointmentsPerCallAgent[$user->user_name]['total'] = count($user->callAgentsAppointments);
                 $numOfAppointmentsPerCallAgent[$user->user_name]['name'] = $user->user_name;
+
+                // call center
+                
             }
         }
 
@@ -159,8 +163,18 @@ class ReportsController extends Controller
         }
 
         // call centers
-        $callAgentRoleId = Role::where('name', 'call_agent')->id;
-        $callAgents = User::where('role_id', $callAgentRoleId)->with('callAgentsAppointments')->all();
+        $callCenters = CallCenter::with('appointments')->get();
+        foreach ($callCenters as $key => $callCenter) {
+            $callCenter->totalAppointments = count($callCenter->appointments->toArray());
+            // filter the won appointments
+            $callCenter->wonAppointments = $callCenter->appointments->filter(function($item, $key) {
+                if($item->graduation_abschluss !== null) {
+                    return true;
+                }
+            });
+            // won appointments num
+            $callCenter->wonAppointments = count($callCenter->wonAppointments->toArray());
+        }
 
         // Returning the result
         return response()->json([
@@ -173,7 +187,7 @@ class ReportsController extends Controller
             'numOfAllApointmentsPerDayNegative' => $numOfAllApointmentsPerDayNegative,
             'numberOfAppointmentsWonPerDay' => $numberOfAppointmentsWonPerDay,
             'numberOfAppointmentsNotWonPerDay' => $numberOfAppointmentsNotWonPerDay,
-            'callAgents' => $callAgents
+            'callCenters' => $callCenters
         ]);
     }
 }

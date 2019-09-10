@@ -84,7 +84,7 @@
                         </div>
                     </div>
                     <div class="panel-body mt-2">
-                        <reports-call-centers-table :call-agents-data="numOfAppointmentsPerCallAgent"></reports-call-centers-table>
+                        <reports-call-centers-table :call-centers-data="callCenters"></reports-call-centers-table>
                     </div>
                 </div>
             </div>

@@ -1899,12 +1899,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ReportsCallCentersTable',
   props: {
     callCentersData: {
       type: Array,
-      required: false
+      required: true
     }
   }
 });
@@ -55709,30 +55710,44 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "table-responsive" }, [
+    _c("table", { staticClass: "table table-striped table-bordered" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.callCentersData, function(value, index) {
+          return _c("tr", { key: index }, [
+            _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(value.name))]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "row" } }, [
+              _vm._v(_vm._s(value.totalAppointments))
+            ]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "row" } }, [
+              _vm._v(_vm._s(value.wonAppointments))
+            ])
+          ])
+        }),
+        0
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "table-responsive" }, [
-      _c("table", { staticClass: "table table-striped table-bordered" }, [
-        _c("thead", { staticClass: "thead-light" }, [
-          _c("tr", [
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [
-              _vm._v("Total appointments")
-            ]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [
-              _vm._v("Total won appointments")
-            ])
-          ])
-        ]),
+    return _c("thead", { staticClass: "thead-light" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
         _vm._v(" "),
-        _c("tbody")
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Total appointments")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v("Total won appointments")
+        ])
       ])
     ])
   }
@@ -69186,7 +69201,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     numOfAllApointmentsPerDayPositive: {},
     numOfAllApointmentsPerDayNegative: {},
     numberOfAppointmentsWonPerDay: {},
-    numberOfAppointmentsNotWonPerDay: {}
+    numberOfAppointmentsNotWonPerDay: {},
+    callCenters: []
   },
   methods: {
     fetchData: function fetchData(data) {
@@ -69201,6 +69217,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
         _this.numOfAllApointmentsPerDayNegative = res.numOfAllApointmentsPerDayNegative;
         _this.numberOfAppointmentsWonPerDay = res.numberOfAppointmentsWonPerDay;
         _this.numberOfAppointmentsNotWonPerDay = res.numberOfAppointmentsNotWonPerDay;
+        _this.callCenters = _.sortBy(res.callCenters, 'totalAppointments').reverse();
         _this.numOfAppointmentsPerSalesAgent = _.sortBy(res.numOfAppointmentsPerSalesAgent, 'total').reverse();
         _this.numOfAppointmentsPerCallAgent = _.sortBy(res.numOfAppointmentsPerCallAgent, 'total').reverse();
       });

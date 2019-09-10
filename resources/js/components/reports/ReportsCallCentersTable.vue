@@ -9,10 +9,11 @@
             </tr>
         </thead>
         <tbody>
-            <!-- <tr v-for="(value, index) in callCentersData" :key="index">
+            <tr v-for="(value, index) in callCentersData" :key="index">
                 <th scope="row">{{ value.name }}</th>
-                <th>{{ value.total }}</th>
-            </!--> 
+                <th scope="row">{{ value.totalAppointments }}</th>
+                <th scope="row">{{ value.wonAppointments }}</th>
+            </tr>
         </tbody>
     </table>
 </div>
@@ -25,7 +26,7 @@
         props: {
             callCentersData: {
                 type: Array,
-                required: false
+                required: true
             }
         }
     }
