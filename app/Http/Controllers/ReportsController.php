@@ -163,7 +163,17 @@ class ReportsController extends Controller
         }
 
         // call centers
-        $callCenters = CallCenter::with('appointments')->get();
+        $callCenters = CallCenter::with(['appointments' => function($query) use ($selectedYear, $selectedMonth, $isAgentMeetingDateSet) {
+            // for some reason we have to do it this way rather than using the already defined scopes
+            $query->whereYear('appointments.created_at', $selectedYear)
+                ->whereMonth('appointments.created_at', $selectedMonth)
+                ->when($isAgentMeetingDateSet, function ($query, $isAgentMeetingDateSet) {
+                    return $query->whereNotNull('appointments.meeting_date');
+                })
+                ->when(!$isAgentMeetingDateSet, function ($query, $isAgentMeetingDateSet) {
+                    return $query->whereNull('appointments.meeting_date');
+                });
+        }])->get();
         foreach ($callCenters as $key => $callCenter) {
             $callCenter->totalAppointments = count($callCenter->appointments->toArray());
             // filter the won appointments
