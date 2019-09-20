@@ -84,7 +84,7 @@ class ReportsController extends Controller
                         $numOfAppointmentsPerSalesAgent[$user->user_name]['won']++;
                     }
                     if(isset($appointment->number_of_people)) {
-                        $numOfAppointmentsPerSalesAgent[$user->user_name]['numberOfPeople']++;
+                        $numOfAppointmentsPerSalesAgent[$user->user_name]['numberOfPeople'] = $appointment->number_of_people + $numOfAppointmentsPerSalesAgent[$user->user_name]['numberOfPeople'];
                     }
                 }
             }
