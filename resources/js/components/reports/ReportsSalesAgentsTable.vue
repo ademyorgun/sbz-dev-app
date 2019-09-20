@@ -6,15 +6,15 @@
                 <th scope="col">Bentuzer</th>
                 <!-- appointments per agent -->
                 <th scope="col">Termine pro Sales</th>
-                <!-- appointments won per agent -->
-                <th scope="col">Termine pro Sales "GEWONNEN"</th>
+                <!-- Number of people -->
+                <th scope="col">Number of people</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="(value, index) in salesAgentsData" :key="index">
                 <th scope="row">{{ value.name }}</th>
                 <th>{{ value.total }}</th>
-                <td>{{ value.won }}</td>
+                <td>{{ value.numberOfPeople }}</td>
             </tr>
         </tbody>
     </table>
