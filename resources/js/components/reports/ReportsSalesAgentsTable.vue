@@ -7,7 +7,7 @@
                 <!-- appointments per agent -->
                 <th scope="col">Termine pro Sales</th>
                 <!-- Number of people -->
-                <th scope="col">Number of people</th>
+                <th scope="col">Anzahl Abschlüsse Total</th>
             </tr>
         </thead>
         <tbody>
