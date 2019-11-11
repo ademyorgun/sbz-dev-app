@@ -6,7 +6,7 @@
                 <th scope="col">Bentuzer</th>
                 <!-- appointments per agent -->
                 <th scope="col">Termine pro Sales</th>
-                <!-- Number of people -->
+                
                 <th scope="col">Anzahl Abschlüsse Total</th>
             </tr>
         </thead>
@@ -14,7 +14,7 @@
             <tr v-for="(value, index) in salesAgentsData" :key="index">
                 <th scope="row">{{ value.name }}</th>
                 <th>{{ value.total }}</th>
-                <td>{{ value.numberOfPeople }}</td>
+                <td>{{ value.anzahlAbschlusseTotal }}</td>
             </tr>
         </tbody>
     </table>

@@ -77,14 +77,12 @@ class ReportsController extends Controller
                 $numOfAppointmentsPerSalesAgent[$user->user_name]['total'] = count($user->appointments);
                 $numOfAppointmentsPerSalesAgent[$user->user_name]['won'] = 0;
                 $numOfAppointmentsPerSalesAgent[$user->user_name]['name'] = $user->user_name;
-                $numOfAppointmentsPerSalesAgent[$user->user_name]['numberOfPeople'] = 0;
+                $numOfAppointmentsPerSalesAgent[$user->user_name]['anzahlAbschlusseTotal'] = 0;
 
                 foreach ($user->appointments as $key => $appointment) {
                     if (isset($appointment->graduation_abschluss)) {
                         $numOfAppointmentsPerSalesAgent[$user->user_name]['won']++;
-                    }
-                    if(isset($appointment->number_of_people)) {
-                        $numOfAppointmentsPerSalesAgent[$user->user_name]['numberOfPeople'] = $appointment->number_of_people + $numOfAppointmentsPerSalesAgent[$user->user_name]['numberOfPeople'];
+                        $numOfAppointmentsPerSalesAgent[$user->user_name]['anzahlAbschlusseTotal'] += $appointment->graduation_abschluss;
                     }
                 }
             }
