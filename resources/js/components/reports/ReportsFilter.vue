@@ -2,18 +2,25 @@
   <div class="filter-form">
     <form id="form">
       <div class="row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
           <!-- year -->
           <label class="control-label">Jahr</label>
           <select class="form-control" v-model="year">
             <option v-for="(year, index) in yearsToShow" :value="year" :key="index">{{year}}</option>
           </select>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
           <!-- month -->
           <label class="control-label">Monat</label>
           <select class="form-control" v-model="month">
             <option v-for="(month, index) in monthsToShow" :value="month" :key="index">{{month}}</option>
+          </select>
+        </div>
+        <div class="form-group col-md-4">
+          <!-- day -->
+          <label class="control-label">Tag</label>
+          <select class="form-control" v-model="day">
+            <option v-for="(day, index) in daysToShow" :value="day" :key="index">{{day}}</option>
           </select>
         </div>
       </div>
@@ -70,7 +77,8 @@ export default {
     return {
       month: "",
       year: "",
-      day: new Date().getDate(),
+      day: "",
+      today: new Date(),
       isAgentMeetingDateSet: true,
       isAppointmentWon: false
     };
@@ -86,8 +94,36 @@ export default {
       // for some weird reason getMonth returs the month
       // starting form 0, so we have to add 1 in order
       // to accomodate for that
+      const now = new Date();
       let currentMonth = new Date().getMonth() + 1;
+
+      if(this.year !== now.getFullYear()) {
+        return this.decreaseValue(12, 0);
+      } 
+      
       return this.decreaseValue(currentMonth, 0);
+    },
+
+    daysToShow() {
+      const now = new Date();
+      const daysList = [];
+      let maxDay = new Date().getDate(); // today
+
+      // not null
+      if(this.month === "" || this.year === "") {
+        return [];
+      }
+
+      // if year&month for today is not selected then we can show days higher than today
+      if(this.month !== (now.getMonth() + 1) || this.year !== now.getFullYear()) {
+        maxDay = new Date(this.year, this.month, 0).getDate();
+      }
+
+      for (let i = 1; i < maxDay + 1; i++) {
+        daysList.push(i);
+      }
+
+      return daysList;
     }
   },
 
