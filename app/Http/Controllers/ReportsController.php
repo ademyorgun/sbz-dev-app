@@ -29,7 +29,8 @@ class ReportsController extends Controller
     public function show(Request $request) {
         $selectedMonth = (string)$request->input('month');
         $selectedYear = (string)$request->input('year');
-        $selectedDay = (int)$request->input('day');
+        $selectedDay = (string) $request->input('day');
+        $today = (int)$request->input('today');
         $isAgentMeetingDateSet = (boolean)$request->input('isAgentMeetingDateSet'); 
         $isAppointmentWon = (boolean)$request->input('isAppointmentWon');
 
@@ -53,7 +54,7 @@ class ReportsController extends Controller
         ];
 
         // Appoitments for the selected year/month
-        $allAppointments = Appointment::SelectedMonth($selectedYear, $selectedMonth)
+        $allAppointments = Appointment::SelectedDate($selectedYear, $selectedMonth, $selectedDay)
                             ->meetingDate($isAgentMeetingDateSet)
                             ->get();
         $numOfAllApointments = count($allAppointments);
@@ -61,14 +62,14 @@ class ReportsController extends Controller
         // Number of appointments per user 
         $numOfAppointmentsPerSalesAgent = [];
         $numOfAppointmentsPerCallAgent = [];
-        $salesAgentsWithAppointments = User::with(['appointments' => function ($query) use ($selectedYear, $selectedMonth, $isAgentMeetingDateSet) {
-                            $query->SelectedMonth($selectedYear, $selectedMonth)
+        $salesAgentsWithAppointments = User::with(['appointments' => function ($query) use ($selectedYear, $selectedMonth, $selectedDay, $isAgentMeetingDateSet) {
+                            $query->selectedDate($selectedYear, $selectedMonth, $selectedDay)
                             ->meetingDate($isAgentMeetingDateSet);
                         }])->get();
 
 
-        $callAgentsWithAppointments = User::with(['callAgentsAppointments' => function ($query) use ($selectedYear, $selectedMonth, $isAgentMeetingDateSet) {
-                                        $query->SelectedMonth($selectedYear, $selectedMonth)
+        $callAgentsWithAppointments = User::with(['callAgentsAppointments' => function ($query) use ($selectedYear, $selectedMonth, $selectedDay, $isAgentMeetingDateSet) {
+                                        $query->selectedDate($selectedYear, $selectedMonth, $selectedDay)
                                             ->meetingDate($isAgentMeetingDateSet);
                                     }])->get();;
 
@@ -113,7 +114,7 @@ class ReportsController extends Controller
         }
 
         if(now()->month == $selectedMonth) {
-            $dayToUse = $selectedDay;
+            $dayToUse = $today;
         } else {
             $dayToUse = \Carbon\Carbon::createFromDate($selectedYear, $selectedMonth)->daysInMonth;
         }
@@ -125,7 +126,7 @@ class ReportsController extends Controller
             $numberOfAppointmentsNotWonPerDay[$dayToUse] = 0;
             $numberOfAppointmentsWonPerDay[$dayToUse] = 0;
 
-            $allAppointments = Appointment::SelectedMonth($selectedYear, $selectedMonth)
+            $allAppointments = Appointment::selectedDate($selectedYear, $selectedMonth, $selectedDay)
                             ->meetingDate($isAgentMeetingDateSet)
                             ->whereDay('created_at', $dayToUse)
                             ->appointmentWon($isAppointmentWon)
@@ -165,10 +166,13 @@ class ReportsController extends Controller
         }
 
         // call centers
-        $callCenters = CallCenter::with(['appointments' => function($query) use ($selectedYear, $selectedMonth, $isAgentMeetingDateSet) {
+        $callCenters = CallCenter::with(['appointments' => function($query) use ($selectedYear, $selectedMonth, $selectedDay, $isAgentMeetingDateSet) {
             // for some reason we have to do it this way rather than using the already defined scopes
             $query->whereYear('appointments.created_at', $selectedYear)
                 ->whereMonth('appointments.created_at', $selectedMonth)
+                ->when($selectedDay, function($query, $selectedDay) {
+                    return $query->whereDay('appointments.created_at', $selectedDay);
+                })
                 ->when($isAgentMeetingDateSet, function ($query, $isAgentMeetingDateSet) {
                     return $query->whereNotNull('appointments.meeting_date');
                 })

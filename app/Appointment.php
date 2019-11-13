@@ -82,7 +82,7 @@ class Appointment extends Model
     }
 
     /**
-     * Scope a query to only include appointments of the current month
+     * Scope a query to only include appointments of the selected month or the selected day
      * 
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @param  mixed  $selectedYear
@@ -93,6 +93,8 @@ class Appointment extends Model
         return $query->whereYear('created_at', $selectedYear)
                     ->whereMonth('created_at', $selectedMonth);
     }
+
+
 
     /**
      * Scope a query to only include appointments where 
@@ -111,6 +113,23 @@ class Appointment extends Model
             ->when(!$isAgentMeetingDateSet, function($query, $isAgentMeetingDateSet) {
                 return $query->whereNull('meeting_date');
         });
+    }
+
+    /**
+     * Scope a query to only include appointments of the selected month or the selected day
+     * 
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  mixed  $selectedYear
+     * @param  mixed  $selectedMonth
+     * @param  mixed  $selectedMonth
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeSelectedDate($query, $selectedYear, $selectedMonth, $selectedDay) {
+        return $query->whereYear('created_at', $selectedYear)
+                ->whereMonth('created_at', $selectedMonth)
+                ->when($selectedDay, function($query, $selectedDay) {
+                    return $query->whereDay('created_at', $selectedDay);
+                });
     }
 
     /**

@@ -78,7 +78,7 @@ export default {
       month: "",
       year: "",
       day: "",
-      today: new Date(),
+      today: new Date().getDate(),
       isAgentMeetingDateSet: true,
       isAppointmentWon: false
     };
