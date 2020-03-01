@@ -7,6 +7,10 @@ use TCG\Voyager\Events\RoutingAdminAfter;
 use TCG\Voyager\Events\RoutingAfter;
 use TCG\Voyager\Facades\Voyager;
 
+Route::ge('/test', function () {
+    return 'asdfasdf'
+});
+
 Route::get('/command', function () {
 	
 	/* php artisan migrate */
