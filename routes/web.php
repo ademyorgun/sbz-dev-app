@@ -8,7 +8,7 @@ use TCG\Voyager\Events\RoutingAfter;
 use TCG\Voyager\Facades\Voyager;
 
 Route::ge('/test', function () {
-    return 'asdfasdf'
+    return 'asdfasdf';
 });
 
 Route::get('/command', function () {
