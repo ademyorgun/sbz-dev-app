@@ -7,7 +7,7 @@ use TCG\Voyager\Events\RoutingAdminAfter;
 use TCG\Voyager\Events\RoutingAfter;
 use TCG\Voyager\Facades\Voyager;
 
-Route::ge('/test', function () {
+Route::get('/test', function () {
     return 'asdfasdf';
 });
 
