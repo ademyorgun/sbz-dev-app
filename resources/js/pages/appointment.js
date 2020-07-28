@@ -33,7 +33,7 @@ const app = new Vue({
         paginationData: {},
         isResultsFiltered: false,
         pos: {},
-        googleMapAPI: "AIzaSyCdw_S7lZML8VVa7qppO6UsVjYcwinCCPk",
+        googleMapAPI: "AIzaSyAdAloLpSTmyrWRbhD4X0txqecEr-savCg",
         appointmentId: 0,
         address: "",
         isSavingGeolocation: false,
