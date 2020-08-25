@@ -293,7 +293,7 @@
 @section('javascript')
 
     <!-- GOOGLE MAP API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdAloLpSTmyrWRbhD4X0txqecEr-savCg-adfs"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdAloLpSTmyrWRbhD4X0txqecEr-savCg"></script>
     <script>
         window.google = google;
     </script>
