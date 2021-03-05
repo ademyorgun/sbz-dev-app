@@ -16,7 +16,7 @@
         "league/flysystem-cached-adapter": "^1.0",
         "orangehill/iseed": "^2.6",
         "spatie/laravel-activitylog": "^3.2",
-        "tcg/voyager": "^1.2.*",
+        "tcg/voyager": "^1.2",
         "test-hook": "^1.0",
         "ext-gd": "*"
     },

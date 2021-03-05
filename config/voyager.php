@@ -60,7 +60,7 @@ return [
     */
 
     'storage' => [
-        'disk' => 'spaces',
+        'disk' => 'public',
     ],
 
     /*
