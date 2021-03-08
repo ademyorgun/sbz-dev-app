@@ -4,7 +4,7 @@
             <img :src=" 'https://sbz-appointment.fra1.digitaloceanspaces.com/' + comment.avatar" alt="">
         </div>
         <div class="text">
-            <a class="username" href="#">@{{ comment.user_username }}</a> <span>{{ comment.body }}</span>
+            <a class="username" href="#">@{{ comment.user_username }}</a> <span class="comment-body">{{ comment.body }}</span> - <span class="updated_at">{{ comment.updated_at }}</span>
         </div>
     </div>
 </template>
@@ -43,10 +43,8 @@
 .comment .text {
     text-align: left;
     margin-left: 5px;
-}
-
-.comment .text span {
-    margin-left: 5px;
+    width: 100%;
+    display: flex;
 }
 
 .comment .text .username {
@@ -54,4 +52,11 @@
     color: #76838f;
 }
 
+.comment-body{
+    max-width: 70%;
+}
+
+.comment .updated_at{
+    margin-left: auto;
+}
 </style>
