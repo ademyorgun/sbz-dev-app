@@ -4,7 +4,7 @@
     @before-open="beforeOpen"
     :width="'90%'"
     height="auto"
-    :maxWidth="900"
+    :maxWidth="1000"
     :scrollable="true"
     :maxHeight="400"
     :adaptive="true"

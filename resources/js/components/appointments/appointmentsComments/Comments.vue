@@ -8,7 +8,7 @@
             ></single-comment>
         </div>
         <hr>
-        <div class="reply">
+        <form class="reply">
             <div class="avatar">
                 <img :src="'https://sbz-appointment.fra1.digitaloceanspaces.com/'+current_user.avatar" alt="">
             </div>
@@ -20,8 +20,14 @@
                 maxlength="250"
                 @keyup.enter="submitComment"
             />
+            <div class="image-upload">
+                <label for="file-input" class="upload--button">
+                  <img src="/upload.png"/>
+                </label>
+                <input id="file-input" type="file" v-on:change="onFileChange" />
+            </div>
             <button class="reply--button" @click.prevent="submitComment"><i class="fa fa-paper-plane"></i> Send</button>
-        </div>
+        </form>
     </div>
 </template>
 
@@ -34,15 +40,38 @@ import singleComment from './SingleComment'
         },
         data() {
             return {
-                reply: ''
+                reply: '',
+                image:null
             }
         },
         methods: {
             submitComment() {
                 if(this.reply != '') {
-                    this.$emit('submit-comment', this.reply);
+                    const fd = new FormData();
+                    fd.append('reply',this.reply);
+                    fd.append('image',this.image);
+                    this.$emit('submit-comment', fd);
                     this.reply = '';
+                    this.removeImage();
                 }
+            },
+            onFileChange(e) {
+                var files = e.target.files || e.dataTransfer.files;
+                if (!files.length)
+                return;
+                this.createImage(files[0]);
+            },
+            createImage(file) {
+              var reader = new FileReader();
+              var vm = this;
+
+              reader.onload = (e) => {
+                vm.image = e.target.result;
+              };
+              reader.readAsDataURL(file);
+            },
+            removeImage: function (e) {
+              this.image = null;
             }
         },
         props: ['comments', 'current_user', 'comments_wrapper_classes']
@@ -125,9 +154,19 @@ import singleComment from './SingleComment'
     right: 10px;
 }
 
+.image-upload>input {
+  display: none;
+}
+
+.reply .upload--button{
+    position: absolute;
+    right: 75px;
+    top: 15px;
+}
+
 .reply .reply--button {
     position: absolute;
-    right: -100px;
+    right: 0;
     border: 1px solid #22a7f0;
     background-color: transparent;
     color: #22a7f0;

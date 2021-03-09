@@ -57,24 +57,31 @@ class CommentsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'body' => 'required',
-            'appointmentId' => 'required'
-        ]);
+    {   
+        // $request->validate([
+        //     'appointmentId' => 'required'
+        // ]);
+        
+        //get the uploaded file
+        // $file = $request->file('image');
+        //get the reply body
+
 
         $user = auth()->user();
-
         $comment = new Comment();
-        $comment->body = $request->body;
+        $comment->body = $request->reply;
         $comment->appointment_id = $request->appointmentId;
         $comment->user_id = $user->id;
-
-        $comment->save();
-
-        $comment->user_username = $comment->user->user_name;
+        
+        // todo upload image to digital ocean + save the url to db
+            $path = $request->file('image')->store('comment-images','s3');
+        // $comment->comment_image = $path;
+        
+        $comment->user_username = $user->user_name;
         $comment->avatar = $comment->user->avatar;
 
+        $comment->save();
+        
         return response()->json([
             'comment' => $comment
         ]);

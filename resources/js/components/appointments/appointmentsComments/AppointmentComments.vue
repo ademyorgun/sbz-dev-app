@@ -70,15 +70,17 @@ export default {
     };
   },
   methods: {
-    submitComment(reply) {
+    submitComment(e) {
+      e.append('appointmentId',this.appointmentId);
+
       axios
-        .post("/comments/" + this.appointmentId, {
-          body: reply,
-          appointmentId: this.appointmentId
-        })
+        .post("/comments/" + this.appointmentId,e)
         .then(response => {
           this.comments.push(response.data.comment);
-        });
+        })
+        .catch(()=>{
+          console.log('errored here');
+        })
     }
   }
 };

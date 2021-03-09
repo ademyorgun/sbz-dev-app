@@ -59,20 +59,10 @@ return [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
+            'region' => env('AWS_REGION'),
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
         ],
-
-        'spaces' => [
-            'driver' => 's3',
-            'key' => env('DO_SPACES_KEY'),
-            'secret' => env('DO_SPACES_SECRET'),
-            'endpoint' => env('DO_SPACES_ENDPOINT'),
-            'region' => env('DO_SPACES_REGION'),
-            'bucket' => env('DO_SPACES_BUCKET'),
-        ],
-
     ],
 
 ];

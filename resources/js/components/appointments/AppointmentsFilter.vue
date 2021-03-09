@@ -44,6 +44,15 @@
             <option disabled value selected>Please select one</option>
             <slot name="cities"></slot>
           </select>
+        </div> 
+
+        <!-- comment status -->
+        <div class="form-group col-md-4">
+          <label class="control-label">feedback</label>
+          <select class="form-control" name="comment_status" aria-hidden="true" v-model="feedback">
+            <option disabled value selected>Please select one</option>
+            <slot name="feedback"></slot>
+          </select>
         </div>
 
         <!-- user  -->
@@ -131,6 +140,7 @@ export default {
       appointmentDateEnd: null,
       wantedExpert: null,
       canton: null,
+      feedback:null,
       userID: null,
       phoneNumber: null,
       appointmentID: null,
@@ -147,6 +157,7 @@ export default {
       this.appointmentDateEnd = null;
       this.wantedExpert = null;
       this.canton = null;
+      this.feedback = null;
       this.userID = null;
       this.phoneNumber = null;
       this.appointmentID = null;
