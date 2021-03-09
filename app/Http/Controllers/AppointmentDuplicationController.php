@@ -22,13 +22,13 @@ class AppointmentDuplicationController extends Controller
           
         // the cloned appointment
         $newAppointment = $appointment->replicate();
+        //push to get the id for the cloned record
+        $newAppointment->push();
         $newAppointment->duplicated_from_id = $appointment->id;
         $newAppointment->save();
         
         // updating the old appointment
-        $oldAppointmentId = $newAppointment->id;
-        $appointment = Appointment::find($id);
-        $appointment->duplicated_to_id = $oldAppointmentId;
+        $appointment->duplicated_to_id = $newAppointment->id;
         $appointment->save();
 
         return redirect()
