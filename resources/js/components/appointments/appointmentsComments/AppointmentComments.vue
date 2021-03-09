@@ -70,16 +70,19 @@ export default {
     };
   },
   methods: {
-    submitComment(e) {
-      e.append('appointmentId',this.appointmentId);
+    submitComment(formData) {
+      formData.append('appointmentId',this.appointmentId);
 
       axios
-        .post("/comments/" + this.appointmentId,e)
+        .post("/comments/" + this.appointmentId,formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }})
         .then(response => {
           this.comments.push(response.data.comment);
         })
-        .catch(()=>{
-          console.log('errored here');
+        .catch((err)=>{
+          console.log('errored here', err);
         })
     }
   }
