@@ -2000,7 +2000,13 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       e.append('appointmentId', this.appointmentId);
-      axios.post("/comments/" + this.appointmentId, e).then(function (response) {
+      axios.post({
+        url: "/comments/" + this.appointmentId,
+        e: e,
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
         _this2.comments.push(response.data.comment);
       })["catch"](function () {
         console.log('errored here');

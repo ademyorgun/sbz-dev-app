@@ -8,7 +8,7 @@
             ></single-comment>
         </div>
         <hr>
-        <form class="reply">
+        <form class="reply" >
             <div class="avatar">
                 <img :src="'https://sbz-appointment.fra1.digitaloceanspaces.com/'+current_user.avatar" alt="">
             </div>

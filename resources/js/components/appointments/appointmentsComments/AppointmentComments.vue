@@ -74,7 +74,12 @@ export default {
       e.append('appointmentId',this.appointmentId);
 
       axios
-        .post("/comments/" + this.appointmentId,e)
+        .post({
+          url:"/comments/" + this.appointmentId,
+          e,
+          headers: {
+          'Content-Type': 'multipart/form-data'
+      }})
         .then(response => {
           this.comments.push(response.data.comment);
         })
