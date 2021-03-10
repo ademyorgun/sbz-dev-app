@@ -14,7 +14,7 @@ class AddImageToComment extends Migration
     public function up()
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->string('comment-image')->nullable();
+            $table->string('comment_image')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddImageToComment extends Migration
     public function down()
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->dropColumn('comment-image');
+            $table->dropColumn('comment_image');
         });
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Comment;
 use App\Appointment;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 
 class CommentsController extends Controller
 {
@@ -61,11 +63,6 @@ class CommentsController extends Controller
         // $request->validate([
         //     'appointmentId' => 'required'
         // ]);
-        
-        //get the uploaded file
-        // $file = $request->file('image');
-        //get the reply body
-
 
         $user = auth()->user();
         $comment = new Comment();
@@ -74,8 +71,11 @@ class CommentsController extends Controller
         $comment->user_id = $user->id;
         
         // todo upload image to digital ocean + save the url to db
-        $path = $request->file('image')->store('public/comment-images','s3');
-        $comment->comment_image = $path;
+
+        if($request->has('image')) {
+          $path = $request->file('image')->store('public/comment-images','s3');
+          $comment->comment_image = $path;
+        }
         
         $comment->user_username = $user->user_name;
         $comment->avatar = $comment->user->avatar;

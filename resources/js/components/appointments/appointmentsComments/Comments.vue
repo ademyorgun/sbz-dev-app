@@ -29,173 +29,204 @@
             <button class="reply--button" @click.prevent="submitComment"><i class="fa fa-paper-plane"></i> Send</button>
         </form>
     </div>
+    <hr />
+    <form class="reply">
+      <div class="avatar">
+        <img
+          :src="
+            'https://sbz-appointment.fra1.digitaloceanspaces.com/' +
+            current_user.avatar
+          "
+          alt=""
+        />
+      </div>
+      <input
+        type="text"
+        v-model.trim="reply"
+        class="reply--text"
+        placeholder="Kommentar erfassen..."
+        maxlength="250"
+        @keyup.enter="submitComment"
+      />
+      <div class="image-upload">
+        <label for="file-input" class="upload--button">
+          <img src="/upload.png" />
+        </label>
+        <input id="file-input" type="file" v-on:change="onFileChange" />
+      </div>
+      <button class="reply--button" @click.prevent="submitComment">
+        <i class="fa fa-paper-plane"></i> Send
+      </button>
+    </form>
+  </div>
 </template>
 
 <script>
-import singleComment from './SingleComment'
-    export default {
-        name: 'comments',
-        components: {
-            singleComment
-        },
-        data() {
-            return {
-                reply: '',
-                image:null
-            }
-        },
-        methods: {
-            submitComment() {
-                if(this.reply != '') {
-                    const fd = new FormData();
-                    fd.append('reply',this.reply);
-                    fd.append('image',this.image);
-                    this.$emit('submit-comment', fd);
-                    this.reply = '';
-                    this.removeImage();
-                }
-            },
-            onFileChange(e) {
-               this.image = this.$refs.file.files[0];
-            },
-            // createImage(file) {
-            //   var reader = new FileReader();
-            //   var vm = this;
+import singleComment from "./SingleComment";
+export default {
+  name: "comments",
+  components: {
+    singleComment,
+  },
+  data() {
+    return {
+      reply: "",
+      image: null,
+    };
+  },
+  methods: {
+    submitComment() {
+      if (this.reply != "") {
+        const fd = new FormData();
+        fd.append("reply", this.reply);
+        fd.append("image", this.image);
+        this.$emit("submit-comment", fd);
+        this.reply = "";
+        this.removeImage();
+      }
+    },
+    onFileChange(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.createImage(files[0]);
+    },
+    createImage(file) {
+      var reader = new FileReader();
+      var vm = this;
 
-            //   reader.onload = (e) => {
-            //     vm.image = e.target.result;
-            //   };
-            //   reader.readAsDataURL(file);
-            // },
-            removeImage: function (e) {
-              this.image = null;
-            }
-        },
-        props: ['comments', 'current_user', 'comments_wrapper_classes']
-    }
+      reader.onload = (e) => {
+        vm.image = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    },
+    removeImage: function (e) {
+      this.image = null;
+    },
+  },
+  props: ["comments", "current_user", "comments_wrapper_classes"],
+};
 </script>
 
 <style scoped>
 .comments {
-    margin-top: 20px;
-    padding: 20px;
-    padding-top: 0;
+  margin-top: 20px;
+  padding: 20px;
+  padding-top: 0;
 }
 
 .comments-wrapper {
-    padding-right: 10px;
+  padding-right: 10px;
 }
 
-.custom-scrollbar::-webkit-scrollbar-track
-{
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    -moz-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    border-radius: 10px;
-    background-color: #fff;
+.custom-scrollbar::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #fff;
 }
 
-.custom-scrollbar::-webkit-scrollbar
-{
-    width: 8px;
-    background-color: #fff;
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  background-color: #fff;
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb
-{
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    -moz-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    background-color: #555;
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #555;
 }
 
 /* Reply component */
 .reply {
-    display: flex;
-    position: relative;
-    align-items: center;
-    background-color: rgb(247, 247, 247);
-    border-radius: 4px;
-    padding: 5px 10px;
-    overflow: hidden;
+  display: flex;
+  position: relative;
+  align-items: center;
+  background-color: rgb(247, 247, 247);
+  border-radius: 4px;
+  padding: 5px 10px;
+  overflow: hidden;
 }
 
 .reply .avatar {
-    position: absolute;
+  position: absolute;
 }
 
 .reply .avatar > img {
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
 }
 
 .reply .reply--text {
-    min-height: 40px;
-    padding: 10px 10px 10px 55px;
-    margin-right: 10px;
-    border: 0;
-    color: #333;
-    width: 100%;
-    outline: 0;
-    background-color: transparent;
-    box-shadow: none;
+  min-height: 40px;
+  padding: 10px 10px 10px 55px;
+  margin-right: 10px;
+  border: 0;
+  color: #333;
+  width: 100%;
+  outline: 0;
+  background-color: transparent;
+  box-shadow: none;
 }
 
 .reply input.reply--text:valid {
-    margin-right: 71px;
+  margin-right: 71px;
 }
 
 .reply input.reply--text:valid + .reply--button {
-    right: 10px;
+  right: 10px;
 }
 
-.image-upload>input {
+.image-upload > input {
   display: none;
 }
 
-.reply .upload--button{
-    position: absolute;
-    right: 75px;
-    top: 15px;
+.reply .upload--button {
+  position: absolute;
+  right: 75px;
+  top: 15px;
 }
 
 .reply .reply--button {
-    position: absolute;
-    right: 0;
-    border: 1px solid #22a7f0;
-    background-color: transparent;
-    color: #22a7f0;
-    display: inline-block;
-    font-weight: 400;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    padding: 0.375rem 0.75rem;
-    font-size: 15px;
-    line-height: 1.5;
-    border-radius: 30px;
-    transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out, border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out, right 0.25s ease-in-out;
-    outline: 0;
+  position: absolute;
+  right: 0;
+  border: 1px solid #22a7f0;
+  background-color: transparent;
+  color: #22a7f0;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 0.375rem 0.75rem;
+  font-size: 15px;
+  line-height: 1.5;
+  border-radius: 30px;
+  transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+    border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out,
+    right 0.25s ease-in-out;
+  outline: 0;
 }
 
 .reply .reply--button:hover {
-    color: #fff;
-    background-color: #2a629c;
+  color: #fff;
+  background-color: #2a629c;
 }
 
 .reply .reply--button:focus,
 .reply .reply--button:active {
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 hr {
-    margin-top: 10px;
-    margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 </style>
