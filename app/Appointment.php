@@ -160,6 +160,7 @@ class Appointment extends Model
         $phoneNumber = $request->input('phoneNumber');
         $userID = $request->input('userID');
         $canton = $request->input('canton');
+        $commentStatus = $request->input('commentStatus');
         $wantedExpert = $request->input('wantedExpert');
         $appointmentDateEnd = $request->input('appointmentDateEnd');
         $appointmentDateStart = $request->input('appointmentDateStart');
@@ -203,6 +204,9 @@ class Appointment extends Model
             })
             ->when($callDateEnd, function ($data, $callDateEnd) {
                 return $data->where('call_date', '<=', $callDateEnd);
+            })    
+            ->when($commentStatus, function ($data, $commentStatus) {
+                return $data->where('comment_status', '=', $commentStatus);
             })
             ->when($callDateStart, function ($data, $callDateStart) {
                 return $data->where('call_date', '>=', $callDateStart);

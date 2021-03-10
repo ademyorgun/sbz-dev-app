@@ -49,7 +49,7 @@
         <!-- comment status -->
         <div class="form-group col-md-4">
           <label class="control-label">feedback</label>
-          <select class="form-control" name="comment_status" aria-hidden="true" v-model="feedback">
+          <select class="form-control" name="comment_status" aria-hidden="true" v-model="commentStatus">
             <option disabled value selected>Please select one</option>
             <slot name="feedback"></slot>
           </select>
@@ -140,7 +140,7 @@ export default {
       appointmentDateEnd: null,
       wantedExpert: null,
       canton: null,
-      feedback:null,
+      commentStatus:null,
       userID: null,
       phoneNumber: null,
       appointmentID: null,

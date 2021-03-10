@@ -1887,7 +1887,7 @@ __webpack_require__.r(__webpack_exports__);
       appointmentDateEnd: null,
       wantedExpert: null,
       canton: null,
-      feedback: null,
+      commentStatus: null,
       userID: null,
       phoneNumber: null,
       appointmentID: null,
@@ -2257,9 +2257,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       e.append('appointmentId', this.appointmentId);
-      axios.post({
-        url: "/comments/" + this.appointmentId,
-        e: e,
+      axios.post("/comments/" + this.appointmentId, e, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -2341,20 +2339,16 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     onFileChange: function onFileChange(e) {
-      var files = e.target.files || e.dataTransfer.files;
-      if (!files.length) return;
-      this.createImage(files[0]);
+      this.image = this.$refs.file.files[0];
     },
-    createImage: function createImage(file) {
-      var reader = new FileReader();
-      var vm = this;
-
-      reader.onload = function (e) {
-        vm.image = e.target.result;
-      };
-
-      reader.readAsDataURL(file);
-    },
+    // createImage(file) {
+    //   var reader = new FileReader();
+    //   var vm = this;
+    //   reader.onload = (e) => {
+    //     vm.image = e.target.result;
+    //   };
+    //   reader.readAsDataURL(file);
+    // },
     removeImage: function removeImage(e) {
       this.image = null;
     }
@@ -2373,6 +2367,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2609,7 +2608,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* Single-comment component */\n.comment[data-v-1b305fe0] {\r\n    display: flex;\r\n    padding: 10px;\r\n    margin-bottom: 10px;\r\n    align-items: center;\r\n    color: #333;\r\n    background-color: #fff;\r\n    border-radius: 4px;\r\n    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);\n}\n.comment .avatar[data-v-1b305fe0] {\r\n    align-self: flex-start;\n}\n.comment .avatar > img[data-v-1b305fe0] {\r\n    width: 40px;\r\n    height: 40px;\r\n    border-radius: 4px;\r\n    align-self: start;\n}\n.comment .text[data-v-1b305fe0] {\r\n    text-align: left;\r\n    margin-left: 5px;\r\n    width: 100%;\r\n    display: flex;\n}\n.comment .text .username[data-v-1b305fe0] {\r\n    font-weight: 700;\r\n    color: #76838f;\n}\n.comment-body[data-v-1b305fe0]{\r\n    max-width: 70%;\n}\n.comment .updated_at[data-v-1b305fe0]{\r\n    margin-left: auto;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* Single-comment component */\n.comment[data-v-1b305fe0] {\r\n    display: flex;\r\n    flex-flow: column nowrap;\r\n    color: #333;\r\n    background-color: #fff;\r\n    border-radius: 4px;\r\n    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);\n}\n.main[data-v-1b305fe0]{\r\n    display: flex;\r\n    padding: 10px;\r\n    margin-bottom: 10px;\r\n    align-items: center;\n}\n.comment .avatar[data-v-1b305fe0] {\r\n    align-self: flex-start;\n}\n.comment .avatar > img[data-v-1b305fe0] {\r\n    width: 40px;\r\n    height: 40px;\r\n    border-radius: 4px;\r\n    align-self: start;\n}\n.comment .text[data-v-1b305fe0] {\r\n    text-align: left;\r\n    margin-left: 5px;\r\n    width: 100%;\r\n    display: flex;\n}\n.image[data-v-1b305fe0]{\r\n    margin-top: 1rem;\n}\n.image .feedback-image[data-v-1b305fe0]{\r\n    max-height: 700px;\n}\n.comment .text .username[data-v-1b305fe0] {\r\n    font-weight: 700;\r\n    color: #76838f;\n}\n.comment-body[data-v-1b305fe0]{\r\n    max-width: 70%;\r\n    margin-left:10px;\n}\n.comment .updated_at[data-v-1b305fe0]{\r\n    margin-left: auto;\n}\r\n", ""]);
 
 // exports
 
@@ -22742,8 +22741,8 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.feedback,
-                  expression: "feedback"
+                  value: _vm.commentStatus,
+                  expression: "commentStatus"
                 }
               ],
               staticClass: "form-control",
@@ -22758,7 +22757,7 @@ var render = function() {
                       var val = "_value" in o ? o._value : o.value
                       return val
                     })
-                  _vm.feedback = $event.target.multiple
+                  _vm.commentStatus = $event.target.multiple
                     ? $$selectedVal
                     : $$selectedVal[0]
                 }
@@ -23381,6 +23380,7 @@ var render = function() {
         _vm._m(0),
         _vm._v(" "),
         _c("input", {
+          ref: "file",
           attrs: { id: "file-input", type: "file" },
           on: { change: _vm.onFileChange }
         })
@@ -23436,29 +23436,42 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "comment" }, [
-    _c("div", { staticClass: "avatar" }, [
+    _c("div", { staticClass: "main" }, [
+      _c("div", { staticClass: "avatar" }, [
+        _c("img", {
+          attrs: {
+            src:
+              "https://sbz-appointment.fra1.digitaloceanspaces.com/" +
+              _vm.comment.avatar,
+            alt: ""
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "text" }, [
+        _c("a", { staticClass: "username", attrs: { href: "#" } }, [
+          _vm._v("@" + _vm._s(_vm.comment.user_username))
+        ]),
+        _vm._v(" "),
+        _c("span", { staticClass: "comment-body" }, [
+          _vm._v(" " + _vm._s(_vm.comment.body))
+        ]),
+        _c("span", { staticClass: "updated_at" }, [
+          _vm._v(_vm._s(_vm.comment.updated_at))
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "image" }, [
       _c("img", {
         attrs: {
+          calass: "feedback-image",
           src:
-            "https://sbz-appointment.fra1.digitaloceanspaces.com/" +
-            _vm.comment.avatar,
+            "https://bucketeer-24961eed-3942-41da-b1d8-d4ce18c0f829.s3.amazonaws.com/" +
+            _vm.comment.comment_image,
           alt: ""
         }
       })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "text" }, [
-      _c("a", { staticClass: "username", attrs: { href: "#" } }, [
-        _vm._v("@" + _vm._s(_vm.comment.user_username))
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "comment-body" }, [
-        _vm._v(_vm._s(_vm.comment.body))
-      ]),
-      _vm._v(" - "),
-      _c("span", { staticClass: "updated_at" }, [
-        _vm._v(_vm._s(_vm.comment.updated_at))
-      ])
     ])
   ])
 }
