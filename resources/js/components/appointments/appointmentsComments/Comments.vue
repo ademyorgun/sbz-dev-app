@@ -1,11 +1,33 @@
 <template>
-  <div class="comments">
-    <div :class="comments_wrapper_classes">
-      <single-comment
-        v-for="comment in comments"
-        :comment="comment"
-        :key="comment.id"
-      ></single-comment>
+    <div class="comments">
+        <div :class="comments_wrapper_classes">
+            <single-comment 
+                v-for="comment in comments"
+                :comment="comment"
+                :key="comment.id"
+            ></single-comment>
+        </div>
+        <hr>
+        <form class="reply" >
+            <div class="avatar">
+                <img :src="'https://sbz-appointment.fra1.digitaloceanspaces.com/'+current_user.avatar" alt="">
+            </div>
+            <input 
+                type="text" 
+                v-model.trim="reply" 
+                class="reply--text" 
+                placeholder="Kommentar erfassen..."
+                maxlength="250"
+                @keyup.enter="submitComment"
+            />
+            <div class="image-upload">
+                <label for="file-input" class="upload--button">
+                  <img src="/upload.png"/>
+                </label>
+                <input id="file-input" type="file" ref="file" v-on:change="onFileChange" />
+            </div>
+            <button class="reply--button" @click.prevent="submitComment"><i class="fa fa-paper-plane"></i> Send</button>
+        </form>
     </div>
     <hr />
     <form class="reply">
