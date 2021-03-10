@@ -185,8 +185,8 @@
                             @foreach($dataType->addRows as $row)
                                 @if($row->field == 'comment_status')
                                     <template v-slot:feedback>
-                                        @foreach ($row->details->options as $option)
-                                            <option>{{ $option}}</option> 
+                                        @foreach ($row->details->options as $key => $option)
+                                            <option value="{{ $key }}">{{ $option}}</option> 
                                         @endforeach
                                     </template>
                                 @endif
