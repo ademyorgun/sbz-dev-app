@@ -74,8 +74,8 @@ class CommentsController extends Controller
         $comment->user_id = $user->id;
         
         // todo upload image to digital ocean + save the url to db
-            $path = $request->file('image')->store('comment-images','s3');
-        // $comment->comment_image = $path;
+        $path = $request->file('image')->store('public/comment-images','s3');
+        $comment->comment_image = $path;
         
         $comment->user_username = $user->user_name;
         $comment->avatar = $comment->user->avatar;

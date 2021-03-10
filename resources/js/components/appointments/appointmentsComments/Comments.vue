@@ -24,7 +24,7 @@
                 <label for="file-input" class="upload--button">
                   <img src="/upload.png"/>
                 </label>
-                <input id="file-input" type="file" v-on:change="onFileChange" />
+                <input id="file-input" type="file" ref="file" v-on:change="onFileChange" />
             </div>
             <button class="reply--button" @click.prevent="submitComment"><i class="fa fa-paper-plane"></i> Send</button>
         </form>
@@ -56,20 +56,17 @@ import singleComment from './SingleComment'
                 }
             },
             onFileChange(e) {
-                var files = e.target.files || e.dataTransfer.files;
-                if (!files.length)
-                return;
-                this.createImage(files[0]);
+               this.image = this.$refs.file.files[0];
             },
-            createImage(file) {
-              var reader = new FileReader();
-              var vm = this;
+            // createImage(file) {
+            //   var reader = new FileReader();
+            //   var vm = this;
 
-              reader.onload = (e) => {
-                vm.image = e.target.result;
-              };
-              reader.readAsDataURL(file);
-            },
+            //   reader.onload = (e) => {
+            //     vm.image = e.target.result;
+            //   };
+            //   reader.readAsDataURL(file);
+            // },
             removeImage: function (e) {
               this.image = null;
             }
