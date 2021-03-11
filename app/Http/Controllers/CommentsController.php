@@ -70,7 +70,7 @@ class CommentsController extends Controller
         $comment->appointment_id = $request->appointmentId;
         $comment->user_id = $user->id;
         
-        // todo upload image to digital ocean + save the url to db
+        // toupload image to digital ocean + save the url to db
 
         if($request->has('image')) {
           $path = $request->file('image')->store('public/comment-images','s3');

@@ -2253,18 +2253,18 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    submitComment: function submitComment(e) {
+    submitComment: function submitComment(formData) {
       var _this2 = this;
 
-      e.append('appointmentId', this.appointmentId);
-      axios.post("/comments/" + this.appointmentId, e, {
+      formData.append('appointmentId', this.appointmentId);
+      axios.post("/comments/" + this.appointmentId, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (response) {
         _this2.comments.push(response.data.comment);
-      })["catch"](function () {
-        console.log('errored here');
+      })["catch"](function (err) {
+        console.log('errored here', err);
       });
     }
   }
@@ -2315,45 +2315,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'comments',
+  name: "comments",
   components: {
     singleComment: _SingleComment__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
-      reply: '',
+      reply: "",
       image: null
     };
   },
   methods: {
     submitComment: function submitComment() {
-      if (this.reply != '') {
-        var fd = new FormData();
-        fd.append('reply', this.reply);
-        fd.append('image', this.image);
-        this.$emit('submit-comment', fd);
-        this.reply = '';
+      if (this.reply != "") {
+        var formData = new FormData();
+        formData.append("reply", this.reply);
+        formData.append("image", this.image);
+        this.$emit("submit-comment", formData);
+        this.reply = "";
         this.removeImage();
       }
     },
     onFileChange: function onFileChange(e) {
       this.image = this.$refs.file.files[0];
     },
-    // createImage(file) {
-    //   var reader = new FileReader();
-    //   var vm = this;
-    //   reader.onload = (e) => {
-    //     vm.image = e.target.result;
-    //   };
-    //   reader.readAsDataURL(file);
-    // },
     removeImage: function removeImage(e) {
       this.image = null;
     }
   },
-  props: ['comments', 'current_user', 'comments_wrapper_classes']
+  props: ["comments", "current_user", "comments_wrapper_classes"]
 });
 
 /***/ }),
@@ -2589,7 +2582,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.comments[data-v-51cf2c2a] {\r\n    margin-top: 20px;\r\n    padding: 20px;\r\n    padding-top: 0;\n}\n.comments-wrapper[data-v-51cf2c2a] {\r\n    padding-right: 10px;\n}\n.custom-scrollbar[data-v-51cf2c2a]::-webkit-scrollbar-track\r\n{\r\n    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);\r\n    border-radius: 10px;\r\n    background-color: #fff;\n}\n.custom-scrollbar[data-v-51cf2c2a]::-webkit-scrollbar\r\n{\r\n    width: 8px;\r\n    background-color: #fff;\n}\n.custom-scrollbar[data-v-51cf2c2a]::-webkit-scrollbar-thumb\r\n{\r\n    border-radius: 10px;\r\n    box-shadow: inset 0 0 6px rgba(0,0,0,.3);\r\n    background-color: #555;\n}\r\n\r\n/* Reply component */\n.reply[data-v-51cf2c2a] {\r\n    display: flex;\r\n    position: relative;\r\n    align-items: center;\r\n    background-color: rgb(247, 247, 247);\r\n    border-radius: 4px;\r\n    padding: 5px 10px;\r\n    overflow: hidden;\n}\n.reply .avatar[data-v-51cf2c2a] {\r\n    position: absolute;\n}\n.reply .avatar > img[data-v-51cf2c2a] {\r\n    width: 40px;\r\n    height: 40px;\r\n    border-radius: 100%;\n}\n.reply .reply--text[data-v-51cf2c2a] {\r\n    min-height: 40px;\r\n    padding: 10px 10px 10px 55px;\r\n    margin-right: 10px;\r\n    border: 0;\r\n    color: #333;\r\n    width: 100%;\r\n    outline: 0;\r\n    background-color: transparent;\r\n    box-shadow: none;\n}\n.reply input.reply--text[data-v-51cf2c2a]:valid {\r\n    margin-right: 71px;\n}\n.reply input.reply--text:valid + .reply--button[data-v-51cf2c2a] {\r\n    right: 10px;\n}\n.image-upload>input[data-v-51cf2c2a] {\r\n  display: none;\n}\n.reply .upload--button[data-v-51cf2c2a]{\r\n    position: absolute;\r\n    right: 75px;\r\n    top: 15px;\n}\n.reply .reply--button[data-v-51cf2c2a] {\r\n    position: absolute;\r\n    right: 0;\r\n    border: 1px solid #22a7f0;\r\n    background-color: transparent;\r\n    color: #22a7f0;\r\n    display: inline-block;\r\n    font-weight: 400;\r\n    text-align: center;\r\n    white-space: nowrap;\r\n    vertical-align: middle;\r\n    -webkit-user-select: none;\r\n    -moz-user-select: none;\r\n    -ms-user-select: none;\r\n    user-select: none;\r\n    padding: 0.375rem 0.75rem;\r\n    font-size: 15px;\r\n    line-height: 1.5;\r\n    border-radius: 30px;\r\n    transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out, border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out, right 0.25s ease-in-out;\r\n    outline: 0;\n}\n.reply .reply--button[data-v-51cf2c2a]:hover {\r\n    color: #fff;\r\n    background-color: #2a629c;\n}\n.reply .reply--button[data-v-51cf2c2a]:focus,\r\n.reply .reply--button[data-v-51cf2c2a]:active {\r\n    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);\n}\nhr[data-v-51cf2c2a] {\r\n    margin-top: 10px;\r\n    margin-bottom: 10px;\n}\r\n", ""]);
+exports.push([module.i, "\n.comments[data-v-51cf2c2a] {\r\n  margin-top: 20px;\r\n  padding: 20px;\r\n  padding-top: 0;\n}\n.comments-wrapper[data-v-51cf2c2a] {\r\n  padding-right: 10px;\n}\n.custom-scrollbar[data-v-51cf2c2a]::-webkit-scrollbar-track {\r\n  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);\r\n  border-radius: 10px;\r\n  background-color: #fff;\n}\n.custom-scrollbar[data-v-51cf2c2a]::-webkit-scrollbar {\r\n  width: 8px;\r\n  background-color: #fff;\n}\n.custom-scrollbar[data-v-51cf2c2a]::-webkit-scrollbar-thumb {\r\n  border-radius: 10px;\r\n  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);\r\n  background-color: #555;\n}\r\n\r\n/* Reply component */\n.reply[data-v-51cf2c2a] {\r\n  display: flex;\r\n  position: relative;\r\n  align-items: center;\r\n  background-color: rgb(247, 247, 247);\r\n  border-radius: 4px;\r\n  padding: 5px 10px;\r\n  overflow: hidden;\n}\n.reply .avatar[data-v-51cf2c2a] {\r\n  position: absolute;\n}\n.reply .avatar > img[data-v-51cf2c2a] {\r\n  width: 40px;\r\n  height: 40px;\r\n  border-radius: 100%;\n}\n.reply .reply--text[data-v-51cf2c2a] {\r\n  min-height: 40px;\r\n  padding: 10px 10px 10px 55px;\r\n  margin-right: 10px;\r\n  border: 0;\r\n  color: #333;\r\n  width: 100%;\r\n  outline: 0;\r\n  background-color: transparent;\r\n  box-shadow: none;\n}\n.reply input.reply--text[data-v-51cf2c2a]:valid {\r\n  margin-right: 71px;\n}\n.reply input.reply--text:valid + .reply--button[data-v-51cf2c2a] {\r\n  right: 10px;\n}\n.image-upload > input[data-v-51cf2c2a] {\r\n  display: none;\n}\n.reply .upload--button[data-v-51cf2c2a] {\r\n  position: absolute;\r\n  right: 75px;\r\n  top: 15px;\n}\n.reply .reply--button[data-v-51cf2c2a] {\r\n  position: absolute;\r\n  right: 0;\r\n  border: 1px solid #22a7f0;\r\n  background-color: transparent;\r\n  color: #22a7f0;\r\n  display: inline-block;\r\n  font-weight: 400;\r\n  text-align: center;\r\n  white-space: nowrap;\r\n  vertical-align: middle;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\r\n  padding: 0.375rem 0.75rem;\r\n  font-size: 15px;\r\n  line-height: 1.5;\r\n  border-radius: 30px;\r\n  transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,\r\n    border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out,\r\n    right 0.25s ease-in-out;\r\n  outline: 0;\n}\n.reply .reply--button[data-v-51cf2c2a]:hover {\r\n  color: #fff;\r\n  background-color: #2a629c;\n}\n.reply .reply--button[data-v-51cf2c2a]:focus,\r\n.reply .reply--button[data-v-51cf2c2a]:active {\r\n  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);\n}\nhr[data-v-51cf2c2a] {\r\n  margin-top: 10px;\r\n  margin-bottom: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -2608,7 +2601,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* Single-comment component */\n.comment[data-v-1b305fe0] {\r\n    display: flex;\r\n    flex-flow: column nowrap;\r\n    color: #333;\r\n    background-color: #fff;\r\n    border-radius: 4px;\r\n    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);\n}\n.main[data-v-1b305fe0]{\r\n    display: flex;\r\n    padding: 10px;\r\n    margin-bottom: 10px;\r\n    align-items: center;\n}\n.comment .avatar[data-v-1b305fe0] {\r\n    align-self: flex-start;\n}\n.comment .avatar > img[data-v-1b305fe0] {\r\n    width: 40px;\r\n    height: 40px;\r\n    border-radius: 4px;\r\n    align-self: start;\n}\n.comment .text[data-v-1b305fe0] {\r\n    text-align: left;\r\n    margin-left: 5px;\r\n    width: 100%;\r\n    display: flex;\n}\n.image[data-v-1b305fe0]{\r\n    margin-top: 1rem;\n}\n.image .feedback-image[data-v-1b305fe0]{\r\n    max-height: 700px;\n}\n.comment .text .username[data-v-1b305fe0] {\r\n    font-weight: 700;\r\n    color: #76838f;\n}\n.comment-body[data-v-1b305fe0]{\r\n    max-width: 70%;\r\n    margin-left:10px;\n}\n.comment .updated_at[data-v-1b305fe0]{\r\n    margin-left: auto;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* Single-comment component */\n.comment[data-v-1b305fe0] {\r\n    display: flex;\r\n    flex-flow: column nowrap;\r\n    color: #333;\r\n    background-color: #fff;\r\n    border-radius: 4px;\r\n    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);\r\n    margin-top: 1.5rem;\n}\n.main[data-v-1b305fe0]{\r\n    display: flex;\r\n    padding: 10px;\r\n    margin-bottom: 10px;\r\n    align-items: center;\n}\n.comment .avatar[data-v-1b305fe0] {\r\n    align-self: flex-start;\n}\n.comment .avatar > img[data-v-1b305fe0] {\r\n    width: 40px;\r\n    height: 40px;\r\n    border-radius: 4px;\r\n    align-self: start;\n}\n.comment .text[data-v-1b305fe0] {\r\n    text-align: left;\r\n    margin-left: 5px;\r\n    width: 100%;\r\n    display: flex;\n}\n.image[data-v-1b305fe0]{\r\n    margin-top: 1rem;\r\n    max-width: 100%;\n}\n.feedback-image[data-v-1b305fe0]{\r\n    max-height: 700px;\r\n    max-width: 100%;\n}\n.comment .text .username[data-v-1b305fe0] {\r\n    font-weight: 700;\r\n    color: #76838f;\n}\n.comment-body[data-v-1b305fe0]{\r\n    max-width: 70%;\r\n    margin-left:10px;\n}\n.comment .updated_at[data-v-1b305fe0]{\r\n    margin-left: auto;\n}\r\n", ""]);
 
 // exports
 
@@ -23399,7 +23392,9 @@ var render = function() {
         },
         [_c("i", { staticClass: "fa fa-paper-plane" }), _vm._v(" Send")]
       )
-    ])
+    ]),
+    _vm._v(" "),
+    _c("hr")
   ])
 }
 var staticRenderFns = [
@@ -23464,6 +23459,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "image" }, [
       _c("img", {
+        staticStyle: { "max-width": "100%" },
         attrs: {
           calass: "feedback-image",
           src:
