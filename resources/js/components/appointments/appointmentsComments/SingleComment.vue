@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="image">
-            <img calass="feedback-image" :src=" 'https://bucketeer-24961eed-3942-41da-b1d8-d4ce18c0f829.s3.amazonaws.com/' + comment.comment_image" alt="">
+            <img calass="feedback-image" style="max-width:100%" :src=" 'https://bucketeer-24961eed-3942-41da-b1d8-d4ce18c0f829.s3.amazonaws.com/' + comment.comment_image" alt="">
         </div>
     </div>
 </template>
@@ -30,6 +30,7 @@
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 1.5rem;
 }
 
 .main{
@@ -59,10 +60,12 @@
 
 .image{
     margin-top: 1rem;
+    max-width: 100%;    
 }
 
-.image .feedback-image{
+.feedback-image{
     max-height: 700px;
+    max-width: 100%;    
 }
 .comment .text .username {
     font-weight: 700;

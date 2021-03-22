@@ -28,36 +28,7 @@
             </div>
             <button class="reply--button" @click.prevent="submitComment"><i class="fa fa-paper-plane"></i> Send</button>
         </form>
-    </div>
     <hr />
-    <form class="reply">
-      <div class="avatar">
-        <img
-          :src="
-            'https://sbz-appointment.fra1.digitaloceanspaces.com/' +
-            current_user.avatar
-          "
-          alt=""
-        />
-      </div>
-      <input
-        type="text"
-        v-model.trim="reply"
-        class="reply--text"
-        placeholder="Kommentar erfassen..."
-        maxlength="250"
-        @keyup.enter="submitComment"
-      />
-      <div class="image-upload">
-        <label for="file-input" class="upload--button">
-          <img src="/upload.png" />
-        </label>
-        <input id="file-input" type="file" v-on:change="onFileChange" />
-      </div>
-      <button class="reply--button" @click.prevent="submitComment">
-        <i class="fa fa-paper-plane"></i> Send
-      </button>
-    </form>
   </div>
 </template>
 
@@ -77,27 +48,16 @@ export default {
   methods: {
     submitComment() {
       if (this.reply != "") {
-        const fd = new FormData();
-        fd.append("reply", this.reply);
-        fd.append("image", this.image);
-        this.$emit("submit-comment", fd);
+        const formData = new FormData();
+        formData.append("reply", this.reply);
+        formData.append("image", this.image);
+        this.$emit("submit-comment", formData);
         this.reply = "";
         this.removeImage();
       }
     },
     onFileChange(e) {
-      var files = e.target.files || e.dataTransfer.files;
-      if (!files.length) return;
-      this.createImage(files[0]);
-    },
-    createImage(file) {
-      var reader = new FileReader();
-      var vm = this;
-
-      reader.onload = (e) => {
-        vm.image = e.target.result;
-      };
-      reader.readAsDataURL(file);
+      this.image = this.$refs.file.files[0]
     },
     removeImage: function (e) {
       this.image = null;
