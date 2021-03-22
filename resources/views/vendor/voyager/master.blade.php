@@ -139,6 +139,72 @@ if (starts_with(app('VoyagerAuth')->user()->avatar, 'http://') || starts_with(ap
     }
     @endif
 </script>
+<script>
+    // get the current user
+    @auth
+    // The user is authenticated...
+
+    // check if it's a sales agent role_id = 2
+    const userRoleId =  @json(Auth::user()->role_id);
+    
+    if(userRoleId === 2){
+    //initialize the cookie to 0 if it doesn't exist
+    if(getCookie("spent_time") === ""){
+        document.cookie = "spent_time=0;"; 
+    }
+
+    let cookie = getCookie("spent_time");
+    //gets the cookie
+    //parse its value
+    let timespent = parseInt(cookie);
+    const timeLeft = 900000 - (timespent * 60000);
+    console.log({'timespent':timespent},{'timeleft':timeLeft});
+    //set interval executes every minute for 15 minutes
+    const timerId = setInterval(() => {
+        //increase the value by 1 and set it to the cookie
+        timespent += 1;
+        document.cookie = `spent_time=${timespent};`;
+        console.log(document.cookie);
+    }, 60000);
+    // after 15 minutes setTimeout clears the interval and logs the user out
+    setTimeout(() => { 
+        clearInterval(timerId);
+        document.cookie = "spent_time=0;";
+        fetch('/logout',{
+            method: 'POST',
+        })
+    }, timeLeft);
+    }
+   
+    //a function to check if the cookie already exists
+    function checkCookie() {
+      var username = getCookie("spent_time");
+      if (username != "") {
+       alert("Welcome again " + username);
+      } else {
+        if (username != "" && username != null) {
+            return false;
+        }
+      }
+    }
+    //a function to get the value of the cookie
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+    }   
+    @endauth
+</script>
 @include('voyager::media.manager')
 @yield('javascript')
 @stack('javascript')
