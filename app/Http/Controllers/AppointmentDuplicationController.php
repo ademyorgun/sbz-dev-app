@@ -25,6 +25,7 @@ class AppointmentDuplicationController extends Controller
         //push to get the id for the cloned record
         $newAppointment->push();
         $newAppointment->duplicated_from_id = $appointment->id;
+        $newAppointment->appointment_status = null;
         $newAppointment->save();
         
         // updating the old appointment
