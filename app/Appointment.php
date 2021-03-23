@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Appointment extends Model
 {
+    protected $fillable = ['duplicated_from_id','appointment_status'];
     /**
      * The "booting" method of the model.
      *

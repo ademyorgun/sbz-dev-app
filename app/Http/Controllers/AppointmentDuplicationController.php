@@ -21,16 +21,16 @@ class AppointmentDuplicationController extends Controller
         };
           
         // the cloned appointment
-        $newAppointment = $appointment->replicate();
-        //push to get the id for the cloned record
+        $newAppointment = $appointment->replicate()->fill([
+            'duplicated_from_id' => $appointment->id,
+            'appointment_status' => null,
+        ]);
         $newAppointment->push();
-        $newAppointment->duplicated_from_id = $appointment->id;
-        $newAppointment->appointment_status = null;
         $newAppointment->save();
-        
         // updating the old appointment
-        $appointment->duplicated_to_id = $newAppointment->id;
-        $appointment->save();
+        $appointment->update([
+            'duplicated_to_id' => $newAppointment->id,
+        ]);
 
         return redirect()
             ->route("voyager.appointments.index")
