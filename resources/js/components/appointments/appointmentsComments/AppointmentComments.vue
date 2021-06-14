@@ -70,15 +70,20 @@ export default {
     };
   },
   methods: {
-    submitComment(reply) {
+    submitComment(formData) {
+      formData.append('appointmentId',this.appointmentId);
+
       axios
-        .post("/comments/" + this.appointmentId, {
-          body: reply,
-          appointmentId: this.appointmentId
-        })
+        .post("/comments/" + this.appointmentId,formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }})
         .then(response => {
           this.comments.push(response.data.comment);
-        });
+        })
+        .catch((err)=>{
+          console.log('errored here', err);
+        })
     }
   }
 };

@@ -82,6 +82,12 @@
                                         <option value="{{ $user->id }}">{{ $user->user_name }}</option>
                                     @endforeach
                                 </template>
+                            @elseif($row->field == 'comment_status')
+                                <template v-slot:commentStatus>
+                                    @foreach ($row->details->options as $option)
+                                        <option>test</option> 
+                                    @endforeach
+                                </template>
                             @endif
                         @endforeach
                     </appointment-filter>
@@ -146,7 +152,7 @@
                         </div>
                     </div>
                     <div class="panel-body mt-2">
-                        <appointment-filter @filter="getResults" :is-agent-view="@if($currentLogedInUserRole == 'call_center_manager') true @else false @endif">
+                    <appointment-filter @filter="getResults" :is-agent-view="@if($currentLogedInUserRole == 'call_center_manager') true @else false @endif">
                             @foreach ($dataType->addRows as $row)
                                 @if ($row->field == 'wanted_expert')
                                     <template v-slot:experts>
@@ -160,6 +166,7 @@
                                             <option value="{{$key}}">{{ $option }}</option> 
                                         @endforeach
                                     </template>
+                                    
                                 @elseif($row->field == 'appointment_belongsto_user_relationship_1')
                                     <template v-slot:users>
                                         @foreach($users as $user)
@@ -175,7 +182,16 @@
                                     @endforeach
                                 </template>
                             @endif
-                        </appointment-filter>
+                            @foreach($dataType->addRows as $row)
+                                @if($row->field == 'comment_status')
+                                    <template v-slot:feedback>
+                                        @foreach ($row->details->options as $key => $option)
+                                            <option value="{{ $key }}">{{ $option}}</option> 
+                                        @endforeach
+                                    </template>
+                                @endif
+                            @endforeach
+                        </appointment-filter>     
                     </div>
                 </div>
             </div>

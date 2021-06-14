@@ -69,12 +69,13 @@ class AppointmentsFilter extends BaseVoyagerBaseController
 
                 if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope' . ucfirst($dataType->scope))) {
                     $query = $model->{$dataType->scope}()
-                        ->whereNull('comment_status')
+                        // ->whereNull('comment_status')
                         ->where('meeting_date', '<', $now)
                         ->FilterAppointments($request);
                 } else {
-                    $query = $model::whereNull('comment_status')
-                        ->where('meeting_date', '<', $now)
+                    $query = $model::
+                    // whereNull('comment_status')
+                        where('meeting_date', '<', $now)
                         ->FilterAppointments($request);
                 }
 
@@ -169,27 +170,27 @@ class AppointmentsFilter extends BaseVoyagerBaseController
                 if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope' . ucfirst($dataType->scope))) {
                     $query = $model->{$dataType->scope}()
                         ->where('meeting_date', '>=', $now)
-                        ->where(function ($query) {
-                            $query
-                                ->where(function ($query) {
-                                    $query
-                                        ->where('comment_status', 'open')
-                                        ->orWhere('comment_status', 'not_home');
-                                })
-                                ->orWhere('comment_status', null);
-                        })
+                        // ->where(function ($query) {
+                        //     $query
+                        //         ->where(function ($query) {
+                        //             $query
+                        //                 ->where('comment_status', 'open')
+                        //                 ->orWhere('comment_status', 'not_home');
+                        //         })
+                        //         ->orWhere('comment_status', null);
+                        // })
                         ->FilterAppointments($request);
                 } else {
                     $query = $model::where('meeting_date', '>=', $now)
-                        ->where(function ($query) {
-                            $query
-                                ->where(function ($query) {
-                                    $query
-                                        ->where('comment_status', 'open')
-                                        ->orWhere('comment_status', 'not_home');
-                                })
-                                ->orWhere('comment_status', null);
-                        })
+                        // ->where(function ($query) {
+                        //     $query
+                        //         ->where(function ($query) {
+                        //             $query
+                        //                 ->where('comment_status', 'open')
+                        //                 ->orWhere('comment_status', 'not_home');
+                        //         })
+                        //         ->orWhere('comment_status', null);
+                        // })
                         ->FilterAppointments($request);
                 }
 
@@ -284,11 +285,12 @@ class AppointmentsFilter extends BaseVoyagerBaseController
 
                 if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope' . ucfirst($dataType->scope))) {
                     $query = $model->{$dataType->scope}()
-                        ->whereNotIn('comment_status', ['open', 'not_home'])
+                        // ->whereNotIn('comment_status', ['open', 'not_home'])
                         ->FilterAppointments($request);
                 } else {
-                    $query = $model::whereNotIn('comment_status', ['open', 'not_home'])
-                        ->FilterAppointments($request);
+                    $query = $model::
+                        // whereNotIn('comment_status', ['open', 'not_home'])
+                        FilterAppointments($request);
                 }
 
                 // Use withTrashed() if model uses SoftDeletes and if toggle is selected
