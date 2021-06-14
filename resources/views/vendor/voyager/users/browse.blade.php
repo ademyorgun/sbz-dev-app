@@ -46,11 +46,6 @@
                         @if ($isServerSide)
                             <form method="get" class="form-search">
                                 <div id="search-input">
-                                    <select id="search_key" name="key">
-                                        @foreach($searchable as $key)
-                                            <option value="{{ $key }}" @if($search->key == $key || (empty($search->key) && $key == $defaultSearchKey)){{ 'selected' }}@endif>{{ ucwords(str_replace('_', ' ', $key)) }}</option>
-                                        @endforeach
-                                    </select>
                                     <select id="filter" name="filter">
                                         <option value="contains" @if($search->filter == "contains"){{ 'selected' }}@endif>contains</option>
                                         <option value="equals" @if($search->filter == "equals"){{ 'selected' }}@endif>=</option>
