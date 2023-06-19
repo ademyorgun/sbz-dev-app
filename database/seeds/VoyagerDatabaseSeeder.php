@@ -8,6 +8,7 @@ class VoyagerDatabaseSeeder extends Seeder
     use Seedable;
 
     protected $seedersPath = __DIR__.'/';
+    use TCG\Voyager\Traits\Seedable;
 
     /**
      * Run the database seeds.

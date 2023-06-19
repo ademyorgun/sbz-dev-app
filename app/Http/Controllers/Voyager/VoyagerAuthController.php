@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\VoyagerAuthController as BaseVoyagerAuthController;
+use TCG\Voyager\Facades\VoyagerAuth;
 
 class VoyagerAuthController extends BaseVoyagerAuthController
 {
