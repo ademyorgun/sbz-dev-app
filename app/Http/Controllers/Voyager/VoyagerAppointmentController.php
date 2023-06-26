@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Voyager;
 use App\CallCenter;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Events\BreadDataUpdated;
 use TCG\Voyager\Database\Schema\SchemaManager;
@@ -28,6 +30,12 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
     {
         // GET THE SLUG, ex. 'posts', 'pages', etc.
         $slug = $this->getSlug($request);
+
+
+        $actions = [];
+        $searchNames = [];
+        $showCheckboxColumn = false;
+        $sortableColumns = [];
 
         // different data depending on views
         if(strtolower(auth()->user()->role->name) == 'sales_agent') {
@@ -367,14 +375,12 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
                 'callCenters',
                 'appointmentsGroupFeedbackPending',
                 'appointmentsGroupOpen',
-                'appointmentsGroupClosed'
+                'appointmentsGroupClosed',
+                'actions',
+                'searchNames',
+                'showCheckboxColumn',
+                'sortableColumns'
             ));
-
-
-
-
-
-
 
         } else {
             // GET THE DataType based on the slug
@@ -521,7 +527,11 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
                 'callCenters',
                 'appointmentsGroupFeedbackPending',
                 'appointmentsGroupOpen',
-                'appointmentsGroupClosed'
+                'appointmentsGroupClosed',
+                'actions',
+                'searchNames',
+                'showCheckboxColumn',
+                'sortableColumns'
                 // 'paginatedItemsFeedback',
                 // 'paginatedItemsOpen',
                 // 'paginatedItemsClosed'
