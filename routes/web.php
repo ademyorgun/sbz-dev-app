@@ -62,7 +62,7 @@ Route::group(['as' => 'voyager.'], function () {
         Route::put('appointment/{id}/location', 'AppointmentsSalesVisitLocation@update')->name('appointment.location');
 
         // Appointment show route
-        Route::get('ppointments/{appointment}/edit', 'Voyager\VoyagerAppointmentController@edit')
+        Route::get('appointments/{appointment}/edit', 'Voyager\VoyagerAppointmentController@edit')
             ->name('appointments.edit')
             ->middleware('sales.agent');
 
