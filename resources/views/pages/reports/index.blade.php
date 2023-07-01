@@ -9,7 +9,6 @@
 
     </div>
 @stop
-
 @section('content')
 <div class="page-content browse container-fluid" id="app-reports">
     <div class="row">
