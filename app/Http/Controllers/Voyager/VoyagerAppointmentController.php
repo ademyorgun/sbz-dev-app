@@ -137,8 +137,6 @@ class VoyagerAppointmentController extends BaseVoyagerBaseController
             $defaultSearchKey = $dataType->default_search_key ?? null;
 
             $appointmentsGroupFeedbackPending = $dataTypeContent;
-
-
             
 
             // ******************* open appointment
